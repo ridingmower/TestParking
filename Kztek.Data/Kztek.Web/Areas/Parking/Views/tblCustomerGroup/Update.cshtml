@@ -1,0 +1,148 @@
+﻿@model Kztek.Model.Models.tblCustomerGroup
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Create";
+    var IsTranserco = Convert.ToBoolean(ViewBag.ISTRANSERCO);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCustomerGroup", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        Cập nhật nhóm khách hàng
+    </h1>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "tblCustomerGroup", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(c => c.CustomerGroupID)
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CustomerGroupName"] </label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.CustomerGroupName, new { @class = "form-control", @placeholder = Dictionary["CustomerGroupName"] })
+                    @Html.ValidationMessageFor(n => n.CustomerGroupName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CustomerGroupParent"]  </label>
+                <div class="col-sm-4">
+                    @Html.DropDownListFor(n => n.ParentID, new SelectList(ViewBag.DDLMenu, "CustomerGroupID", "CustomerGroupName", ViewBag.parentidValue), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.ParentID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Ordering"] </label>
+                <div class="col-sm-4">
+                    @Html.TextBoxFor(n => n.Ordering, new { @class = "form-control", @placeholder = Dictionary["Ordering"] })
+                    @Html.ValidationMessageFor(n => n.Ordering, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            if (IsTranserco)
+            {
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> Mã số thuế </label>
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(n => n.Tax, new { @class = "form-control", @placeholder = "Nhập mã số thuế" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> Địa chỉ </label>
+                    <div class="col-sm-4">
+                        @Html.TextAreaFor(n => n.Description, new { @class = "form-control", @placeholder = "" })
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> Công ty </label>
+                    <div class="col-sm-4">
+                        <label class="line-height-250">
+                            @Html.CheckBoxFor(n => n.IsCompany, new { @class = "ace" })
+                            <span class="lbl"></span>
+                        </label>
+                    </div>
+                </div>
+            }
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["IsLock"] </label>
+                <div class="col-sm-4">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index", new { selectedId = Model.CustomerGroupID })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+    @*<div class="col-xs-12">
+            <i class="fa fa-chevron-circle-left bigger-110"></i>
+            @Html.ActionLink("Back to List", "Index")
+        </div>*@
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+
+            ////Chosen
+            //if (!ace.vars['touch']) {
+            //    $('.chosen-select').chosen({ allow_single_deselect: true });
+            //    //resize the chosen on window resize
+            //    $(window)
+            //    .off('resize.chosen')
+            //    .on('resize.chosen', function () {
+            //        $('.chosen-select').each(function () {
+            //            var $this = $(this);
+            //            $this.css({ 'width': $this.width() });
+            //        })
+            //    }).trigger('resize.chosen');
+            //    //resize chosen on sidebar collapse/expand
+            //    $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+            //        if (event_name != 'sidebar_collapsed') return;
+            //        $('.chosen-select').each(function () {
+            //            var $this = $(this);
+            //            $this.next().css({ 'width': $this.width() });
+            //        })
+            //    });
+            //}
+        });
+    </script>
+}

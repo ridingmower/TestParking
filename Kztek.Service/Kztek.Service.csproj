@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D74B72EF-7B89-4C6A-A96A-2C024501E82A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kztek.Service</RootNamespace>
+    <AssemblyName>Kztek.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.0.1\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\AccessEvent\tblAccessCardEventService.cs" />
+    <Compile Include="Admin\BM_ApartmentEWPriceService.cs" />
+    <Compile Include="Admin\BM_ApartmentRoleService.cs" />
+    <Compile Include="Admin\BM_ApartmentService.cs" />
+    <Compile Include="Admin\BM_ApartmentUseService.cs" />
+    <Compile Include="Admin\BM_Apartment_MemberService.cs" />
+    <Compile Include="Admin\BM_Apartment_ReceiptService.cs" />
+    <Compile Include="Admin\BM_Apartment_ServiceService.cs" />
+    <Compile Include="Admin\BM_BuildingService.cs" />
+    <Compile Include="Admin\BM_Building_ServiceService.cs" />
+    <Compile Include="Admin\BM_FloorService.cs" />
+    <Compile Include="Admin\BM_ResidentGroupService.cs" />
+    <Compile Include="Admin\BM_ResidentService.cs" />
+    <Compile Include="Admin\DynamicCardService.cs" />
+    <Compile Include="Admin\Event\PublicEventService.cs" />
+    <Compile Include="Admin\Event\tblAlarmService.cs" />
+    <Compile Include="Admin\Event\tblCardEventDeleteService.cs" />
+    <Compile Include="Admin\Event\tblCardEventHistoryService.cs" />
+    <Compile Include="Admin\Event\tblCardEventService.cs" />
+    <Compile Include="Admin\Event\tblChangeEventService.cs" />
+    <Compile Include="Admin\Event\tblDispenserService.cs" />
+    <Compile Include="Admin\Event\tblLoopEventService.cs" />
+    <Compile Include="Admin\Event\tblPrintIndexService.cs" />
+    <Compile Include="Admin\Event\tblVoucherService.cs" />
+    <Compile Include="Admin\ExcelColumnService.cs" />
+    <Compile Include="Admin\ExtendCardService.cs" />
+    <Compile Include="Admin\LockerEvent\tblLockerAlarmService.cs" />
+    <Compile Include="Admin\LockerEvent\tblLockerEventService.cs" />
+    <Compile Include="Admin\MenuFunctionConfigService.cs" />
+    <Compile Include="Admin\MenuFunctionService.cs" />
+    <Compile Include="Admin\OrderActiveCardService.cs" />
+    <Compile Include="Admin\OrderInfoService.cs" />
+    <Compile Include="Admin\RoleMenuService.cs" />
+    <Compile Include="Admin\RoleService.cs" />
+    <Compile Include="Admin\SelfHostConfigService.cs" />
+    <Compile Include="Admin\SystemRecordService.cs" />
+    <Compile Include="Admin\tblAccessCameraService.cs" />
+    <Compile Include="Admin\tblAccessControllerGroupService.cs" />
+    <Compile Include="Admin\tblAccessControllerMemoryService.cs" />
+    <Compile Include="Admin\tblAccessControllerService.cs" />
+    <Compile Include="Admin\tblAccessDoorService.cs" />
+    <Compile Include="Admin\tblAccessLevelDetailService.cs" />
+    <Compile Include="Admin\tblAccessLevelService.cs" />
+    <Compile Include="Admin\tblAccessLineService.cs" />
+    <Compile Include="Admin\tblAccessPCService.cs" />
+    <Compile Include="Admin\tblAccessTimezoneService.cs" />
+    <Compile Include="Admin\tblAccessUploadDetailService.cs" />
+    <Compile Include="Admin\tblAccessUploadProcessService.cs" />
+    <Compile Include="Admin\tblActiveCardService.cs" />
+    <Compile Include="Admin\tblBlackListService.cs" />
+    <Compile Include="Admin\tblCameraService.cs" />
+    <Compile Include="Admin\tblCardGroupService.cs" />
+    <Compile Include="Admin\tblCardProcessService.cs" />
+    <Compile Include="Admin\tblCardService.cs" />
+    <Compile Include="Admin\tblCompartmentService.cs" />
+    <Compile Include="Admin\tblControllerService.cs" />
+    <Compile Include="Admin\tblCustomerGroupService.cs" />
+    <Compile Include="Admin\tblCustomerService.cs" />
+    <Compile Include="Admin\tblFeeService.cs" />
+    <Compile Include="Admin\tblFtpAccountService.cs" />
+    <Compile Include="Admin\tblGateService.cs" />
+    <Compile Include="Admin\tblLaneService.cs" />
+    <Compile Include="Admin\tblLEDService.cs" />
+    <Compile Include="Admin\tblLockerControllerService.cs" />
+    <Compile Include="Admin\tblLockerLineService.cs" />
+    <Compile Include="Admin\tblLockerPCService.cs" />
+    <Compile Include="Admin\tblLockerProcessService.cs" />
+    <Compile Include="Admin\tblLockerRegisterService.cs" />
+    <Compile Include="Admin\tblLockerSelfHostService.cs" />
+    <Compile Include="Admin\tblLockerService.cs" />
+    <Compile Include="Admin\tblLogService.cs" />
+    <Compile Include="Admin\tblPCService.cs" />
+    <Compile Include="Admin\tblRolePermissionMapingService.cs" />
+    <Compile Include="Admin\tblRoleService.cs" />
+    <Compile Include="Admin\tblSubCardService.cs" />
+    <Compile Include="Admin\tblSubSystemService.cs" />
+    <Compile Include="Admin\tblSystemConfigService.cs" />
+    <Compile Include="Admin\tblUpdateActionsService.cs" />
+    <Compile Include="Admin\tblUserJoinRoleService.cs" />
+    <Compile Include="Admin\tblUserService.cs" />
+    <Compile Include="Admin\tblVehicleGroupService.cs" />
+    <Compile Include="Admin\UserRoleService.cs" />
+    <Compile Include="Admin\UserService.cs" />
+    <Compile Include="Admin\User_AuthGroupService.cs" />
+    <Compile Include="API\API_tblCardEventService.cs" />
+    <Compile Include="API\API_AuthService.cs" />
+    <Compile Include="API\API_CardGroupService.cs" />
+    <Compile Include="API\API_CardService.cs" />
+    <Compile Include="API\API_CustomerService.cs" />
+    <Compile Include="API\API_MobileService.cs" />
+    <Compile Include="API\API_tblCardService.cs" />
+    <Compile Include="API\API_tblCustomerGroupService.cs" />
+    <Compile Include="API\API_tblLaneService.cs" />
+    <Compile Include="API\tblCardSubmitEventService.cs" />
+    <Compile Include="API\API_tblVehicleGroupService.cs" />
+    <Compile Include="Mobile\API_CardService.cs" />
+    <Compile Include="Admin\MultipleLanesMapService.cs" />
+    <Compile Include="Payment\tblEventPaymentService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Admin\ReduceParkingFeesService.cs" />
+    <Compile Include="ReportService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Kztek.Core\Kztek.Core.csproj">
+      <Project>{2e108ce3-6e45-41f7-ad83-dd8f8888b2ab}</Project>
+      <Name>Kztek.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kztek.Data.AccessEvent\Kztek.Data.AccessEvent.csproj">
+      <Project>{edabdbd8-2a2a-4be0-b8d0-277ad4004331}</Project>
+      <Name>Kztek.Data.AccessEvent</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kztek.Data.Event\Kztek.Data.Event.csproj">
+      <Project>{b3ea14f8-85a2-4143-a147-b708aad53398}</Project>
+      <Name>Kztek.Data.Event</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kztek.Data\Kztek.Data.csproj">
+      <Project>{9064c57c-4f60-4c54-bef3-32bf8ca9d7d4}</Project>
+      <Name>Kztek.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kztek.Model\Kztek.Model.csproj">
+      <Project>{28cdc5f9-a2fa-4d76-bc82-2312c9760b09}</Project>
+      <Name>Kztek.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kztek.Web.Core\Kztek.Web.Core.csproj">
+      <Project>{003202cb-fc7e-4157-a1dd-41c0b932095f}</Project>
+      <Name>Kztek.Web.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

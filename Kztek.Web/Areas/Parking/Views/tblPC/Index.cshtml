@@ -1,0 +1,147 @@
+﻿@using Kztek.Model.CustomModel.iParking
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.CustomModel.iParking.tblPCCustomViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.groupValue);
+    var lstgate = (List<Kztek.Model.Models.tblGate>)ViewBag.Gates;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    string selected = (string)ViewBag.selectedIdValue;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblPC", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblPC", FormMethod.Get, new { id = "frmPC" }))
+    {
+        @Html.Hidden("group", (string)ViewBag.groupValue)
+        @Html.Hidden("selectedId", selected)
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="@Dictionary["KeywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("gate", new SelectList(ViewBag.Gates, "GateID", "GateName", ViewBag.gateValue), Dictionary["GateNamePlaceholder"] , new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = ViewBag.groupValue, key = ViewBag.keyValue, gate = ViewBag.gateValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">@Dictionary["ComputerName"]</th>
+                    <th class="text-left hidden-480">@Dictionary["IPAddress"]</th>
+                    <th class="text-left">@Dictionary["GateName"]</th>
+                    <th class="text-left hidden-480">@Dictionary["Description"]</th>
+                    <th class="text-left">@Dictionary["Status"]</th>
+                    <th class="text-left" width="80">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && !string.IsNullOrEmpty(item.GateID) && selected == item.GateID.ToString() ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.ComputerName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.IPAddress
+                            </td>
+
+                            <td class="text-left">
+                                @item.GateName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.Description
+                            </td>
+
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">@Dictionary["Active"]</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">@Dictionary["Inactive"]</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.PCID, group = ViewBag.groupValue, key = ViewBag.keyValue, page = Model.PageIndex, gate = ViewBag.gateValue })" class="green" title=@DictionaryAction["Update"]>
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.PCID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblPC", new
+           {
+               page = x,
+               gate = ViewBag.gateValue,
+               key = ViewBag.keyValue,
+               group = ViewBag.groupValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmPC");
+            DeleteSubmit(_prefixParkingDomain + '/tblPC/Delete');
+        });
+    </script>
+}

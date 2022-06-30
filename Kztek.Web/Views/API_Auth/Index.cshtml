@@ -1,0 +1,61 @@
+﻿@model Kztek.Model.Models.API.API_Auth
+
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Token hệ thống";
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+}
+
+<div class="page-header">
+    <h1>
+        Token hệ thống
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Index", "API_Auth", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("group", groupID)
+            
+            <div class="form-group">
+                <label class="col-sm-2 control-label-left no-padding-right"> Token  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextAreaFor(n => n.AccessToken, new { @class = "form-control", @placeholder = "Mã token" })
+                    @Html.ValidationMessageFor(n => n.AccessToken, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-4 col-md-8 input-group">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Lưu 
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+        });
+    </script>
+}
+

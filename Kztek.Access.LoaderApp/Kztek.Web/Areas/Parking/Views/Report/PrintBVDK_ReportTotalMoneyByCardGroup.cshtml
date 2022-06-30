@@ -1,0 +1,105 @@
+﻿@{
+    var objsystem = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+    var _dt = (System.Data.DataTable)ViewBag.dt;
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12" style="height:55px;">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Company</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">@objsystem.Address</h4>
+                        @*<h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Tel - @objsystem.Fax</h4>*@
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: 'Times New Roman';text-align:center;font-size:18px;font-weight:bold;">BÁO CÁO THU TIỀN THEO NHÓM THẺ LƯỢT</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: 'Times New Roman';text-align:center;font-size:12px;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover" style="border:solid #000 !important;
+    border-width:1px 0 0 1px !important;">
+                <thead>
+                    <tr class="headerSort">
+                        <th style="text-align: center;border:solid #000 !important;border-width:0 1px 1px 0 !important;width:50px;">STT</th>
+                        <th style="text-align: center;border:solid #000 !important;border-width:0 1px 1px 0 !important;">Nhóm thẻ</th>
+
+                        <th style="text-align: center;border:solid #000 !important;border-width:0 1px 1px 0 !important;">Doanh thu(VNĐ)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (_dt != null && _dt.Rows.Count > 0)
+                    {
+                        var count = 0;
+                        foreach (System.Data.DataRow item in _dt.Rows)
+                        {
+                            count++;
+                            <tr>
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;text-align:center;">@count</td>
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    <span>@item["CardGroupName"].ToString()</span>
+                                </td>
+
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;text-align:right;">
+                                    <span>@item["Moneys"].ToString()</span>
+                                </td>
+                            </tr>
+                        }
+                        <tr style="font-weight: bold;">
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;text-align:center;">#</td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">Tổng số</td>
+
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;text-align:right;">@ViewBag.TotalMoneys.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <p style="font-size:12px;float:right;padding-right:70px;font-family: 'Times New Roman';font-weight:bold;">
+                            NGƯỜI LẬP
+                        </p>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}
+

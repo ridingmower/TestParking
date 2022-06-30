@@ -1,0 +1,27 @@
+﻿@model Kztek.Model.Models.tblAccessLevel
+
+@{
+    var listTimezone = (List<Kztek.Model.Models.tblAccessTimezone>)ViewBag.ListTimeZone;
+    var listController = (IEnumerable<Kztek.Model.Models.tblAccessController>)ViewBag.ListController;
+}
+
+@if (listController.Any())
+{
+    foreach (var item in listController)
+    {
+        <div class="itemControllerTime">
+            <div>
+                <span idata="@item.ControllerID.ToString()" id="idController" class="line-height-250">
+                    @item.ControllerName
+                </span>
+            </div>
+            <div>
+                @{
+                    var objSelected = "";
+                }
+
+                @Html.DropDownList("timezone", new SelectList(listTimezone, "Id", "TimezoneName", objSelected), new { @class = "form-control chosen-select" })
+            </div>
+        </div>
+    }
+}

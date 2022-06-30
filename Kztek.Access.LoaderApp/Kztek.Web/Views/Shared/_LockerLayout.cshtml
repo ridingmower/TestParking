@@ -1,0 +1,193 @@
+﻿@using Kztek.Web.Core.Functions
+
+@{
+    string actionMenu = this.ViewContext.RouteData.Values["action"].ToString();
+    string controllerMenu = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    string groupId = Kztek.Web.Core.Models.ConstField.LockerID;
+
+    var systemname = System.Configuration.ConfigurationManager.AppSettings["SystemName"];
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>@systemname</title>
+    @RenderSection("headerMeta", required: false)
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!--Basic css-->
+    @*@Styles.Render("~/Content/AdminLayout/css")*@
+
+    @Styles.Render("~/Content/AdminLayout/Admincss")
+    @Styles.Render("~/Content/AdminLayout/AdminExtcss")
+
+    @Styles.Render("~/Content/AdminLayout/AdminFont")
+
+    <link href="~/Content/AdminLayout/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet" />
+
+    @*<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&amp;lang=en" />*@
+    <link href="~/fonts/OpenSans/inc_font.css" rel="stylesheet" />
+    <!---->
+    <style>
+        .fontawesome-select {
+            font-family: 'FontAwesome', 'Helvetica';
+        }
+    </style>
+</head>
+
+<body class="no-skin">
+    @try
+    {
+        <div id="navbar" class="navbar navbar-default ace-save-state navbar-fixed-top">
+            @Html.Action("Header", "Home", new { actionName = actionMenu, controllerName = controllerMenu, group = groupId, Area = "Locker" })
+        </div>
+
+        <div class="main-container ace-save-state" id="main-container">
+            <script type="text/javascript">
+                try { ace.settings.loadState('main-container') } catch (e) { }
+            </script>
+
+            <div id="sidebar" class="sidebar responsive ace-save-state sidebar-fixed">
+                @Html.Action("Sidebar", "Home", new { actionName = actionMenu, controllerName = controllerMenu, group = groupId, Area = "Locker" })
+            </div>
+
+            <div class="main-content">
+                <div class="main-content-inner">
+                    <div class="breadcrumbs ace-save-state breadcrumbs-fixed" id="breadcrumbs">
+                        @Html.Action("Breadcrumb", "Home", new { controller = controllerMenu, action = actionMenu, group = groupId, Area = "Locker" })
+                    </div>
+                    <div class="page-content">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div><!-- /.main-content -->
+
+            <div class="footer">
+                @Html.Action("Footer", "Home", new { Area = "Locker" })
+            </div>
+
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div><!-- /.main-container -->
+    }
+    catch (Exception)
+    {
+
+        <div id="reLogin">
+
+        </div>
+    }
+
+    <!-- Basic scripts -->
+    @Scripts.Render("~/bundles/jquery")
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    @*<script type="text/javascript">
+            if ('ontouchstart' in document.documentElement) document.write("<script src='~/Content/AdminLayout/js/jquery.mobile.custom.js'>" + "<" + "/script>");
+        </script>*@
+
+    @Scripts.Render("~/Content/AdminLayout/Adminjs")
+
+    @Scripts.Render("~/Content/AdminLayout/AdminExtjs")
+
+    <script src="~/Content/Zoom/blowup.js"></script>
+    <script src="~/Areas/Parking/Scripts/RedirectLogin.js"></script>
+    <!---->
+    @RenderSection("scripts", required: false)
+
+    <!-- inline scripts related to this page -->
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $("a.img_box img").blowup({
+        //        "background": "#ffffff",
+        //        "width": 150,
+        //        "height": 150
+        //    });
+        //});
+
+        $('[data-spzoom]').spzoom({
+            width: 350,
+            height: 350,
+            position: 'right',
+            margin: 25,
+            showTitle: true,
+            titlePosition: 'bottom'
+        });
+
+        //$("a.img_box").spzoom({
+        //    width: 350,
+        //    height: 350,
+        //    position: 'right',
+        //    margin: 25,
+        //    showTitle: true,
+        //    titlePosition: 'bottom'
+        //});
+
+        //$('body').on('click', 'a.img_box', function () {
+        //    var cmd = $(this);
+
+        //    cmd.removeData('');
+        //});
+
+        //Clear All Cached
+        $('a[name=btnDeleteCached]').click(function () {
+            $.ajax({
+                url: '/Home/DeleteCached',
+                data: {},
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data) {
+                        //toastr.success('Xóa Cached thành công', 'Thông báo')
+                        location.href = location.href;
+                    } else {
+                        toastr.error('Cached chưa được xóa', 'Thông báo')
+                    }
+                }
+            });
+        });
+
+
+        //Check
+        $('#chkCheckALL').click(function () {
+            if ($(this).is(":checked")) {
+                $('.chkCheck').prop('checked', true);
+                //$('.chkCheck').parents().addClass('info');
+            }
+            else {
+                $('.chkCheck').prop('checked', false);
+                //$('.chkCheck').parents().removeClass('info');
+            }
+        });
+        $('.chkCheck').change(function () {
+            //$(this).parents().toggleClass('info', this.checked);
+        });
+
+        //Toast jquery config
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "300",
+            "progressBar": false,
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+    </script>
+</body>
+</html>

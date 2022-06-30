@@ -1,0 +1,127 @@
+﻿@using Kztek.Web.Core.Functions
+@using Kztek.Web.Core.Extensions
+
+@model IEnumerable<Kztek.Model.CustomModel.SelectListModel1>
+
+@{
+    var user = GetCurrentUser.GetUser();
+
+    string group = (string)ViewBag.GroupID;
+
+    var systemname = System.Configuration.ConfigurationManager.AppSettings["SystemName"];
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Header");
+}
+
+<div class="navbar-container ace-save-state" id="navbar-container">
+    <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+        <span class="sr-only">Toggle sidebar</span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+    </button>
+
+    <div class="navbar-header pull-left">
+        <a href="@Url.Action("Index","Home", new { Area = "Resident" })" class="navbar-brand">
+            <small>
+                <i class="fa fa-leaf"></i>
+                  @systemname 
+            </small>
+        </a>
+    </div>
+
+    <div class="navbar-header">
+    </div>
+
+    <div class="navbar-buttons navbar-header pull-right" role="navigation">
+        <ul class="nav ace-nav">
+            <li class="grey dropdown-modal">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#" aria-expanded="false">
+                    <i class="ace-icon fa fa-tasks"></i>
+                </a>
+
+                <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                    <li class="dropdown-content ace-scroll" style="position: relative;">
+                        <div class="scroll-track" style="display: none;"><div class="scroll-bar"></div></div><div class="scroll-content" style="">
+                            <ul class="dropdown-menu dropdown-navbar fu-nav">
+                                @if (Model.Any())
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        @*<li class="@item.Color @string.Format("{0}", item.ItemValue.Equals(group) ? "activeLi" : "") clearfix">
+                                    <a href="@Url.Action("Index","Home",new { Area = item.AreaName })" title="@item.ItemText" class="infobox infobox-green infobox-small infobox-dark">
+                                        <i class="icon-fix @item.Icon @item.Color bigger-250 pull-left"></i>
+                                        <span class="pull-left line-height-125">@item.ItemText</span>
+                                    </a>
+                                </li>*@
+                                        <li style="padding:0;" class="@string.Format("{0}", item.ItemValue.Equals(group) ? "active" : "")">
+                                            <span class="fa fa-check-circle iconcheck"></span>
+                                            <a href="@Url.Action("Index","Home",new { Area = item.AreaName })" title="@item.ItemText" style="padding:0;">
+                                                <div class="infobox infobox-small infobox-dark @item.Color" style="width:100%;padding:0;">
+                                                    <div class="infobox-progress">
+                                                        <!-- #section:pages/dashboard.infobox.easypiechart -->
+                                                        <div class="easy-pie-chart percentage" data-percent="61" data-size="39" style="height: 39px; width: 39px; line-height: 38px;">
+                                                            <img src="@Html.Raw(item.Icon)" width="32" height="32" />
+                                                        </div>
+
+                                                        <!-- /section:pages/dashboard.infobox.easypiechart -->
+                                                    </div>
+                                                    <div class="infobox-data">
+                                                        <div class="infobox-content">@Dictionary["Manage"]</div>
+                                                        <div class="infobox-content">@item.ItemText</div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+
+            @if (user != null)
+            {
+                @*<li class="purple dropdown-modal">
+                    <a name="btnDeleteCached" href="javascript:void(0)" title="Xóa cached">
+                        <i class="ace-icon fa fa-tasks"></i>
+                    </a>
+
+                </li>*@
+                <li class="light-blue dropdown-modal">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="@user.UserAvatar.ImagePathThumb(40, 40)" alt="" />
+                        <span class="user-info">
+                            <small>Welcome,</small>
+                            @user.Name
+                        </span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a href="@Url.Action("UserProfile", "User", new { @id = user.Id, direct = ViewBag.DirectValue, group = ViewBag.GroupID, Area = "" })">
+                                <i class="ace-icon fa fa-user"></i>
+                                @Dictionary["Account"]
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="@Url.Action("Logout", "Login", new { Area = "" })">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                @Dictionary["Logout"]
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div><!-- /.navbar-container -->

@@ -1,0 +1,105 @@
+﻿--REset
+update MenuFunction
+set dept = 0
+
+--cap nhap dept =1 voi nhung Cap cha
+update MenuFunction
+set dept = 1
+where ParentID='0'
+
+--cap nhap dept =2 voi nhung Cap con thuoc cac cap cha
+update MenuFunction
+set dept = 2 
+where ParentID in (select ID from MenuFunction where ParentID='0') and parentID!='0'
+
+--cap nhap dept =3 voi nhung Cap con thuoc cac cap con
+update MenuFunction
+set dept = 3
+where dept=0
+
+--UPdate breadCrumb--------------------------------------------------------------------------------
+
+--cap nhap BreadCrumb cap 1
+UPDATE MenuFunction
+SET BreadCrumb = '/' + ID + '/'
+WHERE dept=1
+
+
+--cap nhap BreadCrumb cap 2
+UPDATE MenuFunction
+SET MenuFunction.BreadCrumb = A.BreadCrumb + MenuFunction.ID + '/'
+FROM MenuFunction
+INNER JOIN 
+(SELECT ID, BreadCrumb FROM MenuFunction WHERE dept=1) A
+ON MenuFunction.ParentId = A.ID
+WHERE MenuFunction.dept=2
+
+
+--cap nhap BreadCrumb cap 3
+UPDATE MenuFunction
+SET MenuFunction.BreadCrumb = A.BreadCrumb + MenuFunction.ID + '/'
+FROM MenuFunction
+INNER JOIN 
+(SELECT ID, BreadCrumb FROM MenuFunction WHERE dept=2) A
+ON MenuFunction.ParentId = A.ID
+WHERE MenuFunction.dept=3
+
+
+
+
+/****** Object:  Trigger [dbo].[stt_MenuFunction_InsertTrigger]    Script Date: 12/07/2012 10:34:06 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TRIGGER [dbo].[MenuFunction_InsertTrigger]
+ON [dbo].[MenuFunction]
+FOR INSERT AS
+UPDATE MenuFunction
+	-- set the dept of this "child" to be the
+	-- dept of the parent, plus one.
+	SET MenuFunction.dept = ISNULL(parent.dept + 1,1),
+	-- the BreadCrumb is simply the BreadCrumb of the parent,
+	-- plus the child's ID (and appropriate '/' characters
+	MenuFunction.BreadCrumb = ISNULL(parent.BreadCrumb,'/') + LTrim(Str(MenuFunction.ID)) + '/' 
+-- we can't update the "inserted" table directly,
+-- so we find the corresponding child in the
+-- "real" table
+FROM MenuFunction INNER JOIN inserted i ON i.ID=MenuFunction.ID
+-- now, we attempt to find the parent of this
+-- "child" - but it might not exist, so these
+-- values may well be NULL
+LEFT OUTER JOIN MenuFunction parent ON MenuFunction.parentId=parent.ID
+
+
+
+
+/****** Object:  Trigger [dbo].[stt_MenuFunction_UpdateTrigger]    Script Date: 12/07/2012 10:35:55 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TRIGGER [dbo].[MenuFunction_UpdateTrigger]
+ON [dbo].[MenuFunction]
+FOR UPDATE AS
+
+-- if we've modified the parentId, then we
+-- need to do some calculations
+IF UPDATE (parentId) OR UPDATE (BreadCrumb)
+BEGIN
+	DECLARE @CatId NVARCHAR(50)
+	SELECT @CatId = ID FROM inserted
+	IF UPDATE (parentId)
+		UPDATE MenuFunction
+			SET MenuFunction.dept = parent.dept + 1,
+			MenuFunction.BreadCrumb = ISNULL(parent.BreadCrumb,'/') + old.ID + '/'
+		FROM MenuFunction 
+		INNER JOIN inserted old ON MenuFunction.ID = old.ID
+		INNER JOIN MenuFunction parent ON old.parentId=parent.ID
+
+	UPDATE MenuFunction
+		SET MenuFunction.dept = parent.dept + 1,
+		MenuFunction.BreadCrumb = ISNULL(parent.BreadCrumb,'/') + MenuFunction.ID + '/'
+	FROM MenuFunction 
+	INNER JOIN MenuFunction parent ON MenuFunction.parentId=parent.ID AND parent.ID = @CatId
+END

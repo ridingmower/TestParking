@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<template>
+  <content>
+    <![CDATA[
+
+          <tr style='background: #FAFAFA;'>
+            <td style='padding: 10px 20px;border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;' colspan='4'>
+              <div style='width: 232px;float:right;'>
+                <span style='width:130px;float:left;display: block;line-height: 22px;'>
+                  Giá trị đơn
+                </span>
+                <span style='width:100px;float:left;text-align:right;display: block;line-height: 22px;'>{0} đ</span>
+                <span style='clear:both;display:block;text-align:right;'>
+                <span style='font-style: italic;'>{3}</span>
+                </span>
+                <span style='width:130px;float:left;display: block;line-height: 22px;'>
+                   <b>Tổng tiền thanh toán</b>
+                </span>
+                 <span style='width:100px;float:left;font-weight:bold;text-align:right;display: block;line-height: 22px;color: #FA1888;font-size: 16px;'>{1} đ</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+       </table>
+		      </p>
+          <p>Khách hàng ghi chú</p>
+          <p>
+            <i style="color:rgb(249, 5, 5)">{2}</i>
+          </p>
+          <p>
+            Bộ phận hỗ trợ khách hàng <a href='http://babo.vn' style='font-weight:bold'>babo.vn</a>
+            sẽ liên hệ với quý khách hàng để xác nhận chi tiết đơn hàng giao dịch. Khi đơn đặt hàng được xác nhận, chúng tôi sẽ bắt đầu chuyển hàng cho khách hàng.
+          </p>
+          <p>
+            Quý khách hàng vui lòng kiểm tra số lượng hàng chính xác khi nhận hàng và xem lại tại website
+            <a href='http://babo.vn' style='font-size:14px;color:#004c92;text-decoration:none;'>babo.vn</a> link tới
+            <b>Lịch sử mua hàng</b> tại trang <b>Thông tin tài khoản</b>.
+          </p>
+          <p>
+            Trân trọng cảm ơn,<br />
+            Trung tâm chăm sóc khách hàng <b>babo.vn</b>.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>{4}</td>
+      </tr>
+    </table>
+  </div>
+		]]>
+  </content>
+</template>

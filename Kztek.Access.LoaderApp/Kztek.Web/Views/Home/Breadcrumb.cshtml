@@ -1,0 +1,30 @@
+﻿@model List<Kztek.Model.CustomModel.SelectListModel2>
+
+@{
+    string direct = (string)ViewBag.DirectValue;
+    bool isSystem = (bool)ViewBag.isSystem;
+}
+
+<ul class="breadcrumb">
+    <li>
+        <i class="ace-icon fa fa-home home-icon"></i>
+        <a href="@Url.Action("Index","Home")">Trang chủ</a>
+    </li>
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            <li>
+                @if (isSystem)
+                {
+                    <a href="@string.Format("/{0}?group={1}", item.ItemValue,ViewBag.GroupIDValue)">@item.ItemText</a>
+                }
+                else
+                {
+                    @Html.ActionLink(item.ItemText, "Index", item.ItemSecondValue == 1 ? item.ItemValue : string.Format("{0}{1}", direct, item.ItemValue))
+                }
+            </li>
+        }
+    }
+    <li class="active">@ViewBag.ObjName</li>
+</ul><!-- /.breadcrumb -->

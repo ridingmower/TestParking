@@ -1,0 +1,1863 @@
+<root>
+	<tblCard>
+		<share>
+			<Text key="selectCardGrp" value="--Select card group--"/>
+		</share>
+		<Index>
+			<Text key="Title" value="Card List"/>
+			<Text key="TitleEx" value="Card_List"/>
+			<Text key="TitleDetail" value="Detail List"/>
+			<Text key="TitleDetailEx" value="Detail_List"/>
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="CardGroup" value="Card Group" />
+			<Text key="Plate" value="Plate" />
+			<Text key="ExpireDate" value="Expire Date" />
+			<Text key="CustomerCode" value="Customer Code" />
+			<Text key="CustomerName" value="Customer Name" />
+			<Text key="CustomerGroupName" value="Customer Group" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="ImportDate" value="Import Date" />
+			<Text key="IsLock" value="Status" />
+			<Text key="IsLockTrue" value="Active" />
+			<Text key="IsLockFalse" value="Inactive" />
+			<Text key="Action" value="Action" />
+			<Text key="NumberRow" value="NumberRow" />
+			<Text key="ContractCode" value="Contract Code" />
+			<Text key="VehicleNames" value="Vehicle Name" />
+			<Text key="IdentityCard" value="Identity Card" />
+			<Text key="phone" value="Phone" />
+			<Text key="add" value="Address" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="DateCreated" value="Date Created" />
+
+			<Text key="Compartment" value="Apartment" />s
+			<Text key="Keyword" value="Keyword:" />
+			<Text key="KeywordPlaceholder" value="CardNo, CardNumber, CustomerCode..." />
+			<Text key="FromDate" value="From:" />
+			<Text key="ToDate" value="To:" />
+			<Text key="CustomerGroupFilter" value="Customer Group" />
+			<Text key="CustomerGroupFilterPlaceholder" value="--Select--" />
+			<Text key="StatusFilter" value="Status" />
+			<Text key="StatusFilterPlaceholder" value="--Select Status--" />
+			<Text key="CardGroupFilter" value="Card Group" />
+			<Text key="CardGroupFilterPlaceholder" value="--Select--" />
+			<Text key="NoFilter" value="No Filter" />
+			<Text key="FilterByCreated" value="Filter by Date Created" />
+			<Text key="FilterByRegistration" value="Filter by Registration Date" />
+			<Text key="FilterByExpire" value="Filter by Expire Date" />
+
+			<Text key="LockCard" value="Lock Card" />
+			<Text key="OpenCard" value="Open Card" />
+			<Text key="DeleteCard" value="Delete Card" />
+
+			<Text key="SelectedCard" value="Selected" />
+			<Text key="import" value=" Import the card list file into the system" />
+			<Text key="dowload" value="Download the sample file" />
+			<Text key="converting" value="During the conversion process ..." />
+			<Text key="stopConvert" value="Stop conversion ..." />
+
+		</Index>
+		<Create>
+			<Text key="CardInfo" value="Card's Information" />
+
+			<Text key="CardPrimary" value="Primary card" />
+
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="CardGroup" value="Card Group" />
+			<Text key="Description" value="Description" />
+			<Text key="DateRegisted" value="ImportDate" />
+			<Text key="DateReleased" value="DateReleased" />
+			<Text key="DateActive" value="DateRegisted" />
+			<Text key="DateExpired" value="DateExpired" />
+			<Text key="DateCreated" value="DateCreated" />
+			<Text key="CardIsLock" value="Is Lock ?" />
+
+			<Text key="CustomerInfo" value="Customer's Information" />
+
+			<Text key="CustomerSearch" value="Search customer" />
+			<Text key="CustomerCode" value="Code" />
+			<Text key="CustomerName" value="Fullname" />
+			<Text key="CustomerMobile" value="Mobile" />
+			<Text key="CustomerIdentify" value="Identify Card" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="CustomerAvatar" value="Customer's Avatar" />
+
+			<Text key="VehicleInfo" value="Vehicle's Information" />
+
+			<Text key="Plate" value="Vehicle's Plate" />
+			<Text key="Name" value="Vehicle's Name" />
+
+			<Text key="PlatePlaceholder" value="Plate " />
+			<Text key="NamePlaceholder" value="Name " />
+		</Create>
+		<Update>
+			<Text key="CardInfo" value="Card's Information" />
+
+			<Text key="CardPrimary" value="Primary card" />
+
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="CardGroup" value="Card Group" />
+			<Text key="Description" value="Description" />
+			<Text key="DateRegisted" value="DateRegisted" />
+			<Text key="DateReleased" value="DateReleased" />
+			<Text key="DateActive" value="DateActive" />
+			<Text key="DateCreated" value="DateCreated" />
+			<Text key="DateExpired" value="DateExpired" />
+			<Text key="CardIsLock" value="Is Lock ?" />
+
+			<Text key="CustomerInfo" value="Customer's Information" />
+
+			<Text key="CustomerSearch" value="Search customer" />
+			<Text key="CustomerCode" value="Code" />
+			<Text key="CustomerName" value="Fullname" />
+			<Text key="CustomerMobile" value="Mobile" />
+			<Text key="CustomerIdentify" value="Identify Card" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="CustomerAvatar" value="Customer's Avatar" />
+
+			<Text key="VehicleInfo" value="Vehicle's Information" />
+
+			<Text key="Plate" value="Vehicle's Plate" />
+			<Text key="Name" value="Vehicle's Name" />
+
+			<Text key="PlatePlaceholder" value="Plate " />
+			<Text key="NamePlaceholder" value="Name " />
+		</Update>
+	</tblCard>
+
+	<ActiveCard>
+		<Index>
+			<Text key="Title" value="Extend Card"/>
+
+			<Text key="Keyword" value="Keyword:" />
+			<Text key="CardGroupFilter" value="Card Group" />
+			<Text key="CustomerGroupFilter" value="Customer Group" />
+			<Text key="NewDateExtend" value="New date:" />
+			<Text key="NewFee" value="New fee:" />
+			<Text key="AllowNegativeDay" value="Allow to extend negative days?" />
+			<Text key="SearchPlaceHolder" value="Card code, customer code ..." />
+			<Text key="SelectedCard" value="Selected" />
+
+			<Text key="Order" value="Order" />
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="DateExpired" value="DateExpired" />
+			<Text key="CustomerCode" value="Code" />
+			<Text key="CustomerName" value="Fullname" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="Vehicle" value="Customer's Vehicle" />
+			<Text key="CardGroup" value="Card's Group" />
+			<Text key="Address" value="Địa chỉ" />
+
+			<Text key="DeleteAll" value="Delete all" />
+			<Text key="Delete" value="Delete" />
+
+			<Text key="Page" value="Page " />
+			<Text key="Record" value="Record's Number " />
+
+			<Text key="WarningSelected" value="Please select cards you want to extend." />
+
+			<Text key="ExtendAction" value="Extend" />
+			<Text key="ExtendCard" value="Cards" />
+			<Text key="DateStart" value="Start day:" />
+		</Index>
+	</ActiveCard>
+
+	<ActiveCardList>
+		<Index>
+			<Text key="Title" value="History Extend Card"/>
+			<Text key="TitleEx" value="History_Extend_Card"/>
+			<Text key="Keyword" value="Keyword:" />
+			<Text key="FromDate" value="From:" />
+			<Text key="ToDate" value="To:" />
+			<Text key="CardGroupFilter" value="Card Group" />
+			<Text key="CustomerGroupFilter" value="Customer Group" />
+			<Text key="UserFilter" value="User:" />
+			<Text key="SearchPlaceHolder" value="keyword..." />
+			<Text key="Order" value="Order" />
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="CustomerName" value="Fullname" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="OldDate" value="Old Date" />
+			<Text key="NewDate" value="New Date" />
+			<Text key="Fee" value="Fee" />
+			<Text key="User" value="User" />
+			<Text key="DateCreated" value="Date Created" />
+			<Text key="DatePayment" value="Date of payment" />
+			<Text key="Action" value="Action" />
+			<Text key="NumberRow" value="Number Row" />
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="dayDifference" value="Day difference"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="DateCreate" value="Date Create"/>
+			<Text key="StaffMade" value="Staff Made"/>
+			<Text key="DatePay" value="Date of payment"/>
+		</Index>
+	</ActiveCardList>
+
+	<ActiveCardDateActive>
+		<Index>
+			<Text key="Title" value="Active Card"/>
+
+			<Text key="Keyword" value="Keyword:" />
+			<Text key="CardGroupFilter" value="Card Group" />
+			<Text key="CustomerGroupFilter" value="Customer Group" />
+			<Text key="NewDateActive" value="New date:" />
+			<Text key="SearchPlaceHolder" value="Card code, customer code ..." />
+			<Text key="SelectedCard" value="Selected" />
+
+			<Text key="Order" value="Order" />
+			<Text key="CardNo" value="Card No" />
+			<Text key="CardNumber" value="Card Number" />
+
+			<Text key="CustomerName" value="Fullname" />
+			<Text key="Vehicle" value="Customer's Vehicle" />
+			<Text key="CardGroup" value="Card's Group" />
+
+			<Text key="DateActive" value="DateActive" />
+
+			<Text key="DeleteAll" value="Delete all" />
+			<Text key="Delete" value="Delete" />
+
+			<Text key="Page" value="Page " />
+			<Text key="Record" value="Record's Number " />
+
+			<Text key="WarningSelected" value="Please select cards you want to active." />
+
+			<Text key="ActiveAction" value="Active" />
+			<Text key="ActiveCard" value="Cards" />
+
+		</Index>
+	</ActiveCardDateActive>
+
+	<tblCustomer>
+		<share>
+			<Text key="typtCus" value="--Select--"/>
+		</share>
+		<Index>
+			<Text key="Title" value="Customer List"/>
+			<Text key="TitleEx" value="Customer_List"/>
+			<Text key="Keyword" value="Keyword:" />
+			<Text key="CustomerGroupFilter" value="Customer Group" />
+			<Text key="StatusFilter" value="Status" />
+
+			<Text key="Order" value="Order" />
+			<Text key="CustomerCode" value="Customer Code" />
+			<Text key="CustomerName" value="Name" />
+			<Text key="CustomerMobile" value="Mobile" />
+			<Text key="CustomerContract" value="Contract" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="Status" value="Status" />
+			<Text key="Action" value="Action" />
+			<Text key="NumberRow" value="Number Row" />
+			<Text key="IdentityCard" value="Identity card" />
+			<Text key="add" value="Address" />
+			<Text key="phone" value="Phone" />
+			<Text key="CardNumber" value="Card Number" />
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="active" value="Active"/>
+			<Text key="IsLockTrue" value="Active" />
+			<Text key="IsLockFalse" value="Inactive" />
+			<Text key="Compartment" value="Apartment" />
+
+		</Index>
+		<Create>
+			<Text key="Title" value="Create Customer"/>
+			<Text key="CustomerTab" value="Customer" />
+
+			<Text key="CustomerCode" value="Customer Code" />
+			<Text key="CustomerName" value="Name" />
+			<Text key="CustomerIdentify" value="Identify Number" />
+			<Text key="CustomerMobile" value="Mobile" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="CustomerContract" value="Customer's Contract" />
+			<Text key="ContractStart" value="Contract's Start" />
+			<Text key="ContractEnd" value="Contract's End" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="CustomerAllowAccess" value="Allow to access" />
+			<Text key="CustomerUsername" value="Username" />
+			<Text key="CustomerPassword" value="Password" />
+			<Text key="CustomerRePassword" value="Re-Password" />
+			<Text key="CustomerAvatar" value="Avatar" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Update Customer"/>
+			<Text key="CustomerTab" value="Customer" />
+
+			<Text key="CustomerCode" value="Customer Code" />
+			<Text key="CustomerName" value="Name" />
+			<Text key="CustomerIdentify" value="Identify Number" />
+			<Text key="CustomerMobile" value="Mobile" />
+			<Text key="CustomerGroup" value="Customer's Group" />
+			<Text key="CustomerContract" value="Customer's Contract" />
+			<Text key="ContractStart" value="Contract's Start" />
+			<Text key="ContractEnd" value="Contract's End" />
+			<Text key="CustomerAddress" value="Address" />
+			<Text key="CustomerAllowAccess" value="Allow to access" />
+			<Text key="CustomerUsername" value="Username" />
+			<Text key="CustomerPassword" value="Password" />
+			<Text key="CustomerRePassword" value="Re-Password" />
+			<Text key="CustomerAvatar" value="Avatar" />
+			<Text key="CustomerIsLock" value="Lock" />
+			<Text key="Compartment" value="Apartment" />
+		</Update>
+	</tblCustomer>
+
+	<tblCustomerGroup>
+		<Index>
+			<Text key="Title" value="Customer's Group"/>
+
+		</Index>
+		<Create>
+			<Text key="Title" value="Create Customer's Group"/>
+
+			<Text key="CustomerGroupName" value="Group Name" />
+			<Text key="CustomerGroupParent" value="Parent level" />
+			<Text key="Ordering" value="Order" />
+			<Text key="IsLock" value="IsLock" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Update Customer's Group"/>
+
+			<Text key="CustomerGroupName" value="Group Name" />
+			<Text key="CustomerGroupParent" value="Parent level" />
+			<Text key="Ordering" value="Order" />
+			<Text key="IsLock" value="IsLock" />
+		</Update>
+	</tblCustomerGroup>
+
+	<tblSubCard>
+		<Index>
+			<Text key="Title" value="Supplementary Card List"/>
+			<Text key="TitleExcel" value="Supplementary_Card_List"/>
+			<Text key="MainCard" value="Main card"/>
+			<Text key="CardNumber" value="Card number"/>
+			<Text key="CardNo" value="Card no"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="import" value=" Import the supplementary card list file into the system" />
+			<Text key="dowload" value="Download the sample file" />
+			<Text key="converting" value="During the conversion process ..." />
+			<Text key="stopConvert" value="Stop conversion ..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Create"/>
+			<Text key="MainCard" value="Main card"/>
+			<Text key="CardNumber" value="Card number"/>
+			<Text key="CardNo" value="Card no"/>
+			<Text key="Placeholder" value="CardNo | CardNumber" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Update"/>
+			<Text key="MainCard" value="Main card"/>
+			<Text key="CardNumber" value="Card number"/>
+			<Text key="CardNo" value="Card no"/>
+			<Text key="Placeholder" value="CardNo | CardNumber" />
+		</Update>
+	</tblSubCard>
+
+	<tblCardGroup>
+		<Index>
+			<Text key="Title" value="Cardgroup List"/>
+			<Text key="CardGroupName" value="Name"/>
+			<Text key="Description" value="Description"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated"/>
+			<Text key="Inactive" value="Inactive"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="New Card Group"/>
+			<Text key="CardGroupName" value="Cardgroup Name"/>
+			<Text key="CardGroupNamePlaceholder" value="Card Group's Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="CardTypes" value="Card Type"/>
+			<Text key="IsHaveMoneyExcessTime" value="include Overtime Fee"/>
+			<Text key="VehicleGroup" value="Vehicle Group"/>
+
+			<Text key="LaneAssign" value="Assign Lane For Card Group"/>
+
+			<Text key="EnableFree" value="Free Duration"/>
+
+			<Text key="DayTimeFrom" value="Valid time from"/>
+			<Text key="DayTimeTo" value="to"/>
+			<Text key="Formulation" value="Formulation"/>
+			<Text key="SortOrder" value="Ordering"/>
+
+			<Text key="IsCheckPlate" value="Check Plate?"/>
+			<Text key="IsHaveMoneyExpiredDate" value="IsHaveMoneyExpiredDate"/>
+			<Text key="Inactive" value="Inactive"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="New Card Group"/>
+			<Text key="CardGroupName" value="Cardgroup Name"/>
+			<Text key="CardGroupNamePlaceholder" value="Card Group's Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="CardTypes" value="Card Type"/>
+			<Text key="IsHaveMoneyExcessTime" value="include Overtime Fee"/>
+			<Text key="VehicleGroup" value="Vehicle Group"/>
+
+			<Text key="LaneAssign" value="Assign Lane For Card Group"/>
+
+			<Text key="EnableFree" value="Free Duration"/>
+
+			<Text key="DayTimeFrom" value="Valid time from"/>
+			<Text key="DayTimeTo" value="to"/>
+			<Text key="Formulation" value="Formulation"/>
+			<Text key="SortOrder" value="Ordering"/>
+
+			<Text key="IsCheckPlate" value="Check Plate?"/>
+			<Text key="IsHaveMoneyExpiredDate" value="IsHaveMoneyExpiredDate"/>
+			<Text key="Inactive" value="Inactive"/>
+		</Update>
+		<FormulationBlock>
+			<Text key="Block0" value="Block 0"/>
+			<Text key="Block1" value="Block 1"/>
+			<Text key="Block2" value="Block 2"/>
+			<Text key="Block3" value="Block 3"/>
+			<Text key="Block4" value="Block 4"/>
+			<Text key="Block5" value="Block 5"/>
+
+			<Text key="Time" value="Time (minute(s))"/>
+		</FormulationBlock>
+		<FormulationEachTurn>
+			<Text key="Fee" value="Fee"/>
+		</FormulationEachTurn>
+		<FormulationTimePeriod>
+			<Text key="TimePeriod" value="Time Period"/>
+			<Text key="Fee" value="Fee"/>
+		</FormulationTimePeriod>
+	</tblCardGroup>
+
+	<tblFee>
+		<Shared>
+			<Text key="select" value="--Select card group--" />
+		</Shared>
+
+		<Index>
+			<Text key="Title" value="Fee List" />
+
+			<Text key="FeeName" value="Name" />
+			<Text key="CardGroupName" value="CardGroup" />
+			<Text key="FeeLevel" value="Fee Level" />
+			<Text key="Period" value="Period" />
+			<Text key="Action" value="Action" />
+			<Text key="KeywordPlaceholder" value="CardNo, CardNumber, CustomerCode..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Create Fee" />
+
+			<Text key="FeeName" value="Name" />
+			<Text key="FeeNamePlaceholder" value="Name..." />
+			<Text key="CardGroupName" value="Card Group" />
+			<Text key="FeeLevel" value="Fee Level" />
+			<Text key="CurrencyUnit" value="Vnđ" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Update Fee" />
+
+			<Text key="FeeName" value="Name" />
+			<Text key="FeeNamePlaceholder" value="Name..." />
+			<Text key="CardGroupName" value="Card Group" />
+			<Text key="CardGroupNamePlaceholder" value="--CardGroup--" />
+			<Text key="FeeLevel" value="Fee Level" />
+			<Text key="CurrencyUnit" value="Vnđ" />
+		</Update>
+	</tblFee>
+
+	<tblBlackList>
+		<Index>
+			<Text key ="Title" value="Blacklisted Plates"/>
+			<Text key ="Name" value="Name"/>
+			<Text key ="Plate" value="Plate"/>
+			<Text key ="Description" value="Description"/>
+			<Text key ="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="New Blacklist Plate"/>
+			<Text key ="Name" value="Name"/>
+			<Text key ="Plate" value="Plate"/>
+			<Text key ="Description" value="Description"/>
+			<Text key ="Action" value="Action"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Edit Blacklist Plate"/>
+			<Text key ="Name" value="Name"/>
+			<Text key ="Plate" value="Plate"/>
+			<Text key ="Description" value="Description"/>
+			<Text key ="Action" value="Action"/>
+		</Update>
+	</tblBlackList>
+
+	<tblGate>
+		<Index>
+			<Text key="Title" value="Gate List"/>
+			<Text key="GateName" value="Name"/>
+			<Text key="Description" value="Description"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated"/>
+			<Text key="Inactive" value="Inactive"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Add Gate"/>
+			<Text key="GateName" value="Name"/>
+			<Text key="GateNamePlaceholder" value="Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="SortOrder" value="Ordering"/>
+			<Text key="SortOrderPlaceholder" value="Ordering..."/>
+			<Text key="Deactive?" value="Deactive?"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update Gate"/>
+			<Text key="GateName" value="Name"/>
+			<Text key="GateNamePlaceholder" value="Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="SortOrder" value="Ordering"/>
+			<Text key="SortOrderPlaceholder" value="Ordering..."/>
+			<Text key="Deactive?" value="Deactive?"/>
+		</Update>
+	</tblGate>
+
+	<tblPC>
+		<Index>
+			<Text key="Title" value="PC List" />
+
+			<Text key="ComputerName" value="Computer Name" />
+			<Text key="IPAddress" value="IP Address" />
+			<Text key="GateName" value="Gate" />
+			<Text key="Description" value="Description" />
+			<Text key="Status" value="Status" />
+			<Text key="Active" value="Activated" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="GateNamePlaceholder" value="--Gate Name--"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Add PC"/>
+			<Text key="ComputerName" value="Computer Name"/>
+			<Text key="ComputerNamePlaceholder" value="Computer Name.."/>
+			<Text key="IPAddress" value="IP Address"/>
+			<Text key="IPAddressPlaceholder" value="IP Address.."/>
+			<Text key="GateName" value="Gate Name"/>
+			<Text key="GateNamePlaceholder" value="Gate Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description.."/>
+			<Text key="PicPathIn" value="In Picture Path"/>
+			<Text key="PicPathInPlaceholder" value="In Picture Path.."/>
+			<Text key="PicPathOut" value="Out Picture Path"/>
+			<Text key="PicPathOutPlaceholder" value="Out Picture Path.."/>
+			<Text key="VideoPath" value="Video Path"/>
+			<Text key="VideoPathPlaceholder" value="Video Path.."/>
+			<Text key="SortOrder" value="Ordering"/>
+			<Text key="Deactive?" value="Deactive?"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update PC"/>
+			<Text key="ComputerName" value="Computer Name"/>
+			<Text key="ComputerNamePlaceholder" value="Computer Name.."/>
+			<Text key="IPAddress" value="IP Address"/>
+			<Text key="IPAddressPlaceholder" value="IP Address.."/>
+			<Text key="GateName" value="Gate Name"/>
+			<Text key="GateNamePlaceholder" value="Gate Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description.."/>
+			<Text key="PicPathIn" value="In Picture Path"/>
+			<Text key="PicPathInPlaceholder" value="In Picture Path.."/>
+			<Text key="PicPathOut" value="Out Picture Path"/>
+			<Text key="PicPathOutPlaceholder" value="Out Picture Path.."/>
+			<Text key="VideoPath" value="Video Path"/>
+			<Text key="VideoPathPlaceholder" value="Video Path.."/>
+			<Text key="SortOrder" value="Ordering"/>
+			<Text key="Deactive?" value="Deactive?"/>
+		</Update>
+	</tblPC>
+
+	<tblCamera>
+		<Index>
+			<Text key="Title" value="Camera List"/>
+      <Text key="TitleDynamic" value="List"/>
+			<Text key="CameraName" value="Camera Name"/>
+			<Text key="HttpUrl" value="Address"/>
+			<Text key="PCName" value="PC Name"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="PCNamePlaceholder" value="--PC--" />
+      <Text key="ControllerPlaceholder" value="--Controller--" />
+      <Text key="CardgroupPlaceholder" value="--CardGroup--" />
+      <Text key="ControllerID" value="Controller"/>
+      <Text key="CardGroupID" value="Card Group"/>
+      <Text key="Date" value="Date"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Add Camera"/>
+      <Text key="TitleDynamic" value="Add"/>
+			<Text key="CameraName" value="Camera Name"/>
+			<Text key="CameraNamePlaceholder" value="Camera Name.."/>
+			<Text key="PCID" value="PC Name"/>
+			<Text key="PCIDPlaceholder" value="--PC Name--"/>
+			<Text key="HttpURL" value="Ip Address"/>
+			<Text key="HttpURLPlaceholder" value="Ip Address.."/>
+			<Text key="HttpPort" value="Http Port"/>
+			<Text key="HttpPortPlaceholder" value="Http Port.."/>
+			<Text key="RtspPort" value="Rtsp Port"/>
+			<Text key="RtspPortPlaceholder" value="Rtsp Port.."/>
+			<Text key="UserName" value="UserName"/>
+			<Text key="UserNamePlaceholder" value="UserName.."/>
+			<Text key="Password" value="Password"/>
+			<Text key="Channel" value="Channel"/>
+			<Text key="CameraType" value="Camera Type"/>
+			<Text key="StreamType" value="Stream Type"/>
+			<Text key="Resolution" value="Resolution"/>
+			<Text key="ResolutionPlaceholder" value="Resolution.."/>
+			<Text key="FrameRate" value="FrameRate"/>
+			<Text key="SDK" value="SDK"/>
+			<Text key="EnableRecording" value="EnableRecording"/>
+			<Text key="Inactive" value="Inactive?"/>
+      <Text key="ControllerID" value="Controller"/>
+      <Text key="CardGroupID" value="Card Group"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Edit Camera"/>
+      <Text key="TitleDynamic" value="Update"/>
+			<Text key="CameraName" value="Camera Name"/>
+			<Text key="CameraNamePlaceholder" value="Camera Name.."/>
+			<Text key="PCID" value="PC Name"/>
+			<Text key="HttpURL" value="Ip Address"/>
+			<Text key="HttpURLPlaceholder" value="Ip Address.."/>
+			<Text key="HttpPort" value="Http Port"/>
+			<Text key="HttpPortPlaceholder" value="Http Port.."/>
+			<Text key="RtspPort" value="Rtsp Port"/>
+			<Text key="RtspPortPlaceholder" value="Rtsp Port.."/>
+			<Text key="UserName" value="UserName"/>
+			<Text key="UserNamePlaceholder" value="UserName.."/>
+			<Text key="Password" value="Password"/>
+			<Text key="Channel" value="Channel"/>
+			<Text key="CameraType" value="Camera Type"/>
+			<Text key="StreamType" value="Stream Type"/>
+			<Text key="Resolution" value="Resolution"/>
+			<Text key="ResolutionPlaceholder" value="Resolution.."/>
+			<Text key="FrameRate" value="FrameRate"/>
+			<Text key="SDK" value="SDK"/>
+			<Text key="EnableRecording" value="EnableRecording"/>
+			<Text key="Inactive" value="Inactive?"/>
+			<Text key="PCIDPlaceholder" value="--Select Computer--"/>
+      <Text key="ControllerID" value="Controller"/>
+      <Text key="CardGroupID" value="Card Group"/>
+		</Update>
+	</tblCamera>
+
+	<tblController>
+		<Index>
+			<Text key="Title" value="Controller List"/>
+			<Text key="ControllerName" value="Controller Name"/>
+			<Text key="Comport" value="Comport/IP"/>
+			<Text key="PCName" value="PC Name"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="PCNamePlaceholder" value="--PC Name--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Add Controller"/>
+			<Text key="ControllerName" value="Controller Name"/>
+			<Text key="ControllerNamePlaceholder" value="Controller Name.."/>
+			<Text key="PCName" value="PC Name"/>
+			<Text key="PCNamePlaceholder" value="--PC--"/>
+			<Text key="CommunicationType" value="Communication Type"/>
+			<Text key="Comport" value="Comport"/>
+			<Text key="ComportPlaceholder" value="COM1"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="BaudratePlaceholder" value="9600"/>
+			<Text key="IP" value="IP Address"/>
+			<Text key="IPPlaceholder" value="IP Address.."/>
+			<Text key="Port" value="Port"/>
+			<Text key="PortPlaceholder" value="80"/>
+			<Text key="LineTypeID" value="Controller Type"/>
+			<Text key="Reader1Type" value="Reader 1"/>
+			<Text key="Reader2Type" value="Reader 2"/>
+			<Text key="Address" value="Address (RS232/485/422)"/>
+			<Text key="Inactive" value="Inactive?"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update Controller"/>
+			<Text key="ControllerName" value="Controller Name"/>
+			<Text key="ControllerNamePlaceholder" value="Controller Name.."/>
+			<Text key="PCName" value="PC Name"/>
+			<Text key="PCNamePlaceholder" value="--PC--"/>
+			<Text key="CommunicationType" value="Communication Type"/>
+			<Text key="Comport" value="Comport"/>
+			<Text key="ComportPlaceholder" value="COM1"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="BaudratePlaceholder" value="9600"/>
+			<Text key="IP" value="IP Address"/>
+			<Text key="IPPlaceholder" value="IP Address.."/>
+			<Text key="Port" value="Port"/>
+			<Text key="PortPlaceholder" value="80"/>
+			<Text key="LineTypeID" value="Controller Type"/>
+			<Text key="Reader1Type" value="Reader 1"/>
+			<Text key="Reader2Type" value="Reader 2"/>
+			<Text key="Address" value="Address (RS232/485/422)"/>
+			<Text key="Inactive" value="Inactive?"/>
+		</Update>
+	</tblController>
+
+	<tblLane>
+		<Index>
+			<Text key="Title" value="Lane List"/>
+			<Text key="LaneName" value="Lane Name"/>
+			<Text key="LaneType" value="Lane Type"/>
+			<Text key="ComputerName" value="PC"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="ComputerNamePlaceholder" value="--Computer--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Add Lane"/>
+			<Text key="LaneName" value="Lane Name"/>
+			<Text key="LaneNamePlaceholder" value="Lane Name.."/>
+			<Text key="PCID" value="PC"/>
+			<Text key="PCIDPlaceholder" value="--PC--"/>
+			<Text key="LaneType" value="Lane Type"/>
+			<Text key="Cam1" value="C1 Car"/>
+			<Text key="Cam2" value="C2 Bike"/>
+			<Text key="Cam3" value="C3 Overview"/>
+			<Text key="Cam4" value="C4 Car"/>
+			<Text key="Cam5" value="C5 Bike"/>
+			<Text key="Cam6" value="C6 Overview"/>
+			<Text key="CheckPlateLevelIn" value="CheckPlateLevelOut"/>
+			<Text key="CheckPlateLevelOut" value="CheckPlateLevelOut"/>
+      <Text key="OpenBarrieIn" value="Open barrie in"/>
+      <Text key="OpenBarrieOut" value="Open barrie out"/>
+			<Text key="IsLoop" value="Use Loop"/>
+			<Text key="IsPrint" value="Print Bill"/>
+			<Text key="IsFree" value="IsFree"/>
+			<Text key="IsLED" value="LED Display"/>
+			<Text key="AccessForEachSide" value="Access For Each Side"/>
+			<Text key="Inactive" value="Deactive"/>
+
+			<Text key="CameraPlaceholder" value="--Select Camera--"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Add Lane"/>
+			<Text key="LaneName" value="Lane Name"/>
+			<Text key="LaneNamePlaceholder" value="Lane Name.."/>
+			<Text key="PCID" value="PC"/>
+			<Text key="PCIDPlaceholder" value="--PC--"/>
+			<Text key="LaneType" value="Lane Type"/>
+			<Text key="Cam1" value="C1 Car"/>
+			<Text key="Cam2" value="C2 Bike"/>
+			<Text key="Cam3" value="C3 Overview"/>
+			<Text key="Cam4" value="C4 Car"/>
+			<Text key="Cam5" value="C5 Bike"/>
+			<Text key="Cam6" value="C6 Overview"/>
+			<Text key="CheckPlateLevelIn" value="CheckPlateLevelIn"/>
+			<Text key="CheckPlateLevelOut" value="CheckPlateLevelOut"/>
+      <Text key="OpenBarrieIn" value="Open barrie in"/>
+      <Text key="OpenBarrieOut" value="Open barrie out"/>
+			<Text key="IsLoop" value="Use Loop"/>
+			<Text key="IsPrint" value="Print Bill"/>
+			<Text key="IsFree" value="IsFree"/>
+			<Text key="IsLED" value="LED Display"/>
+			<Text key="AccessForEachSide" value="Access For Each Side"/>
+			<Text key="Inactive" value="Deactive"/>
+
+			<Text key="CameraPlaceholder" value="--Select Camera--"/>
+			<Text key="selectCamera" value="--Select Camera--"/>
+		</Update>
+	</tblLane>
+
+	<tblLED>
+		<Index>
+			<Text key="Title" value="LED List"/>
+			<Text key="Name" value="Name"/>
+			<Text key="PCName" value="PC"/>
+			<Text key="Comport" value="Comport"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="LedType" value="Led Type"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Activated" />
+			<Text key="Inactive" value="Inactive" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+			<Text key="PCNamePlaceholder" value="--Computer--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Add LED"/>
+			<Text key="Name" value="Name"/>
+			<Text key="NamePlaceholder" value="LED Name..."/>
+			<Text key="PCName" value="Computer"/>
+			<Text key="PCNamePlaceholder" value="--Computer--"/>
+			<Text key="Comport" value="COM(IP)"/>
+			<Text key="Baudrate" value="Baudrate(Port)"/>
+			<Text key="Address" value="Address(232/485/422)"/>
+			<Text key="SideIndex" value="Interface"/>
+			<Text key="LedType" value="LED Type"/>
+			<Text key="Active" value="Active"/>
+
+		</Create>
+		<Update>
+			<Text key="Title" value="Add LED"/>
+			<Text key="Name" value="Name"/>
+			<Text key="NamePlaceholder" value="LED Name..."/>
+			<Text key="PCName" value="Computer"/>
+			<Text key="PCNamePlaceholder" value="--Computer--"/>
+			<Text key="Comport" value="COM(IP)"/>
+			<Text key="Baudrate" value="Baudrate(Port)"/>
+			<Text key="Address" value="Address(232/485/422)"/>
+			<Text key="SideIndex" value="Interface"/>
+			<Text key="LedType" value="LED Type"/>
+			<Text key="Active" value="Active"/>
+
+		</Update>
+	</tblLED>
+
+	<tblFtpAccount>
+		<Index>
+			<Text key="Title" value="FTP Connection List"/>
+			<Text key="FtpHost" value="Hostname"/>
+			<Text key="FtpUser" value="Username"/>
+			<Text key="FtpPass" value="Password"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Add new FTP Connection"/>
+			<Text key="FtpHost" value="Hostname"/>
+			<Text key="FtpHostPlaceholder" value="Hostname..."/>
+			<Text key="FtpUser" value="Username"/>
+			<Text key="FtpUserPlaceholder" value="Username..."/>
+			<Text key="FtpPass" value="Password"/>
+			<Text key="FtpPassPlaceholder" value="Password..."/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Edit FTP Connection"/>
+			<Text key="FtpHost" value="Hostname"/>
+			<Text key="FtpHostPlaceholder" value="Hostname..."/>
+			<Text key="FtpUser" value="Username"/>
+			<Text key="FtpUserPlaceholder" value="Username..."/>
+			<Text key="FtpPass" value="Password"/>
+			<Text key="FtpPassPlaceholder" value="Password..."/>
+		</Update>
+	</tblFtpAccount>
+
+	<!--Báo cáo-->
+	<report>
+		<reportSearch>
+			<Text key="keyWord" value="Keyword"/>
+			<Text key="keywordPlaceholder" value="Code card, License plate..." />
+			<Text key="customerGroup" value="Customer group"/>
+			<Text key="fromDate" value="From date" />
+			<Text key="toDate" value="To date" />
+			<Text key="checkByTime" value="Search by time" />
+			<Text key="lane" value="Lane" />
+			<Text key="user" value="User" />
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="select" value="--Select--"/>
+			<Text key="time" value="Time to check"/>
+			<Text key="vehicleGroup" value="Vehicle Group"/>
+			<Text key="checkByTimeIn" value="Search by time in" />
+			<Text key="checkByTimeOut" value="Search by time out" />
+			<Text key="total" value="Total"/>
+			<Text key="chooseDate" value="Choose the date"/>
+			<Text key="cardIsAboutExpire" value="The card is about to expire"/>
+			<Text key="expiredCard" value="Expired card"/>
+			<Text key="action" value="Action"/>
+			<Text key="totalAmount" value="Total Amount"/>
+
+			<Text key="Filter_by_registration_date" value="Filter by registration date"/>
+			<Text key="Filter_by_release_date" value="Filter by release date"/>
+			<Text key="bookkeeper" value="Bookkeeper"/>
+			<Text key="approver" value="Approver"/>
+		</reportSearch>
+
+		<!--Xe trong bãi hiện tại-->
+		<reportIn>
+			<Text key="title" value="Vehicles in the parking lot at the present time"/>
+			<Text key="titleExcell" value="vehicles_in_the_parking_lot_at_the_present_time"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="timeOut" value="Time out"/>
+			<Text key="imageIn" value="Image in"/>
+			<Text key="imageOut" value="Image out"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="user" value="User"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="expiredDate" value="Expired date"/>
+			<Text key="remainingTime" value="Remaining time"/>
+			<Text key="action" value="Action"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="stt" value="No."/>
+			<Text key="mainCard" value="Main Card"/>
+		</reportIn>
+
+		<!--Xe trong bãi tại thời điểm bất kỳ-->
+		<reportVehicleInAnyTime>
+			<Text key="title" value="Vehicle in the parking lot at any time"/>
+			<Text key="titleExcell" value="Vehicle_in_the_parking_lot_at_any_time"/>
+			<Text key="stt" value="No."/>
+			<Text key="groupName" value="Group name"/>
+			<Text key="quantity" value="Quantity"/>
+		</reportVehicleInAnyTime>
+
+		<!--Chi tiết xe trong bãi tại thời điểm bất kỳ-->
+		<reportDetailVehicleInAnyTime>
+			<Text key="title" value="Vehicle details in the parking lot at any time"/>
+			<Text key="titleExcell" value="Vehicle_details_in_the_parking_lot_at_any_time"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="imageIn" value="Image in"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+		</reportDetailVehicleInAnyTime>
+
+		<!--Báo cáo xe ra-->
+		<reportInOut>
+			<Text key="title" value=" Report Vehicle Out"/>
+			<Text key="titleExcell" value="Report_Vehicle_Out"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="timeOut" value="Time out"/>
+			<Text key="imageIn" value="Image in"/>
+			<Text key="imageOut" value="Image out"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="lanceOut" value="Lance out"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="monitoringOut" value="Monitoring out"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="action" value="Action"/>
+		</reportInOut>
+
+		<!--Báo cáo xe vào-->
+		<ReportVehicleComeIn>
+			<Text key="title" value="Report Vehicle In"/>
+			<Text key="titleExcell" value="Report_Vehicle_In"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="imageIn" value="Image in"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="action" value="Action"/>
+		</ReportVehicleComeIn>
+
+		<!--Chi tiết thu tiền thẻ lượt-->
+		<ReportDetailMoneyCardDay>
+			<Text key="title" value="Details of turn-based parking fees"/>
+			<Text key="titleExcell" value="Details_of_turn-based_parking_fees"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="timeOut" value="Time out"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="lanceOut" value="Lance out"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="monitoringOut" value="Monitoring out"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="timeAll" value="Total Time"/>
+			<Text key="action" value="Action"/>
+			<Text key="total" value="Total"/>
+			<Text key="moneyin" value="Moneys in"/>
+			<Text key="moneyout" value="Moneys out"/>
+			<Text key="paystate" value="Input status"/>
+			<Text key="totalinout" value="Total paid"/>
+		</ReportDetailMoneyCardDay>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo nhóm thẻ-->
+		<ReportTotalMoneyByCardGroup>
+			<Text key="title" value="Report charge card by group of cards"/>
+			<Text key="titleEx" value="Report_charge_card_by_group_of_cards"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="quantity" value="Quantity"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyByCardGroup>
+
+    <ReportTotalByCardGroup_LOTTE>
+      <Text key="title" value="Report charge card by group of cards"/>
+      <Text key="titleEx" value="Report_charge_card_by_group_of_cards"/>
+    </ReportTotalByCardGroup_LOTTE>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo làn đường-->
+		<ReportTotalMoneyByLane>
+			<Text key="title" value="Report toll collection according to the lane"/>
+			<Text key="titleEx" value="Report_toll_collection_according_to_the_lane"/>
+			<Text key="stt" value="No."/>
+			<Text key="lane" value="Lane"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyByLane>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo người dùng-->
+		<ReportTotalMoneyByUser>
+			<Text key="title" value="Report Fee collection report by user"/>
+			<Text key="titleEx" value="Report_Fee_collection_report_by_user"/>
+			<Text key="stt" value="No."/>
+			<Text key="user" value="User"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyByUser>
+
+		<!--Chi tiết thu tiền thẻ tháng-->
+		<ReportDetailMoneyCardMonthTRANSERCO>
+			<Text key="title" value="Detailed month charge card"/>
+			<Text key="titleEx" value="Detailed_month_charge_card"/>
+			<Text key="keywordPlaceholder" value="Card Code ..."/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="customerGroup" value="Customer Group"/>
+			<Text key="durationOld" value="Duration old"/>
+			<Text key="durationNew" value="Duration new"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="payment" value="Payment"/>
+			<Text key="staffMade" value="Staff made"/>
+			<Text key="executionDate" value="Execution date"/>
+			<Text key="contractCode" value="Contract code"/>
+			<Text key="address" value="Address"/>
+		</ReportDetailMoneyCardMonthTRANSERCO>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo nhóm thẻ-->
+		<ReportTotalMoneyCardMonthByCardGroup>
+			<Text key="title" value="Summary of monthly card by group cards"/>
+			<Text key="titleEx" value="Summary_of_monthly_card_by_group_cards"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardGroupName" value="Card group name"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyCardMonthByCardGroup>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo người dùng-->
+		<ReportTotalMoneyCardMonthByUser>
+			<Text key="title" value="Summary of monthly card collection by users"/>
+			<Text key="titleEx" value="Summary_of_monthly_card_collection_by_users"/>
+			<Text key="stt" value="No."/>
+			<Text key="userName" value="User name"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyCardMonthByUser>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo nhóm khách hàng-->
+		<ReportTotalMoneyCardMonthByGroupUser>
+			<Text key="title" value="Collect monthly card payments according by customer groups"/>
+			<Text key="titleEx" value="Collect_monthly_card_payments_according_by_customer_groups"/>
+			<Text key="stt" value="No."/>
+			<Text key="cusGrp" value="Customer Group"/>
+			<Text key="amount" value="Amount"/>
+		</ReportTotalMoneyCardMonthByGroupUser>
+
+		<!--Báo cáo lượt ra vào miễn phí toàn phần-->
+		<!--Báo cáo lượt ra vào miễn phí 1 phần-->
+		<ReportVehicleFreeAll>
+			<Text key="titleAll" value="Report of free entrance and exit full"/>
+			<Text key="titleExAll" value="Report_of_free_entrance_and_exit_full"/>
+			<Text key="titlePart" value="Report of free entrance and exit part"/>
+			<Text key="titleExPart" value="Report_of_free_entrance_and_exit_part"/>
+			<Text key="stt" value="No."/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time in"/>
+			<Text key="timeOut" value="Time out"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="lanceOut" value="Lance out"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="monitoringOut" value="Monitoring out"/>
+			<Text key="amount" value="Amount"/>
+			<Text key="voucher" value="Voucher"/>
+			<Text key="total" value="Total"/>
+			<Text key="amountFree" value="Amount Free"/>
+		</ReportVehicleFreeAll>
+
+		<!--Thời hạn thẻ tháng-->
+		<ReportCardExpire>
+			<Text key="title" value="Validity of the month card"/>
+			<Text key="titleEx" value="Validity_of_the_month_card"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="customerCode" value="Customer Code"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="add" value="Address"/>
+			<Text key="phone" value="Phone"/>
+			<Text key="expirationDate" value="Expiration date"/>
+		</ReportCardExpire>
+
+		<!--Chi tiết xử lý thẻ-->
+		<ReportCardProcessDetail>
+			<Text key="title" value="Card processing details"/>
+			<Text key="titleEx" value="Card_processing_details"/>
+			<Text key="stt" value="No."/>
+			<Text key="time" value="Time"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Code card"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="behavior" value="Action"/>
+			<Text key="cardHolder" value="Card holder"/>
+			<Text key="cusGrp" value="Customer group"/>
+			<Text key="add" value="Address"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="staffMade" value="Staff made"/>
+		</ReportCardProcessDetail>
+
+		<!--Tổng hợp xử lý thẻ-->
+		<ReportCardProcess>
+			<Text key="title" value="Integrated report card processing"/>
+			<Text key="titleEx" value="Integrated_report_card_processing"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="addCard" value="Add Card"/>
+			<Text key="cardIssuance" value="Card issuance"/>
+			<Text key="changeCard" value="Change card"/>
+			<Text key="returnCard" value="Return the card"/>
+			<Text key="openCard" value="Open card"/>
+			<Text key="lockCard" value="Lock card"/>
+			<Text key="delCard" value="Delete Card"/>
+			<Text key="activeCard" value="Active Card"/>
+		</ReportCardProcess>
+
+		<!--Sự kiện cảnh báo-->
+		<ReportAlarm>
+			<Text key="title" value="Report on events alert"/>
+			<Text key="titleEx" value="Report_ on_events_alert"/>
+			<Text key="stt" value="No." />
+			<Text key="keywordPlaceholder" value="Code card..." />
+			<Text key="time" value="Time"/>
+			<Text key="cardCode" value="Card Code"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="image" value="Image"/>
+			<Text key="warning" value="Warning"/>
+			<Text key="lane" value="Lane"/>
+			<Text key="monitoring" value="Monitoring"/>
+			<Text key="explanation" value="Explanation"/>
+		</ReportAlarm>
+
+		<!--other-->
+
+		<!--Chi tiết thông tin thẻ-->
+		<ReportCustomerList>
+			<Text key="title" value="Details card information"/>
+			<Text key="stt" value="No."/>
+			<Text key="customerCode" value="Customer code"/>
+			<Text key="customergrp" value="Customer Group"/>
+			<Text key="name" value="Full name"/>
+			<Text key="add" value="address"/>
+			<Text key="phone" value="Phone"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardCode" value="Card Id"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="expirationDate" value="Expiration date"/>
+			<Text key="Date_of_card_entry" value="Date of card entry"/>
+			<Text key="type" value="Type"/>
+		</ReportCustomerList>
+
+		<!--Báo cáo chi tiết thẻ theo căn hộ-->
+		<ReportCardDetailByCompartment>
+			<Text key="title" value="Report card details by apartment"/>
+			<Text key="stt" value="No."/>
+			<Text key="apartment" value="Apartment"/>
+			<Text key="customerCode" value="Customer code"/>
+			<Text key="customergrp" value="Customer Group"/>
+			<Text key="name" value="Customer"/>
+			<Text key="cardGroup" value="Card group"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardCode" value="Card Id"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="expirationDate" value="Expiration date"/>
+			<Text key="Date_of_card_entry" value="Date of card entry"/>
+			<Text key="Card_cancellation_date" value="Card cancellation date"/>
+			<Text key="staff_made" value="Staff made"/>
+		</ReportCardDetailByCompartment>
+
+		<!-- Báo cáo tổng hợp theo mã thẻ cho lượt vào ra phát sinh phụ trội-->
+		<ReportTotalSubventionByCardNumber>
+			<Text key="title" value="Total report by card code for amount incurred"/>
+			<Text key="title_EX" value="Total_report_by_card_code_for_amount_incurred"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardId" value="Card Id"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="customerGroup" value="Customer group"/>
+			<Text key="cost" value="Cost"/>
+		</ReportTotalSubventionByCardNumber>
+
+		<!--Báo cáo chi tiết xe phát sinh phí phụ trội-->
+		<ReportVehicleMoneyByCardMonth>
+			<Text key="title" value="Report details additional charges arising car"/>
+			<Text key="title_EX" value="Report_details_additional_charges_arising_car"/>
+			<Text key="stt" value="No."/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardId" value="Card Id"/>
+			<Text key="licensePlate" value="License plate"/>
+			<Text key="timeIn" value="Time In"/>
+			<Text key="customer" value="Customer"/>
+			<Text key="cardGroup" value="Card Group"/>
+			<Text key="cost" value="Cost"/>
+			<Text key="lanceIn" value="Access lane"/>
+			<Text key="lanceOut" value="Lance out"/>
+			<Text key="monitoringIn" value="Monitoring in"/>
+			<Text key="monitoringOut" value="Monitoring out"/>
+		</ReportVehicleMoneyByCardMonth>
+
+		<ReportCardCompartment>
+			<Text key="title" value="Card by apartment"/>
+			<Text key="titleDetail" value="Detailed report"/>
+			<Text key="titleDetail_EX" value="Detailed_report"/>
+			<Text key="titleTotal" value="Synthesis report"/>
+			<Text key="titleDetail_EX" value="Synthesis_report"/>
+			<Text key="Compartment" value="Apartment"/>
+			<Text key="CAR_REG" value="Car card registration"/>
+			<Text key="CAR_NOTUSE" value="Cancel car card"/>
+			<Text key="CAR_USE" value="Use car card"/>
+			<Text key="CYCLE_REG" value="Motorbike card registration"/>
+			<Text key="CYCLE_NOTUSE" value="Cancel motorbike card"/>
+			<Text key="CYCLE_USE" value="Use motorbike card"/>
+			<Text key="BIKE_REG" value="Bicycle card registration"/>
+			<Text key="BIKE_NOTUSE" value="Cancel bicycle card"/>
+			<Text key="BIKE_USE" value="Use bicycle card"/>
+		</ReportCardCompartment>
+
+	</report>
+
+	<User>
+		<Index>
+			<Text key="Title" value="Users list"/>
+			<Text key="Name" value="Name"/>
+			<Text key="Phone" value="Phone"/>
+			<Text key="Username" value="Username"/>
+			<Text key="DateCreated" value="Date Created"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Active"/>
+			<Text key="Inactive" value="Inactive"/>
+			<Text key="IsAdmin" value="IsAdmin"/>
+			<Text key="IsAdminTrue" value="Admin"/>
+			<Text key="IsAdminFalse" value="User"/>
+			<Text key="Roles" value="Roles"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..."/>
+			<Text key="selected" value="Selected"/>
+
+		</Index>
+		<Create>
+			<Text key="Title" value="Create new user"/>
+			<Text key="Tab_Info" value="Basic information"/>
+			<Text key="Tab_Role" value="Roles list"/>
+
+			<Text key="Username" value="Username"/>
+			<Text key="UsernamePlaceholder" value="Username..."/>
+			<Text key="Password" value="Password"/>
+			<Text key="RePassword" value="Reinput Password"/>
+			<Text key="IsAdmin" value="Is Admin"/>
+			<Text key="Active" value="Active"/>
+			<Text key="Avatar" value="Avatar"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update user"/>
+			<Text key="Tab_Info" value="Basic information"/>
+			<Text key="Tab_Role" value="Roles list"/>
+
+			<Text key="Username" value="Username"/>
+			<Text key="UsernamePlaceholder" value="Username..."/>
+			<Text key="Password" value="Password"/>
+			<Text key="RePassword" value="Reinput Password"/>
+			<Text key="IsAdmin" value="Is Admin"/>
+			<Text key="Active" value="Active"/>
+			<Text key="Avatar" value="Avatar"/>
+		</Update>
+	</User>
+
+	<Role>
+		<Index>
+			<Text key="Title" value="Roles list"/>
+			<Text key="ID" value="ID"/>
+			<Text key="RoleName" value="Name"/>
+			<Text key="Description" value="Description"/>
+			<Text key="Status" value="Status"/>
+			<Text key="Active" value="Active"/>
+			<Text key="Inactive" value="Inactive"/>
+			<Text key="Action" value="Action"/>
+
+			<Text key="KeywordPlaceholder" value="Keyword..."/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Create new role"/>
+			<Text key="Tab_Info" value="Basic information"/>
+			<Text key="Tab_Menu" value="Menu list"/>
+			<Text key="RoleName" value="Role Name"/>
+			<Text key="RoleNamePlaceholder" value="Role Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="Active" value="Active"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update role"/>
+			<Text key="Tab_Info" value="Basic information"/>
+			<Text key="Tab_Menu" value="Menu list"/>
+			<Text key="RoleName" value="Role Name"/>
+			<Text key="RoleNamePlaceholder" value="Role Name..."/>
+			<Text key="Description" value="Description"/>
+			<Text key="DescriptionPlaceholder" value="Description..."/>
+			<Text key="Active" value="Active"/>
+		</Update>
+	</Role>
+
+	<MenuFunction>
+		<Index>
+			<Text key="Title" value="Menu list"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Add new menu"/>
+			<Text key="MenuName" value="Menu Name"/>
+			<Text key="MenuNamePlaceholder" value="Menu Name..."/>
+			<Text key="ControllerName" value="Controller Name"/>
+			<Text key="ControllerNamePlaceholder" value="Controller Name..."/>
+			<Text key="ActionName" value="Action Name"/>
+			<Text key="ActionNamePlaceholder" value="Action Name..."/>
+			<Text key="ParentId" value="ParentId"/>
+			<Text key="MenuType" value="Menu Type"/>
+			<Text key="Icon" value="Icon"/>
+			<Text key="IconPlaceholder" value="Icon..."/>
+			<Text key="MenuGroupListId" value="MenuGroupListId"/>
+			<Text key="MenuGroupListIdPlaceholder" value="MenuGroupListId..."/>
+			<Text key="MenuGroupListIdNote" value="MenuGroupListIdNote"/>
+			<Text key="OrderNumber" value="OrderNumber"/>
+			<Text key="isSystem" value="isSystem"/>
+			<Text key="Active" value="Active"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Add new menu"/>
+			<Text key="MenuName" value="Menu Name"/>
+			<Text key="MenuNamePlaceholder" value="Menu Name..."/>
+			<Text key="ControllerName" value="Controller Name"/>
+			<Text key="ControllerNamePlaceholder" value="Controller Name..."/>
+			<Text key="ActionName" value="Action Name"/>
+			<Text key="ActionNamePlaceholder" value="Action Name..."/>
+			<Text key="ParentId" value="ParentId"/>
+			<Text key="MenuType" value="Menu Type"/>
+			<Text key="Icon" value="Icon"/>
+			<Text key="IconPlaceholder" value="Icon..."/>
+			<Text key="MenuGroupListId" value="MenuGroupListId"/>
+			<Text key="MenuGroupListIdPlaceholder" value="MenuGroupListId..."/>
+			<Text key="MenuGroupListIdNote" value="MenuGroupListIdNote"/>
+			<Text key="OrderNumber" value="OrderNumber"/>
+			<Text key="isSystem" value="isSystem"/>
+			<Text key="Active" value="Active"/>
+		</Update>
+	</MenuFunction>
+
+	<tblSystemConfig>
+		<Index>
+			<Text key="Title" value="System Parameters"/>
+			<Text key="Company" value="Company Name"/>
+			<Text key="Tel" value="Phone Number"/>
+			<Text key="Fax" value="Fax Number"/>
+			<Text key="Tax" value="Tax No."/>
+			<Text key="Address" value="Address"/>
+			<Text key="FeeName" value="Fee Name"/>
+			<Text key="Logo" value="Logo"/>
+			<Text key="DelayTime" value="DelayTime"/>
+			<Text key="Para1" value="P1(MS)"/>
+			<Text key="Para2" value="P2(KH)"/>
+			<Text key="EnableDeleteCardFailed" value="Enable Failed Card Deleteting"/>
+			<Text key="EnableSoundAlarm" value="Enable Sound Alarm"/>
+			<Text key="EnableAlarmMessageBox" value="Enable Alarm Box Out"/>
+			<Text key="EnableAlarmMessageBoxIn" value="Enable Alarm Box In"/>
+      <Text key="SaveEventButton" value="Save all event button"/>
+		</Index>
+	</tblSystemConfig>
+
+	<tblLog>
+		<Index>
+			<Text key="Title" value="System Log"/>
+
+			<Text key="Date" value="Date"/>
+			<Text key="ComputerName" value="Computer"/>
+			<Text key="UserName" value="UserName"/>
+			<Text key="SubSystemCode" value="SubSystemCode"/>
+			<Text key="ObjectName" value="ObjectName"/>
+			<Text key="Actions" value="Actions"/>
+			<Text key="Description" value="Description"/>
+
+			<Text key="Keyword" value="Keyword"/>
+			<Text key="KeywordPlaceholder" value="Keyword..."/>
+			<Text key="FromDate" value="From:"/>
+			<Text key="ToDate" value="To:"/>
+			<Text key="ActionFilter" value="Action:"/>
+			<Text key="UserFilter" value="User:"/>
+
+		</Index>
+	</tblLog>
+
+	<Home>
+		<Index>
+			<Text key="fromdate" value="From"/>
+			<Text key="todate" value="To"/>
+			<Text key="vehiclein" value="Vehicle in"/>
+			<Text key="vehicleout" value="Vehicle out"/>
+		</Index>
+		<Action>
+			<Text key="Create" value="Create" />
+			<Text key="Update" value="Update" />
+			<Text key="Delete" value="Delete" />
+			<Text key="Import" value="Import" />
+			<Text key="Export" value="Export" />
+			<Text key="Reset" value="Reset" />
+			<Text key="Search" value="Search" />
+			<Text key="Print" value="Print" />
+			<Text key="decentralization" value="Decentralization" />
+
+
+			<Text key="Save" value="Save" />
+			<Text key="SaveAndExit" value="Save &#38; Exit" />
+			<Text key="Refresh" value="Refresh" />
+			<Text key="BackToList" value="Back to list" />
+			<Text key="exit" value="Exit" />
+
+			<Text key="ChangeCustomer" value="Change Customer" />
+			<Text key="ReturnCard" value="Return card" />
+
+			<Text key="nonSelect" value="--Select--" />
+			<Text key="allSelect" value="--Selected all--" />
+			<Text key="nSelect" value="--Selected--" />
+		</Action>
+
+		<notification>
+			<Text key="notification" value="Notification" />
+			<Text key="DeleteSuccess" value="Delete Success" />
+			<Text key="DeleteFail" value="Delete failed" />
+			<Text key="LstDelSuccess" value="Delete all listings successfully" />
+			<Text key="addSuccess" value="Add new data successfully" />
+			<Text key="updateSuccess" value="Update successful" />
+			<Text key="updateFailed" value="Update Failed" />
+			<Text key="del_menu_fail" value="Can't delete active menu" />
+			<Text key="del_user_fail" value="Can't delete user as admin" />
+
+			<Text key="record_already_exist" value="The record already exists" />
+			<Text key="record_does_not_exist" value="The record does not exist" />
+			<Text key="deleteConfirm" value="Are you sure you want to delete this record?" />
+			<!--<Text key="changeCardConfirm" value="Are you sure you want to Change Card ?" />
+      <Text key="returnCardConfirm" value="Are you sure you want to Return Card?" />-->
+			<Text key="lockCardConfirm" value="Are you sure you want to Lock Card?" />
+			<Text key="openCardConfirm" value="Are you sure you want to Open Card?" />
+
+			<Text key="card_does_not_exist_in_the_system" value="The card does not exist in the system" />
+			<Text key="card_is_existing_in_the_event" value="The card is existing in the event. Can not delete" />
+			<Text key="reason" value="What is your reason ?" />
+			<Text key="err" value="Error! An error occurred Please try again." />
+			<Text key="please_select_card" value="Please select a card" />
+			<Text key="changeAnotherCustomer" value="Please enter a new customer code. Click 'Save and exit' to save changes." />
+			<Text key="returnCardFromCustomer" value="Return card successfully. Click 'Save and exit' to save changes." />
+			<Text key="Please_enter_the_CardNo" value="Please enter the Card No" />
+			<Text key="Please_enter_the_Card_Number" value="Please enter the Card Number" />
+			<Text key="please_select_card_group" value="Please select Card Group" />
+			<Text key="Card_code_already_exists" value="Card Number already exists" />
+			<Text key="messErrExtendCard" value="Please select the card list you want to renew" />
+			<Text key="ConfirmExtendCard" value="Are you sure you want to renew these card?" />
+			<Text key="select_card_activate" value="Please select the card you want to activate" />
+			<Text key="enter_customer_name" value="Name can't be blank" />
+			<Text key="enter_customer_code" value="Customer Code can't be blank" />
+			<Text key="Customer_code_already_exists" value="Customer code already exists" />
+			<Text key="correct_password" value="Please re-enter the correct password" />
+
+			<Text key="enter_CardGrp_name" value="Card group name can't be blank" />
+			<Text key="CardGrp_lane" value="Please divide the lane for the card group" />
+			<Text key="CardGrp_already_exists" value="The card group already exists" />
+			<Text key="cusGrp_name" value="Customer group Name can't be blank" />
+			<Text key="enter_name" value="Name can't be blank" />
+			<Text key="exists_name" value="Name already exists" />
+			<Text key="exists_Number_plate" value="Number plate information already exists" />
+
+			<Text key="enter_Number_plate" value="Plate can't be blank" />
+			<Text key="Message_del_fail_computer" value="Using in computer. Can not delete" />
+
+			<Text key="Computer_Name" value="Computer Name can't be blank" />
+			<Text key="ip" value="IP Address can't be blank" />
+			<Text key="ip_already_exists" value="IP Address already exists" />
+			<Text key="Camera_Name" value="Camera Name can't be blank" />
+			<Text key="Camera_already_exists" value="Camera Name already exists" />
+			<Text key="Controller_Name" value="Controller Name can't be blank" />
+			<Text key="Controller_Name_already_exists" value="Controller Name already exists" />
+			<Text key="Lane_Name" value="Lane Name can't be blank" />
+			<Text key="Lane_Name_already_exists" value="Lane already exists" />
+			<Text key="interface" value="Please select the interface" />
+			<Text key="addIp" value="Address can't be blank(232/485/422)" />
+
+			<Text key="LED_Name_already_exists" value="LED Name already exists" />
+			<Text key="LEDName" value="LED Name can't be blank" />
+      <Text key="Info_already_exists" value="Information already exists" />
+
+			<Text key="ErMenu" value="Error occurred during initialization" />
+			<Text key="menu_Name" value="Menu Name can't be blank" />
+			<Text key="Role_Name" value="Role Name can't be blank" />
+			<Text key="Role_New" value="Add new role" />
+			<Text key="Role_update" value="Update role" />
+			<Text key="Role_User" value="Are you sure you want to decentralize these users?" />
+
+			<Text key="User_name_already_exists" value="User Name already exists" />
+			<Text key="re_enter_pass_correct" value=" Please re-enter the correct password." />
+			<Text key="re_enter_pass" value=" Please re-enter the password." />
+			<Text key="Admin_account" value=" Admin account. Can not delete" />
+			<Text key="Username_already_exists" value="Username already exists. Please  re-enter another username." />
+			<Text key="Email_already_exists" value="Email already exists. Please re-enter another email." />
+			<Text key="re-enter_new_password" value="Please re-enter the correct new password" />
+			<Text key="re-enter_old_password" value="Please re-enter the correct old password" />
+			<Text key="choose_authority" value="Please choose authority" />
+			<Text key="choose_user" value="Please choose user" />
+			<Text key="re-pass" value="Are you sure you want to recover this account password?" />
+			<Text key="Successful_recovery" value="Successful recovery" />
+			<Text key="Recovery_failed" value="Recovery failed" />
+
+			<Text key="enter_MainCard_name" value="Main card can't be blank" />
+
+		</notification>
+
+		<MenuFunction>
+			<!--Home-->
+			<Text key="Home" value="Dashboard" />
+			<!--tblCard-->
+			<Text key="controller_67797447" value="Card Management" />
+			<Text key="tblCard_Index" value="Card List" />
+			<Text key="tblCard_Create" value="Create" />
+			<Text key="tblCard_Update" value="Update" />
+			<Text key="controller_43820046" value="Extend Card" />
+			<Text key="ActiveCard_Index" value="New Extend" />
+			<Text key="ActiveCardList_Index" value="Extend Card History" />
+			<Text key="ActiveCardDateActive_Index" value="Card Activation" />
+			<!--tblCustomer-->
+			<Text key="controller_55844880" value="Cus. Management " />
+			<Text key="tblCustomer_Index" value="Customer List" />
+			<Text key="tblCustomer_Create" value="Create" />
+			<Text key="tblCustomer_Update" value="Update" />
+			<!--Directory-->
+			<Text key="controller_71080602" value="Directory" />
+
+			<Text key="tblCardGroup_Index" value="Cardgroups" />
+			<Text key="tblCardGroup_Create" value="Create" />
+			<Text key="tblCardGroup_Update" value="Update" />
+
+			<Text key="tblCompartment_Index" value="Apartments List" />
+
+			<Text key="tblCustomerGroup_Index" value="Customer Groups" />
+			<Text key="tblCustomerGroup_Create" value="Create" />
+			<Text key="tblCustomerGroup_Update" value="Update" />
+
+			<Text key="tblFee_Index" value="Fee" />
+			<Text key="tblFee_Create" value="Create" />
+			<Text key="tblFee_Update" value="Update" />
+
+			<Text key="tblBlackList_Index" value="Blacklisted Plates" />
+			<Text key="tblBlackList_Create" value="Create" />
+			<Text key="tblBlackList_Update" value="Update" />
+			<!--Device-->
+			<Text key="controller_81507875" value="Devices Setup" />
+
+			<Text key="tblGate_Index" value="Gates" />
+			<Text key="tblGate_Create" value="Create" />
+			<Text key="tblGate_Update" value="Update" />
+
+			<Text key="tblPC_Index" value="Computers" />
+			<Text key="tblPC_Create" value="Create" />
+			<Text key="tblPC_Update" value="Update" />
+
+			<Text key="tblCamera_Index" value="Cameras" />
+			<Text key="tblCamera_Create" value="Create" />
+			<Text key="tblCamera_Update" value="Update" />
+
+			<Text key="tblController_Index" value="Controllers" />
+			<Text key="tblController_Create" value="Create" />
+			<Text key="tblController_Update" value="Update" />
+
+			<Text key="tblLane_Index" value="Lanes" />
+			<Text key="tblLane_Create" value="Create" />
+			<Text key="tblLane_Update" value="Update" />
+
+			<Text key="tblLED_Index" value="LEDs" />
+			<Text key="tblLED_Create" value="Create" />
+			<Text key="tblLED_Update" value="Update" />
+			<!--System-->
+			<Text key="controller_35537716" value="System" />
+
+			<Text key="User_Index" value="Users" />
+			<Text key="User_Create" value="Create" />
+			<Text key="User_Update" value="Update" />
+
+			<Text key="Role_Index" value="Roles" />
+			<Text key="Role_Create" value="Create" />
+			<Text key="Role_Update" value="Update" />
+
+			<Text key="MenuFunction_Index" value="Menu Functions" />
+			<Text key="MenuFunction_Create" value="Create" />
+			<Text key="MenuFunction_Update" value="Update" />
+
+			<Text key="tblSystemConfig_Index" value="Sys. Config" />
+			<Text key="tblLog_Index" value="Sys. Log" />
+			<!--Report-->
+			<Text key="controller_81478553" value="Reports"/>
+
+			<Text key="controller_93393965" value="Vehicles In"/>
+			<Text key="Report_ReportIn" value="Current Vehicles In"/>
+			<Text key="Report_ReportVehicleInAnyTime" value="Vehicles In Any Time"/>
+			<Text key="Report_ReportDetailVehicleInAnyTime" value="Details Vehicles In Any Time"/>
+
+			<Text key="controller_65558701" value="Vehicles In/Out"/>
+			<Text key="Report_ReportInOut" value="Vehicles Out"/>
+			<Text key="Report_ReportVehicleComeIn" value="Vehicles In"/>
+
+			<Text key="controller_108250286" value="Daily Cards Income"/>
+			<Text key="Report_ReportDetailMoneyCardDay" value="Details Report"/>
+			<Text key="Report_ReportTotalMoneyByCardGroup" value="By Cardgroup"/>
+			<Text key="Report_ReportTotalMoneyByLane" value="By Lane"/>
+			<Text key="Report_ReportTotalMoneyByUser" value="By User"/>
+
+			<Text key="controller_69053990" value="Collect Monthly Card Fee"/>
+			<Text key="Report_ReportDetailMoneyCardMonth" value="Detailed report of monthly card fee collection"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByCardGroup" value="Monthly fee collection report by card group"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByCustomerGroup" value="Monthly fee collection report by customer group"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByUser" value="Monthly fee collection report by customer"/>
+
+			<Text key="controller_112087670" value="Turn in/out vehicles for free"/>
+			<Text key="Report_ReportVehicleFreeAll" value="Full free entrance and exit reports"/>
+			<Text key="Report_ReportVehicleFreeApart" value="Free A Part entrance and exit reports"/>
+
+			<Text key="Report_ReportCardExpire" value="Validity of the month card"/>
+
+			<Text key="controller_69624132" value="Card Processing"/>
+			<Text key="Report_ReportCardProcessDetail" value="Card processing details"/>
+			<Text key="Report_ReportCardProcess" value="Integrated report card processing"/>
+
+			<Text key="Report_ReportAlarm" value="Report on events alert"/>
+
+			<Text key="controller_163427001" value="Other Reports"/>
+			<Text key="Report_ReportCustomerList" value="Details card information"/>
+			<Text key="Report_ReportCardDetailByCompartment" value="Report card details by apartment"/>
+			<Text key="Report_ReportCardTotalByCompartment" value="Report integrated card by apartment"/>
+			<Text key="Report_ReportPrint" value="Report printing contract"/>
+			<Text key="Report_ReportVehicleOutByHand" value="Report vehicle out by manually"/>
+			<Text key="Report_ReportDetailMoneyCardDay3" value="Detail of card money 3"/>
+			<Text key="Report_ReportTotalByCardGroup" value="Report total by card group"/>
+
+			<Text key="Report_ReportVehicleEvent" value="Detailed report on parking fees of Ha Noi Taxi"/>
+			<Text key="Report_ReportTotalMoneyByVehicleEvent" value="Report Integrated on turnover of turn-by-ticket tickets by parking location"/>
+			<Text key="Report_ReportTotalMoneyAndVehicleByCardGroup" value="Report Integrated parking revenue"/>
+
+			<Text key="Report_ReportTotalMoneyByCardGroupCAB2VCT" value="Report revenue by shift"/>
+			<Text key="Report_ReportVehicleTooDay" value="Report Vehicle Too Day"/>
+			<Text key="Report_ReportInOutByCustomer" value="Report group of staff cards"/>
+
+			<Text key="Report_ReportInternal" value="Internal report"/>
+			<Text key="Report_ReportPublic" value="Public report"/>
+
+		</MenuFunction>
+
+		<Breadcrumb>
+			<Text key="Homepage" value="Homepage"/>
+		</Breadcrumb>
+
+		<Header>
+			<Text key="Manage" value="Manage"/>
+			<Text key="Account" value="Account"/>
+			<Text key="Logout" value="Logout"/>
+		</Header>
+	</Home>
+
+	<SelectList>
+		<LaneTypes1>
+			<Text key="chooseAction" value="--Choose action--"/>
+			<Text key="in" value=" In "/>
+			<Text key="out" value=" Out "/>
+		</LaneTypes1>
+
+		<CheckPlateLevelOuts>
+			<Text key="4char" value="Compare >= 4 characters"/>
+			<Text key="all" value="Compare all characters"/>
+			<Text key="noCheck" value="No check"/>		
+      <Text key="CheckAllPlate" value="Check registration license plates, entry license plates, exit license plates"/>
+      <Text key="CheckPlateInOut" value="Check entry license plates, exit license plates"/>
+      <Text key="CheckPlateOutAndRegistration" value="Check registration license plates,exit license plates"/>
+      <Text key="CardMonth" value="Month card"/>
+		</CheckPlateLevelOuts>
+    <OpenBarrie>
+      <Text key="noOpen" value="Do not open barrier"/>
+      <Text key="noOpenAndnoCheck" value="Do not open barrier and check plate"/>
+      <Text key="OpenAllTicket" value="Open for all types of cards"/>
+      <Text key="OnlyCardMonthAndAllType" value="Open for monthly cards according to the registration license plates and other types of cards"/>
+      <Text key="AutoInOutSame" value="Auto when license plates in and out is the same"/>
+      <Text key="AutoInOutDifferent" value="Auto when license plates in and out is is different"/>
+      <Text key="OnlyCardMonth" value="Open for monthly cards according to the registration license plates"/>
+      <Text key="OnlyTurnMonth" value="Open for turn cards"/>
+		<Text key="OnlyMonthCard" value="Month cards only"/>
+
+    </OpenBarrie>
+		<ControllerType>
+			<Text key="chooseControllerType" value="--Choose controller type--"/>
+		</ControllerType>
+
+		<CameraTypes1>
+			<Text key="CamType" value="--Choose camera type--"/>
+		</CameraTypes1>
+
+		<StreamType>
+			<Text key="StreamType" value="--Choose stream type--"/>
+		</StreamType>
+
+		<SDKs1>
+			<Text key="SDKs1" value="--Choose SDK type--"/>
+		</SDKs1>
+
+		<CustomerGroupID>
+			<Text key="SlectlistCusGrp" value="--Select customer group--"/>
+		</CustomerGroupID>
+
+		<CardTypes>
+			<Text key="monthlyTicket" value="Monthly ticket"/>
+			<Text key="ticketEachTime" value="Ticket each time"/>
+			<Text key="freeTicket" value="Free tickets"/>
+		</CardTypes>
+
+
+		<FormulationList>
+			<Text key="turn" value="Turn"/>
+			<Text key="block" value="Block"/>
+			<Text key="periodTime" value="Period of time"/>
+		</FormulationList>
+
+		<CustomerStatusType>
+			<Text key="active" value="Active"/>
+			<Text key="inactive" value="Inactive"/>
+		</CustomerStatusType>
+
+		<menuFunction>
+			<Text key="menuFunction" value="--Select category--"/>
+		</menuFunction>
+
+		<CardStatus>
+			<Text key="select" value="--Select card status--"/>
+			<Text key="active" value="Activity card"/>
+			<Text key="inactive" value="Card is lock"/>
+		</CardStatus>
+
+		<CardGroup>
+			<Text key="SlectlistCardGrp" value="--Select card group--"/>
+		</CardGroup>
+
+		<ActionCard>
+			<Text key="select" value="--Select card action--"/>
+			<Text key="add" value="Add card"/>
+			<Text key="release" value="Release card"/>
+			<Text key="return" value="Return card"/>
+			<Text key="change" value="Change card"/>
+			<Text key="del" value="Delete card"/>
+			<Text key="lock" value="Lck card"/>
+			<Text key="unlock" value="Unlock card"/>
+			<Text key="active" value="Active card"/>
+		</ActionCard>
+
+		<AlarmCodes>
+			<Text key="unknownCard" value="Unknown card"/>
+			<Text key="lock" value="Card is locked"/>
+			<Text key="permissions" value="Wrong permissions"/>
+			<Text key="inParking" value="Vehicles were in the parking lot"/>
+			<Text key="notInParking" value="Vehicles not in the parking lot"/>
+			<Text key="openBarrieByComputer" value="Open barrie by computer"/>
+			<Text key="openBarrieByButton" value="Open barrie by pressing the button"/>
+			<Text key="eventEscapeIn" value="Event Escape in"/>
+			<Text key="eventEscapeOut" value="Event Escape out"/>
+			<Text key="Card_expired" value="Card expired"/>
+			<Text key="Invalid_license_plates" value="Invalid license plates"/>
+			<Text key="Black_list" value="Black list"/>
+			<Text key="lock_License_plate" value="License plate has been locked"/>
+			<Text key="License_plate_expired" value="License plate expired"/>
+			<Text key="Locked_tag_group" value="Locked tag group"/>
+			<Text key="License_plate_do_not_match" value="License plate do not match "/>
+			<Text key="Vehicles_beyond_the_magnetic_ring" value="Vehicles beyond the magnetic ring"/>
+
+			<!--dự án hòa phát mandarin garden 15/7/2019 dungdt
+      Sự kiện cảnh báo chưa có trường thông tin: "Không tồn tại trên hệ thống"-->
+			<Text key="Not_exist_on_the_system" value="Not exist on the system"/>
+		</AlarmCodes>
+
+		<GroupMenuList>
+			<Text key="67810176" value="BMS"/>
+			<Text key="98818976" value="iAccess"/>
+			<Text key="12878956" value="iParking"/>
+			<Text key="61119719" value="SmartLocker"/>
+			<Text key="75675733" value="Resident"/>
+		</GroupMenuList>
+		<HubList1>
+			<Text key="select" value="--Select--"/>
+			<Text key="left" value="Left"/>
+			<Text key="right" value="Right"/>
+			<Text key="all" value="All"/>
+		</HubList1>
+	</SelectList>
+
+	<Login>
+		<Index>
+			<Text key="AccountInfo" value="Account Detail"/>
+			<Text key="UserNamePlaceholder" value="Username"/>
+			<Text key="PasswordPlaceholder" value="Password"/>
+			<Text key="Remember" value="Remember"/>
+			<Text key="ButtonLogin" value="Login"/>
+		</Index>
+	</Login>
+</root>

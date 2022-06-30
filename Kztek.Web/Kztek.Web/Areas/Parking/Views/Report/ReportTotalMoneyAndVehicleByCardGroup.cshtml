@@ -1,0 +1,186 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+
+@{
+    ViewBag.Title = "ReportTotalMoneyAndVehicleByCardGroup";
+    var _dt = (System.Data.DataTable)ViewBag.dt;
+}
+
+<div class="page-header">
+    <h1>
+        Bảng tổng hợp doanh thu trông giữ xe
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportTotalMoneyAndVehicleByCardGroup", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm thẻ:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportTotalMoneyAndVehicleByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportTotalMoneyAndVehicleByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "ReportTotalMoneyAndVehicleByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportTotalMoneyAndVehicleByCardGroup" })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th style="text-align: center;">STT</th>
+                    <th style="text-align: center;">Nhóm thẻ</th>
+                    <th style="text-align: center;">Tổng số xe vào</th>
+                    <th style="text-align: center;">Tổng số xe ra</th>
+                    <th style="text-align: center;">Doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (_dt != null && _dt.Rows.Count > 0)
+                {
+                    var count = 0;
+                    foreach (System.Data.DataRow item in _dt.Rows)
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>
+                                <span>@item["CardGroupName"].ToString()</span>
+                            </td>
+                            <td>
+                                <span>@item["TotalVehicleIn"].ToString()</span>
+                            </td>
+                            <td>
+                                <span>@item["TotalVehicleOut"].ToString()</span>
+                            </td>
+                            <td>
+                                <span>@item["Moneys"].ToString()</span>
+                            </td>
+                        </tr>
+                    }
+                    <tr style="font-weight: bold;">
+                        <td>#</td>
+                        <td>Tổng số</td>
+                        <td>@ViewBag.TotalIn.ToString()</td>
+                        <td>@ViewBag.TotalOut.ToString()</td>
+                        <td>@ViewBag.TotalMoneys.ToString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportIn').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportIn').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _cardgroup = $('#cardgroup').val();
+                var url = '/Parking/Report/PrintReportTotalMoneyAndVehicleByCardGroup?fromdate=' + _frdate + '&todate=' + _todate + '&cardgroup=' + _cardgroup;
+                window.open(url, '_blank');
+            });
+        });
+    </script>
+}
+

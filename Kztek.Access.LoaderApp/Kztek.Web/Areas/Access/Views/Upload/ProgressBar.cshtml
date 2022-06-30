@@ -1,0 +1,10 @@
+﻿@model double
+
+@*<div class="progress pos-rel" data-percent="@string.Format("{0}%", Convert.ToDouble(Model).ToString("##"))">
+    <div class="progress-bar" style="@string.Format("width: {0}%;", Convert.ToDouble(Model).ToString("##"))"></div>
+</div>*@
+
+<div class="easy-pie-chart percentage" data-percent="@string.Format("{0}", Convert.ToDouble(Model).ToString("##"))" data-color="#87CEEB">
+    <span class="percent">@Convert.ToDouble(Model).ToString("##")</span>%
+</div>
+    

@@ -1,0 +1,170 @@
+﻿@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model Kztek.Model.CustomModel.PageModel<Kztek.Model.Models.tblLane>
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var l = (List<Kztek.Model.CustomModel.SelectListModel>)ViewBag.LaneTypes;
+    var lPC = (List<Kztek.Model.Models.tblPC>)ViewBag.PCs;
+
+    string groupValue = (string)ViewBag.groupValue;
+
+    string selected = (string)ViewBag.selectedIdValue;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblLane", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblLane", FormMethod.Get, new { id = "frmLane" }))
+    {
+        @Html.Hidden("group", groupValue)
+        @Html.Hidden("selectedId", selected)
+
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="@Dictionary["KeywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("pc", new SelectList(ViewBag.PCs, "PCID", "ComputerName", ViewBag.pcValue), Dictionary["ComputerNamePlaceholder"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"] 
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">@Dictionary["LaneName"]</th>
+                    <th class="text-left hidden-480">@Dictionary["LaneType"]</th>
+                    <th class="text-left">@Dictionary["ComputerName"]</th>
+                    <th class="text-left">@Dictionary["Status"]</th>
+                    <th class="text-left" width="80">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.LaneID.ToString() ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.LaneName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @{
+                                    if (item.LaneType >= 0)
+                                    {
+                                        var a = l.FirstOrDefault(n => n.ItemValue == item.LaneType.ToString());
+                                        if (a != null)
+                                        {
+                                            <span>@a.ItemText</span>
+                                        }
+                                    }
+
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    if (!string.IsNullOrEmpty(item.PCID))
+                                    {
+                                        var b = lPC.FirstOrDefault(n => n.PCID.ToString() == item.PCID);
+                                        if (b != null)
+                                        {
+                                            <span>@b.ComputerName</span>
+                                        }
+                                    }
+
+                                }
+
+                            </td>
+
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">@Dictionary["Active"]</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">@Dictionary["Inactive"]</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.LaneID, group = groupValue, key = ViewBag.keyValue, page = Model.PageIndex, pc = ViewBag.pcValue })" class="green" title="@DictionaryAction["Update"]">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.LaneID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblLane", new
+           {
+               page = x,
+               pc = ViewBag.pcValue,
+               key = ViewBag.keyValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val(true);
+            });
+            SearchSubmit("frmLane");
+            DeleteSubmit(_prefixParkingDomain + '/tblLane/Delete');
+        });
+    </script>
+}

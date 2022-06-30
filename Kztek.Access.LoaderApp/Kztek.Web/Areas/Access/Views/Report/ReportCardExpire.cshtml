@@ -1,0 +1,212 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Core.Helpers
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ReportCardExpire_Access>
+
+@{
+    ViewBag.Title = "ReportCardExpire";
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+ //   var listcustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+}
+
+<div class="page-header">
+    <h1>
+        Danh sách thẻ hết hạn (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportCardExpire", "Report", FormMethod.Get, new { id = "frmReportCardExpire" }))
+    {
+        @Html.Hidden("chkExport", "0")
+
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="KeyWord" value="@ViewBag.KeyWord" placeholder="Mã thẻ, Biển số..." class="form-control" />
+        </div>
+
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Chọn ngày:
+            <div class="input-group">
+                @Html.TextBox("date", (string)ViewBag.Date, new { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        @*<div class="col-md-3 col-xs-12 divboxmd">
+                Đến ngày:
+                <div class="input-group">
+                    @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control daterangtimepicker" })
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>*@
+
+        <div class="col-md-2 col-xs-12 divboxmd line-height-380">
+            <label>
+                <input type="radio" name="IsAlmostExpired" value="false" class="ace" @string.Format("{0}", (bool)ViewBag.IsAlmostExpiredValue == false ? "checked" : "") )>
+                <span class="lbl"> Lọc thẻ sắp hết hạn </span>
+            </label>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd line-height-380">
+            <label>
+                <input type="radio" name="IsAlmostExpired" value="true" class="ace" @string.Format("{0}", (bool)ViewBag.IsAlmostExpiredValue == false ? "" : "checked") )>
+                <span class="lbl"> Lọc thẻ hết hạn </span>
+            </label>
+        </div>
+
+        <div class="col-md-3 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm thẻ:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm khách hàng:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd">
+
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportCardExpire" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportCardExpire" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportCardExpire" })
+
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center">STT</th>
+                    <th class="text-left"> Số thẻ </th>
+                    <th class="text-left hidden-480">Mã thẻ</th>
+                    <th class="text-left">Ngày hết hạn</th>
+                    <th class="text-left hidden-480">Khách hàng </th>
+                    <th class="text-left hidden-480">Địa chỉ</th>
+                    <th class="text-left hidden-480">Nhóm khách hàng </th>
+                    <th class="text-left hidden-480">Trạng thái</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="text-center">
+                                @item.RowNumber
+                            </td>
+                            <td>
+                                @item.CardNo
+                            </td>
+                            <td>
+                                @item.CardNumber
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.AccessExpireDate).ToString("dd/MM/yyy")
+                            </td>
+                            
+                            <td>
+                                @item.CustomerName
+                            </td>
+                          
+                            <td>
+                                @item.Address
+                            </td>
+                            <td>
+                                @item.CustomerGroupName
+                            </td>
+                            <td>
+                                @if (item.IsLock.Contains("True"))
+                                {
+                                    <span class="label label-sm label-warning">Đã khóa thẻ</span>
+                                }
+                                else
+                                {
+
+                                    <span class="label label-sm label-success">Hoạt động</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportCardExpire", "Report", new
+           {
+               page = x,
+               KeyWord = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               date = ViewBag.Date,
+               user = ViewBag.UserId,
+               customergroup = ViewBag.CustomerGroupId,
+               IsAlmostExpired = ViewBag.IsAlmostExpiredValue
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddlcustomergroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#customergroup').val(str);
+            });
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportCardExpire').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportCardExpire').submit();
+            });
+        });
+    </script>
+}

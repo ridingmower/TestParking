@@ -1,0 +1,11 @@
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\Kztek.ReportAPI.dll
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\Kztek.ReportAPI.pdb
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\Newtonsoft.Json.dll
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\System.Text.Encodings.Web.dll
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\Newtonsoft.Json.xml
+E:\ParkingV3\Kztek.ReportAPI\bin\Debug\System.Text.Encodings.Web.xml
+E:\ParkingV3\Kztek.ReportAPI\obj\Debug\Kztek.ReportAPI.csproj.AssemblyReference.cache
+E:\ParkingV3\Kztek.ReportAPI\obj\Debug\Kztek.ReportAPI.csproj.CoreCompileInputs.cache
+E:\ParkingV3\Kztek.ReportAPI\obj\Debug\Kztek.ReportAPI.csproj.CopyComplete
+E:\ParkingV3\Kztek.ReportAPI\obj\Debug\Kztek.ReportAPI.dll
+E:\ParkingV3\Kztek.ReportAPI\obj\Debug\Kztek.ReportAPI.pdb

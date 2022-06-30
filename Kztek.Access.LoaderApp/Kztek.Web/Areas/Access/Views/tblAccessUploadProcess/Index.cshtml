@@ -1,0 +1,338 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ReporttblAccessUploadProcess>
+
+@{
+    ViewBag.Title = "Index";
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+    var listcontrol = (List<Kztek.Model.Models.tblAccessController>)ViewBag.Control;
+    var listaction = (List<SelectListModel>)ViewBag.Actions;
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.LstCustomerGroups;
+}
+
+<div class="page-header">
+    <h1>
+        Báo cáo chi tiết nạp / hủy thẻ, vân tay (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblAccessUploadProcess",FormMethod.Get, new { id = "frmAccessUploadProcess" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ, Biển số..." class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Thao tác:
+            @Html.DropDownList("actionvs", new SelectList(ViewBag.Actions, "ItemValue", "ItemText", ViewBag.ActionId), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Phân loại:
+            @Html.DropDownList("eventtype", new SelectList(ViewBag.EventTypes, "ItemValue", "ItemText", ViewBag.EventTypeId), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Trạng thái:
+            @Html.DropDownList("eventstatus", new SelectList(ViewBag.EventStatus, "ItemValue", "ItemText", ViewBag.EventStatusId), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm khách hàng:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Người dùng:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.UserDT, itemValue = "Id", itemText = "Username", selectedValues = ViewBag.UserId, Modelname = "ddluser", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("user")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm thẻ:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "tblAccessUploadProcess" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "tblAccessUploadProcess" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "tblAccessUploadProcess" })
+
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center">STT</th>
+                    <th class="center">Thời gian</th>
+                    <th class="center">Mã thẻ</th>
+                    <th class="center">User trên tb</th>
+                    <th class="center hidden-480">Nhóm thẻ</th>
+                    <th class="center hidden-480">Hành vi</th>
+                    <th class="center hidden-480">Chủ thẻ</th>
+                    <th class="center hidden-480">Nhóm KH</th>
+                    <th class="center hidden-480">Địa chỉ</th>
+                    <th class="center hidden-480">Thiết bị</th>
+                    <th class="center hidden-480">Hết hạn</th>
+                    <th class="center hidden-480">NV thực hiện</th>
+                    <th class="center hidden-480">Event</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="text-center">@count</td>
+                            <td>
+                                @if (item.Date != null && item.Date > DateTime.MinValue)
+                                {
+                                    @Convert.ToDateTime(item.Date).ToString("dd/MM/yyy hh:mm:ss")
+                                }
+                               
+                            </td>
+                            <td>
+                                @item.CardNumber
+                            </td>
+                            <td>
+                                @item.UserIDofFinger
+                            </td>
+                                           
+                            <td>
+                                @{
+                                    var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupID)) : null;
+
+                                    if (objcardGroup != null)
+                                    {
+                                        <span>@objcardGroup.CardGroupName</span>
+                                    }
+                                }
+                            </td>
+                           
+                            <td>
+                                @{
+                                    var objaction = listaction != null ? listaction.FirstOrDefault(n => n.ItemValue.Equals(item.Actions)) : null;
+
+                                    if (objaction != null)
+                                    {
+                                        if (objaction.ItemValue.Equals("UPLOAD"))
+                                        {
+                                            <span class="label label-sm label-success">@objaction.ItemText</span>
+                                        }
+                                        else if (objaction.ItemValue.Equals("EXTEND"))
+                                        {
+                                            <span class="label label-sm label-warning">@objaction.ItemText</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-sm label-danger">@objaction.ItemText</span>
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.CustomerName))
+                                {
+                                    @item.CustomerName
+                                }
+                                else
+                                {
+                                    
+                                        @Html.Action("PartialCustomer", "tblAccessUploadProcess", new { id = item.UserIDofFinger })
+                                   
+
+                                }
+                            </td>
+                             <td>
+                                 @{
+                                     var objcustomerGroup = listCustomerGroup != null ? listCustomerGroup.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID)) : null;
+
+                                     if (objcustomerGroup != null)
+                                     {
+                                         <span>@objcustomerGroup.CustomerGroupName</span>
+                                     }
+                                 }
+                                 
+                             </td>
+                            <td>
+                                @item.Address
+                            </td>
+                            <td>
+                                @{
+                                    var objcontrol = listcontrol != null ? listcontrol.FirstOrDefault(n => n.ControllerID.ToString().Equals(item.SuccessControllerIDs)) : null;
+
+                                    if (objcontrol != null)
+                                    {
+                                        <span>@objcontrol.ControllerName</span>
+                                    }
+                                }
+                                
+                            </td>
+                            <td>
+                                @if (item.AccessDateExpire != null && item.AccessDateExpire > DateTime.MinValue)
+                                {
+                                    @Convert.ToDateTime(item.AccessDateExpire).ToString("dd/MM/yyy")
+                                }
+
+                            </td>
+                           
+                            <td>
+                                @{
+                                    var objuser = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserID)) : null;
+
+                                    if (objuser != null)
+                                    {
+                                        <span>@objuser.Username</span>
+                                    }
+                                }
+                            </td>
+                           
+                            <td >
+                                @item.EventType
+                            </td>
+                           
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblAccessUploadProcess", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               user = ViewBag.UserId,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               customergroup = ViewBag.CustomerGroupId,
+               actionvs = ViewBag.ActionId,
+               eventtype = ViewBag.EventTypeId,
+               eventstatus = ViewBag.EventStatusId
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        })
+
+        $(document).ready(function () {
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmAccessUploadProcess').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmAccessUploadProcess').submit();
+            });
+
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddluser').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#user').val(str);
+            });
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventInOut')
+        });
+    </script>
+}
+
+

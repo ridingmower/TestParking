@@ -1,0 +1,200 @@
+﻿@using Kztek.Web.Core.Extensions
+
+@model Kztek.Model.Models.tblCustomer
+
+@{
+    ViewBag.Title = "Update";
+
+    int pn = (int)ViewBag.PN;
+}
+
+<div class="page-header">
+    <h1>
+        Cập nhật khách hàng
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Update", "tblCustomer", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(n => n.CustomerID)
+        @Html.Hidden("key", (string)ViewBag.keyValue)
+        @Html.Hidden("customergroup", (string)ViewBag.customergroupValue)
+        @Html.Hidden("customerstatus", (string)ViewBag.customerstatusValue)
+        @Html.Hidden("page", pn)
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a data-toggle="tab" href="#customer">
+                        <i class="green ace-icon fa fa-user bigger-120"></i>
+                        Khách hàng
+                    </a>
+                </li>
+
+                @*<li>
+                        <a data-toggle="tab" href="#messages">
+                            <i class="red ace-icon fa fa-credit-card bigger-120"></i>
+                            Thẻ
+                        </a>
+                    </li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div id="customer" class="tab-pane fade in active">
+                    <div class="col-xs-7">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Mã KH <span class="error">*</span></label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.CustomerCode, new { @class = "form-control", @placeholder = "Mã KH" })
+                                @Html.ValidationMessageFor(n => n.CustomerCode, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label-left no-padding-right"> Họ tên </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.CustomerName, new { @class = "form-control", @placeholder = "Họ tên" })
+                                @Html.ValidationMessageFor(n => n.CustomerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Chứng minh thư </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.IDNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.IDNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label-left no-padding-right"> Số điện thoại </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.Mobile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Nhóm KH </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.DropDownListFor(n => n.CustomerGroupID, new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText"), new { @class = "form-control chosen-select" })
+                                @Html.ValidationMessageFor(n => n.CustomerGroupID, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Địa chỉ </label>
+                            <div class="col-sm-8 col-xs-12">
+                                @Html.TextAreaFor(n => n.Address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Cho phép đăng nhập </label>
+                            <div class="col-sm-6 col-xs-12">
+                                <label class="line-height-250">
+                                    @Html.CheckBoxFor(n => n.EnableAccount, new { @class = "ace" })
+                                    <span class="lbl"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Tên đăng nhập </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(n => n.Account, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Account, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Mật khẩu </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @type = "password" })
+                                @Html.ValidationMessageFor(n => n.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Nhập lại mật khẩu </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBox("RePassword", "", new { @class = "form-control", @type = "password" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Avatar </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @if (!string.IsNullOrWhiteSpace(Model.Avatar))
+                                {
+                                    <img src="@Model.Avatar.ImagePathThumb(120, 150)" alt="@Model.CustomerName" />
+                                }
+                            </div>
+                            <div class="col-sm-offset-2 col-sm-12 col-xs-12">
+                                <input type="file" name="FileUpload" id="FileUpload" value="" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Ngừng sử dụng </label>
+                            <div class="col-sm-6 col-xs-12">
+                                <label class="line-height-250">
+                                    @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                                    <span class="lbl"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                   
+                    <div style="clear:both"></div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn open" id="ace-settings-btn">
+                <i class="ace-icon fa fa-cog bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                <!-- /.pull-left -->
+                <div class="bg-rightbox">
+                    <div class="clearfix lineButton">
+                        <div class="col-md-12 input-group">
+                            <button class="btn btn-success" type="submit" id="Countinue">
+                                <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                Lưu lại
+                            </button>
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                Nhập lại
+                            </button>
+                            <a href="@Url.Action("Index", new { key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue, page = pn, selectedId = Model.CustomerID })" class="btn btn-yellow">
+                                <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                Quay lại
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.pull-left -->
+            </div><!-- /.ace-settings-box -->
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Areas/Access/Scripts/CustomerController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+        });
+    </script>
+}

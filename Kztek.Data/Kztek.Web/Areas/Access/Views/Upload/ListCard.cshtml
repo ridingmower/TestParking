@@ -1,0 +1,67 @@
+﻿@using Kztek.Model.CustomModel
+
+@model PageModel<Kztek.Model.Models.tblCardExtend>
+
+@{
+    var selectedCard = (List<Kztek.Model.Models.tblCardExtend>)ViewBag.selectedCard;
+}
+
+@if (Model != null && Model.Data.Any())
+{
+    @Html.Hidden("pageTotal", Model.TotalPage)
+    @Html.Hidden("totalItem", Model.TotalItem)
+    @Html.Hidden("selectedItem", selectedCard.Count)
+    var count = (Model.PageIndex - 1) * Model.PageSize;
+    foreach (var item in Model.Data)
+    {
+        var selected = selectedCard.Any(n => n.CardID.ToString() == item.CardID.ToString());
+
+        count++;
+        <tr class="@string.Format("{0}", selected ? "info" : "")">
+            <td class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" id="@item.CardID.ToString()" name="Id" value="@item.CardID.ToString()" class="ace chkCheckCard" @string.Format("{0}", selected ? "checked" : "") />
+                    <span class="lbl"></span>
+                </label>
+            </td>
+            <td>@count</td>
+
+            <td class="text-left">
+                @item.CardNo
+            </td>
+
+            <td class="text-left">
+                @item.CardNumber
+            </td>
+
+            <td class="text-left">
+                @item.CardGroupName
+            </td>
+
+            <td class="text-left">
+                @item.CustomerName
+            </td>
+
+            <td class="text-left">
+                @item.AccessLevelName
+            </td>
+
+            <td class="text-left">
+                @if (item.AccessExpireDate != null)
+                {
+                    <span>
+                        @Convert.ToDateTime(item.AccessExpireDate).ToString("dd/MM/yyyy")
+                    </span>
+                }
+            </td>
+        </tr>
+    }
+}
+else
+{
+    @Html.Hidden("pageTotal", 0)
+    @Html.Hidden("totalItem", 0)
+    @Html.Hidden("selectedItem", 0)
+}
+
+

@@ -1,0 +1,124 @@
+﻿@model List<Kztek.Model.Models.ReportTotalMoneyCardMonthByUser>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "ReportTotalMoneyCardMonthByUser";
+
+    double money = 0;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportTotalMoneyCardMonthByUser");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var user = GetCurrentUser.GetUser();
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">@Dictionary["title"]</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            @DictionarySearch["fromDate"] <strong>@ViewBag.fromdateValue</strong> @DictionarySearch["toDate"] <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center" width="50">
+                            @Dictionary["stt"]
+                        </th>
+                        <th class="center"> @Dictionary["userName"] </th>
+                        <th class="center"> @Dictionary["amount"] </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            money += item.Moneys;
+                            <tr>
+                                <td align="center">@count</td>
+                                <td>
+                                    @item.UserName
+                                </td>
+                                <td align="center">
+                                    @if (item.Moneys > 0)
+                                    {
+                                        @item.Moneys.ToString("###,###")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                @*<tfoot>
+                        <tr>
+                            <td align="center">#</td>
+                            <td>TỔNG SỐ</td>
+                            <td align="center">@money.ToString("###,###")</td>
+                        </tr>
+                    </tfoot>*@
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Người lập báo cáo
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            @if (user != null)
+                            {
+                                @user.Name
+                            }
+                        </h6>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+

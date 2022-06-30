@@ -1,0 +1,182 @@
+﻿@model Kztek.Model.CustomModel.iLocker.UploadModel
+
+@{
+    ViewBag.Title = "Giao tiếp thiết bị";
+}
+
+<div id="boxModalConfirm"></div>
+
+<div id="boxModalLockerDetail"></div>
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @Html.HiddenFor(n => n.TaskViewId)
+    @Html.Hidden("hidTotalLockerConfirm")
+
+    <div class="col-sm-5 col-xs-12">
+        <div>
+            @Html.DropDownList("LineID", new SelectList(Model.tblLockerLines, "Id", "LineName"), "-- Lựa chọn line --", new { @class = "form-control chosen-select" })
+        </div>
+        <div id="boxController" style="margin-top:10px">
+            @Html.Action("PartialListController", new { data = Model.tblLockerControllers, lineid = "", taskid = Model.TaskViewId })
+        </div>
+        <div id="boxSelfHost">
+
+        </div>
+        <div id="boxLockerCount" style="margin-top:10px"></div>
+    </div>
+    <div class="col-sm-7 col-xs-12">
+        <div id="boxMessage">
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-toggle="tab" href="#listerror">
+                            <i class="red ace-icon fa fa-list-ol bigger-120"></i>
+                            Lỗi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a data-toggle="tab" href="#listsuccess">
+                            <i class="green ace-icon fa fa-list-ol bigger-120"></i>
+                            Thành công
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="listerror" class="tab-pane fade in active divOverBox">
+
+                    </div>
+
+                    <div id="listsuccess" class="tab-pane fade divOverBox">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="hr hr-12" />
+
+<div class="row">
+    <div class="col-xs-9">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-3">
+                    Từ khóa:
+                    <div>
+                        <input type="text" name="txtCardAnotherKey" id="txtCardAnotherKey" class="form-control" value="" placeholder="Từ khóa tìm kiếm" />
+                    </div>
+                </div>
+                <div class="col-xs-2">
+                    Nhóm thẻ:
+                    <div>
+                        @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = Model.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = "", Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                    </div>
+                    @Html.Hidden("cardgroups")
+                </div>
+                <div class="col-xs-2">
+                    Nhóm khách hàng:
+                    <div>
+                        @Html.Action("DroplistChosenTemplate", "CommonUse", new { _dt = Model.CustomerGroupDT, itemValue = "ItemValue", itemText = "ItemText", selectedValue = "", Modelname = "ddlcustomergroup", labelName = "Lựa chọn" })
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <button type="button" class="btn btn-sm btn-success pull-right" id="LoadDataListCard">
+                        <i class="fa fa-download"></i>
+                        Nạp dữ liệu
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <table class="table table-bordered" id="tblCards">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" id="chkCheckALLCard" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th>Thông tin thẻ</th>
+                        <th>Tủ</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <span class="pull-left pagination">Trang: <span id="CardPageIndex">0</span> / <span id="CardPageCount">0</span> - Số bản ghi: <span class="CardCount">0</span></span>
+        </div>
+        <div class="form-group">
+            <div id="CardPagination" class="pull-right"></div>
+        </div>
+    </div>
+    <div class="col-xs-3">
+        <div class="form-group">
+            <div>Đã chọn: <strong class="CardSelected"></strong> / <span class="CardCount">0</span> </div>
+            <button type="button" class="btn btn-sm btn-white btn-bold btn-default" id="btnRemoveAllCardLockerSelected">
+                <i class="fa fa-trash"></i>
+                Xóa tất cả
+            </button>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-sm btn-success btn-white btn-bold" onclick="UploadLockers(true)">
+                <i class="fa fa-upload"></i>
+                Nạp <span class="CardCount"></span> thẻ
+            </button>
+            <button type="button" class="btn btn-sm btn-info btn-white btn-bold" onclick="UploadLockers(false)">
+                <i class="fa fa-upload"></i>
+                Nạp <span class="CardSelected"></span> thẻ đã chọn
+            </button>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-sm btn-danger btn-white btn-bold" onclick="DeleteLockers(true)">
+                <i class="fa fa-remove"></i>
+                Hủy <span class="CardCount"></span> thẻ
+            </button>
+            <button type="button" class="btn btn-sm btn-warning btn-white btn-bold" onclick="DeleteLockers(false)">
+                <i class="fa fa-remove"></i>
+                Hủy <span class="CardSelected"></span>  thẻ đã chọn
+            </button>
+        </div>
+
+        <div class="form-group">
+            <label>
+                <input type="checkbox" name="chkDeleteLockersByController" id="chkDeleteLockersByController" class="ace" />
+                <span class="lbl"> Hủy thẻ theo bộ điều khiển </span>
+            </label>
+        </div>
+
+        <div class="form-group">
+            <p> Tiến trình </p>
+        </div>
+
+        <div id="BoxHostLockerProgress">
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.twbsPagination.js"></script>
+    <script src="~/Areas/Locker/Scripts/UploadLockerController.js"></script>
+    <script>
+        $(document).ready(function () {
+            UploadLockerController.init();
+        });
+    </script>
+}

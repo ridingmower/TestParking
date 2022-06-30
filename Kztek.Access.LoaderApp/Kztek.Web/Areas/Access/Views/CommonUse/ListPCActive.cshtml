@@ -1,0 +1,3 @@
+﻿@model IEnumerable<Futech.Model.Models.devPC>
+
+@Html.DropDownList("pcID", new SelectList(Model, "ID", "ComputerName", ViewBag.SelectedPC), "-- Chọn máy tính --", new { @class = "form-control" })

@@ -1,0 +1,25 @@
+﻿@{
+    /**/
+
+    var desc = (string)ViewBag.descriptions;
+    var ty = (string)ViewBag.TypeValue;
+    var t = (string)ViewBag.L;
+}
+
+<a href="@t" data-rel="colorbox" title="@desc" class="cboxElement img_box" data-spzoom>
+    <img class="msg-photo" src="@t" alt="thumb" width="30" height="30" />
+</a>
+
+@if (ty.Equals("INOUT"))
+{
+    <a href="@t.Replace("PLATE","OVERVIEW")" data-rel="colorbox" title="@desc" class="cboxElement img_box" data-spzoom>
+        <img class="msg-photo" src="@t.Replace("PLATE","OVERVIEW")" alt="thumb" width="30" height="30" />
+    </a>
+}
+
+@if (ty.Equals("HOAPHAT"))
+{
+    <a href="@t.Replace("bienso","toancanh")" data-rel="colorbox" title="@desc" class="cboxElement img_box" data-spzoom>
+        <img class="msg-photo" src="@t.Replace("bienso","toancanh")" alt="thumb" width="30" height="30" />
+    </a>
+}

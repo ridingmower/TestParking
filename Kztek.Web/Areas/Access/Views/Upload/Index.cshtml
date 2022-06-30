@@ -1,0 +1,717 @@
+﻿@model Kztek.Model.CustomModel.SelectListModelUpload
+
+@{
+    /**/
+
+
+    ViewBag.Title = "Giao tiếp với thiết bị";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+@*<link href="~/Content/mutipleslect.css" rel="stylesheet" />*@
+@Html.Hidden("hidTotalCardConfirm")
+@Html.Hidden("hidTotalCustomerConfirm")
+@Html.Hidden("column", "")
+@Html.Hidden("sort", "")
+
+<div id="boxModalConfirm"></div>
+
+<div class="row">
+    <div class="col-xs-5">
+        <h3 class="header smaller lighter green">
+            Danh sách bộ điều khiển
+        </h3>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-4">
+                    Máy tính:
+                    <div>
+                        @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = Model.dtComputer, itemValue = "PCID", itemText = "PCName", selectedValues = "", Modelname = "ddlcomputer", labelName = "-- Lựa chọn --" })
+                    </div>
+                    @Html.Hidden("computers")
+                </div>
+                <div class="col-xs-4">
+                    Line:
+                    <div id="boxLine">
+
+                    </div>
+                </div>
+                <div class="col-xs-4 no-padding">
+                    Nhóm bộ điều khiển:
+                    <div id="boxLine">
+                        @Html.DropDownList("groupController", new SelectList(ViewBag.GroupController, "Id", "Name", ViewBag.GroupControllerId), "-- Nhóm bộ điều khiển --", new { @class = "form-control chosen-select", @onchange = "SearchInFromListController()" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div>Đã chọn: <strong class="ControllerSelected"></strong> / <span class="ControllerNumber">0</span> </div>
+                    <button type="button" class="btn btn-sm btn-danger btn-white btn-bold" onclick="RemoveAllExtendController()">
+                        <i class="fa fa-trash"></i>
+                        Xóa tất cả
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="text" name="txtControllerAnotherKey" id="txtControllerAnotherKey" class="form-control" value="" placeholder="Từ khóa tìm kiếm" onkeyup="SearchInFromListController()" />
+        </div>
+        <div class="form-group">
+            <table class="table table-bordered table-hover col-xs-12" id="tblControllers">
+                <thead>
+                    <tr>
+                        <th class="center" width="10px">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" id="chkCheckALLController" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th class="text-left" idata="STT" width="10px"> STT <i class=""></i></th>
+                        <th class="text-left" idata="Controller"> Bộ điều khiển <i class=""></i></th>
+                        <th class="text-left" idata="Controller"> Nhóm bộ điều khiển</th>
+                        <th class="text-left" idata="Status"> Trạng thái <i class=""></i></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+                <tfoot>
+                    <tr>
+                        <td class="center">
+                            <div>
+                                <button type="button" class="btn btn-sm btn-default btn-white btn-bold" onclick="ReloadControllers()">
+                                    <i class="fa fa-refresh"></i>
+                                    Load lại
+                                </button>
+                            </div>
+                        </td>
+                        <td colspan="4">
+                            <span class="pull-left pagination">Trang: <span id="ControllerPageIndex">0</span> / <span id="ControllerPageCount">0</span> - Số bản ghi: <span class="ControllerNumber">0</span></span>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="form-group">
+            <div id="ControllerPagination" class="pull-right"></div>
+        </div>
+    </div>
+    <div class="col-xs-2">
+        <h3 class="header smaller lighter blue">
+            Danh sách selfhost
+        </h3>
+        <div class="form-group">
+            <div id="ListSelfHost">
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-5">
+        <h3 class="header smaller lighter red">
+            Log
+        </h3>
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a data-toggle="tab" href="#listerror">
+                        <i class="red ace-icon fa fa-list-ol bigger-120"></i>
+                        Lỗi
+                    </a>
+                </li>
+
+                <li>
+                    <a data-toggle="tab" href="#listsuccess">
+                        <i class="green ace-icon fa fa-list-ol bigger-120"></i>
+                        Thành công
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <div id="listerror" class="tab-pane fade in active divOverBox">
+
+                </div>
+
+                <div id="listsuccess" class="tab-pane fade divOverBox">
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="tabbable">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+            <a data-toggle="tab" href="#Card">
+                <i class="green ace-icon fa fa-credit-card bigger-120"></i>
+                Xử lý với thẻ
+            </a>
+        </li>
+
+        <li>
+            <a data-toggle="tab" href="#Finger">
+                <i class="green ace-icon fa fa-users bigger-120"></i>
+                Xử lý với vân tay
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="Card" class="tab-pane fade in active">
+            <div class="row">
+                <div class="col-xs-9">
+                    <h3 class="header smaller lighter pink">
+                        Danh sách thẻ
+                    </h3>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                Nhóm thẻ:
+                                <div>
+                                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = Model.dtCardGroup, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = "", Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                                </div>
+                                @Html.Hidden("cardgroups")
+                            </div>
+                            <div class="col-xs-2">
+                                Quyền truy cập:
+                                <div>
+                                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = Model.dtAccessLevel, itemValue = "AccessLevelID", itemText = "AccessLevelName", selectedValues = "", Modelname = "ddllevel", labelName = "-- Lựa chọn --" })
+                                </div>
+                                @Html.Hidden("levels")
+                            </div>
+                            <div class="col-xs-2">
+                                Nhóm khách hàng:
+                                <div>
+                                    @Html.Action("DroplistChosenTemplate", "CommonUse", new { _dt = Model.dtCustomerGroup, itemValue = "ItemValue", itemText = "ItemText", selectedValue = "", Modelname = "ddlcustomergroup", labelName = "Lựa chọn" })
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                Số bản ghi/ trang:
+                                <div>
+                                    @Html.DropDownList("ddlPageSizeCard", new SelectList(ViewBag.PageSize, "ItemValue", "ItemText"), new { @style = "width:100%", @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="col-xs-4">
+                                Đến ngày:
+                                <div class="input-group">
+                                    @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control daterangtimepicker2" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+
+
+                            <div class="col-">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="txtCardAnotherKey" id="txtCardAnotherKey" class="form-control" value="" placeholder="Từ khóa tìm kiếm" onkeyup="SearchInFromListCard()" />
+                    </div>
+                    <div class="form-group">
+                        <table class="table table-bordered table-hover" id="tblCards">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace" id="chkCheckALLCard" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </th>
+                                    <th class="text-left" idata="STT"> STT <i class=""></i></th>
+                                    <th class="text-left btnSort" idata="CardNo"> Số thẻ <i class="fa fa-sort"></i></th>
+                                    <th class="text-left" idata="CardNumber"> Mã thẻ <i class=""></i></th>
+                                    <th class="text-left" idata="CardGroup"> Nhóm thẻ <i class=""></i></th>
+                                    <th class="text-left" idata="Customer"> Khách hàng <i class=""></i></th>
+                                    <th class="text-left" idata="AccessLevel"> Quyền truy cập <i class=""></i></th>
+                                    <th class="text-left" idata="AccessLevelDate"> Thời hạn <i class=""></i></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <span class="pull-left pagination">Trang: <span id="CardPageIndex">0</span> / <span id="CardPageCount">0</span> - Số bản ghi: <span class="CardCount">0</span></span>
+                    </div>
+                    <div class="form-group">
+                        <div id="CardPagination" class="pull-right"></div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <h3 class="header smaller lighter pink">
+                        Xử lý thẻ
+                    </h3>
+
+                    <div class="form-group">
+                        <label class="control-label-left">Chọn ngày hết hạn khác:</label>
+                        <div class="input-group">
+                            <input name="dtpNewExpireDate" id="dtpNewExpireDate" class="form-control daterangpicker" />
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="cbUseNewDate" id="cbUseNewDate" value="" class="ace" />
+                                <span class="lbl"> Sử dụng</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>Đã chọn: <strong class="CardSelected"></strong> / <span class="CardCount">0</span> </div>
+                        <button type="button" class="btn btn-sm btn-white btn-bold btn-default" onclick="RemoveAllExtendCard()">
+                            <i class="fa fa-trash"></i>
+                            Xóa tất cả
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-success btn-white btn-bold" onclick="UploadCards(true)">
+                            <i class="fa fa-upload"></i>
+                            Nạp <span class="CardCount"></span> thẻ
+                        </button>
+                        <button type="button" class="btn btn-sm btn-info btn-white btn-bold" onclick="UploadCards(false)">
+                            <i class="fa fa-upload"></i>
+                            Nạp <span class="CardSelected"></span> thẻ chọn
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-danger btn-white btn-bold" onclick="DeleteCards(true)">
+                            <i class="fa fa-remove"></i>
+                            Hủy <span class="CardCount"></span> thẻ
+                        </button>
+                        <button type="button" class="btn btn-sm btn-warning btn-white btn-bold" onclick="DeleteCards(false)">
+                            <i class="fa fa-remove"></i>
+                            Hủy <span class="CardSelected"></span> thẻ chọn
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="chkDeleteCardsByController" id="chkDeleteCardsByController" class="ace" />
+                            <span class="lbl"> Hủy thẻ theo bộ điều khiển </span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <p> Tiến trình </p>
+                    </div>
+
+                    <div id="BoxHostCardProgress">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Finger" class="tab-pane fade">
+            <div class="row">
+                <div class="col-xs-9">
+                    <h3 class="header smaller lighter orange">
+                        Danh sách vân tay khách hàng
+                    </h3>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                Quyền truy cập:
+                                <div>
+                                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = Model.dtAccessLevel, itemValue = "AccessLevelID", itemText = "AccessLevelName", selectedValues = "", Modelname = "ddlCustomerlevel", labelName = "-- Lựa chọn --" })
+                                </div>
+                                @Html.Hidden("customerlevels")
+                            </div>
+                            <div class="col-xs-2">
+                                Nhóm khách hàng:
+                                <div>
+                                    @Html.Action("DroplistChosenTemplate", "CommonUse", new { _dt = Model.dtCustomerGroup, itemValue = "ItemValue", itemText = "ItemText", selectedValue = "", Modelname = "ddlcuscustomergroup", labelName = "Lựa chọn" })
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                Số bản ghi/ trang:
+                                <div>
+                                    @Html.DropDownList("ddlPageSizeCustomer", new SelectList(ViewBag.PageSize, "ItemValue", "ItemText"), new { @style = "width:100%", @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="txtCustomerAnotherKey" id="txtCustomerAnotherKey" class="form-control" value="" placeholder="Từ khóa tìm kiếm" onkeyup="SearchInFromListCustomer()" />
+                    </div>
+                    <div class="form-group">
+                        <table class="table table-bordered table-hover" id="tblCustomers">
+                            <thead>
+                                <tr>
+                                    <th class="center">
+                                        <label class="pos-rel">
+                                            <input type="checkbox" class="ace" id="chkCheckALLCustomer" />
+                                            <span class="lbl"></span>
+                                        </label>
+                                    </th>
+                                    <th class="text-left" idata="STT"> STT <i class=""></i></th>
+                                    <th class="text-left" idata="CustomerCode"> Mã khách hàng <i class=""></i></th>
+                                    <th class="text-left" idata="CustomerName"> Tên khách hàng <i class=""></i></th>
+                                    <th class="text-left" idata="CustomerGroup"> Nhóm khách hàng <i class=""></i></th>
+                                    <th class="text-left" idata="AccessLevel"> Quyền truy cập <i class=""></i></th>
+                                    <th class="text-left" idata="AccessLevelDate"> Thời hạn <i class=""></i></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="form-group">
+                        <span class="pull-left pagination">Trang: <span id="CustomerPageIndex">0</span> / <span id="CustomerPageCount">0</span> - Số bản ghi: <span class="CustomerCount">0</span></span>
+                    </div>
+                    <div class="form-group">
+                        <div id="CustomerPagination" class="pull-right"></div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <h3 class="header smaller lighter orange">
+                        Xử lý vân tay khách hàng
+                    </h3>
+
+                    <div class="form-group">
+                        <label class="control-label-left">Chọn ngày hết hạn khác:</label>
+                        <div class="input-group">
+                            <input name="dtpCusNewExpireDate" id="dtpCusNewExpireDate" class="form-control daterangpicker" />
+                            <span class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </span>
+                        </div>
+                        <div>
+                            <label>
+                                <input type="checkbox" name="cbCusUseNewDate" id="cbCusUseNewDate" value="" class="ace" />
+                                <span class="lbl"> Sử dụng </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div>Đã chọn: <strong class="CustomerSelected"></strong> / <span class="CustomerCount">0</span> </div>
+                        <button type="button" class="btn btn-sm btn-white btn-bold btn-default" onclick="RemoveAllExtendCustomer()">
+                            <i class="fa fa-trash"></i>
+                            Xóa tất cả
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-success btn-white btn-bold" onclick="UploadCustomers(true)">
+                            <i class="fa fa-upload"></i>
+                            Nạp <span class="CustomerCount"></span> vân tay
+                        </button>
+                        <button type="button" class="btn btn-sm btn-info btn-white btn-bold" onclick="UploadCustomers(false)">
+                            <i class="fa fa-upload"></i>
+                            Nạp <span class="CustomerSelected"></span> vân tay chọn
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-sm btn-danger btn-white btn-bold" onclick="DeleteCustomers(true)">
+                            <i class="fa fa-remove"></i>
+                            Hủy <span class="CustomerCount"></span> vân tay
+                        </button>
+                        <button type="button" class="btn btn-sm btn-warning btn-white btn-bold" onclick="DeleteCustomers(false)">
+                            <i class="fa fa-remove"></i>
+                            Hủy <span class="CustomerSelected"></span> vân tay chọn
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="chkDeleteCustomersByController" id="chkDeleteCustomersByController" class="ace" />
+                            <span class="lbl"> Xóa khách hàng theo bộ điều khiển </span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <p> Tiến trình </p>
+                    </div>
+
+                    <div id="BoxHostCustomerProgress">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.twbsPagination.js"></script>
+    <script src="~/Areas/Access/Scripts/UploadController.js"></script>
+    @*<script src="~/Areas/Access/Scripts/mutilpleSelect.js"></script>*@
+    <script>
+        //jQuery('#ddllevel').multiselect({
+        //    columns: 1,
+        //    placeholder: 'Select Languages',
+        //    search: true,
+        //    selectAll: true
+        //});
+        //jQuery('#ddlcardgroup').multiselect({
+        //    columns: 1,
+        //    placeholder: 'Select Languages',
+        //    search: true,
+        //    selectAll: true
+        //});
+        $(document).ready(function () {
+
+            //$('#ddllevel').click(function () {
+            //    var cmd = $(this);
+            //    /*alert(cmd.val());*/
+            //    cmd.parent().find('ul.multiselect-container li').addClass('active');
+            //});
+            //$("#ddllevel").click(function () {
+            //    var cmd = $(this);
+            //    cmd.parent(). find("ul li ").addClass('selected');
+            //});
+
+            //
+            UploadController.init();
+
+            //Load controller
+            UploadController.ControllerLoadData(true);
+
+            //Load card
+            UploadController.CardLoadData(true);
+
+            //Load customer
+            UploadController.CustomerLoadData(true);
+
+            //Computers
+            $('#ddlcomputer').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#computers').val(str);
+
+                UploadController.ControllerLoadData(true);
+            });
+
+            //CardGroups
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroups').val(str);
+
+                UploadController.CardLoadData(true);
+            });
+
+            //Levels
+            $('#ddllevel').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#levels').val(str);
+
+                UploadController.CardLoadData(true);
+            });
+
+            //Levels
+            $('#ddlCustomerlevel').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#customerlevels').val(str);
+
+                UploadController.CustomerLoadData(true);
+            });
+
+            //CustomerGroup
+            $('#ddlcustomergroup').change(function () {
+                UploadController.CardLoadData(true);
+            });
+
+            //CustomerGroup
+            $('#ddlcuscustomergroup').change(function () {
+                UploadController.CustomerLoadData(true);
+            });
+
+            //
+            $("#chkCheckALLController").click(function () {
+
+
+                if ($(this).is(":checked")) {
+                    $('.chkCheckController').prop('checked', true);
+                    $('.chkCheckController').parents().addClass('info');
+
+                    var choices = [];
+
+                    $("#tblControllers > tbody").find("tr").each(function () {
+                        var cmd = $(this);
+                        var chk = cmd.find(".chkCheckController");
+                        if (chk.is(":checked")) {
+                            var id = chk.val();
+
+                            choices.push(id);
+                        }
+                    });
+
+                    UploadController.ControllerAddListExtend(choices, true);
+                }
+                else {
+                    $('.chkCheckController').prop('checked', false);
+                    $('.chkCheckController').parents().removeClass('info');
+
+                    var unchoices = [];
+
+                    $("#tblControllers > tbody").find("tr").each(function () {
+                        var cmd = $(this);
+                        var chk = cmd.find(".chkCheckController");
+                        if (chk.is(":checked") === false) {
+                            var id = chk.val();
+
+                            unchoices.push(id);
+                        }
+                    });
+
+                    UploadController.ControllerAddListExtend(unchoices, false);
+                }
+
+            });
+
+
+
+            //
+            $("#chkCheckALLCard").click(function () {
+                if ($(this).is(":checked")) {
+                    $('.chkCheckCard').prop('checked', true);
+                    $('.chkCheckCard').parents().addClass('info');
+
+                    var choices = [];
+                    $("#tblCards > tbody").find("tr").each(function () {
+                        var cmd = $(this);
+                        var chk = cmd.find(".chkCheckCard");
+                        if (chk.is(":checked")) {
+                            var id = chk.val();
+
+                            choices.push(id);
+                        }
+                    });
+
+                    UploadController.CardAddListExtend(choices, true);
+                    //var check = UploadController.GetCountListSession("1");
+                    //if (check) {
+
+                    //    $("#tblCards > tbody").find("tr").each(function () {
+                    //        var cmd = $(this);
+                    //        var chk = cmd.find(".chkCheckCard");
+                    //        if (chk.is(":checked")) {
+                    //            var id = chk.val();
+
+                    //            choices.push(id);
+                    //        }
+                    //    });
+
+                    //    UploadController.CardAddListExtend(choices, true);
+
+                    //} else {
+                    //    toastr.error("Số thẻ được chọn tối đa là 20!");
+                    //    $(this).prop("checked", "");
+
+                    //    $("#tblCards > tbody").find("tr").each(function () {
+                    //        var cmd = $(this);
+                    //        var chk = cmd.find(".chkCheckCard");
+                    //        $(chk).prop("checked", "");
+                    //    });
+                    //}
+
+                }
+                else {
+                    $('.chkCheckCard').prop('checked', false);
+                    $('.chkCheckCard').parents().removeClass('info');
+
+                    var unchoices = [];
+
+                    $("#tblCards > tbody").find("tr").each(function () {
+                        var cmd = $(this);
+                        var chk = cmd.find(".chkCheckCard");
+                        if (chk.is(":checked") === false) {
+                            var id = chk.val();
+
+                            unchoices.push(id);
+                        }
+                    });
+
+                    UploadController.CardAddListExtend(unchoices, false);
+                }
+            });
+
+            //
+            $("#chkCheckALLCustomer").click(function () {
+                if ($(this).is(":checked")) {
+                    $('.chkCheckCustomer').prop('checked', true);
+                    $('.chkCheckCustomer').parents().addClass('info');
+
+                    var choices = [];
+
+                    var check = UploadController.GetCountListSession("2");
+                    if (check) {
+
+                        $("#tblCustomers > tbody").find("tr").each(function () {
+                            var cmd = $(this);
+                            var chk = cmd.find(".chkCheckCustomer");
+                            if (chk.is(":checked")) {
+                                var id = chk.val();
+
+                                choices.push(id);
+                            }
+                        });
+
+                        UploadController.CustomerAddListExtend(choices, true);
+
+                    } else {
+                        toastr.error("Số vân tay được chọn tối đa là 20!");
+                        $(this).prop("checked", "");
+
+                        $("#tblCustomers > tbody").find("tr").each(function () {
+                            var cmd = $(this);
+                            var chk = cmd.find(".chkCheckCustomer");
+                            $(chk).prop("checked", "");
+                        });
+                    }
+                }
+                else {
+                    $('.chkCheckCustomer').prop('checked', false);
+                    $('.chkCheckCustomer').parents().removeClass('info');
+
+                    var unchoices = [];
+
+                    $("#tblCustomers > tbody").find("tr").each(function () {
+                        var cmd = $(this);
+                        var chk = cmd.find(".chkCheckCustomer");
+                        if (chk.is(":checked") === false) {
+                            var id = chk.val();
+
+                            unchoices.push(id);
+                        }
+                    });
+
+                    UploadController.CustomerAddListExtend(unchoices, false);
+                }
+            });
+        });
+    </script>
+}

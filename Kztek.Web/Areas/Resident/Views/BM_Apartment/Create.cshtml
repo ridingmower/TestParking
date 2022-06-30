@@ -1,0 +1,344 @@
+﻿@model Kztek.Model.Models.BM_Apartment
+@using Kztek.Model.CustomModel;
+@using Kztek.Web.Core.Functions
+
+@{
+    /**/
+
+    ViewBag.Title = Model == null ? "Thêm mới" : "Cập nhật";
+
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div id="boxModal">
+
+</div>
+<div class="tabbable SubTab">
+    <ul class="nav nav-tabs" id="myTab">
+        <li class="active">
+            <a data-toggle="tab" href="#tab1" aria-expanded="true">
+                Căn hộ
+            </a>
+        </li>
+
+        <li class="">
+            <a data-toggle="tab" href="#tab2" aria-expanded="false">
+                Dịch vụ
+            </a>
+        </li>
+        <li class="">
+            <a data-toggle="tab" href="#tab3" aria-expanded="false">
+                Quản lý xe
+            </a>
+        </li>
+
+    </ul> 
+    <div class="tab-content clearfix">
+        <div id="tab1" class="tab-pane fade active in">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <h3 class="header smaller lighter blue">
+                        Thông tin căn hộ
+                    </h3>
+                </div>
+            </div>
+            @using (Html.BeginForm("Create", "BM_Apartment", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", @id = "frmUpdate" }))
+            {
+
+                @Html.Hidden("objId", string.Format("{0}", Model != null ? Model.Id : ""))
+                @Html.Hidden("strfloor", string.Format("{0}", Model != null ? Model.FloorId : ""))
+                @Html.Hidden("strEmployee", "")
+                @Html.Hidden("strEmployeeChoose", string.Format("{0}", Model != null ? (string)ViewBag.strEmployeeChoose : ""))
+                @Html.Hidden("strService", "")
+                @Html.Hidden("strServiceChoose", string.Format("{0}", Model != null ? (string)ViewBag.strServiceChoose : ""))
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Mã căn hộ: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.TextBoxFor(n => n.Code, new { @class = "form-control", @placeholder = "Mã căn hộ" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Tên căn hộ: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.TextBoxFor(n => n.Name, new { @class = "form-control", @placeholder = "Tên căn hộ" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Mục đích: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.DropDownListFor(n => n.ApartmentUseId, new SelectList(ViewBag.Purpose, "ItemValue", "ItemText"), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Tòa nhà: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.DropDownListFor(n => n.BuildingId, new SelectList(ViewBag.Building, "ItemValue", "ItemText"), new { @class = "form-control chosen-select" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Tầng: </label>
+                            <div class="col-xs-12 col-sm-7" id="boxFloor">
+                                @Html.Action("Partial_ListFloor", "BM_Apartment", new { buildingid = string.Format("{0}", Model != null ? Model.BuildingId : ""), floorid = string.Format("{0}", Model != null ? Model.FloorId : "0") })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Diện tích(m2): </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.TextBoxFor(n => n.Acreage, new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row" style="padding-bottom:10px;">
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Điện tiêu thụ: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.DropDownListFor(n => n.ElecticityType, new SelectList(ViewBag.TypeElec, "ItemValue", "ItemText"), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Mô tả: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.TextAreaFor(n => n.Description, new { @class = "form-control", @placeholder = "Mô tả" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label class="col-xs-12 col-sm-4 control-label-left StyleLabel"> Ghi chú: </label>
+                            <div class="col-xs-12 col-sm-7">
+                                @Html.TextAreaFor(n => n.Note, new { @class = "form-control", @placeholder = "Ghi chú" })
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                    <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                    </div>
+
+                    <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                        <!-- /.pull-left -->
+                        <div class="bg-rightbox">
+                            <div class="clearfix lineButton">
+                                <div class="col-md-12 input-group">
+                                    <button class="btn btn-info" type="button" id="Save">
+                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                        Hoàn thành
+                                    </button>
+                                    @*<button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Nhập lại
+                                </button>*@
+                                    <a href="@ViewBag.urlValue" class="btn btn-yellow">
+                                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                        Quay lại
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.pull-left -->
+                    </div><!-- /.ace-settings-box -->
+                </div>
+
+            }
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <h3 class="header smaller lighter blue">
+                        Danh sách thành viên
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-10" style="padding-bottom:5px;">
+                    <button name="btnModalSearch" class="btn btn-sm btn-info" type="button"><i class="fa fa-plus"></i> Thêm mới</button>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <div class="row divPadding">
+                        <div class="tblHeader clearfix">
+                            <div class="col-xs-12">
+                                <table class="table table-striped table-bordered" id="tblChooseResident" style="margin:0">
+                                    <colgroup>
+                                        <col style="width:5%">
+                                        <col>
+                                        <col style="width:20%">
+                                        <col style="width:20% ">
+                                        <col style="width:10% ">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="center">
+                                                STT
+                                            </th>
+
+                                            <th class="center">
+                                                Họ tên
+                                            </th>
+                                            <th class="center">
+                                                SĐT/Email
+                                            </th>
+                                            <th class="center">
+                                                Vai trò
+                                            </th>
+                                            <th class="center">
+                                                Xóa
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="tblTablList clearfix" id="divPaddingChoose">
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--Pagging-->
+
+
+            </div>
+
+        </div>
+
+        <div id="tab2" class="tab-pane fade">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <h3 class="header smaller lighter blue">
+                        Danh sách dịch vụ
+                    </h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-10" style="padding-bottom:5px;">
+                    <button name="btnModalSearchService" class="btn btn-sm btn-info" type="button"><i class="fa fa-plus"></i> Thêm mới</button>
+                </div>
+                <div class="col-xs-12 col-sm-10">
+                    <div class="row divPadding">
+                        <div class="tblHeader clearfix">
+                            <div class="col-xs-12">
+                                <table class="table table-striped table-bordered" id="tblChooseService" style="margin:0">
+                                    <colgroup>
+                                        <col style="width:5%">
+                                        <col>
+                                        <col style="width:10%">
+                                        <col style="width:15% ">
+                                        <col style="width:15% ">
+                                        <col style="width:15% ">
+                                        <col style="width:10% ">
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th class="center">
+                                                STT
+                                            </th>
+
+                                            <th class="center">
+                                                Dịch vụ
+                                            </th>
+                                            <th class="center">
+                                                Giá
+                                            </th>
+                                            <th class="center">
+                                                Thời gian thu
+                                            </th>
+                                            <th class="center">
+                                                Ngày bắt đầu
+                                            </th>
+                                            <th class="center">
+                                                Ngày kết thúc
+                                            </th>
+                                            <th class="center">
+
+                                            </th>
+                                        </tr>
+                                    </thead>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        <div class="tblTablList clearfix" id="divPaddingChooseService">
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--Pagging-->
+
+
+            </div>
+        </div>
+
+        <div id="tab3" class="tab-pane fade">
+            <div id="tab3-table">
+                @*@Html.Action("Partial_ListProductSeason", "KMF_Product", new { productid = Model.objProduct.Id })*@
+            </div>
+            <div class="hr hr-18 dotted hr-24"></div>
+            <div id="tab3-CRUD">
+                @*@Html.Action("Partial_CRUDProductSeason", "KMF_Product", new { id = "", productid = Model.objProduct.Id })*@
+            </div>
+
+        </div>
+
+
+
+    </div>
+</div>
+@section scripts{
+<script src="~/Areas/Resident/Scripts/BM_ApartmentController.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $("#BackToList").click(function () {
+                $("#SaveAndCountinue").val('false');
+            });
+
+            $("#Save").click(function () {
+                $("#frmUpdate").submit();
+            })
+        });
+    </script>
+}

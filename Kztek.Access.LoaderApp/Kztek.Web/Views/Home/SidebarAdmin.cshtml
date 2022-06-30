@@ -1,0 +1,63 @@
+﻿@using Kztek.Model.Models
+@using Kztek.Web.Attributes
+
+
+
+@{
+    var controller = (string)ViewBag.Controller;
+}
+
+<script type="text/javascript">
+    try { ace.settings.loadState('sidebar') } catch (e) { }
+</script>
+
+
+<ul class="nav nav-list">
+    <li class="@string.Format("{0}",controller == "Home" ? "active" : "page_home")">
+        <a href="@Url.Action("IndexAdmin","Home")">
+            <i class="menu-icon fa fa-tachometer"></i>
+            <span class="menu-text"> Bàn làm việc </span>
+        </a>
+
+        <b class="arrow"></b>
+    </li>
+
+    <li class="@string.Format("{0}", controller == "UserAdmin" || controller == "RoleAdmin" ? "open active" : "")">
+        <a href="#" class="dropdown-toggle">
+            <i class="menu-icon fa fa-cog"></i>
+
+            <span class="menu-text">Hệ thống</span>
+
+
+            <b class="arrow fa fa-angle-down"></b>
+        </a>
+        <b class="arrow"></b>
+
+
+        <ul class="submenu @string.Format("{0}", controller == "UserAdmin" || controller == "RoleAdmin" ? "nav-show" : "nav-hide")" style="@string.Format("{0}", controller == "UserAdmin" || controller == "RoleAdmin" ? "display: block;" : "display: none;")">
+            <li class="@string.Format("{0}",controller == "UserAdmin" ? "active" : "")">
+                <a href="/UserAdmin">
+                    <i class="menu-icon fa fa-caret-right"></i>
+
+
+                    <span class="menu-text">Người dùng</span>
+
+                </a>
+            </li>
+            <li class="@string.Format("{0}",controller == "RoleAdmin" ? "active" : "")">
+                <a href="/RoleAdmin">
+                    <i class="menu-icon fa fa-caret-right"></i>
+
+
+                    <span class="menu-text">Vai trò, quyền hạn</span>
+
+                </a>
+            </li>
+
+        </ul>
+    </li>
+</ul><!-- /.nav-list -->
+
+<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+</div>

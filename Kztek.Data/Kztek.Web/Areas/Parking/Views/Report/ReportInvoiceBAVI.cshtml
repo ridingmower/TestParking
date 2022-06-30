@@ -1,0 +1,221 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportInvoiceBAVI>
+
+@{
+    ViewBag.Title = "ReportInvoiceBAVI";
+
+    bool isTimeIn = ViewBag.isFilterByTimeIn;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "reportInOut");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportInvoiceBAVI", "Report", FormMethod.Get, new { id = "frmReportInvoiceBAVI" }))
+    {
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["keyWord"]:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder=" @DictionarySearch["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd line-height-380">
+            <label>
+                <input type="radio" name="IsFilterByTimeIn" value="true" class="ace" @string.Format("{0}", isTimeIn ? "checked" : "") )>
+                <span class="lbl"> @DictionarySearch["checkByTimeIn"] </span>
+            </label>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd line-height-380">
+            <label>
+                <input type="radio" name="IsFilterByTimeIn" value="false" class="ace" @string.Format("{0}", isTimeIn ? "" : "checked") )>
+                <span class="lbl"> @DictionarySearch["checkByTimeOut"] </span>
+            </label>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportInOut" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportInOut" })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">@Dictionary["stt"]</th>
+                        <th class="text-left" idata="Card">@Dictionary["cardNo"]<i class=""></i></th>
+                        <th class="text-left">@Dictionary["codeCard"]</th>
+                        <th class="text-left">@Dictionary["licensePlate"] </th>
+                        <th class="text-left">@Dictionary["timeIn"]</th>
+                        <th class="text-left">@Dictionary["timeOut"] </th>
+                        <th class="text-left">Ngày tạo </th>
+                        <th class="text-left">Trạng thái </th>
+                        <th class="text-left" width="80">@Dictionary["action"]</th>
+                        @*<th class="hidden-480">Ngày hết hạn</th>
+                            <th class="hidden-480">Số ngày còn lại</th>*@
+                        @*<th class="text-left" width="80">Xử lý</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = (Model.PageIndex - 1) * Model.PageSize;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                            <tr>
+                                <td class="text-center">@item.RowNumber</td>
+                                <td>
+                                    @item.CardNo
+                                </td>
+                                <td>
+                                    @item.CardNumber
+                                </td>
+                                <td>
+                                    @item.Plate
+                                </td>
+                                <td>
+                                    @Convert.ToDateTime(item.DateTimeIn).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                <td>
+                                    @Convert.ToDateTime(item.DateTimeOut).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                <td>
+                                    @Convert.ToDateTime(item.DateCreatedInvoice).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                <td>
+                                    @if (item.IsSync == 1)
+                                    {
+                                        <span class="label label-sm label-success" idata="@item.Id">Đã có hóa đơn</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-sm label-warning" idata="@item.Id">Chưa có hóa đơn</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0)" class="btnSyncInvoice green" idata="@item.Id" idate="@Convert.ToDateTime(item.DateCreatedInvoice).ToString("dd/MM/yyy HH:mm:ss")" title="Đẩy hóa đơn">
+                                        <i class="ace-icon fa fa-arrow-up bigger-120"></i>
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportInvoiceBAVI", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               IsFilterByTimeIn = ViewBag.isFilterByTimeIn
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+<div id="modalSyncInvoice" class="modal fade">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="boxTitle">Cập nhật hóa đơn?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input class="form-control datepicker" id="dateSync" name="dateSync" type="text" value="">
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+                <input type="hidden" id="currentEvendId" name="currentEvendId" value="">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">@DictionaryAction["exit"]</button>
+                <button type="button" class="btn btn-primary" id="btnSave" name="btnSave">@DictionaryAction["Save"]</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportInvoiceBAVI').submit();
+            });
+
+            $('button[name=btnSave]').click(function () {
+                var _id = $('#currentEvendId').val();
+                var _date = $('#dateSync').val();
+                $.ajax({
+                    url: '/Parking/Report/SyncInvoiceBAVI',
+                    data: { eventId: _id, invoiceCreatedDate: _date },
+                    type: 'json',
+                    //async:false,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            toastr.success(data.Message, "Thông báo");
+                            $("#modalSyncInvoice").modal("hide");
+                        } else {
+                            toastr.error(data.Message, "Thông báo");
+                        }
+                    }
+                });
+            });
+
+            $('.btnSyncInvoice').click(function () {
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+                var _date = cmd.attr('idate');
+                $('#dateSync').val(_date);
+                $('#currentEvendId').val(_id);
+                $("#modalSyncInvoice").modal("show");
+            });
+        });
+    </script>
+}

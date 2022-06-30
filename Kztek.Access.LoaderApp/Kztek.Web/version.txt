@@ -1,0 +1,119 @@
+﻿  _  __  ______  _______   ______   _  __         _    _____    _____ 
+ | |/ / |___  / |__   __| |  ____| | |/ /        | |  / ____|  / ____|
+ | ' /     / /     | |    | |__    | ' /         | | | (___   | |     
+ |  <     / /      | |    |  __|   |  <      _   | |  \___ \  | |     
+ | . \   / /__     | |    | |____  | . \    | |__| |  ____) | | |____ 
+ |_|\_\ /_____|    |_|    |______| |_|\_\    \____/  |_____/   \_____|
+
+--------------------------------------------------------------------------------
+Version History:
+--------------------------------------------------------------------------------
+
+[Version 3.0.35 (25-08-2020)]
+- Chỉnh sửa import thẻ Hòa Phát Dung Quất (Parking)
+
+[Version 3.0.34 (22-08-2020)]
+- Bổ sung bộ điều khiển "Ingress_FirstSeri10" (Parking, Access)
+
+[Version 3.0.33 (13-08-2020)]
+- Cập nhật cho báo cáo vào ra, background login, tên web cho Bảo Việt (Access)
+
+[Version 3.0.32 (03-08-2020)]
+- Bổ sung thẻ phụ (Parking)
+
+[Version 3.0.31 (21-07-2020)]
+- Sửa báo cáo theo căn hộ(Parking)
+
+[Version 3.0.30 (16-07-2020)]
+- Thêm mã khách hàng tại form gia hạn thẻ(Parking)
+
+[Version 3.0.29 (13-07-2020)]
+- Sửa tìm kiếm khách hàng(Parking)
+
+[Version 3.0.28 (04-07-2020)]
+- Báo cáo Hoành Bồ(Parking)
+
+[Version 3.0.27 (03-07-2020)]
+- Cập nhật gia hạn thẻ(Parking)
+
+[Version 3.0.26 (02-07-2020)]
+- Cập nhật nạp/hủy thẻ, vân tay (Access)
+
+[Version 3.0.25 (26-06-2020)]
+- Bổ sung trường 'IsFaceRecognize' trong bảng 'tblCamera', 'tblLane' (Parking)
+
+[Version 3.0.24 (24-06-2020)]
+- Sửa gia hạn chi tiết(Parking)
+
+[Version 3.0.23 (13-06-2020)]
+- Bổ sung báo cáo thu tiền thẻ lượt cho Lào Cai(Parking)
+
+[Version 3.0.22 (12-06-2020)]
+- Bổ sung báo cáo thẻ theo căn hộ(Parking)
+
+[Version 3.0.21 (11-06-2020)]
+- Sửa báo cáo sự kiện (Access)
+
+[Version 3.0.20 (11-06-2020)]
+- Bổ sung nút xóa cache (Parking)
+
+[Version 3.0.19 (10-06-2020)]
+- Sửa gia hạn aqua (Parking)
+
+[Version 3.0.18 (06-06-2020)]
+- Bổ sung gia hạn mới chi tiết từng tháng (Parking)
+
+[Version 3.0.17 (21-05-2020)]
+- Bổ sung bộ điều khiển E02_FirstSeri10 (Parking)
+
+[Version 3.0.16 (04-05-2020)]
+- Bổ sung bộ điều khiển FaceMQTT (Parking)
+
+[Version 3.0.15 (20-04-2020)]
+- Sửa báo cáo FPT(Parking)
+
+[Version 3.0.14 (18-04-2020)]
+- Sửa báo cáo FPT(Parking)
+
+[Version 3.0.13 (08-04-2020)]
+- Check trùng trên nhóm khách hàng trong cùng cấp parent(Parking)
+
+[Version 3.0.12 (20-03-2020)]
+- Sửa báo cáo cảnh báo(Parking)
+
+[Version 3.0.11 (16-03-2020)]
+- Sửa báo cáo tổng hợp thu tiền thẻ lượt(Parking)
+
+[Version 3.0.10 (13-03-2020)]
+- Sửa báo cáo FPT(Parking)
+
+[Version 3.0.9 (10-03-2020)]
+- Cập nhật tính năng check license online(Parking)
+
+[Version 3.0.8 (22-02-2020)]
+- Sửa Báo cáo xe vào (sự kiện loop lấy cả vào lẫn ra)(Parking)
+
+[Version 3.0.7 (22-02-2020)]
+- Sửa Báo cáo xe vào (Parking)
+
+[Version 3.0.6 (22-02-2020)]
+- Bổ sung cập nhật chụp ảnh tự động tại danh sách thẻ cho Hòa Phát (Parking)
+
+[Version 3.0.5 (03-02-2020)]
+- Sửa lỗi báo cáo khi tìm kiếm theo user (Parking)
+
+[Version 3.0.4 (11-12-2019)]
+- Bổ xung sắp xếp thứ tự cho các cửa (Access)
+
+[Version 3.0.3 (09-12-2019)]
+- SỬa phân quyển truy cập (Access)
+- Cập nhật danh sách bộ điều khiển (Access)
+
+[Version 3.0.2 (28-11-2019)]
+- SỬa phần import card (Parking)
+
+[Version 3.0.1 (26-11-2019)]
+- Bổ sung báo cáo FPT. Cập nhật trong FUTECHSUPPORT
+
+[Version 3.0.0 (25-11-2019)]
+- Áp dụng chức năng chia version cho các phiên bản của parking/access/locker

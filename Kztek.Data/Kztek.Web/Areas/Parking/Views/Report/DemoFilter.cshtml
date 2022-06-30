@@ -1,0 +1,271 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportInOut>
+
+@{
+    ViewBag.Title = "ReportInOut";
+
+    var listLane = (List<Kztek.Model.Models.tblLane>)ViewBag.LaneList;
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "reportInOut");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+
+    string dateDefault = DateTime.Now.ToString("dd/MM/yyyy 00:00") + "-" + DateTime.Now.ToString("dd/MM/yyyy 23:59");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span id="spCount">0</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportInOut", "Report", FormMethod.Get, new { id = "frmReportInOut" }))
+    {
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportInOut" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportInOut" })
+
+        </div>
+    }
+</div>
+
+@Html.Hidden("CardNo", "")
+@Html.Hidden("CardNumber", "")
+@Html.Hidden("Plate", "")
+@Html.Hidden("CardGroup", "")
+@Html.Hidden("LaneIn", "")
+@Html.Hidden("DCTypeCode", "")
+@Html.Hidden("DCTypeCode", "")
+@Html.Hidden("DateTimeIn", dateDefault)
+@Html.Hidden("DateTimeOut", dateDefault)
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover" id="tblEvent">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">@Dictionary["stt"]</th>
+                        <th class="text-left" idata="Card">@Dictionary["cardNo"]<i class=""></i></th>
+                        <th class="text-left">@Dictionary["codeCard"]</th>
+                        <th class="text-left">@Dictionary["licensePlate"] </th>
+                        <th class="text-left">@Dictionary["timeIn"]</th>
+                        <th class="text-left">@Dictionary["timeOut"] </th>
+
+                        <th class="text-left hidden-480" idata="CardGroup"> @Dictionary["cardGroup"]<i class=""></i></th>
+                        <th class="text-left hidden-480" idata="Customer">@Dictionary["customer"] <i class=""></i></th>
+                        <th class="text-left hidden-480">@Dictionary["lanceIn"] </th>
+                        <th class="text-left hidden-480">@Dictionary["lanceOut"] </th>
+                        <th class="text-left">@Dictionary["monitoringIn"] </th>
+                        <th class="text-left">@Dictionary["monitoringOut"] </th>
+                        <th class="hidden-480">Loại giảm phí</th>
+                        <th class="text-left">@Dictionary["amount"] </th>
+                        <th class="hidden-480">Số tiền giảm</th>
+                        <th class="hidden-480">Tiền thu thực tế</th>
+                        <th class="text-left" width="80">@Dictionary["action"]</th>
+                    </tr>
+                    <tr class="headerSort">
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="CardNumber">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="Plate">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control filter daterangtimepicker2" idata="DateTimeIn">
+                            </div>
+                        </th>
+                        <th class="center">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control filter daterangtimepicker2" idata="DateTimeOut">
+                            </div>
+                        </th>
+
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="CardGroup">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center hidden-480">
+
+                        </th>
+                        <th class="center hidden-480">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="LaneIn">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center hidden-480">
+
+                        </th>
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+
+                        </th>
+                        <th class="hidden-480">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="DCTypeCode">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center"></th>
+                        <th class="hidden-480"></th>
+                        <th class="hidden-480"></th>
+                        <th class="center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-xs-12" id="boxPaging">
+
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/DemoFilter.js"></script>
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        })
+
+        $(document).ready(function () {
+            //$('#sidebar').removeClass('sidebar-scroll');
+            //$('#sidebar').addClass('menu-min');
+            //$('#sidebar-toggle-icon').removeClass('fa-angle-double-left');
+            //$('#sidebar-toggle-icon').addClass('fa-angle-double-right');
+            //$('#groupname1').hide();
+            //$('#groupname2').hide();
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportInOut').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportInOut').submit();
+            });
+
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddllane').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#lane').val(str);
+            });
+
+            $('#ddluser').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#user').val(str);
+            });
+
+            $('#ddlExcelColumn').change(function () {
+                var cmd = $(this);
+                var str = '';
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#excelcol').val(str);
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventInOut')
+        });
+    </script>
+}

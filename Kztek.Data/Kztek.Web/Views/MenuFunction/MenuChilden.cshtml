@@ -1,0 +1,68 @@
+﻿@model List<Kztek.Model.Models.MenuFunction>
+
+@{
+    var list = (List<Kztek.Model.Models.MenuFunction>)ViewBag.ListMenu;
+    string groupID = (string)ViewBag.GroupID;
+}
+@if (Model.Any())
+{
+    <style>
+        .submenu1 {
+            display: none;
+        }
+    </style>
+
+    <ul style="list-style-type:none;" class="submenu1">
+
+        @foreach (var item in Model)
+        {
+            var strActive = item.Active ? "" : "text-decoration:line-through";
+            var child = list.Where(n => n.ParentId.Equals(item.Id)).ToList();
+            var childFunction = list.Where(c => c.Breadcrumb != null && c.Breadcrumb.Contains(item.Id) && c.MenuType == "2").ToList();
+        <li>
+            <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item.Id" />
+            <span class="showButton lbl" style="@strActive">
+                <span>@item.OrderNumber</span>. @item.MenuName
+                @*<span class="hideblock">
+                <a href="@Url.Action("Update", "MenuFunction", new { @id = item.Id })" class="green" title="Cập nhật">
+                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                </a>
+            </span>*@
+            </span>
+            <span>
+                <a href="@Url.Action("Update", new {id = item.Id, group = groupID})" title="@string.Format("/{0}/{1}", item.ControllerName, item.ActionName)">
+                    <i class="ace-icon fa fa-pencil-square-o"></i>
+                </a>
+            </span>
+            <span class="pull-right">
+                @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+            </span>
+            @if (child.Any())
+            {
+                @Html.Action("MenuChilden", "MenuFunction", new { childList = child, AllList = list })
+            }
+            @*@if (childFunction.Any())
+        {
+            <ul class="tree2" style="list-style-type:none;display:block;">
+                @foreach (var itemF in childFunction)
+                {
+                    var strActive2 = itemF.Active ? "" : "text-decoration:line-through";
+                    <li>
+                        <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@itemF.Id" />
+                        <span class="showButton lbl" style="@strActive2">
+                            @itemF.MenuName
+                            <span class="hideblock">
+                                <a href="@Url.Action("Update", "MenuFunction", new { @id = itemF.Id })" class="green" title="Cập nhật">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                            </span>
+                        </span>
+                    </li>
+                }
+            </ul>
+        }*@
+        </li>
+        }
+
+    </ul>
+}

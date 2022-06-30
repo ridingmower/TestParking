@@ -1,0 +1,25 @@
+﻿@model List<Kztek.Model.Models.tblLocker>
+
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>Tổng</td>
+            <td>Đã gắn thẻ</td>
+            <td>Trống</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                <strong>@Model.Count</strong>
+            </td>
+            <td>
+                <strong class="red">@Model.Where(n => n.LockerType == "1").Count()</strong>
+            </td>
+            <td>
+                <strong class="blue">@Model.Where(n => n.LockerType == "0").Count()</strong>
+            </td>
+        </tr>
+    </tbody>
+</table>

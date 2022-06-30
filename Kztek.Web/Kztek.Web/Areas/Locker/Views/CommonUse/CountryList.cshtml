@@ -1,0 +1,3 @@
+﻿@model List<Futech.Model.CustomModel.DistrictModel>
+
+@Html.DropDownList("provinceName",new SelectList(Model, "DistrictName", "DistrictName", ViewBag.Selected),new { @class = "form-control", @style = "width:auto;" })

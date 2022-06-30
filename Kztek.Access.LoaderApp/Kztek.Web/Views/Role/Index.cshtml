@@ -1,0 +1,158 @@
+﻿@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model IEnumerable<Kztek.Model.Models.Role>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Vai trò";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Role", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryNoti = FunctionHelper.GetLocalizeDictionary("Home", "notification");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Role", FormMethod.Get, new { id = "frmRole" }))
+    {
+        <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="" placeholder="@Dictionary["KeywordPlaceholder"] " class="form-control" />
+        </div>
+        <div class="col-md-6 col-lg-6 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-sm btn-primary" type="submit"> <i class="fa fa-search"></i> @DictionaryAction["Search"] </button>
+            <a href="@Url.Action("Index", "Role", new { group = groupID })" class="btn btn-primary btn-white btn-bold" type="submit">
+                <i class="fa fa-refresh green" aria-hidden="true"></i>
+                @DictionaryAction["Reset"]
+            </a>
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = groupID })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table id="simple-table" class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center hidden-480">@Dictionary["ID"] </th>
+                    <th class="center">@Dictionary["RoleName"] </th>
+                    <th class="center hidden-480">@Dictionary["Description"] </th>
+                    <th class="center">@Dictionary["Status"] </th>
+                    <th class="center">@Dictionary["Action"] </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-left hidden-480">
+                                @item.Id
+                            </td>
+
+                            <td class="text-left">
+                                @item.RoleName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.Description
+                            </td>
+
+                            <td class="center">
+                                @if (item.Active == true)
+                                {
+                                    <span class="label label-sm label-success">@Dictionary["Active"] </span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">@Dictionary["Inactive"] </span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { @id = item.Id , pageNumber = 1, group = groupID })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+<input type="hidden" name="notification" value="@DictionaryNoti["notification"]" />
+<input type="hidden" name="delConfrim" value="@DictionaryNoti["deleteConfirm"]" />
+<input type="hidden" name="delSuccess" value="@DictionaryNoti["DeleteSuccess"]" />
+<input type="hidden" name="delFail" value="@DictionaryNoti["DeleteFail"]" />
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //$(document).ready(function () {
+            //    SearchSubmit("frmRole");
+            //    DeleteSubmit('/Role/Delete');
+            //});
+            $('.btnDelete').click(function () {
+                var noti = $('input[name=notification]').val();
+                var delConfrim = $('input[name=delConfrim]').val();
+                var delSuccess = $('input[name=delSuccess]').val();
+                var delFail = $('input[name=delFail]').val();
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+                if (confirm(delConfrim)) {
+                    $.ajax({
+                        url: '/Role/Delete',
+                        data: { id: _id },
+                        type: 'json',
+                        //async:false,
+                        success: function (data) {
+                            if (data.isSuccess) {
+                                cmd.parent().parent().parent().fadeOut();
+                                toastr.success(delSuccess, noti)
+                            } else {
+                                toastr.error(delFail, noti)
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}

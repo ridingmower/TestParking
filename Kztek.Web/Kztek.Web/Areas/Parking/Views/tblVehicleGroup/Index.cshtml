@@ -1,0 +1,96 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model IEnumerable<Kztek.Model.Models.tblVehicleGroup>
+
+@{
+    ViewBag.Title = "Danh sách nhóm xe";
+
+    string groupValue = (string)ViewBag.groupValue;
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = groupValue, key = ViewBag.keyValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên</th>
+                    <th class="text-left">Số lượng giới hạn</th>
+                    <th class="text-left">Trạng thái</th>
+                    <th class="text-left" width="80">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.VehicleGroupName
+                            </td>
+
+                            <td class="text-left">
+                                @item.LimitNumber
+                            </td>
+
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Chưa kích hoạt</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.VehicleGroupID, group = groupValue, key = ViewBag.keyValue })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.VehicleGroupID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            DeleteSubmit(_prefixParkingDomain + '/tblVehicleGroup/Delete');
+        });
+    </script>
+}

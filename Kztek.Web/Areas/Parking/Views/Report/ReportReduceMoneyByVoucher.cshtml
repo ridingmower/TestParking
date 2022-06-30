@@ -1,0 +1,144 @@
+﻿
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model List<Kztek.Model.Models.ReportReduceMoneyByVoucher>
+
+
+
+<div class="page-header">
+    <h1>
+        Tổng số tiền giảm theo voucher (<span>@Model.Count</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportReduceMoneyByVoucher", "Report", FormMethod.Get, new { id = "frmReportReduceMoneyByVoucher" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ khóa </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Tên giảm giá" class="form-control" />
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ ngày: </label>
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Đến ngày: </label>
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportReduceMoneyByVoucher" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportReduceMoneyByVoucher" })
+
+      
+            @Html.Hidden("excelcol")
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportReduceMoneyByVoucher" })
+
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-5">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                  
+                        <th class="center">STT</th>
+                        <th class="text-left">Tên voucher </th>
+                        <th class="text-left">Số tiền</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        double total = 0;
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            total += Convert.ToDouble(@item.TotalReduceVocher);
+                            <tr>
+                                <td class="center">@count</td>
+                                <td>
+                                    @item.DCTypeName
+                                </td>
+                                <td>
+                                    @item.TotalReduceVocher.ToString("###,###.##")
+                                </td>                      
+                            </tr>
+                        }
+
+                <tr>
+                    <td></td>
+                    <td><strong>Tổng</strong></td>
+                    <td>@total.ToString("###,###.##")</td>
+                </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+ 
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+      
+
+        $(document).ready(function () {
+          
+
+        
+
+            $('#ddlExcelColumn').change(function () {
+                var cmd = $(this);
+                var str = '';
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#excelcol').val(str);
+            });
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportReduceMoneyByVoucher').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportReduceMoneyByVoucher').submit();
+            });
+
+        
+        });
+    </script>
+}

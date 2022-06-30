@@ -1,0 +1,554 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.tblCardCustomViewModel>
+
+@{
+    ViewBag.Title = "Danh sách thẻ";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var checkbytype = (string)ViewBag.isCheckByTimeValue;
+
+    string selected = (string)ViewBag.selectedIdValue;
+
+    var listCardSelected = (List<string>)ViewBag.selectedCardValue;
+
+    string path = HttpContext.Current.Request.Url.PathAndQuery;
+
+    var listLevel = (IEnumerable<Kztek.Model.Models.tblAccessLevel>)ViewBag.llevels;
+
+    string columnquery = Convert.ToString(ViewBag.columnQueryValue);
+    bool isDescSort = Convert.ToBoolean(ViewBag.DescValue);
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+
+@using (Html.BeginForm("Index", "tblCard", FormMethod.Get, new { id = "frmCard" }))
+{
+    @Html.Hidden("chkExport", "0")
+    @Html.Hidden("selectedId", selected)
+    @Html.Hidden("columnQuery", columnquery)
+    @Html.Hidden("desc", isDescSort)
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Số thẻ, mã thẻ, mã khách hàng, biển số..." class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control daterangnoautopicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control daterangnoautopicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm khách hàng:
+            @Html.DropDownList("customergroups", new SelectList(ViewBag.lcustomergroups, "ItemValue", "ItemText", ViewBag.customergroupsValue), "--Lựa chọn--", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Trạng thái:
+            @Html.DropDownList("active", new SelectList(ViewBag.lactives, "ItemValue", "ItemText", ViewBag.activeValue), new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm thẻ:
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.lcardgroups, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.cardgroupsValue, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+            </div>
+            @Html.Hidden("cardgroups")
+        </div>
+        @*<div class="col-md-2 col-xs-12 divboxmd">
+            Quyền:
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.llevelDTs, itemValue = "AccessLevelID", itemText = "AccessLevelName", selectedValues = ViewBag.levelsValue, Modelname = "ddllevel", labelName = "-- Lựa chọn --" })
+            </div>
+            @Html.Hidden("levels")
+        </div>*@
+        <div class="col-md-2 col-xs-4 divboxmd">
+            <label class="line-height-250">
+                <input type="radio" name="isCheckByTime" value="0" class="ace" @string.Format("{0}", checkbytype.Equals("0") ? "checked" : "")>
+                <span class="lbl"> Không lọc theo ngày </span>
+            </label>
+        </div>
+        <div class="col-md-2 col-xs-4 divboxmd">
+            <label class="line-height-250">
+                <input type="radio" name="isCheckByTime" value="1" class="ace" @string.Format("{0}", checkbytype.Equals("1") ? "checked" : "")>
+                <span class="lbl"> Lọc theo ngày tạo </span>
+            </label>
+        </div>
+        <div class="col-md-2 col-xs-4 divboxmd">
+            <label class="line-height-250">
+                <input type="radio" name="isCheckByTime" value="2" class="ace" @string.Format("{0}", checkbytype.Equals("2") ? "checked" : "")>
+                <span class="lbl"> Lọc theo ngày hết hạn </span>
+            </label>
+        </div>
+        @*<div class="col-md-2 col-xs-4 divboxmd">
+                <label class="line-height-250">
+                    <input type="radio" name="columnQuery" value="DateActive" class="ace" @string.Format("{0}", checkbytype.Equals("3") ? "checked" : "")>
+                    <span class="lbl"> Lọc theo ngày kích hoạt </span>
+                </label>
+            </div>*@
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Import", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    </div>
+
+}
+
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    @*<div class="col-xs-2">
+            <div id="boxActionCardChoice" style="display:none">
+                @Html.Action("CardActionSubmitChoice")
+            </div>
+        </div>*@
+    @*<div class="col-md-8 col-xs-12">
+        <div id="boxCardAction"></div>
+    </div>
+    <div class="col-md-4 col-xs-12">*@
+        <div class="pull-right">
+            @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+            {
+                <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue, cardgroups = ViewBag.cardgroupsValue, customergroups = ViewBag.customergroupsValue, active = ViewBag.active, fromdate = ViewBag.fromdateValue, todate = ViewBag.todateValue, isCheckByTime = ViewBag.isCheckByTimeValue })" class="btn btn-primary btn-sm btn-white btn-bold">
+                    <i class=" fa fa-plus"></i> Thêm mới
+                </a>
+            }
+        </div>
+    @*</div>*@
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" id="chkCheckALL" />
+                            <span class="lbl"></span>
+                        </label>
+                    </th>
+                    <th class="text-left" idata="CardNo"> CardNo <i class=""></i></th>
+                    <th class="text-left" idata="CardNumber"> Mã thẻ <i class=""></i></th>
+                    <th class="text-left">Nhóm thẻ </th>
+                    @*<th class="text-left">Ngày hết hạn </th>*@
+
+                    @*<th class="text-left" >Quyền truy cập </th>*@
+                    <th class="text-left">Mã khách hàng</th>
+                    <th class="text-left">Khách hàng </th>
+                    <th class="text-left"> Nhóm khách hàng </th>
+                    @*<th class="text-left">Địa chỉ</th>*@
+                    <th class="text-left" idata="ImportDate">Ngày tạo <i class=""></i></th>
+                    <th class="text-left">Trạng thái</th>
+                    <th class="text-left">Tủ đồ</th>
+                    @*<th class="text-left">Trạng thái nạp</th>*@
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.CardID.ToString() ) ? "info" : "")">
+                            <td class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" id="@item.CardID.ToString()" name="Id" value="@item.CardNumber.ToString()" class="ace chkCheck" @string.Format("{0}", (listCardSelected != null && listCardSelected.Any(n => n.Equals(item.CardNumber))) ? "checked" : "") />
+                                    <span class="lbl"></span>
+                                </label>
+                            </td>
+
+                            <td class="text-left">
+                                @item.CardNo
+                            </td>
+
+                            <td class="text-left">
+                                @item.CardNumber
+                            </td>
+
+                            <td class="text-left">
+                                @item.CardGroupName
+                            </td>
+
+                            @*<td class="text-left">
+                                @if (item.AccessExpireDate != null)
+                                {
+                                    var status = Kztek.Web.Core.Functions.FunctionHelper.GetStatusDateByDay(Convert.ToDateTime(item.AccessExpireDate));
+                                    <span>@Html.Raw(status)</span>
+                                }
+                            </td>*@
+                            
+                           
+                            @*<td class="text-left">
+                                @{
+                                    var objLevel = listLevel.FirstOrDefault(n => n.AccessLevelID.ToString() == item.AccessLevelID);
+                                    if (objLevel != null)
+                                    {
+                                        <span>@objLevel.AccessLevelName</span>
+                                    }
+                                }
+                            </td>*@
+
+                            <td class="text-left">
+                                @item.CustomerCode
+                            </td>
+
+                            <td class="text-left">
+                                @item.CustomerName
+                            </td>
+
+                            <td class="text-left">
+                                @item.CustomerGroupName
+                            </td>
+
+                            @*<td class="text-left">
+                                @item.CustomerAddress
+                            </td>*@
+
+                            <td class="text-left">
+                                @if (item.ImportDate != null)
+                                {
+                                    @item.ImportDate.Value.ToString("dd/MM/yyyy")
+                                }
+                            </td>
+                            <td class="text-left">
+                                @if (item.IsLock == false)
+                                {
+                                    <span class="label label-sm label-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Ngừng hoạt động</span>
+                                }
+                            </td>
+                             <td class="text-left">
+                                @item.LockerName
+                            </td>
+                            @*<td class="center">
+                                @Html.Action("CardUploadStatus", new { cardnumber = item.CardNumber, accesslevel = item.AccessLevelID })
+                            </td>*@
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.CardID, key = ViewBag.keyValue, cardgroups = ViewBag.cardgroupsValue, customergroups = ViewBag.customergroupsValue, active = ViewBag.active, fromdate = ViewBag.fromdateValue, todate = ViewBag.todateValue, isCheckByTime = ViewBag.isCheckByTimeValue, page = Model.PageIndex })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Delete"))
+                                    {
+                                        <a href="javascript:void(0)" class="btnDelete red" idata="@item.CardID" title="Xóa">
+                                            <i class="ace-icon fa fa-trash bigger-120"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblCard", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               cardgroups = ViewBag.cardgroupsValue,
+               customergroups = ViewBag.customergroupsValue,
+               customerid = ViewBag.customeridValue,
+               active = ViewBag.activeValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               isCheckByTime = ViewBag.isCheckByTimeValue,
+               selectedId = ViewBag.selectedIdValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+
+@Html.Action("ModalImportCard")
+
+@section scripts{
+    <script src="~/Areas/Access/Scripts/CardController.js"></script>
+    <script>
+        function saveNewFileCard() {
+            $('.loading1').css('display', 'block');
+            $('#proccess').css('display', 'block');
+            $("#messs").css('display', 'none');
+
+            var file = $("#modalImportCard").find("input[name=FileUpload]").prop("files");
+
+            var formdata = new FormData();
+
+            for (i = 0; i < file.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(file[i].name, file[i]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: _prefixLockerDomain + '/tblCard/ImportFile',
+                data: formdata,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.isSuccess) {
+                        $('.loading1').css('display', 'none');
+
+                        toastr.success(response.Message);
+
+                        window.location.href = "/Locker/tblCard";
+                    }
+                    else
+                    {
+                        toastr.error(response.Message);
+                    }
+
+                },
+                error: function (error) {
+                    alert("errror");
+                    console.log(error);
+                }
+            });
+        }
+
+        function OrderColumnInTable(columnSort, columnDefault, isDesc, url) {
+            columnSort = columnDefault;
+
+            $(".headerSort th").on('click', function () {
+                var cmd = $(this);
+                var column = cmd.attr('idata');
+                cmd.removeClass("blue");
+                cmd.find("i").addClass("fa fa-sort")
+                if (column != undefined) {
+                    cmd.find("i").removeClass();
+                    sortColumn(column, columnDefault, isDesc, url);
+                    var className = getClass(column, columnDefault, isDesc);
+                    cmd.find("i").toggleClass(className);
+
+                    columnSort = column;
+                }
+            })
+
+            $(".headerSort th").each(function () {
+                var cmd = $(this);
+                cmd.find("i").addClass("fa fa-sort");
+                var column = cmd.attr('idata');
+                if (column == columnSort) {
+                    $(".headerSort").find("th[idata=" + columnSort + "]").find("i").removeClass();
+
+                    var className = getClass(columnSort, columnDefault, isDesc);
+
+                    $(".headerSort").find("th[idata=" + columnSort + "]").find("i").toggleClass(className);
+
+                    $(".headerSort").find("th[idata=" + columnSort + "]").addClass("blue");
+                }
+            })
+        }
+
+        function sortColumn(column, defaultColumn, isDesc, firsturl) {
+
+            if (defaultColumn == column) {
+                if (isDesc === "False") {
+                    isDesc = "True";
+                } else {
+                    isDesc = "False";
+                }
+            } else {
+                isDesc = "True";
+            }
+
+            defaultColumn = column;
+            window.location.href = firsturl + "&&columnQuery=" + column + "&&desc=" + isDesc;
+        }
+
+        function getClass(column, defaultColumn, isDesc) {
+
+            if (defaultColumn == column) {
+                if (isDesc == "True") {
+                    return "fa fa-caret-down";
+                } else {
+                    return "fa fa-caret-up";
+                }
+            }
+            return "";
+        }
+
+        $(document).ready(function () {
+
+            var _str = '@ViewBag.cardgroupsValue';
+            var count = (_str.match(/&#39;/g) || []).length;
+            var i;
+            for (i = 0; i < count; ++i) {
+                _str = _str.replace('&#39;', "'").replace(',','%2C');
+            };
+
+            var _role = '@ViewBag.levelsValue';
+            var count = (_role.match(/&#39;/g) || []).length;
+            var i;
+            for (i = 0; i < count; ++i) {
+                _role = _role.replace('&#39;', "'").replace(',','%2C');
+            };
+
+            var urlSt = '/Locker/tblCard/Index?key=' + '@ViewBag.keyValue' + '&page=' + '@Model.PageIndex' + '&cardgroups=' + _str + '&customergroups=' + '@ViewBag.customergroupsValue' + '&isCheckByTime=' + '@ViewBag.isCheckByTimeValue' + '&active=' + '@ViewBag.activeValue' + '&fromdate=' + '@ViewBag.fromdateValue' + '&todate=' + '@ViewBag.todateValue' + '&levels=' + _role;
+
+            OrderColumnInTable("", "@columnquery", "@isDescSort", urlSt);
+            //
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += "'" + _cmd.find('input[type=checkbox]').val() + "'" + ',';
+                });
+                $('#cardgroups').val(str);
+            });
+
+            $('#ddllevel').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += "'" + _cmd.find('input[type=checkbox]').val() + "'" + ',';
+                });
+                $('#levels').val(str);
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixLockerDomain + '/tblCard/Delete');
+
+            //$('.btnDelete').click(function () {
+            //    var cmd = $(this);
+            //    var _id = cmd.attr('idata');
+            //    if (confirm('Bạn chắc chắn muốn xóa bản ghi này?')) {
+            //        $.ajax({
+            //            url: ,
+            //            data: { id: _id },
+            //            type: 'json',
+            //            //async:false,
+            //            success: function (data) {
+            //                if (data.Success) {
+            //                    cmd.parent().parent().parent().fadeOut();
+            //                    toastr.success(data.Message)
+            //                } else {
+            //                    toastr.error(data.Message)
+            //                }
+            //            }
+            //        });
+            //    }
+            //});
+
+            $('input[name=fromdate],input[name=todate]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY'));
+            });
+
+
+            @*var urlSt = '/Parking/PK_Card/Index?key=' + '@ViewBag.Keyword' + '&page=' + '@Model.PageIndex' + '&cardgroup=' + '@ViewBag.CardGroupId' + '&datefrompicker=' + '@ViewBag.DateTimePicker' + '&customergroup=' + '@ViewBag.CustomerGroupId' + '&columnQuery=' + '@columnquery' + '&cardstatus=' + '@cardStatus' ;
+
+            OrderColumnInTable("", "@column", "@isDescSort", urlSt);*@
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmCard').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmCard').submit();
+            });
+
+            $("button[name=btnImport]").click(function () {
+                $("#modalImportCard").modal("show");
+            });
+
+
+            //
+            AC_CardController.loadModalButton('@Model.TotalItem', '@path');
+
+            $("#chkCheckALL").click(function () {
+                if ($(this).is(":checked")) {
+                    var choices = [];
+                    $('.chkCheck').each(function () {
+                        if ($(this).is(":checked")) {
+                            var cn = $(this).val();
+                            choices.push(cn);
+                        }
+                    });
+
+                    AC_CardController.AddRemoveCardChoice(choices, '@Model.TotalItem', true);
+
+                } else {
+                    var unchoices = [];
+
+                    $('.chkCheck').each(function () {
+                        if (!$(this).is(":checked")) {
+                            var cn = $(this).val();
+                            unchoices.push(cn);
+                        }
+                    });
+
+                    AC_CardController.AddRemoveCardChoice(unchoices, '@Model.TotalItem', false);
+                }
+            });
+
+            $('.chkCheck').click(function () {
+                if ($(this).is(":checked")) {
+                    var choices = [];
+                    var cn = $(this).val();
+                    choices.push(cn);
+                    AC_CardController.AddRemoveCardChoice(choices, '@Model.TotalItem', true);
+
+                } else {
+                    var unchoices = [];
+                    var cn1 = $(this).val();
+                    unchoices.push(cn1);
+                    AC_CardController.AddRemoveCardChoice(unchoices, '@Model.TotalItem', false);
+                }
+            });
+
+            //
+            $("#frmCard").find("input[name=key]").keypress(function (e) {
+                if (e.which === 13) {
+                    $("#frmCard").submit();
+                }
+            });
+        });
+    </script>
+}

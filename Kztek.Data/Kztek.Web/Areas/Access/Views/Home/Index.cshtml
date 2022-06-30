@@ -1,0 +1,66 @@
+﻿@model Kztek.Model.CustomModel.SelectListModel
+
+@{
+    ViewBag.Title = "Home Page";
+
+}
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "frmHome" }))
+    {
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control daterangtimepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd">
+            <button class="btn btn-sm btn-primary" type="submit" name="btnFilter">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="infobox infobox-green">
+            <div class="infobox-data">
+                <span class="infobox-data-number" id="id_dashboard1" runat="server">@Model.ItemText</span>
+                <div class="infobox-content">Thẻ</div>
+            </div>
+        </div>
+
+        <div class="infobox infobox-blue">
+            <div class="infobox-data">
+                <span class="infobox-data-number" id="id_dashboard2" runat="server">@Model.ItemValue</span>
+                <div class="infobox-content">Khách hàng</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".page_home").addClass("active");
+
+
+        });
+    </script>
+}

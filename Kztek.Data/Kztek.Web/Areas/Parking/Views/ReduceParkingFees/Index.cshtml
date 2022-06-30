@@ -1,0 +1,171 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblDiscountParking>
+
+@{
+    ViewBag.Title = "Hình thức giảm phí gửi xe";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCard", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryNoti = FunctionHelper.GetLocalizeDictionary("Home", "notification");
+
+    var system = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+@using (Html.BeginForm("Index", "ReduceParkingFees", FormMethod.Get, new { id = "frmReduceParkingFees" }))
+{
+
+    <div class="row">
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @Dictionary["Keyword"]
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Tên hình thức,Mã hình thức..." class="form-control" />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-8 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    </div>
+
+
+}
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-md-12 col-xs-12">
+        <div class="pull-right">
+
+            @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+            {
+                <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue})" class="btn btn-primary btn-sm btn-white btn-bold">
+                    <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+                </a>
+            }
+
+        </div>
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            Tên hình thức
+                        </th>
+                        <th class="text-center"> Mã hình thức</th>
+                        <th class="text-center">Hình thức giảm </th>
+                        <th class="text-center">Mức giảm(Phần trăm/Giờ/Tiền)</th>
+                        <th class="text-center">Ghi chú </th>
+                        <th class="text-center"> @Dictionary["Action"] </th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        foreach (var item in Model.Data)
+                        {
+
+
+                            <tr class="">
+                                <td class="left">
+                                    @item.DCTypeName
+                                </td>
+
+                                <td class="text-center ">
+                                    @item.DCTypeCode
+                                </td>
+
+                                <td class="text-center">
+
+                                    @{
+                                        if (item.DiscountMode == 0)
+                                        {
+                                            <label class="label-default">Phần trăm</label>
+                                        }
+                                        else if (item.DiscountMode == 1)
+                                        {
+                                            <label class="label-danger ">Giờ</label>
+                                        }
+                                        else if (item.DiscountMode == 2)
+                                        {
+                                            <label class="label-info">Tiền</label>
+                                        }
+                                    }
+                                </td>
+
+                                <td class="text-center">
+                                    @item.DiscountAmount.ToString("###,###.##")
+                                </td>
+
+                                <td class="text-center">
+                                    @item.Note
+                                </td>
+
+                                <td class="center">
+                                    <div class="btn-group">
+                                        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                        {
+                                            <a href="@Url.Action("Update", controller, new { id = item.Id.ToString(), key = ViewBag.keyValue,  page = Model.PageIndex })" class="green" title="Cập nhật">
+                                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            </a>
+                                        }
+                                        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Delete"))
+                                        {
+                                            <a href="javascript:void(0)" class="btnDelete red" idata="@item.Id.ToString()" title="Xóa">
+                                                <i class="ace-icon fa fa-trash bigger-120"></i>
+                                            </a>
+                                        }
+
+
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "ReduceParkingFees", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            SearchSubmit("frmReduceParkingFees");
+            DeleteSubmit(_prefixParkingDomain + '/ReduceParkingFees/Delete');
+        });
+    </script>
+}

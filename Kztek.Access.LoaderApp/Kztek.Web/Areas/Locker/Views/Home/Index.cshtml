@@ -1,0 +1,122 @@
+﻿@model Kztek.Model.Models.LockerHome
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions;
+@{
+    ViewBag.Title = "Home Page";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+<style>    
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        /*background-color:darkgreen;*/
+    }   
+</style>
+<div class="page-header">
+    <h1>
+        Danh sách tủ đồ
+    </h1>
+</div>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="col-xs-4">
+            <div class="commentbox" style="background-color:chocolate">
+            </div>
+
+        </div>
+        <div class="col-xs-8">
+            <p class="comment">Tủ cố định</p>
+        </div>
+
+    </div>
+    <div class="col-sm-4">
+        <div class="col-xs-4">
+            <div class="commentbox" style="background-color:royalblue">
+            </div>
+
+        </div>
+        <div class="col-xs-8">
+            <p class="comment">Tủ tức thời đang sử dụng</p>
+        </div>
+
+    </div>
+    <div class="col-sm-4">
+        <div class="col-xs-4">
+            <div class="commentbox" style="background-color:#372577">
+            </div>
+
+        </div>
+        <div class="col-xs-8">
+            <p class="comment">Tủ trống</p>
+        </div>
+
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+@if (Model != null && Model.ListController != null && Model.ListController.Count() > 0)
+{
+    int count = 0;
+    int count1 = 0;
+    <div class="col-sm-12">
+        <div class="tabbable tabs-left">
+            <ul class="nav nav-tabs" id="myTab3">
+                @foreach (var item in Model.ListController.ToList())
+                {
+                    count++;
+                    <li class="@string.Format("{0}", count == 1 ? "active" : "")">
+                        <a data-toggle="tab" href="#@item.Id" aria-expanded="false">
+                            <i class="purple ace-icon fa fa-wrench bigger-110"></i>
+                            @item.ControllerName
+                        </a>
+                    </li>
+                }
+
+            </ul>
+            <div class="tab-content">
+                @foreach (var item in Model.ListController.ToList())
+                {
+                    count1++;
+                    var listlocker = Model.ListLocker.Where(n => n.ControllerID == item.Id);
+                    <div id="@item.Id" class="@string.Format("{0}", count1 == 1 ? "tab-pane active" : "tab-pane")">
+
+                        @if (listlocker != null && listlocker.Count() > 0)
+                        {
+                            foreach (var locker in listlocker)
+                            {
+                                var _style = "chocolate";
+                                if (locker.LockerType.Equals("2"))
+                                {
+                                    _style = "royalblue";
+
+                                }
+                                else if (locker.LockerType.Equals("0"))
+                                {
+                                    _style = "#372577";
+
+                                }
+
+                                <div class="column" style="@string.Format("background-color:{0}", _style)">
+                                    <h3 class="contentLock">
+                                        @locker.Name
+                                    </h3>
+                                </div>
+                            }
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".page_home").addClass("active");
+        });
+    </script>
+}

@@ -1,0 +1,191 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@model System.Data.DataTable
+
+@{
+    ViewBag.Title = "ReportTotalMoneyByCardGroupCAB2VCT";
+    var _dt = (System.Data.DataTable)ViewBag.dt;
+    double totalmoney = 0;
+}
+
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">BÁO CÁO DOANH THU BÃI XE MÁY THEO CA</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th style="text-align:center;font-weight:bold;" colspan="5">Số lượt xe vào</th>
+
+                    </tr>
+                    <tr>
+                        @*@if (_dt != null && _dt.Rows.Count > 0)
+                            {
+                                foreach (System.Data.DataRow drin in _dt.Rows)
+                                {
+                                    <th style="text-align: center;">@drin["CardGroupName"].ToString()</th>
+                                }
+
+                            }*@
+                        <th style="text-align: center;">
+                            Xe máy nhân viên
+                        </th>
+                        <th style="text-align: center;">
+                            Xe máy khách
+                        </th>
+                        <th style="text-align: center;">
+                            Xe đạp nhân viên
+                        </th>
+                        <th style="text-align: center;">
+                            Xe đạp khách
+                        </th>
+                        <th style="text-align: center;">
+                            Tổng số
+                        </th>
+                    </tr>
+                    <tr>
+                        @if (_dt != null && _dt.Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow drin in _dt.Rows)
+                            {
+                                <td style="text-align: center;">@drin["TotalVehicleIn"].ToString()</td>
+                            }
+
+                        }
+
+                        @*<td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>*@
+                    </tr>
+                    <tr class="headerSort">
+                        <th style="text-align:center;font-weight:bold;" colspan="5">Số lượt xe ra</th>
+                    </tr>
+                    <tr>
+                        @*@if (_dt != null && _dt.Rows.Count > 0)
+                            {
+                                foreach (System.Data.DataRow drin in _dt.Rows)
+                                {
+                                    <th style="text-align: center;">@drin["CardGroupName"].ToString()</th>
+                                }
+
+                            }*@
+                        <th style="text-align: center;">
+                            Xe máy nhân viên
+                        </th>
+                        <th style="text-align: center;">
+                            Xe máy khách
+                        </th>
+                        <th style="text-align: center;">
+                            Xe đạp nhân viên
+                        </th>
+                        <th style="text-align: center;">
+                            Xe đạp khách
+                        </th>
+                        <th style="text-align: center;">
+                            Tổng số
+                        </th>
+                    </tr>
+                    <tr>
+                        @if (_dt != null && _dt.Rows.Count > 0)
+                        {
+                            foreach (System.Data.DataRow drin in _dt.Rows)
+                            {
+                                <td style="text-align: center;">@drin["TotalVehicleOut"].ToString()</td>
+                            }
+
+                        }
+                        @*<td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>
+                            <td style="text-align: center;">100</td>*@
+                    </tr>
+
+                    <tr class="headerSort">
+                        <th style="text-align:center;" colspan="3">Chi tiết</th>
+                        <th style="text-align:center;" colspan="1">Số lượng</th>
+                        <th style="text-align:center;" colspan="1">Thành tiền</th>
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe máy khách thu 2.000đ (7h01 - 19h)</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[0]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[0]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[0]["Moneys"].ToString());}
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe máy khách thu 3.000đ (19h01 - 7h)</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[1]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[1]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[1]["Moneys"].ToString());}
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe đạp khách thu 1.000đ (7h01 - 19h)</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[2]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[2]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[2]["Moneys"].ToString());}
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe đạp khách thu 2.000đ (19h01 - 7h)</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[3]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[3]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[3]["Moneys"].ToString());}
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe máy quá giờ</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[4]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[4]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[4]["Moneys"].ToString());}
+                    </tr>
+                    <tr class="headerSort">
+                        <td style="text-align:left;padding-left:75px;" colspan="3">Số xe đạp quá giờ</td>
+                        <td style="text-align:center;" colspan="1">@Model.Rows[5]["VehicleName"].ToString()</td>
+                        <td style="text-align:center;color:red;" colspan="1">@Model.Rows[5]["Moneys"].ToString().FormatMoney() VNĐ</td>
+                        @{ totalmoney += Convert.ToDouble(@Model.Rows[5]["Moneys"].ToString());}
+                    </tr>
+
+                    @*<tr class="headerSort">
+                            <th style="text-align:center;" colspan="3" rowspan="2">Số xe quá giờ</th>
+                            <th style="text-align:center;" colspan="1">Số ngày</th>
+                            <th style="text-align:center;" colspan="1">Thành tiền</th>
+                        </tr>
+                        <tr class="headerSort">
+                            <td style="text-align:center;" colspan="3">50</td>
+                            <td style="text-align:center;" colspan="1">50</td>
+                            <td style="text-align:center;color:red;" colspan="1">5.000.000 VNĐ</td>
+                        </tr>*@
+                    <tr class="headerSort">
+                        <th style="text-align:left;padding-left:75px;font-weight:bold;" colspan="5">Tổng doanh thu: <span style="color:red;padding-left:330px;">@totalmoney.ToString().FormatMoney() VNĐ</span></th>
+                    </tr>
+                </thead>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+<script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

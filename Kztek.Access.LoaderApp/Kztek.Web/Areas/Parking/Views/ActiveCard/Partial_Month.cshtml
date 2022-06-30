@@ -1,0 +1,23 @@
+﻿@model List<Kztek.Model.CustomModel.iParking.ExtendModel>
+
+@if (Model != null && Model.Count > 0)
+{
+    @Html.Hidden("jsonMonth", (string)ViewBag.Json)
+    foreach (var item in Model)
+    {
+    <div class="col-md-3 col-xs-12 col-sm-12 divboxmd" id="@item.Id">
+        <span>@string.Format("{0} - {1}:", item.OldDate, item.NewDate)</span>
+        <div>
+            <input type="number" min="0" step="1000" class="form-control" onchange="ActiveCardController.ChangeDateMoney('@item.Id','1')" name="txtMoney" value="@item.Money" />
+        </div>
+        <span>Ngày tính doanh thu:</span>
+        <div class="input-group">
+            <input type="text" class="form-control" onchange="ActiveCardController.ChangeDateMoney('@item.Id','2')" name="txtDateM" placeholder="__/__/____" value="@item.Date" />
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+        
+    }
+}

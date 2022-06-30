@@ -1,0 +1,100 @@
+﻿@model Kztek.Model.Models.ExcelColumn
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="page-header">
+    <h1>
+        Thêm mới
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Create", "ExcelColumn", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("SaveAndCountinue", false)
+            @Html.Hidden("key", (string)ViewBag.keyValue)
+
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Menu </label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.DropDownListFor(n => n.MenuFunctionId, new SelectList(ViewBag.DDLMenu, "Id", "MenuName", ViewBag.parent), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.MenuFunctionId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Excel Column </label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextAreaFor(n => n.ColName, new { @class = "form-control", @placeholder = "Excel Column", @rows = "4" })
+                    @Html.ValidationMessageFor(n => n.ColName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+           
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Kích hoạt </label>
+                <div class="col-sm-6">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Active, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    Lưu
+                                </button>
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Lưu và thoát
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Nhập lại
+                                </button>
+                                <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+        });
+    </script>
+}

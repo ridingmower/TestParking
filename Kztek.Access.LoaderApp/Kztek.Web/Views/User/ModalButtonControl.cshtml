@@ -1,0 +1,89 @@
+﻿@model List<string>
+@using Kztek.Web.Core.Functions
+
+@{
+    var total = (int)ViewBag.totalItemValue;
+    var url = (string)ViewBag.urlValue;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryNoti = FunctionHelper.GetLocalizeDictionary("Home", "notification");
+    var DictionaryUser= FunctionHelper.GetLocalizeDictionary("User", "Index");
+}
+
+
+<div style="display:inline">
+    @DictionaryUser["selected"]: @Model.Count / @total
+
+    @if (Model.Count > 0)
+    {
+        <a href="javascript:void(0)" class="red" title="Xóa tất cả người dùng đã chọn" onclick="RemoveAllSelectedUser('@total', '@url')">
+            <i class="fa fa-remove"></i>
+        </a>
+    }
+</div>
+<div style="display:inline;margin-left:15px">
+    @DictionaryUser["Roles"]:
+    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.roles, itemValue = "Id", itemText = "RoleName", selectedValues = "", Modelname = "ddlrole", labelName = "-- Lựa chọn --" })
+    @Html.Hidden("roles")
+</div>
+<div style="display:inline;margin-left:15px">
+    <button type="button" class="btn btn-warning btn-sm btn-white btn-bold" onclick="AuthorizeUserSelected('@total', '@url')">
+        <i class="fa fa-check-square"></i>
+       @Dictionary["decentralization"]
+    </button>
+    @*<button type="button" class="btn btn-warning btn-sm btn-white btn-bold" onclick="LockUserSelected('@url')">
+            <i class="fa fa-lock"></i>
+            Khóa người dùng
+        </button>
+        <button type="button" class="btn btn-info btn-sm btn-white btn-bold" onclick="UnlockUserSelected('@url')">
+            <i class="fa fa-unlock"></i>
+            Mở người dùng
+        </button>
+        <button type="button" class="btn btn-danger btn-sm btn-white btn-bold" onclick="DeleteUserSelected('@url')">
+            <i class="fa fa-trash"></i>
+            Xóa người dùng
+        </button>*@
+</div>
+
+<input type="hidden" name="_nonSelectedText" value="@Dictionary["nonSelect"]" />
+<input type="hidden" name="_allSelectedText" value="@Dictionary["allSelect"]" />
+<input type="hidden" name="_nSelectedText" value="@Dictionary["nSelect"]" />
+<input type="hidden" name="_Role_User" value="@DictionaryNoti["Role_User"]" />
+
+<script>
+    $(function () {
+        var _nonSelectedText = $('input[name=_nonSelectedText]').val();
+        var _allSelectedText = $('input[name=_allSelectedText]').val();
+        var _nSelectedText = $('input[name=_nSelectedText]').val();
+
+        $('.multiselect').multiselect({
+            enableFiltering: true,
+            enableHTML: true,
+            nonSelectedText: _nonSelectedText,
+            allSelectedText: _allSelectedText,
+            nSelectedText: _nSelectedText,
+            numberDisplayed: 1,
+            enableCaseInsensitiveFiltering: true,
+            buttonClass: 'btn btn-white btn-primary',
+            templates: {
+                button: '<button type="button" class="multiselect dropdown-toggle" data-toggle="dropdown"><span class="multiselect-selected-text"></span> &nbsp;<b class="fa fa-caret-down"></b></button>',
+                ul: '<ul class="multiselect-container dropdown-menu"></ul>',
+                filter: '<li class="multiselect-item filter"><div class="input-group"><span class="input-group-addon"><i class="fa fa-search"></i></span><input class="form-control multiselect-search" type="text"></div></li>',
+                filterClearBtn: '<span class="input-group-btn"><button class="btn btn-default btn-white btn-grey multiselect-clear-filter" type="button"><i class="fa fa-times-circle red2"></i></button></span>',
+                li: '<li><a tabindex="0"><label></label></a></li>',
+                divider: '<li class="multiselect-item divider"></li>',
+                liGroup: '<li class="multiselect-item multiselect-group"><label></label></li>'
+            }
+        });
+
+        $('#ddlrole').change(function () {
+            var str = '';
+            var cmd = $(this);
+            cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                var _cmd = $(this);
+                str += _cmd.find('input[type=checkbox]').val() + ',';
+            });
+            $('#roles').val(str);
+        });
+
+    });
+</script>

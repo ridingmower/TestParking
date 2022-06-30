@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{28CDC5F9-A2FA-4D76-BC82-2312C9760B09}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Kztek.Model</RootNamespace>
+    <AssemblyName>Kztek.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.0.0\lib\netstandard1.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CustomModel\ActionModel.cs" />
+    <Compile Include="CustomModel\ADFS\ADFS_User.cs" />
+    <Compile Include="CustomModel\AdminLoginModel.cs" />
+    <Compile Include="CustomModel\ChartModel.cs" />
+    <Compile Include="CustomModel\DistrictModel.cs" />
+    <Compile Include="CustomModel\GetTotalItems.cs" />
+    <Compile Include="CustomModel\GridModel.cs" />
+    <Compile Include="CustomModel\iAccess\AccessControllerAPI.cs" />
+    <Compile Include="CustomModel\iAccess\CardUploadAPI.cs" />
+    <Compile Include="CustomModel\iAccess\Employee.cs" />
+    <Compile Include="CustomModel\IconModel.cs" />
+    <Compile Include="CustomModel\iLocker\UploadModel.cs" />
+    <Compile Include="CustomModel\iParking\ActiveCardCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\DynamicCardCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\Event\tblAlarm_Excel.cs" />
+    <Compile Include="CustomModel\iParking\tblCameraCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\tblCardViettel.cs" />
+    <Compile Include="CustomModel\iParking\tblControllerCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\tblCustomer_Excel.cs" />
+    <Compile Include="CustomModel\iParking\tblLaneCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\tblLEDCustomViewModel.cs" />
+    <Compile Include="CustomModel\iParking\tblPCCustomViewModel.cs" />
+    <Compile Include="CustomModel\MessageReport.cs" />
+    <Compile Include="CustomModel\Mobile\API_Card.cs" />
+    <Compile Include="CustomModel\Mobile\API_CardConvert.cs" />
+    <Compile Include="CustomModel\Mobile\API_EventInOut.cs" />
+    <Compile Include="CustomModel\Mobile\API_Lane.cs" />
+    <Compile Include="CustomModel\PageInfo.cs" />
+    <Compile Include="CustomModel\PageModel.cs" />
+    <Compile Include="CustomModel\PriceCustomViewModel.cs" />
+    <Compile Include="CustomModel\QuantityCustomViewModel.cs" />
+    <Compile Include="CustomModel\SelectListModel.cs" />
+    <Compile Include="CustomModel\TotalPaging.cs" />
+    <Compile Include="CustomModel\TotalPrice.cs" />
+    <Compile Include="Models\AccessEvent\tblAccessCardEvent.cs" />
+    <Compile Include="Models\API\tblCustomer_API_Log.cs" />
+    <Compile Include="Models\API\API_Auth.cs" />
+    <Compile Include="Models\API\API_CardInfo.cs" />
+    <Compile Include="Models\API\tblCardSubmitEvent.cs" />
+    <Compile Include="Models\API\API_QRCodeRequest.cs" />
+    <Compile Include="Models\API\API_SignalR_Connection.cs" />
+    <Compile Include="Models\API\API_User.cs" />
+    <Compile Include="Models\API\MN_License.cs" />
+    <Compile Include="Models\BM_Apartment.cs" />
+    <Compile Include="Models\BM_ApartmentEWPrice.cs" />
+    <Compile Include="Models\BM_ApartmentRole.cs" />
+    <Compile Include="Models\BM_Building_Service.cs" />
+    <Compile Include="Models\BM_Apartment_Member.cs" />
+    <Compile Include="Models\BM_Apartment_Receipt.cs" />
+    <Compile Include="Models\BM_Apartment_Service.cs" />
+    <Compile Include="Models\BM_Building.cs" />
+    <Compile Include="Models\BM_Floor.cs" />
+    <Compile Include="Models\BM_Resident.cs" />
+    <Compile Include="Models\BM_ResidentGroup.cs" />
+    <Compile Include="Models\BM_ApartmentUse.cs" />
+    <Compile Include="Models\CardCustom.cs" />
+    <Compile Include="Models\DynamicCard.cs" />
+    <Compile Include="Models\Event\PayIn.cs" />
+    <Compile Include="Models\Event\PublicEvent.cs" />
+    <Compile Include="Models\Event\tblAlarm.cs" />
+    <Compile Include="Models\Event\tblCardEvent.cs" />
+    <Compile Include="Models\Event\tblCardEventDelete.cs" />
+    <Compile Include="Models\Event\tblCardEventHistory.cs" />
+    <Compile Include="Models\Event\tblChangeEvent.cs" />
+    <Compile Include="Models\Event\tblDispenser.cs" />
+    <Compile Include="Models\Event\tblLoopEvent.cs" />
+    <Compile Include="Models\Event\tblPrintIndex.cs" />
+    <Compile Include="Models\Event\tblVoucher.cs" />
+    <Compile Include="Models\ExcelColumn.cs" />
+    <Compile Include="Models\LockerEvent\tblLockerAlarm.cs" />
+    <Compile Include="Models\LockerEvent\tblLockerEvent.cs" />
+    <Compile Include="Models\MenuFunction.cs" />
+    <Compile Include="Models\MenuFunctionConfig.cs" />
+    <Compile Include="Models\MultipleLanesMap.cs" />
+    <Compile Include="Models\OrderActiveCard.cs" />
+    <Compile Include="Models\OrderInfo.cs" />
+    <Compile Include="Models\Payment\tblEventPayment.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RoleMenu.cs" />
+    <Compile Include="Models\SelfHostConfig.cs" />
+    <Compile Include="Models\SystemRecord.cs" />
+    <Compile Include="Models\tblAccessCamera.cs" />
+    <Compile Include="Models\tblAccessController.cs" />
+    <Compile Include="Models\tblAccessControllerGroup.cs" />
+    <Compile Include="Models\tblAccessControllerMemory.cs" />
+    <Compile Include="Models\tblAccessDoor.cs" />
+    <Compile Include="Models\tblAccessLevel.cs" />
+    <Compile Include="Models\tblAccessLevelDetail.cs" />
+    <Compile Include="Models\tblAccessLine.cs" />
+    <Compile Include="Models\tblAccessPC.cs" />
+    <Compile Include="Models\tblAccessTimezone.cs" />
+    <Compile Include="Models\tblAccessUploadDetail.cs" />
+    <Compile Include="Models\tblAccessUploadProcess.cs" />
+    <Compile Include="Models\ExtendCard.cs" />
+    <Compile Include="Models\tblActiveCard.cs" />
+    <Compile Include="Models\tblBlackList.cs" />
+    <Compile Include="Models\tblCamera.cs" />
+    <Compile Include="Models\tblCard.cs" />
+    <Compile Include="Models\tblCardGroup.cs" />
+    <Compile Include="Models\tblCardProcess.cs" />
+    <Compile Include="Models\tblCompartment.cs" />
+    <Compile Include="Models\tblController.cs" />
+    <Compile Include="Models\tblCustomer.cs" />
+    <Compile Include="Models\tblCustomerGroup.cs" />
+    <Compile Include="Models\tblDiscountParking.cs" />
+    <Compile Include="Models\tblFee.cs" />
+    <Compile Include="Models\tblFtpAccount.cs" />
+    <Compile Include="Models\tblGate.cs" />
+    <Compile Include="Models\tblLane.cs" />
+    <Compile Include="Models\tblLED.cs" />
+    <Compile Include="Models\tblLocker.cs" />
+    <Compile Include="Models\tblLockerController.cs" />
+    <Compile Include="Models\tblLockerLine.cs" />
+    <Compile Include="Models\tblLockerPC.cs" />
+    <Compile Include="Models\tblLockerProcess.cs" />
+    <Compile Include="Models\tblLockerRegister.cs" />
+    <Compile Include="Models\tblLockerSelfHost.cs" />
+    <Compile Include="Models\tblLog.cs" />
+    <Compile Include="Models\tblPC.cs" />
+    <Compile Include="Models\tblRole.cs" />
+    <Compile Include="Models\tblRolePermissionMaping.cs" />
+    <Compile Include="Models\tblSubCard.cs" />
+    <Compile Include="Models\tblSubSystem.cs" />
+    <Compile Include="Models\tblSystemConfig.cs" />
+    <Compile Include="Models\tblUser.cs" />
+    <Compile Include="Models\tblUserJoinRole.cs" />
+    <Compile Include="Models\tblVehicleGroup.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\User_AuthGroup.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="FunctionHelper\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

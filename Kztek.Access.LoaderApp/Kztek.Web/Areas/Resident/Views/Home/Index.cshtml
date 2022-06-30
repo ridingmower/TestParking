@@ -1,0 +1,22 @@
+﻿@model Kztek.Model.CustomModel.SelectListModel
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions;
+@{
+    ViewBag.Title = "Home Page";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+
+
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".page_home").addClass("active");
+
+
+        });
+    </script>
+}

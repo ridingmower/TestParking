@@ -1,0 +1,203 @@
+﻿@model Kztek.Model.Models.tblCustomer
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Create";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCustomer", "Create");
+    var DictionaryUpdate = FunctionHelper.GetLocalizeDictionary("tblCustomer", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Create", "tblCustomer", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.Hidden("SaveAndCountinue", false)
+        @Html.Hidden("key", (string)ViewBag.keyValue)
+        @Html.Hidden("customergroup", (string)ViewBag.customergroupValue)
+        @Html.Hidden("customerstatus", (string)ViewBag.customerstatusValue)
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a data-toggle="tab" href="#customer">
+                        <i class="green ace-icon fa fa-user bigger-120"></i>
+                        @Dictionary["CustomerTab"]
+                    </a>
+                </li>
+
+                @*<li>
+                        <a data-toggle="tab" href="#messages">
+                            <i class="red ace-icon fa fa-credit-card bigger-120"></i>
+                            Thẻ
+                        </a>
+                    </li>*@
+            </ul>
+
+            <div class="tab-content">
+                <div id="customer" class="tab-pane fade in active">
+                    <div class="col-xs-8">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerCode"] <span class="error">*</span></label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.CustomerCode, new { @class = "form-control", @placeholder = Dictionary["CustomerCode"] })
+                                @Html.ValidationMessageFor(n => n.CustomerCode, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerName"]  </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.CustomerName, new { @class = "form-control", @placeholder = Dictionary["CustomerName"] })
+                                @Html.ValidationMessageFor(n => n.CustomerName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerIdentify"]  </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.IDNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.IDNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerMobile"]  </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.Mobile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerGroup"]  </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.DropDownListFor(n => n.CustomerGroupID, new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText"), new { @class = "form-control chosen-select" })
+                                @Html.ValidationMessageFor(n => n.CustomerGroupID, "", new { @class = "text-danger" })
+                            </div>
+                            @if ((bool)ViewBag.IsCompartment)
+                            {
+                                <label class="col-sm-2 control-label-left no-padding-right"> @DictionaryUpdate["Compartment"] </label>
+                                <div class="col-sm-3 col-xs-12">
+                                    @Html.DropDownListFor(n => n.CompartmentId, new SelectList(ViewBag.Compartments, "ItemValue", "ItemText"), "Lựa chọn",new { @class = "form-control chosen-select" })
+                                  
+                                </div>
+                            }
+
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerAddress"]  </label>
+                            <div class="col-sm-8 col-xs-12">
+                                @Html.TextAreaFor(n => n.Address, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Address, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerAllowAccess"] </label>
+                            <div class="col-sm-6 col-xs-12">
+                                <label class="line-height-250">
+                                    @Html.CheckBoxFor(n => n.EnableAccount, new { @class = "ace" })
+                                    <span class="lbl"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerUsername"]  </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(n => n.Account, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.Account, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerPassword"] </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @type = "password" })
+                                @Html.ValidationMessageFor(n => n.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> Nhập lại mật khẩu </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextBox("RePassword", "", new { @class = "form-control", @type = "password" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["CustomerAvatar"] </label>
+                            <div class="col-sm-8 col-xs-12">
+                                <div id="BoxRenderFile">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="clear:both"></div>
+                </div>
+
+                @*<div id="messages" class="tab-pane fade">
+                        <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid.</p>
+                    </div>*@
+            </div>
+        </div>
+        <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+            <div class="btn btn-app btn-xs btn-warning ace-settings-btn open" id="ace-settings-btn">
+                <i class="ace-icon fa fa-cog bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                <!-- /.pull-left -->
+                <div class="bg-rightbox">
+                    <div class="clearfix lineButton">
+                        <div class="col-md-12 input-group">
+                            <button class="btn btn-success" type="submit" id="Countinue">
+                                <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                @DictionaryAction["Save"]
+                            </button>
+                            <button class="btn btn-info" type="submit" id="BackToList">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                @DictionaryAction["SaveAndExit"]
+                            </button>
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                @DictionaryAction["Reset"]
+                            </button>
+                            <a href="@Url.Action("Index", new { key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue })" class="btn btn-yellow">
+                                <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                @DictionaryAction["BackToList"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.pull-left -->
+            </div><!-- /.ace-settings-box -->
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Ext/FileUploadController.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+            $("#BackToList").click(function () {
+                $("#SaveAndCountinue").val('false');
+            });
+
+            //Vị trí upload avatar
+            FileUploadController.init("BoxRenderFile", "FileUpload", "", "");
+        });
+    </script>
+}

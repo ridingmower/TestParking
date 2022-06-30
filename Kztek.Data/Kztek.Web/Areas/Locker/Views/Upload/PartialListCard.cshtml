@@ -1,0 +1,54 @@
+﻿@using Kztek.Model.CustomModel
+
+@model PageModel<Kztek.Model.Models.tblCardExtend>
+
+@{
+    var selectedCard = (List<string>)ViewBag.selectedCard;
+}
+
+@if (Model != null && Model.Data.Any())
+{
+    @Html.Hidden("pageTotal", Model.TotalPage)
+    @Html.Hidden("totalItem", Model.TotalItem)
+    @Html.Hidden("selectedItem", selectedCard.Count)
+
+    var count = (Model.PageIndex - 1) * Model.PageSize;
+
+    foreach (var item in Model.Data)
+    {
+        var selected = selectedCard.Any(n => n == item.CardNumber);
+
+        count++;
+
+        <tr class="@string.Format("{0}", selected ? "info" : "")" id="@string.Format("TR_{0}", item.CardNumber)">
+            <td class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" id="@item.CardNumber.ToString()" name="Id" value="@item.CardNumber.ToString()" class="ace chkCheckCard" @string.Format("{0}", selected ? "checked" : "") />
+                    <span class="lbl"></span>
+                </label>
+            </td>
+
+            <td class="text-left">
+                <p>Thẻ: <strong>@item.CardNumber<span> - @item.CardNo</span></strong></p>
+                <p>Nhóm thẻ: @item.CardGroupName</p>
+                <p>Khách hàng: <strong>@item.CustomerName</strong></p>
+                <p>Nhóm KH: @item.CustomerGroupName</p>
+            </td>
+
+            <td class="text-left">
+                <a href="javascript:void(0)" class="btnEditLocker" idata="@Newtonsoft.Json.JsonConvert.SerializeObject(item)">
+                    @item.LockerInfo
+                </a>
+            </td>
+        </tr>
+    }
+}
+else
+{
+    @Html.Hidden("pageTotal", 0)
+    @Html.Hidden("totalItem", 0)
+    @Html.Hidden("selectedItem", 0)
+}
+
+
+

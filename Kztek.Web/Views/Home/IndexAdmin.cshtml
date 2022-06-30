@@ -1,0 +1,339 @@
+﻿@model List<Kztek.Model.Models.MenuFunctionConfig>
+
+@{
+    ViewBag.Title = "IndexAdmin";
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+
+    var objConfig = (Kztek.Model.Models.tblSystemConfig)ViewBag.SystemConfigValue;
+}
+
+<style>
+    .table-fixed thead {
+        width: 100%;
+    }
+
+    .table-fixed tbody {
+        height: 400px;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+    .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
+        display: block;
+    }
+
+        .table-fixed tbody td, .table-fixed thead > tr > th {
+            float: left;
+            border-bottom-width: 0;
+        }
+</style>
+
+<div class="row">
+    <div class="col-xs-5">
+        <h3 class="header smaller lighter blue">Thông tin hệ thống</h3>
+        <div>
+            @if (objConfig != null)
+            {
+                <p>Tên công ty: <strong>@objConfig.Company</strong> </p>
+                <p>Tên biểu phí: <strong>@objConfig.FeeName</strong></p>
+
+                <p>
+                    <label>
+                        <input class="ace" type="checkbox" name="chkAuthInView" @string.Format("{0}", objConfig.isAuthInView ? "checked" : "") onclick="AuthInView()" />
+                        <span class="lbl">Phân quyền nhóm thẻ</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input class="ace" type="checkbox" name="chkAutoCapture" @string.Format("{0}", objConfig.IsAutoCapture ? "checked" : "") onclick="AutoCapture()" />
+                        <span class="lbl">Chụp ảnh tự động</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input class="ace" type="checkbox" name="chkCompartment" @string.Format("{0}", objConfig.isCompartment ? "checked" : "") onclick="UseCompartment()" />
+                        <span class="lbl">Sử dụng thông tin căn hộ</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input class="ace" type="checkbox" name="chkDisplay" @string.Format("{0}", objConfig.IsDisplay ? "checked" : "") onclick="PermitShow()" />
+                        <span class="lbl">Hiện thị nút mở thẻ và khóa thẻ</span>
+                    </label>
+                </p>
+                <p>
+                    <label>
+                        <input class="ace" type="checkbox" name="chkHideEventOut" @string.Format("{0}", objConfig.IsHideEventOut ? "checked" : "") onclick="HideEventOut()" />
+                        <span class="lbl">Ẩn sự kiện ra</span>
+                    </label>
+                </p>
+            }
+        </div>
+
+        <h3 class="header smaller lighter blue">Upload file</h3>
+        <div>
+            <input type="file" id="id-input-file-2" />
+            <button class="btn btn-sm btn-success" onclick="uploadFile()">
+                <i class="fa fa-upload"></i>
+                Upload file
+            </button>
+        </div>
+        <h3 class="header smaller lighter blue">History</h3>
+        <div id="boxHistory">
+            <table class="table table-fixed">
+                <thead>
+                    <tr>
+                        <th class="col-xs-3">
+                            Tên file
+                        </th>
+                        <th class="col-xs-3">
+                            Mô tả
+                        </th>
+                        <th class="col-xs-3">
+                            Ngày cập nhật
+                        </th>
+                        <th class="col-xs-3">
+                            Máy tính
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @Html.Action("History", "Home")
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-xs-7">
+        <h3 class="header smaller lighter blue">Danh mục hệ thống</h3>
+        <div style="margin-bottom:10px">
+            <button type="button" class="btn btn-sm btn-success" onclick="saveConfig()">
+                <i class="fa fa-save bigger-120"></i>
+                Cập nhật thay đổi
+            </button>
+        </div>
+        <div style="overflow-y:scroll;height:500px;position:relative">
+            <div id="boxMenuFunction">
+                @Html.Action("MenuFunctionList", "Home", new { selected = Model })
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function AuthInView() {
+          
+            $.ajax({
+                url: '/Home/AuthInView',
+                data: { isAuthInView: $("input[name=chkAuthInView]").is(":checked") },
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                }
+            });
+        }
+        function PermitShow() {
+            ;
+            $.ajax({
+                url: '/Home/Display',
+                data: { isDisplay: $("input[name=chkDisplay]").is(":checked") },
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+                          
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                }
+            });
+        }
+        function HideEventOut() {
+            ;
+            $.ajax({
+                url: '/Home/HideEventOut',
+                data: { IsHideEventOut: $("input[name=chkHideEventOut]").is(":checked") },
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                }
+            });
+        }
+        function AutoCapture() {
+
+            $.ajax({
+                url: '/Home/AutoCapture',
+                data: { isAutoCapture: $("input[name=chkAutoCapture]").is(":checked") },
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+                       
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                }
+            });
+        }
+
+        function loadDataMenuFunction() {
+            $.ajax({
+                type: "GET",
+                url: "/Home/MenuFunctionList",
+                data: { selected: '@Model' },
+                success: function (data) {
+                    $("#boxMenuFunction").html('');
+                    $("#boxMenuFunction").html(data);
+
+                    $(".showButton").click(function () {
+                        var cmd = $(this);
+                        cmd.parent().find('ul li span.showButton').parent().parent().toggle();
+                    });
+
+                    //Check box
+                    $(".chkCheckBox").click(function () {
+                        var cmd = $(this);
+                        cmd.parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+                    });
+                }
+            });
+        }
+
+        function loadDataHistory() {
+            $.ajax({
+                type: "GET",
+                url: "/Home/History",
+                data: { },
+                success: function (data) {
+                    $("#boxHistory tbody").html('');
+                    $("#boxHistory tbody").html(data);
+                }
+            });
+        }
+
+        function uploadFile() {
+            var myFile = $('#id-input-file-2').prop('files');
+
+            var formdata = new FormData();
+
+            if (myFile !== null) {
+                for (i = 0; i < myFile.length; i++) {
+                    //Appending each file to FormData object
+                    //formdata.append(myFile[i].name, myFile[i]);
+                    formdata.append("UploadedFile", myFile[0]);
+                }
+            }
+
+            $.ajax({
+                url: '/Home/UploadFileUpdate',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                type: 'POST',
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+
+                        $('#id-input-file-2').val('');
+
+                        loadDataMenuFunction();
+                        loadDataHistory();
+
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                },
+                error: function (errorData) {
+
+                }
+            });
+        }
+
+        function saveConfig() {
+            if (confirm('Bạn chắc chắn muốn cho đơn vị sử dụng các chức năng này?')) {
+                var str = [];
+
+                $("input[name='chkCheckBox']").each(function () {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+                    if ($(this).is(":checked")) {
+                        str.push(id);
+                    }
+                });
+
+                $.ajax({
+                    url: '/Home/saveNewConfig',
+                    data: { str: str },
+                    type: 'json',
+                    //async:false,
+                    success: function (data) {
+                        if (data.isSuccess) {
+                            toastr.success(data.Message);
+                        } else {
+                            toastr.error(data.Message);
+                        }
+                    }
+                });
+            }
+        }
+
+        function UseCompartment() {
+
+            $.ajax({
+                url: '/Home/UseCompartment',
+                data: { isCompartment: $("input[name=chkCompartment]").is(":checked") },
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        toastr.success(data.Message);
+                    } else {
+                        toastr.error(data.Message);
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $(".showButton").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.showButton').parent().parent().toggle();
+            });
+
+            //Check box
+            $(".chkCheckBox").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            $('#id-input-file-2').ace_file_input({
+                no_file: 'No File ...',
+                btn_choose: 'Choose',
+                btn_change: 'Change',
+                droppable: false,
+                onchange: null,
+                thumbnail: false //| true | large
+                //whitelist:'gif|png|jpg|jpeg'
+                //blacklist:'exe|php'
+                //onchange:''
+                //
+            });
+
+
+        });
+    </script>
+}
+

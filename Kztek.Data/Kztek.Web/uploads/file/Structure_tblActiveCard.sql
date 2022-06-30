@@ -1,0 +1,4 @@
+﻿IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'tblActiveCard' AND COLUMN_NAME = 'CardNo')
+BEGIN
+	ALTER TABLE tblActiveCard ADD CardNo nvarchar(50) not null default('')
+END

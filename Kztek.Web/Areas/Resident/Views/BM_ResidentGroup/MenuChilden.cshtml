@@ -1,0 +1,50 @@
+﻿@model List<Kztek.Model.Models.BM_ResidentGroup>
+
+@{
+    var list = (List<Kztek.Model.Models.BM_ResidentGroup>)ViewBag.ListMenu;
+
+    string selected = (string)ViewBag.selectedIdValue;
+}
+@if (Model.Any())
+{
+    <style>
+        .submenu1 {
+            display: none;
+        }
+    </style>
+
+    <ul style="list-style-type:none;" class="submenu1">
+
+        @foreach (var item in Model)
+        {
+            var child = list.Where(n => n.ParentId.Equals(item.Id.ToString())).ToList();
+            <li>
+                <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item.Id.ToString()" />
+                <span class="showButton lbl" style="">
+                    @if (selected == item.Id.ToString())
+                    {
+                        <span class="label label-info">
+                            <span>@item.Ordering</span>. @item.Name
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            <span>@item.Ordering</span>. @item.Name
+                        </span>
+                    }
+                </span>
+                <span>
+                    <a href="@Url.Action("Update", new { id = item.Id.ToString() })">
+                        <i class="ace-icon fa fa-pencil-square-o"></i>
+                    </a>
+                </span>
+                @if (child.Any())
+                {
+                    @Html.Action("MenuChilden", "BM_ResidentGroup", new { childList = child, AllList = list, selectedId = selected })
+                }
+            </li>
+        }
+
+    </ul>
+}

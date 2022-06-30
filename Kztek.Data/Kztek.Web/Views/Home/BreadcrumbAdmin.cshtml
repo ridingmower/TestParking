@@ -1,0 +1,35 @@
+﻿@model List<Kztek.Model.CustomModel.SelectListModel2>
+
+@{
+    string action = (string)ViewBag.Action;
+    string controller = (string)ViewBag.Controller;
+}
+
+<ul class="breadcrumb">
+
+
+    @if (controller != "Home")
+    {
+        <li>
+            <i class="ace-icon fa fa-cog home-icon"></i>
+            <a href="javascrip:void(0)">Hệ thống</a>
+        </li>
+
+        <li>
+            <a href="@string.Format("/{0}/Index", controller)">@string.Format("{0}", controller == "UserAdmin" ? "Người dùng" : "Vai trò")</a>
+        </li>
+
+        if (action != "Index")
+        {
+            <li class="active">@string.Format("{0}",action.Equals("Create") ? "Thêm mới" : "Cập nhật")</li>
+        }
+    }
+    else
+    {
+        <li>
+            <i class="ace-icon fa fa-home home-icon"></i>
+            <a href="@Url.Action("IndexAdmin","Home")">Bàn làm việc</a>
+        </li>
+    }
+
+</ul><!-- /.breadcrumb -->

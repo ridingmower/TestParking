@@ -1,0 +1,48 @@
+﻿@model List<Kztek.Model.Models.MenuFunction>
+
+@{
+    string selected = (string)ViewBag.Selected;
+}
+
+@if (Model.Any())
+{
+    var count = 0;
+    <ul class="treeCustom">
+        @foreach (var item in Model.OrderBy(n => n.OrderNumber))
+        {
+            count++;
+            if (selected.Contains(item.Id.ToString()))
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" checked />
+                        <strong class="lbl" style="font-weight:bold;"> </strong>
+                    </label>
+                    <span class="liMenuFunction" style="font-weight: bold;">
+                        @item.MenuName
+                    </span>
+                    <span class="pull-right">
+                        @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+                    </span>
+                    @Html.Action("Child", new { parentId = item.Id.ToString(), selectedId = selected, gId = ViewBag.gIdValue })
+                </li>
+            }
+            else
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" />
+                        <strong class="lbl" style="font-weight:bold;"></strong>
+                    </label>
+                    <span class="liMenuFunction" style="font-weight: bold;">
+                        @item.MenuName
+                    </span>
+                    <span class="pull-right">
+                        @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+                    </span>
+                    @Html.Action("Child", new { parentId = item.Id.ToString(), selectedId = selected, gId = ViewBag.gIdValue })
+                </li>
+            }
+        }
+    </ul>
+}

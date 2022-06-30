@@ -1,0 +1,227 @@
+﻿@model Kztek.Model.Models.tblSystemConfig
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Core.Functions
+@{
+    ViewBag.Title = "Tham số hệ thống";
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblSystemConfig", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Index", "tblSystemConfig", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="col-sm-2 control-label-left no-padding-right"> @Dictionary["Company"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Company, new { @class = "form-control", @placeholder = @Dictionary["Company"] })
+                    @Html.ValidationMessageFor(n => n.Company, "", new { @class = "text-danger" })
+                    @Html.Hidden("group", groupID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Tel"] </label>
+                <div class="col-md-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.Tel, new { @class = "form-control", @placeholder = @Dictionary["Tel"] })
+                    @Html.ValidationMessageFor(n => n.Tel, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-md-1 control-label no-padding-right"> @Dictionary["Fax"]  </label>
+                <div class="col-md-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.Fax, new { @class = "form-control", @placeholder = @Dictionary["Fax"] })
+                    @Html.ValidationMessageFor(n => n.Fax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Tax"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Tax, new { @class = "form-control", @placeholder = @Dictionary["Tax"] })
+                    @Html.ValidationMessageFor(n => n.Tax, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Address"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextAreaFor(n => n.Address, new { @class = "form-control", @placeholder = @Dictionary["Address"], @rows = "5" })
+                    @Html.ValidationMessageFor(n => n.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["FeeName"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.FeeName, new { @class = "form-control", @placeholder = @Dictionary["FeeName"] })
+                    @Html.ValidationMessageFor(n => n.FeeName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Logo"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Logo, new { @class = "form-control", @placeholder = @Dictionary["Logo"] })
+                    @Html.ValidationMessageFor(n => n.Logo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["DelayTime"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.DelayTime, new { @class = "form-control", @placeholder = @Dictionary["DelayTime"] })
+                    @Html.ValidationMessageFor(n => n.DelayTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Para1"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Para1, new { @class = "form-control", @placeholder = "P1(MS)" })
+                    @Html.ValidationMessageFor(n => n.Para1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> @Dictionary["Para2"]  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Para2, new { @class = "form-control", @placeholder = "P2(KH)" })
+                    @Html.ValidationMessageFor(n => n.Para2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> Default  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.CustomInfo, new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> Background Login  </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.Background, new { @class = "form-control" })
+                    <input type="file" name="FileUpload" id="FileUpload" />
+                    @{
+                        if (!string.IsNullOrEmpty(Model.Background))
+                        {
+                            <img src="@Model.Background.ImagePathThumb(150,150))" width="100" />
+                        }
+                    }
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> Đường dẫn ảnh </label>
+                <div class="col-md-5 col-xs-12">
+                    @Html.TextBoxFor(n => n.FolderPic, new { @class = "form-control", @placeholder = "Đường dẫn ảnh" })
+                    @Html.ValidationMessageFor(n => n.FolderPic, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            @*<div class="form-group">
+                <label class="col-md-2 control-label-left no-padding-right"> STT </label>
+                <div class="col-md-1 col-xs-12">
+                    @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "Số thứ tự" })
+                    @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.EnableDeleteCardFailed, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["EnableDeleteCardFailed"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.EnableSoundAlarm, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["EnableSoundAlarm"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.EnableAlarmMessageBox, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["EnableAlarmMessageBox"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.EnableAlarmMessageBoxIn, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["EnableAlarmMessageBoxIn"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.isCompartment, new { @class = "ace" })
+                        <span class="lbl"> Hiện thị căn hộ </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsSaveButton, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["SaveEventButton"] </span>
+                    </label>
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.AlwaysOpenBarrierIn, new { @class = "ace" })
+                        <span class="lbl">Luôn mở barrier lối vào</span>
+                    </label>
+                </div>
+            </div>*@
+            @*<div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"></label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.isRememberPasswordApp, new { @class = "ace" })
+                        <span class="lbl">Lưu mật khẩu đăng nhập App</span>
+                    </label>
+                </div>
+            </div>*@
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-4 col-md-8 input-group">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        @DictionaryAction["Save"]
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+        });
+    </script>
+}
+

@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "Gia hạn thẻ";
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-md-2 col-xs-12 divboxmd">
+        Từ khóa:
+        <input type="text" name="key" value="" placeholder="Mã thẻ hoặc mã khách hàng..." class="form-control" />
+    </div>
+    <div class="col-md-2 col-xs-12 divboxmd">
+            Từ ngày:
+            @Html.TextBox("fromdate", "", new { @class = "form-control daterangnoautopicker" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Đến ngày:
+            @Html.TextBox("todate", "", new { @class = "form-control daterangnoautopicker" })
+        </div>
+    <div class="col-md-2 col-xs-12 divboxmd">
+        Nhóm thẻ:
+        @Html.DropDownList("cardgroups", new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName"), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+    </div>
+    <div class="col-md-3 col-xs-12 divboxmd">
+        Nhóm khách hàng:
+        @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText"), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+    </div>
+
+    <div class="col-md-3 col-xs-12 divboxmd line-height-450" style="margin-top:14px;">
+        <button class="btn btn-sm btn-primary" type="button" onclick="SearchListCard()">
+            <i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm
+        </button>
+
+        @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ActiveCardTRANSERCO" })
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        Gia hạn mới:
+        <div class="input-group">
+            @Html.TextBox("datenewextendfrompicker", "", new { @class = "form-control daterangpicker", @style = "border-left: 3px solid #337ab7;" })
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        Mức phí:
+        @Html.TextBox("newfeelevel", "", new { @class = "form-control", @Value = 0, @style = "border-left: 3px solid #337ab7;" })
+    </div>
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        <label class="line-height-380">
+            @Html.CheckBox("isAllowNegativeDays", false, new { @class = "ace" })
+            <span class="lbl"> Cho phép gia hạn âm ngày </span>
+        </label>
+    </div>
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        <label class="line-height-380">
+            @Html.CheckBox("isTransferPayment", false, new { @class = "ace" })
+            <span class="lbl"> Chuyển khoản </span>
+        </label>
+    </div>
+</div>
+
+@*<div class="row">
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            Ngày hoạt động mới:
+            <div class="input-group">
+                @Html.TextBox("datenewactivefrompicker", "", new { @class = "form-control daterangnoautopicker", @style = "border-left: 3px solid #337ab7;" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>*@
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-md-6 col-xs-12" id="boxCards">
+        <div class="form-group">
+            <input type="text" name="txtAnotherKey" id="txtAnotherKey" class="form-control" value="" placeholder="Từ khóa tìm kiếm" onkeyup="SearchInFromList()" />
+        </div>
+        <div class="divOver">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" id="chkCheckALL" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th class="text-left" idata="STT"> STT <i class=""></i></th>
+                        <th class="text-left" idata="Card"> CardNo <i class=""></i></th>
+                        <th class="text-left" idata="Card">Mã thẻ <i class=""></i></th>
+                        <th class="text-left" idata="DateExpire"> Ngày hết hạn <i class=""></i></th>
+                        <th class="text-left">Phương tiện</th>
+                        <th class="text-left" idata="Customer">Khách hàng <i class=""></i></th>
+                        <th class="text-left" idata="CustomerGroup">Nhóm khách hàng <i class=""></i></th>
+
+                        <th class="text-left" idata="CardGroup"> Nhóm thẻ <i class=""></i></th>
+
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="col-xs-5">
+            <span class="pull-left pagination">Trang: <span id="pageIndex">0</span> / <span id="pageCount">0</span> - Số bản ghi: <span class="numberCard">0</span></span>
+        </div>
+        <div class="col-xs-7">
+            <div id="pagination" class="pull-right"></div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="clearfix form-actions" style="padding:0;">
+            <button class="btn btn-lg btn-success" type="button" onclick="ExtendAllCard()">
+                <strong>GIA HẠN <span class="numberCard">0</span> THẺ</strong>
+            </button>
+        </div>
+    </div><!-- /.span -->
+    <div class="col-md-6 col-xs-12" id="boxExtendCards">
+        <div class="form-group line-height-250">
+            Số thẻ đã chọn: <span class="numberExtendCard">0</span>
+        </div>
+        <div class="divOver">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th class="text-left" idata="STT"> STT <i class=""></i></th>
+                        <th class="text-left" idata="Card"> CardNo <i class=""></i></th>
+                        <th class="text-left" idata="Card">Mã thẻ <i class=""></i></th>
+                        <th class="text-left" idata="DateExpire">Ngày hết hạn <i class=""></i></th>
+                        <th class="text-left">Phương tiện</th>
+                        <th class="text-left">Chuyển khoản</th>
+                        <th class="text-left" idata="Customer">Khách hàng <i class=""></i></th>
+                        <th class="text-left" idata="CustomerGroup">Nhóm khách hàng <i class=""></i></th>
+
+
+                        <th class="text-left" idata="CardGroup">Nhóm thẻ <i class=""></i></th>
+
+                        <th class="center">
+                            <button type="button" class="btn btn-sm btn-danger" onclick="RemoveAllExtendCard()">
+                                <i class="fa fa-trash bigger-110" aria-hidden="true"></i>
+                                Xóa tất
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="col-xs-12">
+            <strong class="error">Vui lòng chọn thẻ muốn gia hạn</strong>
+        </div>
+        <div style="clear:both"></div>
+        <div class="clearfix form-actions" style="padding:0;margin-top: 9.3%">
+            <button class="btn btn-lg btn-warning" type="button" onclick="ExtendCards()">
+                <strong>GIA HẠN <span class="numberExtendCard">0</span> THẺ</strong>
+            </button>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.twbsPagination.js"></script>
+
+    <script src="~/Areas/Parking/Scripts/ActiveCardTRANSERCOController.js"></script>
+    <script>
+        $(document).ready(function () {
+            //
+            $('#cardgroups').change(function () {
+                var id = $(this).val();
+
+                $.ajax({
+                    url: _prefixParkingDomain + '/ActiveCardTRANSERCO/FillFee',
+                    data: { id: id },
+                    type: 'json',
+                    //async: true,
+                    success: function (data) {
+                        if (data != "") {
+                            $('#newfeelevel').val(data);
+                        }
+
+                        //$("#newfeelevel").mask("000.000.000.000.000", { reverse: true });
+                    }
+                });
+            });
+
+            //
+            $("#chkCheckALL").click(function () {
+                var str = "";
+                $("#boxCards table > tbody").find("tr").each(function () {
+                    var cmd = $(this);
+                    var chk = cmd.find(".chkCheck");
+                    if (chk.is(":checked")) {
+                        var id = chk.val();
+
+                        str += id + ";";
+                    }
+                });
+
+                ActiveCardTRANSERCOController.addListExtendCard(str);
+            });
+
+            $("#newfeelevel").mask("000.000.000.000.000", { reverse: true });
+
+            //
+            $('input[name=datenewactivefrompicker]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY'));
+            });
+
+            $('input[name=fromdate],input[name=todate]').on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('DD/MM/YYYY'));
+            });
+        });
+    </script>
+}

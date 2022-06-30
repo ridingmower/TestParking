@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Futech.Model.Models.devGate>
+
+<div class="input-group">
+    @Html.DropDownList("gateID", new SelectList(Model, "ID", "GateName", ViewBag.SelectedGate), "-- Chọn cổng --", new { @class = "form-control" })
+    <span class="input-group-btn">
+        <button class="btn btn-sm btn-primary" type="button" onclick="OpenModalGate()">
+            <i class="ace-icon fa fa-plus bigger-110"></i>
+        </button>
+    </span>
+</div>
+@Html.Action("ModalGateQuickCreate", "CommonUse")

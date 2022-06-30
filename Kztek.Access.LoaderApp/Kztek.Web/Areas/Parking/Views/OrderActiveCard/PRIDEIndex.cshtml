@@ -1,0 +1,214 @@
+﻿
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.OrderActiveCard_Custom>
+
+@{
+    ViewBag.Title = "Danh sách hóa đơn";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var totalmoney = (double)ViewBag.TotalMoney;
+}
+<style>
+    .trItem {
+        cursor: pointer;
+    }
+</style>
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+@using (Html.BeginForm("PRIDEIndex", "OrderActiveCard", FormMethod.Get, new { id = "frmOrderActiveCard" }))
+{
+    <div class="row">
+
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ khóa
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm KH:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.customergroups, "ItemValue", "ItemText", ViewBag.customergroupidsValue), "--Chọn nhóm--", new { @class = "form-control chosen-select" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm thẻ:
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.cardgroups, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.cardgroupidsValue, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 divboxmd line-height-450" style="margin-top:14px;">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })
+        
+            <a href="@Url.Action("PRIDEIndex", controller)" class="btn btn-primary btn-white btn-bold" type="submit">
+                <i class="fa fa-refresh green" aria-hidden="true"></i>
+                Reset
+            </a>
+        </div>
+    </div>
+}
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover" id="lpOrderPRIDE">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="50">STT </th>
+                    <th class="center"> Địa chỉ KH </th>
+                    <th class="center"> Số thẻ </th>
+                    <th class="center"> Biển số </th>
+                    <th class="center" width="230"> Ngày tạo </th>
+                    <th class="center" width="100"> Tổng tiền </th>
+                    <th class="center" width="80"> In </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr class="trItem" idata="@item.Id">
+                            <td class="center">@count</td>
+                              <td class="text-left">
+                                @item.Note
+                            </td>
+                             <td class="text-left">
+                                @item.CardNo
+                            </td>
+                             <td class="text-left">
+                                @item.Plate
+                            </td>
+                            <td class="center">
+                                <span>Hóa đơn ngày @item.DateCreated.ToString("dd/MM/yyyy HH:mm:ss")</span>
+                            </td>
+
+                            <td class="text-right">
+                                @if (item.Price > 0)
+                                {
+                                    <span>@item.Price.ToString("###,###")</span>
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </td>
+
+                            <td class="center">
+                                <a href="javascript:void(0)" class="btnPrint" idata="@item.Id" title="In">
+                                    <i class="ace-icon fa fa-print bigger-120"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                        <tr style="font-weight:bold;">
+                            <td></td>
+                            <td class="text-left">Tổng tiền</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="text-right">
+                                @if (totalmoney > 0)
+                                {
+                                    <span>@totalmoney.ToString("###,###")</span>
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </td>
+                            <td></td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("PRIDEIndex", "OrderActiveCard", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               cardgroup = ViewBag.cardgroupidsValue,
+               customergroup = ViewBag.customergroupidsValue,            
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+<script src="~/Areas/Parking/Scripts/OrderActiveCardController_v2.js"></script>
+    <script>
+
+        $(document).ready(function () {
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmOrderActiveCard').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmOrderActiveCard').submit();
+            });
+
+            //
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+            //
+
+        });
+    </script>
+}
+

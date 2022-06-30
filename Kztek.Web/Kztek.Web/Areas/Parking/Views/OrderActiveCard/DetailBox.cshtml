@@ -1,0 +1,86 @@
+﻿@using Kztek.Model.Models
+@model List<Kztek.Model.Models.tblActiveCardCustomViewModel>
+@{ 
+    bool isAQUA = (bool)ViewBag.ISAQUA;
+}
+
+<tr class="showDetailBox-child-@ViewBag.Id trHide bgRowColor">
+    <td colspan="6">
+        <!--Tab detail-->
+        <div class="tabbable SubTab">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a data-toggle="tab" href="#tab1-@ViewBag.Id" aria-expanded="true">
+                        Chi tiết
+                    </a>
+                </li>
+
+            </ul>
+
+            <div class="tab-content clearfix" style="min-height:unset;">
+
+
+                <div id="tab1-@ViewBag.Id" class="tab-pane fade active in">
+                    <table class="col-sm-9 col-xs-12 table table-bordered table-striped" id="tblOrder" style="margin-top:15px">
+                        <thead>
+                            <tr>
+                                <th class="center"> STT </th>
+                                <th class="center"> Mã thẻ </th>
+                                <th class="center"> Khách hàng </th>
+                                <th class="center"> BKS </th>
+                                <th class="center"> Thời hạn cũ </th>
+                                <th class="center"> Thời hạn mới </th>
+                                @if (!isAQUA)
+                                {
+                                    <th class="center"> Số tiền </th>
+                                }
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null && Model.Count > 0)
+                            {
+                                int count = 0;
+                                foreach (var item in Model)
+                                {
+                                    count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>@item.CardNumber</td>
+                                <td>@item.CustomerName</td>
+                                <td>@item.Plate</td>
+                                <td>@Convert.ToDateTime(item.OldExpireDate).ToString("dd/MM/yyyy")</td>
+                                <td>
+                                    @Convert.ToDateTime(item.NewExpireDate).ToString("dd/MM/yyyy")
+                                </td>
+                                @if (!isAQUA)
+                                {
+                                <td>
+                                    @if (item.FeeLevel > 0)
+                                    {
+                                        <span>@item.FeeLevel.ToString("###,###")</span>
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+                                }
+                                
+                            </tr>
+                            }
+
+                        }
+
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </td>
+</tr>
+
+
+

@@ -1,0 +1,123 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblCardGroup>
+
+@{
+    ViewBag.Title = "Danh sách nhóm thẻ";
+    //Layout = Futech.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+    string objId = (string)ViewBag.objId;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCardGroup", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblCardGroup", FormMethod.Get, new { id = "frmCardGroup" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="@Dictionary["KeywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row" style="padding-bottom:10px;">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller)" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+            </a>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">@Dictionary["CardGroupName"]</th>
+                    <th class="text-center">@Dictionary["Description"]</th>
+                    <th class="text-center" width="80">@Dictionary["Status"]</th>
+                    <th class="text-center" width="60">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(objId) && objId == item.CardGroupID.ToString() ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.CardGroupName
+                            </td>
+
+                            <td class="text-left">
+                                @item.Description
+                            </td>
+
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">@Dictionary["Active"]</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">@Dictionary["Inactive"]</span>
+                                }
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.CardGroupID, key = ViewBag.keyValue, page = Model.PageIndex })" class="green" title="@DictionaryAction["Update"]">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.CardGroupID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblCardGroup", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmCardGroup");
+            DeleteSubmit(_prefixParkingDomain + '/tblCardGroup/Delete');
+        });
+    </script>
+}

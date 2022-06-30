@@ -1,0 +1,49 @@
+﻿@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model List<string>
+
+@{
+    var total = (int)ViewBag.totalItemValue;
+    var url = (string)ViewBag.urlValue;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCard", "Index");
+}
+
+<div style="display:inline">
+    @Dictionary["SelectedCard"]: @Model.Count / @total
+
+    @if (Model.Count > 0)
+    {
+        <a href="javascript:void(0)" class="red" title="Xóa tất cả thẻ đã chọn" onclick="RemoveAllSelectedCard('@total', '@url')">
+            <i class="fa fa-remove"></i>
+        </a>
+    }
+</div>
+<div style="display:inline;margin-left:15px">
+    @if (CheckAuthorizeAction.CheckActionPemission("tblCard", "Lock"))
+    {
+        <button type="button" class="btn btn-warning btn-sm btn-white btn-bold" onclick="LockCardSelected('@url')">
+            <i class="fa fa-lock"></i>
+            @Dictionary["LockCard"]
+        </button>
+    }
+
+    @if (CheckAuthorizeAction.CheckActionPemission("tblCard", "Unlock"))
+    {
+        <button type="button" class="btn btn-info btn-sm btn-white btn-bold" onclick="UnlockCardSelected('@url')">
+            <i class="fa fa-unlock"></i>
+            @Dictionary["OpenCard"]
+        </button>
+    }
+
+    @if (CheckAuthorizeAction.CheckActionPemission("tblCard", "Delete"))
+    {
+        <button type="button" class="btn btn-danger btn-sm btn-white btn-bold" onclick="DeleteCardSelected('@url')">
+            <i class="fa fa-trash"></i>
+            @Dictionary["DeleteCard"]
+        </button>
+    }
+   
+
+  
+</div>

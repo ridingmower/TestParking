@@ -1,0 +1,128 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportInOut>
+
+@{
+
+    var listLane = (List<Kztek.Model.Models.tblLane>)ViewBag.LaneList;
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+}
+@Html.Hidden("totalCount", Model.TotalItem)
+@Html.Hidden("totalPage", Model.TotalPage)
+@Html.Hidden("pageSize", Model.PageSize)
+@Html.Hidden("pageIndex", Model.PageIndex)
+
+<tbody>
+    @if (Model.Data.Any())
+    {
+        var count = (Model.PageIndex - 1) * Model.PageSize;
+        foreach (var item in Model.Data)
+        {
+            count++;
+            <tr>
+                <td class="text-center">@item.RowNumber</td>
+                <td>
+                    @item.CardNo
+                </td>
+                <td>
+                    @item.CardNumber
+                </td>
+                <td>
+                    @item.Plate
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.DateTimeIn).ToString("dd/MM/yyy HH:mm:ss")
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.DateTimeOut).ToString("dd/MM/yyy HH:mm:ss")
+                </td>
+             
+                <td>
+                    @{
+                        var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.ItemValue.ToString().Equals(item.CardGroupID)) : null;
+
+                        if (objcardGroup != null)
+                        {
+                            <span>@objcardGroup.ItemText</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @item.CustomerName
+                </td>
+                <td>
+                    @{
+                        var objLaneIn = listLane != null ? listLane.FirstOrDefault(n => n.LaneID.ToString().Equals(item.LaneIDIn)) : null;
+
+                        if (objLaneIn != null)
+                        {
+                            <span>@objLaneIn.LaneName</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        var objLaneOut = listLane != null ? listLane.FirstOrDefault(n => n.LaneID.ToString().Equals(item.LaneIDOut)) : null;
+
+                        if (objLaneOut != null)
+                        {
+                            <span>@objLaneOut.LaneName</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        var objuserIn = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserIDIn)) : null;
+
+                        if (objuserIn != null)
+                        {
+                            <span>@objuserIn.Username</span>
+                        }
+                    }
+                </td>
+                <td>
+                    @{
+                        var objuserOut = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserIDOut)) : null;
+
+                        if (objuserOut != null)
+                        {
+                            <span>@objuserOut.Username</span>
+                        }
+                    }
+                </td>
+                <td class="text-right">
+                    @item.DCTypeCode
+                </td>
+                <td class="text-right">
+                    @string.Format("{0:N0}", long.Parse(item.Moneys))
+                </td>
+                <td class="text-right">
+                    @string.Format("{0:N0}", long.Parse(item.ReducedMoney))
+                </td>
+                <td class="text-right">
+                    @{
+                        var money = long.Parse(item.Moneys) - long.Parse(item.ReducedMoney);
+                        <span>@money</span>
+                    }
+                </td>
+                <td>
+                    @if (CheckAuthorizeAction.CheckActionPemission("ReportInOut", "Delete"))
+                    {
+                        <div class="btn-group">
+                            @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = "ReportInOut", id = item.Id })
+                        </div>
+                    }
+
+                </td>
+            </tr>
+        }
+    }
+</tbody>
+

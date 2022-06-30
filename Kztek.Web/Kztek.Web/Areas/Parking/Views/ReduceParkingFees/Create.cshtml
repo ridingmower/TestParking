@@ -1,0 +1,149 @@
+﻿@model Kztek.Model.Models.tblDiscountParking
+@using Kztek.Web.Core.Functions
+
+
+
+    @{
+        ViewBag.Title = "Thêm mới";
+
+    }
+
+    <div class="page-header">
+        <h1>
+            @ViewBag.Title
+        </h1>
+    </div>
+    <div class="row">
+        @if (TempData["Success"] != null)
+        {
+            <strong style="color:green">@TempData["Success"]</strong>
+        }
+        <strong style="color:red">@ViewBag.Error</strong>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            @using (Html.BeginForm("Create", "ReduceParkingFees", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", @id = "frmReduceParkingFees" }))
+            {
+                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                @Html.Hidden("SaveAndCountinue", false)
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right">Tên hình thức </label>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(n => n.DCTypeName, new { @class = "form-control", @placeholder = "Tên hình thức giảm phí" })
+                        @Html.ValidationMessageFor(n => n.DCTypeCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> Mã hình thức  </label>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(n => n.DCTypeCode, new { @class = "form-control", @placeholder = "Mã hình thức" })
+                        @Html.ValidationMessageFor(n => n.DCTypeCode, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> Hình thức giảm </label>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.DropDownListFor(n => n.DiscountMode, new SelectList(ViewBag.DiscountModes, "ItemValue", "ItemText"), new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label class="col-sm-4 control-label no-padding-right "  > Số tiền giảm theo <span id="textlabel" ></span>  </label>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(n => n.DiscountAmount, new { @class = "form-control", @placeholder = "Số tiền giảm" })
+                        @Html.ValidationMessageFor(n => n.DiscountAmount, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <label class="col-sm-4 control-label no-padding-right"> Ghi chú  </label>
+                    <div class="col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(n => n.Note, new { @class = "form-control", @placeholder = "Ghi chú" })
+                        @Html.ValidationMessageFor(n => n.Note, "", new { @class = "text-danger" })
+                    </div>
+
+                </div>
+
+
+
+
+
+                <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                    <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                        <i class="ace-icon fa fa-cog bigger-130"></i>
+                    </div>
+
+                    <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                        <!-- /.pull-left -->
+                        <div class="bg-rightbox">
+                            <div class="clearfix lineButton">
+                                <div class="col-md-12 input-group">
+                                    <button class="btn btn-success" type="submit" id="Countinue">
+                                        <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                        Lưu
+                                    </button>
+                                    <button class="btn btn-info" type="submit" id="BackToList">
+                                        <i class="ace-icon fa fa-check bigger-110"></i>
+                                        Lưu và thoát
+                                    </button>
+                                    <button class="btn" type="reset">
+                                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                                        Reset
+                                    </button>
+                                    <a href="@Url.Action("Index")" class="btn btn-yellow">
+                                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                        Quay trở lại
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.pull-left -->
+                    </div><!-- /.ace-settings-box -->
+                </div>
+            }
+        </div>
+    </div>
+
+    @section scripts{
+       <script>
+           $(document).ready(function () {
+               $("#Countinue").click(function () {
+                   $("#SaveAndCountinue").val(true);
+               });
+               var s = $("#DiscountMode").val();
+               if (s == 1) {
+                   var vl1 = "giờ";
+                   $("#textlabel").text(vl1);
+
+               } else if (s == 0) {
+                   var vl2 = "phần trăm";
+                   $("#textlabel").text(vl2);
+               } else if (s == 2) {
+                   var vl3 = "tiền";
+                   $("#textlabel").text(vl3);
+               }
+               $("#DiscountMode").change(function () {
+                   var s = $("#DiscountMode").val();
+                   if (s == 1) {
+                       var vl1 = "giờ";
+                       $("#textlabel").text(vl1);
+
+                   } else if (s == 0) {
+                       var vl2 = "phần trăm";
+                       $("#textlabel").text(vl2);
+                   } else if (s == 2) {
+                       var vl3 = "tiền";
+                       $("#textlabel").text(vl3);
+                   }
+               });
+               $('.AmountReduced').priceFormat({
+                   prefix: '',
+                   centsLimit: 0,
+                   centsSeparator: '.',
+                   thousandsSeparator: ','
+               });
+           })
+        </script>
+    }

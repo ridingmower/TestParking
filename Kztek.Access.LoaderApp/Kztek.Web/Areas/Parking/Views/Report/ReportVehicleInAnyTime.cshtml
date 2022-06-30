@@ -1,0 +1,111 @@
+﻿@model List<Kztek.Model.Models.ReportVehicleInAnyTime>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "ReportVehicleInAnyTime";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "reportVehicleInAnyTime");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportVehicleInAnyTime", "Report", FormMethod.Get, new { id = "frmReportVehicleInAnyTime" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["time"]
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.DateFromPickerValue, new { @class = "form-control daterangpickerMutil" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12 divboxmd line-height-450" style="margin-top:15px;">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportVehicleInAnyTime" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportVehicleInAnyTime" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportVehicleInAnyTime" })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="50">@Dictionary["stt"]</th>
+                    <th class="text-left" idata="Card"> @Dictionary["groupName"] <i class=""></i></th>
+                    <th class="center">@Dictionary["quantity"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    var count = 0;
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        <tr style="@string.Format(count == Model.Count ? "font-weight:bold" : "")">
+                            <td align="center">@count</td>
+                            <td>
+                                <a href="@Url.Action("ReportDetailVehicleInAnyTime", new { vehiclegroupid = item.VehicleGroupID, fromdate = ViewBag.DateFromPickerValue })" target="_blank">
+                                    @item.VehicleGroupName
+                                </a>
+                            </td>
+                            <td align="center">
+                                @item.VehicleCount
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportVehicleInAnyTime').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportVehicleInAnyTime').submit();
+            });
+
+            //Datetimepicker
+            $('.daterangpickerMutil').daterangepicker({
+                'applyClass': 'btn-sm btn-success',
+                'cancelClass': 'btn-sm btn-default',
+                autoUpdateInput: true,
+                singleDatePicker: true,
+                timePicker: true,
+                timePicker24Hour: true,
+                timePickerIncrement: 1,
+                locale: {
+                    applyLabel: 'Apply',
+                    cancelLabel: 'Cancel',
+                    format: 'DD/MM/YYYY HH:mm'
+                },
+                showDropdowns: true
+
+            });
+        });
+    </script>
+}
+
+

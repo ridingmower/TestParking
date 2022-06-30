@@ -1,0 +1,76 @@
+﻿@using Kztek.Web.Core.Functions
+@model Kztek.Model.Models.MultipleLanesMap_Cus
+@{
+    var count = (int)ViewBag.Count;
+}
+
+<style>
+    .loading1 {
+        display: none;
+    }
+</style>
+
+<div id="modalImportCard_@count" class="modal fade">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="boxTitle">Thêm mới làn</h4>
+            </div>
+            <form role="form" id="frmImportCard">
+                <div class="row">
+                    @*@Html.HiddenFor(n => n.ViewOrder)*@
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-left no-padding-right"> Tên</label>
+                        <div class="col-sm-8 col-xs-12">
+                            @Html.TextBoxFor(n => n.Name, new { placeholder = "---Tên---" , @class = "form-control" })
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-left no-padding-right"> Tên máy tính</label>
+                        <div class="col-sm-8 col-xs-12">
+                            @Html.DropDownListFor(n => n.PCid, new SelectList(ViewBag.ListPC, "PCID", "ComputerName"),"---Chọn máy tính---", new { @class = "form-control chosen-select" })
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label-left no-padding-right">Giao diện</label>
+                        <div class="col-sm-8 col-xs-12">
+                            @Html.DropDownListFor(n => n.SideIndex, new SelectList(ViewBag.ListSideIndex, "ItemValue", "ItemText"), "---Chọn giao diện---", new { @class = "form-control chosen-select" })
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-4 control-label-left no-padding-right">Chiều</label>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-xs-12">
+
+                            @Html.DropDownListFor( n => n.CurrentDirection, new SelectList(ViewBag.ListCurrectionDirect, "ItemValue", "ItemText"),"---Chọn chiều---", new { @class = "form-control chosen-select" })
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-primary" id="btnSave_@count">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

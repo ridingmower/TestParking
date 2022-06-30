@@ -1,0 +1,51 @@
+﻿@model List<Kztek.Model.Models.tblCustomerGroup>
+
+@{
+    var list = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.ListMenu;
+
+    string selected = (string)ViewBag.selectedIdValue;
+}
+@if (Model.Any())
+{
+    <style>
+        .submenu1 {
+            display: none;
+        }
+    </style>
+
+    <ul style="list-style-type:none;" class="submenu1">
+
+        @foreach (var item in Model)
+        {
+            var strActive = item.Inactive ? "text-decoration:line-through" : "";
+            var child = list.Where(n => n.ParentID.Equals(item.CustomerGroupID.ToString())).ToList();
+            <li>
+                <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item.CustomerGroupID.ToString()" />
+                <span class="showButton lbl" style="@strActive">
+                    @if (selected == item.CustomerGroupID.ToString())
+                    {
+                        <span class="label label-info">
+                            <span>@item.Ordering</span>. @item.CustomerGroupName
+                        </span>
+                    }
+                    else
+                    {
+                        <span>
+                            <span>@item.Ordering</span>. @item.CustomerGroupName
+                        </span>
+                    }
+                </span>
+                <span>
+                    <a href="@Url.Action("Update", new { id = item.CustomerGroupID.ToString() })">
+                        <i class="ace-icon fa fa-pencil-square-o"></i>
+                    </a>
+                </span>
+                @if (child.Any())
+                {
+                    @Html.Action("MenuChilden", "tblCustomerGroup", new { childList = child, AllList = list, selectedId = selected })
+                }
+            </li>
+        }
+
+    </ul>
+}

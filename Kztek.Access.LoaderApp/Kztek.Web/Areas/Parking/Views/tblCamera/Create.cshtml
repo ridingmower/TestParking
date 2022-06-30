@@ -1,0 +1,251 @@
+﻿@model Kztek.Model.Models.tblCamera
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    string url = string.Format("?group={0}&key={1}&pc={2}", ViewBag.groupValue, ViewBag.keyValue, ViewBag.pcValue);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCamera", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Create", "tblCamera", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("SaveAndCountinue", false)
+            @Html.Hidden("key", (string)ViewBag.keyValue)
+            @Html.Hidden("pc", (string)ViewBag.pcValue)
+            @Html.Hidden("group", (string)ViewBag.GroupID)
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CameraName"]  </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.CameraName, new { @class = "form-control", @placeholder = Dictionary["CameraNamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.CameraName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CameraType"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.CameraType, new SelectList(ViewBag.CameraType, "ItemValue", "ItemText"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["PCID"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.PCID, new SelectList(ViewBag.PCs, "PCID", "ComputerName", ViewBag.pcValue), Dictionary["PCIDPlaceholder"], new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(n => n.PCID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["HttpURL"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.HttpURL, new { @class = "form-control", @placeholder = Dictionary["HttpURLPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.HttpURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["HttpPort"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.HttpPort, new { @class = "form-control", @placeholder = Dictionary["HttpPortPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.HttpPort, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["RtspPort"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.RtspPort, new { @class = "form-control", @placeholder = Dictionary["RtspPortPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.RtspPort, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["UserName"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.UserName, new { @class = "form-control", @placeholder = Dictionary["UserNamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Password"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @type = "password" })
+                    @Html.ValidationMessageFor(n => n.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Channel"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Channel)
+                    @Html.ValidationMessageFor(n => n.Channel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["StreamType"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.StreamType, new SelectList(ViewBag.StreamType, "ItemValue", "ItemText"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Resolution"] </label>  
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.Resolution, new SelectList(ViewBag.Resolutions, "ItemValue", "ItemText"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["FrameRate"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.FrameRate)
+                    @Html.ValidationMessageFor(n => n.FrameRate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["SDK"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.SDK, new SelectList(ViewBag.SDK, "ItemValue", "ItemText"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["EnableRecording"] </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.EnableRecording, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> STT </label>
+                <div class="col-sm-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "STT" })
+                    @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Inactive"] </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn btn-info" type="submit" id="BackToList">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    @DictionaryAction["SaveAndExit"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+            @*@Html.Action("Buttons", "Home", new { controller = "tblCamera", action = "NewCreate",  url = url })*@
+        }
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        $(document).ready(function () {
+            @*//
+            $('#CameraType').val('@Model.CameraType');
+            $('#StreamType').val('@Model.StreamType');
+            $('#SDK').val('@Model.SDK');*@
+
+            //
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+            $("#BackToList").click(function () {
+                $("#SaveAndCountinue").val('false');
+            });
+
+            $('#Channel').ace_spinner({ min: 0, max: 100, step: 1, btn_up_class: 'btn-info', btn_down_class: 'btn-info' })
+                .closest('.ace-spinner')
+                .on('changed.fu.spinbox', function () {
+                    //console.log($('#spinner1').val())
+                });
+            $('#Framerate').ace_spinner({ min: 5, max: 20, step: 5, btn_up_class: 'btn-info', btn_down_class: 'btn-info' })
+                .closest('.ace-spinner')
+                .on('changed.fu.spinbox', function () {
+                    //console.log($('#spinner1').val())
+                });
+
+            $("#Resolution").autocomplete({
+                source: []
+            });
+            $('#CameraType').change(function () {
+                $("#HttpURL").val("192.168.1.");
+                $("#HttpPort").val("80");
+                $("#RtspPort").val("554");
+                $("#StreamType").val("H264");
+                $("#SDK").val("KztekSDK2");
+
+            });
+            $("#Resolution").keyup(function () {
+                var key = $(this).val();
+
+                $.ajax({
+                    url: _prefixParkingDomain + '/PK_Camera/GetResolution',
+                    data: { key: key },
+                    type: 'json',
+                    async: true,
+                    success: function (data) {
+                        $("#Resolution").autocomplete({
+                            source: data
+                        });
+                    }
+                });
+            });
+        });
+
+
+    </script>
+}

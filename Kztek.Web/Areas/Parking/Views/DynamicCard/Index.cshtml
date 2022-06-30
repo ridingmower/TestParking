@@ -1,0 +1,151 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.CustomModel.iParking.DynamicCardCustomViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    string groupValue = (string)ViewBag.groupValue;
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupValue);
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    string selected = (string)ViewBag.selectedIdValue;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCamera", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["TitleDynamic"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "DynamicCard", FormMethod.Get, new { id = "frmCamera" }))
+    {
+        @Html.Hidden("group", groupValue)
+        @Html.Hidden("selectedId", selected)
+
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Button" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("pc", new SelectList(ViewBag.PCs, "PCID", "ComputerName", ViewBag.pcValue), Dictionary["PCNamePlaceholder"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("control", new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName", ViewBag.controllerValue), Dictionary["ControllerPlaceholder"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("cardgroup", new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName", ViewBag.cardgroupValue), Dictionary["CardgroupPlaceholder"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">@Dictionary["ControllerID"]</th>
+                    <th class="text-left hidden-480">@Dictionary["PCName"]</th>
+
+                    <th class="text-left">Button</th>
+                    <th class="text-left hidden-480">@Dictionary["CardGroupID"]</th>
+                    <th class="text-left">@Dictionary["Date"]</th>
+                    <th class="text-left" width="80">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.Id ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.ControllerName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.ComputerName
+                            </td>
+
+                           
+
+                            <td class="text-left hidden-480">
+                                @item.Button
+                            </td>
+                             <td class="text-left hidden-480">
+                                @item.CardGroupName
+                            </td>
+                             <td class="text-left hidden-480">
+                                @item.DateCreated.ToString("dd/MM/yyyy HH:mm:ss")
+                            </td>
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.Id, group = groupValue, key = ViewBag.keyValue, page = Model.PageIndex, pc = ViewBag.pcValue })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "DynamicCard", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               pc = ViewBag.pcValue,
+               control = ViewBag.controllerValue,
+               cardgroup = ViewBag.cardgroupValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmCamera");
+            DeleteSubmit(_prefixParkingDomain + '/DynamicCard/Delete');
+        });
+    </script>
+}

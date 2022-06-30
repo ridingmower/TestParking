@@ -1,0 +1,181 @@
+﻿@model List<Kztek.Model.Models.Event.BIkeInOUt>
+
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions;
+@{
+    ViewBag.Title = "Home Page";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var lstVehicle = (IEnumerable<Kztek.Model.Models.tblVehicleGroup>)ViewBag.Vehicles;
+    var lstCardGr = (IEnumerable<Kztek.Model.Models.tblCardGroup>)ViewBag.objCardGr;
+    //var modelBikes =(List < Kztek.Model.Models.tblCardGroup >) ViewBag.objCardGrBike;
+    var BikeOuts = (List<Kztek.Model.Models.Event.CountBike_CarInOut>)ViewBag.BikeOut;
+    var CountCarInouts = (List<Kztek.Model.Models.Event.CarInOUt>)ViewBag.CountInOutCar;
+    var CountEventEveryDay = (Kztek.Model.CustomModel.SelectListModel)ViewBag.CountEventEveryDay;
+}
+
+@{
+    CheckAuthorizeAction.Instance.CheckPemission("Home", "Index");
+    if (CheckAuthorizeAction.Instance.Check)
+    {
+        <div class="row">
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "frmHome" }))
+            {
+                <div class="col-md-3 col-xs-12 divboxmd">
+                    @Dictionary["fromdate"]
+                    <div class="input-group">
+                        @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 divboxmd">
+                    @Dictionary["todate"]
+                    <div class="input-group">
+                        @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-12 col-xs-12 divboxmd">
+                    <button class="btn btn-sm btn-primary" type="submit" name="btnFilter">
+                        <i class="fa fa-search"></i>
+                        @DictionaryAction["Search"]
+                    </button>
+                </div>
+            }
+        </div>
+
+        <div class="hr hr-18 dotted hr-24"></div>
+        if ((bool)ViewBag.IsLote)
+        {
+            <div class="row">
+                <div class="col-xs-6">
+                    <table class="table  table-bordered table-hover">
+                        <thead>
+                            <tr class="headerSort">
+                                <th class="center">Xe máy </th>
+                                <th class="center">Xe vào<i class=""></i></th>
+                                <th class="center">Xe ra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.Any())
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr style="">
+                                        <td class="left">
+                                            @{
+                                                var obj1 = lstCardGr != null ? lstCardGr.FirstOrDefault(n => n.CardGroupID.ToString() == item.CardGroupID) : null;
+                                                if (obj1 != null)
+                                                {
+
+                                                    <span>@obj1.CardGroupName</span>
+                                                }
+                                            }
+                                        </td>
+                                        <td class="center">
+                                            @item.BikeIn
+                                        </td>
+                                        <td align="center">
+                                            @item.BikeOut
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="col-xs-6">
+                    <table class="table  table-bordered table-hover">
+                        <thead>
+                            <tr class="headerSort">
+                                <th class="center">Ô tô </th>
+                                <th class="center">Xe vào</th>
+                                <th class="center">Xe ra</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (CountCarInouts.Any())
+                            {
+
+                                foreach (var item1 in CountCarInouts)
+                                {
+                                    <tr style="">
+                                        <td class="left">
+                                            @{
+                                                var obj1 = lstCardGr != null ? lstCardGr.FirstOrDefault(n => n.CardGroupID.ToString() == item1.CardGroupID) : null;
+                                                if (obj1 != null)
+                                                {
+
+                                                    <span>@obj1.CardGroupName</span>
+                                                }
+                                            }
+                                        </td>
+                                        <td class="center">
+                                            @item1.CarIn
+                                        </td>
+                                        <td align="center">
+                                            @item1.CarOut
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="infobox infobox-green">
+                        <div class="infobox-data">
+                            <span class="infobox-data-number" id="id_dashboard1" runat="server">@CountEventEveryDay.ItemValue</span>
+                            <div class="infobox-content">@Dictionary["vehiclein"]</div>
+                        </div>
+                    </div>
+
+                    <div class="infobox infobox-blue">
+                        <div class="infobox-data">
+                            <span class="infobox-data-number" id="id_dashboard2" runat="server">@CountEventEveryDay.ItemText</span>
+                            <div class="infobox-content">@Dictionary["vehicleout"]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+}
+
+@*<a href="javascript:void(0)" class="btn btn-success btnMomo" name="btnMomo">
+        Thanh toán qua app momo
+    </a>
+    <input class="form-control" type="text" id="orderid" value="11111911119"/>*@
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".page_home").addClass("active");
+
+            $(".btnMomo").click(function () {
+                $.ajax({
+                    url: _prefixParkingDomain + '/Home/GetPayUrl',
+                    type: 'json',
+                    data: { orderid: $("#orderid").val() },
+                    success: function (data) {
+                        location.href = data;
+                    }
+                });
+
+            });
+        });
+    </script>
+}

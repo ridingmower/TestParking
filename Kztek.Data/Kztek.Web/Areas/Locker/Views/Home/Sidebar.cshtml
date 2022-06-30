@@ -1,0 +1,141 @@
+﻿@using Kztek.Model.Models
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model List<MenuFunction>
+
+@{
+    string breadcrumb = (string)ViewBag.Breadcrumb;
+    string controller = (string)ViewBag.Controller;
+    string action = (string)ViewBag.Action;
+    string direct = (string)ViewBag.DirectValue;
+    string groupname = (string)ViewBag.GroupNameValue;
+
+    var list = (List<Kztek.Model.CustomModel.SelectListModel>)ViewBag.ServerList;
+
+    var DictionaryFunction = FunctionHelper.GetLocalizeDictionary("Home", "MenuFunction");
+    var nodeWeb = Model.FirstOrDefault(n => n.MenuName.Equals("Web"));
+}
+
+<script type="text/javascript">
+    try { ace.settings.loadState('sidebar') } catch (e) { }
+</script>
+
+<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+    <div class="btn btn-white btn-xs btn-success btn-bold" id="sidebar-shortcuts-large" style="margin-top:5px;    width: 94%;">
+        <span id="groupname1">@groupname.ToUpper()</span>
+    </div>
+
+    <div class="sidebar-shortcuts-mini btn btn-white btn-xs btn-success btn-bold" id="sidebar-shortcuts-mini pull-left" style="margin-top:5px;width: 100%;">
+        <span id="groupname2">@groupname.ToUpper()</span>
+    </div>
+</div><!-- /.sidebar-shortcuts -->
+
+<ul class="nav nav-list">
+    @*@{
+            CheckAuthorizeAction.Instance.CheckPemission("Home", "Index");
+            if (CheckAuthorizeAction.Instance.Check)
+            {
+        <li class="page_home">
+            <a href="@Url.Action("Index","Home")">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> Bàn làm việc </span>
+            </a>
+
+            <b class="arrow"></b>
+        </li>
+            }
+        }*@
+
+
+    @if (Model.Any())
+    {
+        foreach (var item in Model.Where(n => n.ParentId.Equals(nodeWeb != null ? nodeWeb.Id : "0") && n.MenuType.Equals("1")).OrderBy(n => n.OrderNumber))
+        {
+            //if (CheckAction.CheckPemission(item))
+            //{
+
+            //}
+            var child = Model.Any(n => n.ParentId.Equals(item.Id) && n.MenuType.Equals("1"));
+            if (child)
+            {
+                <li class="@string.Format("{0}", breadcrumb.Contains(item.Id)? "open active" : "")">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon @item.Icon"></i>
+                        @*<span class="menu-text">
+                                @item.MenuName
+                            </span>*@
+                        @{
+                            string name = "";
+                            DictionaryFunction.TryGetValue($"{item.ControllerName}", out name);
+                            if (!string.IsNullOrWhiteSpace(name))
+                            {
+                                <span class="menu-text">@name</span>
+                            }
+                            else
+                            {
+                                <span class="menu-text">@item.MenuName</span>
+                            }
+                        }
+
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    @Html.Action("Child", "Home", new { id = item.Id, controllerName = controller, actionName = action, breadCrumb = breadcrumb, group = ViewBag.GroupID, listMenu = Model })
+                </li>
+            }
+            else
+            {
+                <li class="@string.Format("{0}", ((controller.Equals(item.ControllerName) && action.Equals(item.ActionName)) || controller.Equals(item.ControllerName))? "active" : "")">
+                    @if (item.isSystem)
+                    {
+                        <a href="@Url.Action(item.ActionName, item.ControllerName, new { group = ViewBag.GroupID, Area = "" })">
+                            <i class="menu-icon @item.Icon"></i>
+                            @*<span class="menu-text">
+                                    @item.MenuName
+                                </span>*@
+                            @{
+                                string name = "";
+                                DictionaryFunction.TryGetValue($"{item.ControllerName}", out name);
+                                if (!string.IsNullOrWhiteSpace(name))
+                                {
+                                    <span class="menu-text">@name</span>
+                                }
+                                else
+                                {
+                                    <span class="menu-text">@item.MenuName</span>
+                                }
+                            }
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(item.ActionName, string.Format("{0}{1}", direct, item.ControllerName), new { group = ViewBag.GroupID })">
+                            <i class="menu-icon @item.Icon"></i>
+                            @*<span class="menu-text">
+                                    @item.MenuName
+                                </span>*@
+                            @{
+                                string name = "";
+                                DictionaryFunction.TryGetValue($"{item.ControllerName}", out name);
+                                if (!string.IsNullOrWhiteSpace(name))
+                                {
+                                    <span class="menu-text">@name</span>
+                                }
+                                else
+                                {
+                                    <span class="menu-text">@item.MenuName</span>
+                                }
+                            }
+                        </a>
+                    }
+                </li>
+                //string.Format("{0}{1}", direct, item.ControllerName)
+            }
+        }
+    }
+</ul><!-- /.nav-list -->
+
+<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+    <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+</div>

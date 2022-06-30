@@ -1,0 +1,149 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportTotalMoneyByLane>
+
+@{
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportTotalMoneyByLane");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var objsystem = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+    bool ischeck = (objsystem != null && objsystem.FeeName == "BVDK_THANHPHO_VINH") ? true : false;
+    var user = GetCurrentUser.GetUser();
+}
+
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    @if (ischeck)
+    {
+        <div class="row">
+            <div class="col-xs-12" style="height:55px;">
+                <table class="table" style="margin-bottom:unset;">
+                    <tr style="height:10px;border-style:hidden;">
+                        <td>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Company</h4>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">@objsystem.Address</h4>
+                            @*<h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Tel - @objsystem.Fax</h4>*@
+                        </td>
+                        <td>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">@Dictionary["title"]</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            @DictionarySearch["fromDate"] <strong>@ViewBag.fromdateValue</strong> @DictionarySearch["toDate"] <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center" width="50">
+                            @Dictionary["stt"]
+                        </th>
+                        <th class="text-left">@Dictionary["lane"] </th>
+                        <th class="center"> @Dictionary["amount"] </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                            <tr>
+                                <td align="center">@count</td>
+                                <td>
+                                    @item.LaneName
+                                </td>
+                                <td align="center">
+                                    @item.Moneys.FormatMoney()
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                @*<tfoot>
+                        <tr>
+                            <td>#</td>
+                            <td>TỔNG SỐ</td>
+                            <td>@money</td>
+                        </tr>
+                    </tfoot>*@
+            </table>
+        </div>
+    </div>
+
+    @if (ischeck)
+    {
+
+        <div class="row">
+            <div class="col-xs-12" style="height:30px;">
+                <table class="table">
+                    <tr style="border-style:hidden;">
+                        <td>
+                            <p style="font-size:12px;float:right;padding-right:70px;font-family: 'Times New Roman';font-weight:bold;">
+                                NGƯỜI LẬP
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-xs-12" style="height:30px;">
+                <table class="table">
+                    <tr style="border-style:hidden;">
+                        <td>
+                            <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                                Ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                            </h6>
+                            <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                                Người lập báo cáo
+                            </h6>
+                            <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                                @if (user != null)
+                                {
+                                    @user.Name
+                                }
+                            </h6>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

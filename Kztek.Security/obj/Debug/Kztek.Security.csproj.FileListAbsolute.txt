@@ -1,0 +1,10 @@
+E:\ParkingV3\Kztek.Security\bin\Debug\Kztek.Security.dll
+E:\ParkingV3\Kztek.Security\bin\Debug\Kztek.Security.pdb
+E:\ParkingV3\Kztek.Security\bin\Debug\System.Text.Encodings.Web.dll
+E:\ParkingV3\Kztek.Security\bin\Debug\System.Text.Encodings.Web.xml
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.csproj.AssemblyReference.cache
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.csproj.ResolveComReference.cache
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.csproj.CoreCompileInputs.cache
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.csproj.CopyComplete
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.dll
+E:\ParkingV3\Kztek.Security\obj\Debug\Kztek.Security.pdb

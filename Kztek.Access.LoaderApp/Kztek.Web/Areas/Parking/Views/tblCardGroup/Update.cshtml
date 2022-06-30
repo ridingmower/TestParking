@@ -1,0 +1,321 @@
+﻿@model Kztek.Model.Models.tblCardGroup
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Update";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    var blockTimes = "";
+    //if (Model != null)
+    //{
+    //    if (Model.BlockTime != null && Model.BlockTime.Any())
+    //    {
+    //        foreach (var item in Model.BlockTime)
+    //        {
+    //            var obj = item["ItemValue1"].ToString() + "-" + item["ItemValue2"].ToString();
+    //            blockTimes += obj + ";";
+    //        }
+    //    }
+    //}
+
+    int pn = Convert.ToInt32(ViewBag.PN);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCardGroup", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "tblCardGroup", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", @id = "frmCardGroupUpdate" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">@Dictionary["CardGroupName"]</label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.CardGroupName, new { @class = "form-control", @placeholder = Dictionary["CardGroupNamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.CardGroupName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Description"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Description, new { @class = "form-control", @placeholder = Dictionary["DescriptionPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CardTypes"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.CardType, new SelectList(ViewBag.CardTypes, "ItemValue", "ItemText"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CardType, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-4 col-xs-12">
+                    <label class="inline">
+                        @Html.CheckBoxFor(n => n.IsHaveMoneyExcessTime, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsHaveMoneyExcessTime"]</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["VehicleGroup"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.VehicleGroupID, new SelectList(ViewBag.VehicleGroups, "VehicleGroupID", "VehicleGroupName"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.VehicleGroupID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="hr hr-18 dotted hr-24"></div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["LaneAssign"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    <div id="boxLane">
+                        @Html.Action("LaneByCardGroup", new { laneSelected = Model.LaneIDs })
+                        @Html.Hidden("listLanes", Model.LaneIDs)
+                    </div>
+                </div>
+            </div>
+            <div class="hr hr-18 dotted hr-24"></div>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-4">
+                    <label class="inline">
+                        @Html.CheckBoxFor(n => n.EnableFree, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["EnableFree"]</span>
+                    </label>
+                </div>
+                <div class="col-sm-1">
+                    @Html.TextBoxFor(n => n.FreeTime, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.FreeTime, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["DayTimeFrom"] </label>
+                <div class="col-sm-2">
+                    <div class="input-group bootstrap-timepicker">
+                        @Html.TextBoxFor(n => n.DayTimeFrom, new { @class = "form-control timepicker" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-clock-o bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+                <label class="col-sm-2 control-label no-padding-right"> @Dictionary["DayTimeTo"]  </label>
+                <div class="col-sm-2">
+                    <div class="input-group bootstrap-timepicker">
+                        @Html.TextBoxFor(n => n.DayTimeTo, new { @class = "form-control timepicker" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-clock-o bigger-110"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Formulation"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.Formulation, new SelectList(ViewBag.Formulation, "ItemValue", "ItemText"), new { @class = "form-control", @onchange = "OpenFormulationBox()" })
+                    @Html.ValidationMessageFor(n => n.Formulation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div id="boxFormulation"></div>
+            @Html.Hidden("selectValueBlockTime")
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["SortOrder"]  </label>
+                <div class="col-sm-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "STT" })
+                    @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-sm-4 control-label no-padding-right">  </label>
+                <div class="col-sm-2">
+                    <label class="line-height-250">
+                        <input type="checkbox" id="limit" name="limit" value="" class="ace">
+                        <span class="lbl">Giới hạn số lượng </span>
+                    </label>
+                </div>
+
+                <div class="col-sm-2">
+                    @Html.TextBoxFor(n => n.RestrictedNumber, new { @class = "form-control ", @type = "number", @min = "-1", })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">  </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsCheckPlate, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsCheckPlate"]</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">  </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsHaveMoneyExpiredDate, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsHaveMoneyExpiredDate"]</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["Inactive"]</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsSpecialGroup, new { @class = "ace" })
+                        <span class="lbl">Nhóm đặc biệt</span>
+                    </label>
+                </div>
+            </div>
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index")" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <link href="~/Content/AdminLayout/css/bootstrap-duallistbox.css" rel="stylesheet" />
+    <script src="~/Content/AdminLayout/js/jquery.bootstrap-duallistbox.js"></script>
+    <script src="~/Scripts/Ext/tblCardGroupController.js"></script>
+    <script>
+        function OpenFormulationBox() {
+            var type = $("#Formulation").val();
+            tblCardGroupController.loadData(type,'@Model.EachFee','@Model.TimePeriods', '@Model.Costs', '@blockTimes');
+        }
+
+        $(document).ready(function () {
+
+            // giới hạn số lượng
+        
+            var limitNb = $('#RestrictedNumber').val();
+            if (limitNb == -1) {
+                $('#limit').prop('checked', false);
+            } else {
+                $('#limit').prop('checked', true);
+            }
+            $('#RestrictedNumber').click(function () {
+                var lm = $('#RestrictedNumber').val();
+                if (lm == -1) {
+                    $('#limit').prop('checked', false);
+                } else {
+                    $('#limit').prop('checked', true);
+                }
+            });
+
+            $("#limit").click(function () {
+                if ($('#limit').is(":checked")) {
+                    $('#RestrictedNumber').val(0);
+                } else {
+                    $('#RestrictedNumber').val(-1);
+                }
+            });
+            $("#Formulation").val('@Model.Formulation');
+
+            tblCardGroupController.loadData('@Model.Formulation','@Model.EachFee','@Model.TimePeriods', '@Model.Costs', '@blockTimes');
+
+            $('.timepicker').timepicker({
+                minuteStep: 1,
+                showMeridian: false,
+                disableFocus: true,
+                icons: {
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down'
+                }
+            }).on('focus', function () {
+                $(this).timepicker('showWidget');
+                });
+
+            ////////////////////////////////////////////////////
+            var demo1 = $('#boxLane #cbLaneList').bootstrapDualListbox({
+                nonselectedlistlabel: 'Non-selected',
+                selectedlistlabel: 'Selected',
+                preserveselectiononmove: 'moved',
+                moveonselect: false
+            });
+
+            $('#boxLane #cbLaneList').on('change', function () {
+                var _val = '';
+                $(this).find('option:selected').each(function () {
+                    //alert($(this).val());
+                    _val += $(this).val() + ',';
+                });
+
+                $('#boxLane #listLanes').val(_val);
+                // alert(_val);
+            });
+
+            var container1 = demo1.bootstrapDualListbox('getContainer');
+            container1.find('.btn').addClass('btn-white btn-info btn-bold');
+
+            var container1 = demo1.bootstrapDualListbox('getContainer');
+            container1.find('.btn').addClass('btn-white btn-info btn-bold');
+
+            //////////////////////////////
+            $("#frmCardGroupUpdate").submit(function () {
+                var formulation = $("#Formulation").val();
+                var str = "";
+
+                if (formulation === "1") {
+
+                    $("#boxFormulation").find(".form-group").each(function () {
+
+                        var cmd = $(this);
+                        var nbBlock = $(this).find("input[name=nbBlock]").val();
+                        var nbTime = $(this).find("input[name=nbTime]").val();
+
+                        str += nbBlock + "-" + nbTime + ";";
+                    });
+                }
+
+                $("#selectValueBlockTime").val(str);
+            });
+        });
+    </script>
+}

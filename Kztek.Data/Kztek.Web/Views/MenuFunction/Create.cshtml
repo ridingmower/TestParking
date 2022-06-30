@@ -1,0 +1,181 @@
+﻿@model Kztek.Model.Models.MenuFunction
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Create";
+
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("MenuFunction", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<style>
+    .fontawesome-select {
+        font-family: 'FontAwesome', 'Helvetica';
+    }
+</style>
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Create", "MenuFunction", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["MenuName"]  </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(n => n.MenuName, new { @class = "col-xs-12 col-sm-5", @placeholder = Dictionary["MenuNamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.MenuName, "", new { @class = "text-danger" })
+                    @Html.Hidden("SaveAndCountinue", false)
+                    @Html.Hidden("group", groupID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["ControllerName"]  </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(n => n.ControllerName, new { @class = "col-xs-12 col-sm-5", @placeholder = Dictionary["ControllerNamePlaceholder"] , @Value = ViewBag.controller })
+                    @Html.ValidationMessageFor(n => n.ControllerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["ActionName"]  </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(n => n.ActionName, new { @class = "col-xs-12 col-sm-5", @placeholder = Dictionary["ActionNamePlaceholder"]  })
+                    @Html.ValidationMessageFor(n => n.ActionName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["ParentId"]  </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(n => n.ParentId, new SelectList(ViewBag.DDLMenu, "Id", "MenuName", ViewBag.parent), new { @class = "col-xs-12 col-sm-5" })
+                    @Html.ValidationMessageFor(n => n.ParentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["MenuType"]  </label>
+                <div class="col-sm-8">
+                    @Html.DropDownListFor(n => n.MenuType, new SelectList(ViewBag.DDLMenuType, "ItemValue", "ItemText", ViewBag.menytypeValue), new { @class = "fontawesome-select col-xs-6 col-sm-3" })
+                    @Html.ValidationMessageFor(n => n.Icon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Icon"]  </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(n => n.Icon, new { @class = "form-control", @placeholder = Dictionary["IconPlaceholder"]  })
+                    @Html.ValidationMessageFor(n => n.Icon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["MenuGroupListId"]  </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.MenuGroupListId, new { @class = "form-control", @placeholder = Dictionary["MenuGroupListIdPlaceholder"] , @Value = ViewBag.grouplistValue })
+                    @Html.ValidationMessageFor(n => n.MenuGroupListId, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-offset-4 col-sm-4">
+                    <label class="grey">@Dictionary["MenuGroupListIdNote"] </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["OrderNumber"]  </label>
+                <div class="col-sm-8">
+                    @Html.TextBoxFor(n => n.OrderNumber, new { @class = "col-xs-12 col-sm-2", @placeholder = "Nhập số thứ tự", @Value = ViewBag.ordernuValue })
+                    @Html.ValidationMessageFor(n => n.OrderNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["isSystem"]  </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.isSystem, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Active"]  </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Active, new { @class = "ace", @checked = "true" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-4 col-md-8 input-group">
+                    <button class="btn btn-success" type="submit" id="Countinue">
+                        <i class="ace-icon fa fa-refresh bigger-110"></i>
+                        @DictionaryAction["Save"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        @DictionaryAction["SaveAndExit"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        @DictionaryAction["Refresh"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <a href="@Url.Action("Index", "MenuFunction", new { group = groupID })" class="btn btn-yellow">
+                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                        @DictionaryAction["BackToList"]
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+    <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+
+    <div class="ace-settings-box clearfix open" id="ace-settings-box">
+        <!-- /.pull-left -->
+        <div class="bg-rightbox">
+            <div class="clearfix lineButton">
+                @{
+                    var list = Kztek.Web.Core.Functions.FunctionHelper.GroupMenuList();
+                    foreach (var item in list)
+                    {
+                        <p>
+                            <span>@item.ItemValue</span> - <span>@item.ItemText</span>
+                        </p>
+                    }
+                }
+            </div>
+        </div>
+        <!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            })
+        });
+    </script>
+}

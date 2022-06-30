@@ -1,0 +1,323 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportInOut>
+
+@{
+    ViewBag.Title = "ReportInOut";
+
+    var listLane = (List<Kztek.Model.Models.tblLane>)ViewBag.LaneList;
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "reportInOut");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+
+    string dateDefault = DateTime.Now.ToString("dd/MM/yyyy 00:00") + "-" + DateTime.Now.ToString("dd/MM/yyyy 23:59");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span id="spCount">0</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportInOutByFilter", "Report", FormMethod.Get, new { id = "frmReportInOutByFilter" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        @Html.Hidden("key", "")
+        @Html.Hidden("DCTypeNames", "")
+        @Html.Hidden("CardGr", "")
+        @Html.Hidden("LaneIns", "")
+        @Html.Hidden("LaneOuts", "")
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportInOutByFilter" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportInOutByFilter" })
+
+        </div>
+    }
+</div>
+
+@Html.Hidden("CardNo", "")
+@Html.Hidden("CardNumber", "")
+@Html.Hidden("Plate", "")
+@Html.Hidden("CardGroup", "")
+@Html.Hidden("LaneIn", "")
+@Html.Hidden("LaneOut", "")
+@Html.Hidden("DCTypeName", "")
+@Html.Hidden("DateTimeIn", dateDefault)
+@Html.Hidden("DateTimeOut", dateDefault)
+@Html.Hidden("DateTimeOut", dateDefault)
+@Html.Hidden("Customer", "")
+@Html.Hidden("Moneys", "")
+@Html.Hidden("UserIn", "")
+@Html.Hidden("UserOut", "")
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover" id="tblEvent">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">@Dictionary["stt"]</th>
+                        <th class="text-left" idata="Card">@Dictionary["cardNo"]<i class=""></i></th>
+                        <th class="text-left">@Dictionary["codeCard"]</th>
+                        <th class="text-left">@Dictionary["licensePlate"] </th>
+                        <th class="text-left">@Dictionary["timeIn"]</th>
+                        <th class="text-left">@Dictionary["timeOut"] </th>
+                        <th class="text-left">@Dictionary["imageIn"] </th>
+                        <th class="text-left">@Dictionary["imageOut"] </th>
+                        <th class="text-left hidden-480" idata="CardGroup"> @Dictionary["cardGroup"]<i class=""></i></th>
+                        <th class="text-left hidden-480" idata="Customer">@Dictionary["customer"] <i class=""></i></th>
+                        <th class="text-left hidden-480">@Dictionary["lanceIn"] </th>
+                        <th class="text-left hidden-480">@Dictionary["lanceOut"] </th>
+                        <th class="text-left">@Dictionary["monitoringIn"] </th>
+                        <th class="text-left">@Dictionary["monitoringOut"] </th>
+                        <th class="hidden-480 ">Loại giảm phí</th>
+                        <th class="text-left ">Số tiền ban đầu </th>
+                        <th class="hidden-480">Số tiền giảm</th>
+                        <th class="hidden-480">Tiền thu thực tế</th>
+                        <th class="text-left" width="80">@Dictionary["action"]</th>
+                    </tr>
+                    <tr class="headerSort">
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="CardNo">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="CardNumber">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="Plate">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control filter daterangtimepicker2" idata="DateTimeIn">
+                            </div>
+                        </th>
+                        <th class="center">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="text" class="form-control filter daterangtimepicker2" idata="DateTimeOut">
+                            </div>
+                        </th>
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+
+                        </th>
+                        <th class="center">
+                            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.Cardgrid, Modelname = "ddlcardgr", labelName = "-- Lựa chọn --" })
+
+
+                        </th>
+                        <th class="center hidden-480">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="Customer">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center hidden-480">
+
+                            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.LaneInDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.LaneIn, Modelname = "ddllaneIns", labelName = "-- Lựa chọn --" })
+
+                        </th>
+                        <th class="center hidden-480">
+
+                            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.LaneInDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.LaneOut, Modelname = "ddllaneOuts", labelName = "-- Lựa chọn --" })
+
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="UserIn">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="center">
+                            <span class="input-icon input-icon-right">
+                                <input type="text" class="form-control filter" idata="UserOut">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="">
+                            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.DCTypeDT, itemValue = "DCTypeName", itemText = "DCTypeName", selectedValues = ViewBag.DiscountParkingId, Modelname = "ddlDiscount", labelName = "-- Lựa chọn --" })
+
+
+                        </th>
+                        <th class="center" width="500px">
+                            <span class="input-icon input-icon-right">
+                                <input type="number" class="form-control filter" idata="Moneys" min="-1" max="100000000">
+                                <i class="ace-icon fa fa-search info"></i>
+                            </span>
+                        </th>
+                        <th class="hidden-480"></th>
+                        <th class="hidden-480"></th>
+                        <th class="center"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="col-xs-12" id="boxPaging">
+
+    </div>
+</div>
+
+@section scripts{
+
+    <script src="~/Areas/Parking/Scripts/ReportInOutByFilterController.js"></script>
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+
+
+            ReportInOutByFilterController.PartialInOutFilter(1, "", "", "", "");
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+
+                var key = "CardNo$" + $("#CardNo").val() + "|" +
+                    "CardNumber$" + $("#CardNumber").val() + "|" +
+                    "Plate$" + $("#Plate").val() + "|" +
+                    "Customer$" + $("#Customer").val() + "|" +
+                    "DateTimeIn$" + $("#DateTimeIn").val() + "|" +
+                    "DateTimeOut$" + $("#DateTimeOut").val() + "|" +
+                    "UserIn$" + $("#UserIn").val() + "|" +
+                    "Moneys$" + $("#Moneys").val() + "|" +
+                    "UserOut$" + $("#UserOut").val();
+
+                $("#key").val(key);
+
+                var DCTypeName = $('#DCTypeName').val();
+                $("#DCTypeNames").val(DCTypeName);
+
+                var laneIns = $('#LaneIn').val();
+                $("#LaneIns").val(laneIns);
+
+                var laneOuts = $('#LaneOut').val();
+                $("#LaneOuts").val(laneOuts);
+
+                var cardGrs = $('#CardGroup').val();
+                $("#CardGr").val(cardGrs);
+
+                $('#frmReportInOutByFilter').submit();
+
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportInOut').submit();
+            });
+
+
+            $('#ddlDiscount').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#DCTypeName').val(str);
+                var DCtype = $('#DCTypeName').val();
+                var laneIns = $('#LaneIn').val();
+                var laneOuts = $('#LaneOut').val();
+                var cardGrs = $('#CardGroup').val();
+                ReportInOutByFilterController.PartialInOutFilter(1, DCtype, laneIns, laneOuts, cardGrs);
+
+            });
+
+            $('#ddllaneIns').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#LaneIn').val(str);
+                var laneIns = $('#LaneIn').val();
+                var DCtype = $('#DCTypeName').val();
+                var laneOuts = $('#LaneOut').val();
+                var cardGrs = $('#CardGroup').val();
+                ReportInOutByFilterController.PartialInOutFilter(1, DCtype, laneIns, laneOuts, cardGrs);
+            });
+
+            $('#ddllaneOuts').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#LaneOut').val(str);
+                var laneIns = $('#LaneIn').val();
+                var DCtype = $('#DCTypeName').val();
+                var laneOuts = $('#LaneOut').val();
+                var cardGrs = $('#CardGroup').val();
+                ReportInOutByFilterController.PartialInOutFilter(1, DCtype, laneIns, laneOuts, cardGrs);
+            });
+
+            $('#ddlcardgr').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#CardGroup').val(str);
+                var cardGrs = $('#CardGroup').val();
+                var laneIns = $('#LaneIn').val();
+                var DCtype = $('#DCTypeName').val();
+                var laneOuts = $('#LaneOut').val();
+
+                ReportInOutByFilterController.PartialInOutFilter(1, DCtype, laneIns, laneOuts, cardGrs);
+            });
+
+            $('#ddlExcelColumn').change(function () {
+                var cmd = $(this);
+                var str = '';
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#excelcol').val(str);
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventInOut')
+        });
+    </script>
+}

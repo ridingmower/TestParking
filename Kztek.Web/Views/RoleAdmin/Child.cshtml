@@ -1,0 +1,46 @@
+﻿@model List<Kztek.Model.Models.MenuFunction>
+
+@{
+    string selected = (string)ViewBag.Selected;
+}
+
+@if (Model.Any())
+{
+    <ul>
+        @foreach (var item in Model.OrderBy(n => n.OrderNumber))
+        {
+            if (selected.Contains(item.Id.ToString()))
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" checked />
+                        <span class="lbl"> </span>
+                    </label>
+                    <span class="liMenuFunction" style="font-weight: bold;">
+                        @item.MenuName
+                    </span>
+                    <span class="pull-right">
+                        @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+                    </span>
+                    @Html.Action("Child", new { parentId = item.Id.ToString(), selectedId = selected })
+                </li>
+            }
+            else
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" />
+                        <span class="lbl"> </span>
+                    </label>
+                    <span class="liMenuFunction" style="font-weight: bold;">
+                        @item.MenuName
+                    </span>
+                    <span class="pull-right">
+                        @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+                    </span>
+                    @Html.Action("Child", new { parentId = item.Id.ToString(), selectedId = selected })
+                </li>
+            }
+        }
+    </ul>
+}

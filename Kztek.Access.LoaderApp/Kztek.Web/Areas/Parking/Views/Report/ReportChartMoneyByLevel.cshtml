@@ -1,0 +1,249 @@
+﻿
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using System.Data
+@model List<Kztek.Model.Models.ReportChartMoneyByLevel>
+
+@{
+    ViewBag.Title = "ReportChartMoneyByLevel";
+    var dt = (System.Data.DataTable)ViewBag.dt;
+}
+
+<div class="page-header">
+    <h1>
+        Biểu đồ doanh thu theo mức thu
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportChartMoneyByLevel", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Làn:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.LaneDT, itemValue = "LaneID", itemText = "LaneName", selectedValues = ViewBag.LaneId, Modelname = "ddllane", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("lane")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm xe:
+            </div>
+
+            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.VehicleGroupDT, itemValue = "VehicleGroupID", itemText = "VehicleGroupName", selectedValues = ViewBag.VehicleGroupId, Modelname = "ddlvehiclegroupid", labelName = "-- Lựa chọn --" })
+            @Html.Hidden("vehiclegroupid")
+
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportChartMoneyByLevel" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportChartMoneyByLevel" })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row" style="height:500px;width: 100%;">
+    <div class="col-xs-12">
+        <div id="income"></div>
+    </div>
+</div>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="divScroll">
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                        <tr class="headerSort">
+                            <th style="text-align: center;">Mức thu</th>
+
+                            @foreach (var item in Model)
+                            {
+                                <th style="text-align: center;">@item.LevelMoney</th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td style="font-weight:bold;">Số tiền(VNĐ)</td>
+                            @foreach (var item1 in Model)
+                            {
+
+                                <td>
+                                    <span>@item1.TotalMoney</span>
+                                </td>
+
+                            }
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+          
+        </div>
+
+    </div>
+}
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            load();
+            $('#ddllane').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#lane').val(str);
+            });
+            $('#ddlvehiclegroupid').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#vehiclegroupid').val(str);
+            });
+            $('button[name=btnFilter]').click(function () {
+                load();
+                $('#frmReportIn').submit();
+            });
+
+
+        });
+        function load() {
+         var dt = [];
+
+            Item = function (LevelMoney, TotalMoney) {
+                var obj = this;
+                obj.LevelMoney = LevelMoney;
+                obj.TotalMoney = TotalMoney;           
+            }
+
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach(var item in Model)
+                {
+                   @:dt.push(new Item(ConvertCharacter('@item.LevelMoney'),'@item.TotalMoney'));
+                }
+            }
+
+
+            LoadChart(dt);
+        }
+        function LoadChart(_dt) {
+            var arrIn = [];
+
+            for (i = 0; i < _dt.length; i++) {
+                var objIn = {
+                    label:_dt[i].LevelMoney,
+                    y: parseInt(_dt[i].TotalMoney.replace(',', '').replace(',', '').replace(',', '').replace(',', '').replace(',', ''))
+                }
+
+                arrIn.push(objIn);
+
+            }
+
+            var chart = new CanvasJS.Chart("income", {
+                title: {
+                    text: "Biểu đồ doanh thu theo mức thu",
+                    fontFamily: "Times New Roman",
+                    fontSize: "28",
+                    fontWeight: "bold"
+                },
+                culture: "es",          
+                animationEnabled: true,          
+                axisX: {
+                    interval: 1                 
+                },   
+                axisY: {
+                    valueFormatString: "#,### VNĐ",
+                },
+             
+                legend: {
+                    cursor: "pointer",
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        }
+                        else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+                },
+
+                toolTip: {
+                    shared: true,
+                    content: function (e) {
+                        var str = '';
+                        var total = 0;
+                        var totalformat = '';
+                        var str3;
+                        var str2;
+                        for (var i = 0; i < e.entries.length; i++) {
+                            var money = e.entries[i].dataPoint.y.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                            var str1 = "<span style= 'color:" + e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>: <strong>" + money + "</strong> <br/>";
+                            total = e.entries[i].dataPoint.y + total;
+                            str = str.concat(str1);
+                        }
+                        totalformat = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                        str2 = "<span style = 'color:DodgerBlue; '><strong>Mức " + e.entries[0].dataPoint.label + "</strong></span><br/>";
+                        str3 = "<span style = 'color:Tomato '>Tổng(VNĐ): </span><strong>" + totalformat + "</strong><br/>";
+
+                        return (str2.concat(str)).concat(str3);
+                    }
+
+                },
+               
+                data: [
+                    {
+                        type: "column",
+                        //showInLegend: true,
+                        name: "Số tiền(VNĐ)",
+                        //color: "rgba(255, 99, 71, 0.8)",
+                        dataPoints: arrIn,                   
+                    }
+                ]
+            });
+
+            chart.render();
+        };
+
+    </script>
+
+}
+
+
+
+

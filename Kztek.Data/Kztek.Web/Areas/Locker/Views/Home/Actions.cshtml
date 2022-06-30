@@ -1,0 +1,199 @@
+﻿@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@{
+    var controller = (string)ViewBag.ControllerName;
+    var action = (string)ViewBag.ActionName;
+    var id = ViewBag.Id;
+    int pn = ViewBag.PN;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryNoti = FunctionHelper.GetLocalizeDictionary("Home", "notification");
+}
+
+@{
+    //Nút thêm mới
+    if (action.Equals("Create"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="@Url.Action(action, controller)" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @Dictionary["Create"]
+            </a>
+        }
+    }
+
+    //Nút cập nhật
+    if (action.Equals("Update"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="@Url.Action(action, controller, new { @id = id , pageNumber = pn})" class="green" title="@Dictionary["Update"]">
+                <i class="ace-icon fa fa-pencil bigger-120"></i>
+            </a>
+        }
+    }
+
+    //Nút xóa
+    if (action.Equals("Delete"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnDelete red" idata="@id" title="@Dictionary["Delete"]">
+                <i class="ace-icon fa fa-trash bigger-120"></i>
+            </a>
+        }
+    }
+
+    //Nút xóa nhiều
+    if (action.Equals("MutilDelete"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnMutilDelete btn btn-sm btn-danger">
+                <i class=" fa fa-trash"></i> Xóa
+            </a>
+        }
+    }
+
+    //Nút active
+    if (action.Equals("Active"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btn btn-sm btn-primary" id="btnDuyet" style="float:right;">
+                <i class=" fa fa-check"></i> Cập nhật
+            </a>
+        }
+    }
+
+    //Nút phân quyền
+    if (action.Equals("Authorize"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="@Url.Action(action, controller, new { @id = id ,pageNumber=pn})" class="blue" title="Cập nhật">
+                <i class="ace-icon fa fa-plug bigger-120"></i>
+            </a>
+        }
+    }
+
+    if (action.Equals("RestoreDefaultPass"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnRes blue" idata="@id" title="Phục hồi mật khẩu">
+                <i class="ace-icon fa fa-recycle bigger-120"></i>
+            </a>
+        }
+    }
+
+    //Restore
+    if (action.Equals("Restore"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnRestore blue" idata="@id" title="Phục hồi">
+                <i class="ace-icon fa fa-refresh bigger-120"></i>
+            </a>
+        }
+    }
+
+    if (action.Equals("PrintFile"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnPrintFile grey" idata="@id" title="In ấn">
+                <i class="ace-icon fa fa-print bigger-120"></i>
+            </a>
+        }
+    }
+
+    //PerDel
+    if (action.Equals("PerDel"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <a href="javascript:void(0)" class="btnPerDel red" idata="@id" title="Xóa vĩnh viễn">
+                <i class="ace-icon fa fa-database bigger-120"></i>
+            </a>
+        }
+    }
+
+    //Export
+    if (action.Equals("Export"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <button class="btn btn-primary btn-white btn-bold" type="button" name="btnExport">
+                <i class="fa fa-file green" aria-hidden="true"></i>
+                @Dictionary["Export"]
+            </button>
+        }
+    }
+
+    //Import
+    if (action.Equals("Import"))
+    {
+        CheckAuthorizeAction.Instance.CheckPemission(controller, action);
+        if (CheckAuthorizeAction.Instance.Check)
+        {
+            <button class="btn btn-primary btn-white btn-bold" type="button" name="btnImport">
+                <i class="fa fa-file green"></i>
+                @Dictionary["Import"]
+            </button>
+        }
+    }
+
+    //Index
+    if (action.Equals("Index"))
+    {
+        if (controller.Contains("Report"))
+        {
+            <a href="@Url.Action(controller, "Report")" class="btn btn-primary btn-white btn-bold" type="submit">
+                <i class="fa fa-refresh green" aria-hidden="true"></i>
+                Reset
+            </a>
+        }
+        else
+        {
+            <a href="@Url.Action(action, controller)" class="btn btn-primary btn-white btn-bold" type="submit">
+                <i class="fa fa-refresh green" aria-hidden="true"></i>
+                Reset
+            </a>
+        }
+    }
+
+    //Search
+    if (action.Equals("Search"))
+    {
+        <button class="btn btn-sm btn-primary" type="button" name="btnFilter">
+            <i class="fa fa-search"></i>
+            @Dictionary["Search"]
+        </button>
+    }
+
+    if (action.Equals("Print"))
+    {
+        <button type="button" class="btn btn-primary btn-white btn-bold" id="btnPrintFile">
+            <i class="fa fa-file-pdf-o green"></i>
+            @Dictionary["Print"]
+        </button>
+    }
+}
+ @*get value munti language từ file XML để truyền vào Kztek.Web\Kztek.Web\Scripts\Ext\common.js*@
+<input type="hidden" name="_nonSelectedText" value="@Dictionary["nonSelect"]" />
+<input type="hidden" name="_allSelectedText" value="@Dictionary["allSelect"]" />
+<input type="hidden" name="_nSelectedText" value="@Dictionary["nSelect"]" />
+<input type="hidden" name="_deleteConfirm" value="@DictionaryNoti["deleteConfirm"]" />
+<input type="hidden" name="_noti" value="@DictionaryNoti["notification"]" />

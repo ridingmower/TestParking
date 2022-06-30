@@ -1,0 +1,167 @@
+﻿@model List<Kztek.Model.Models.ReportTotalMoneyCardMonthByCardGroup>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "ReportTotalMoneyCardMonthByCustomerGroup";
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportTotalMoneyCardMonthByGroupUser");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+    // string money = Convert.ToDouble((double)ViewBag.totalMoney).ToString("###,###");
+    double money = 0;
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"]
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("ReportTotalMoneyCardMonthByCustomerGroup", "Report", FormMethod.Get, new { id = "frmReportTotalMoneyCardMonthByCustomerGroup" }))
+    {
+        @Html.Hidden("chkExport", "0")
+    <div class="row">
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["customerGroup"]:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 divboxmd line-height-450">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportTotalMoneyCardMonthByCustomerGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportTotalMoneyCardMonthByCustomerGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "ReportTotalMoneyCardMonthByCustomerGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportTotalMoneyCardMonthByCustomerGroup" })
+
+        </div>
+    </div>
+     
+      
+    }
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="50">
+                        @Dictionary["stt"]
+                    </th>
+                    <th class="text-left"> @Dictionary["cusGrp"] </th>
+                    <th class="center"> @Dictionary["amount"] </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    var count = 0;
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        money += item.Moneys;
+                        var a = (Convert.ToInt32(item.Level) - 1) * 30;
+                        var style = "margin-left:" + a + "px;";
+                        <tr>
+                            <td align="center">@count</td>
+                            <td>
+                                <span style="@style"></span>
+                                <a href="@Url.Action("ReportDetailMoneyCardMonth", new { customergroup = item.CustomerGroupID, fromdate = ViewBag.fromdateValue, todate= ViewBag.todateValue})" target="_blank">
+                                    @item.GroupName
+                                </a>
+                            </td>
+                            <td align="center">
+                                @if (item.Moneys > 0)
+                                {
+                                    @item.Moneys.ToString("###,###")
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                }
+                <tr>
+                    <td align="center">#</td>
+                    <td><span style="margin-left:30px;"></span>@DictionarySearch["total"]</td>
+                    <td align="center">
+                        @if (money > 0)
+                        {
+                            @money.ToString("###,###")
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        }
+                    </td>
+                </tr>
+            </tbody>
+            @*<tfoot>
+
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportTotalMoneyCardMonthByCustomerGroup').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportTotalMoneyCardMonthByCustomerGroup').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _customergroup = $('#customergroup').val();
+                var url = '/Parking/Report/PrintReportTotalMoneyCardMonthByCustomerGroup?fromdate=' + _frdate + '&todate=' + _todate + '&customergroup=' + _customergroup;
+                window.open(url, '_blank');
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

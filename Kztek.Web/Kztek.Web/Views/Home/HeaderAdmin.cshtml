@@ -1,0 +1,71 @@
+﻿@using Kztek.Web.Core.Functions
+@using Kztek.Web.Models
+@using Kztek.Web.Core.Extensions
+
+@model IEnumerable<Kztek.Model.CustomModel.SelectListModel1>
+
+@{
+    var user = GetCurrentSuperAdmin.GetUser();
+
+    string group = (string)ViewBag.GroupID;
+}
+
+<div class="navbar-container ace-save-state" id="navbar-container">
+    <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+        <span class="sr-only">Toggle sidebar</span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+
+        <span class="icon-bar"></span>
+    </button>
+
+    <div class="navbar-header pull-left">
+        <a href="@Url.Action("Index","Home")" class="navbar-brand">
+            <small>
+                <i class="fa fa-leaf"></i>
+                Kztek JSC
+            </small>
+        </a>
+    </div>
+
+    <div class="navbar-header">
+    </div>
+
+    <div class="navbar-buttons navbar-header pull-right" role="navigation">
+        <ul class="nav ace-nav">
+            @if (user != null)
+            {
+                @*<li class="purple dropdown-modal">
+                        <a name="btnDeleteCached" href="javascript:void(0)" title="Xóa cached">
+                            <i class="ace-icon fa fa-tasks"></i>
+                        </a>
+
+                    </li>*@
+                <li class="light-blue dropdown-modal">
+                    <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                        <img class="nav-user-photo" src="" alt="" />
+                        <span class="user-info">
+                            <small>Welcome,</small>
+                            @user.UserName
+                        </span>
+
+                        <i class="ace-icon fa fa-caret-down"></i>
+                    </a>
+
+                    <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li class="divider"></li>
+
+                        <li>
+                            <a href="@Url.Action("LogoutSuperAdmin", "Login")">
+                                <i class="ace-icon fa fa-power-off"></i>
+                                Đăng xuất
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div><!-- /.navbar-container -->

@@ -1,0 +1,10 @@
+﻿@model List<Kztek.Model.Models.tblCamera>
+@using Kztek.Web.Core.Functions
+
+
+@{
+    string name = string.Format("C{0}", ViewBag.Number);
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblLane", "Update");
+}
+
+@Html.DropDownList(name, new SelectList(Model, "CameraID", "CameraName", ViewBag.selectedCamera), Dictionary["selectCamera"], new { @class = "form-control" })

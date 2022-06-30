@@ -1,0 +1,4 @@
+﻿@using System.Data
+@model DataTable
+
+@Html.Action("DroplistMultiSelectTemplate", "CommonUse", new { _dt = Model, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.ListValue, Modelname = "ddlExcelColumn", labelName = "-- Lựa chọn --" })

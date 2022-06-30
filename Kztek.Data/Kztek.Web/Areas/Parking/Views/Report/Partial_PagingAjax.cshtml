@@ -1,0 +1,10 @@
+﻿@model Kztek.Model.CustomModel.PageModel
+@using Kztek.Web.Core.Extensions
+
+
+    <div class="pull-right" id="@Model.Id">
+        @Html.GeneratePagingFooterAjax(Model.TotalPage, Model.TotalItem, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action(Model.Action, Model.Controller, new
+   {
+       page = x
+   }))
+    </div>

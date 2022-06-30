@@ -1,0 +1,57 @@
+﻿@using Kztek.Model.Models
+@using Kztek.Web.Attributes
+@model List<MenuFunction>
+@{
+    var list = (List<Kztek.Model.Models.MenuFunction>)ViewBag.MenuFunctions;
+    string breadcrumb = (string)ViewBag.BreadcrumbValue;
+    string controller = (string)ViewBag.Controller;
+    string action = (string)ViewBag.Action;
+    string direct = (string)ViewBag.DirectValue;
+}
+
+<ul class="submenu">
+    @if (Model.Any())
+    {
+        foreach (var item in Model.Where(n => n.MenuType.Equals("1")).OrderBy(n => n.OrderNumber))
+        {
+            var child = list.Where(n => n.ParentId.Equals(item.Id.ToString()) && n.MenuType.Equals("1"));
+            if (child.Any())
+            {
+                <li class="@string.Format("{0}", breadcrumb.Contains(item.Id.ToString())? "open active" : "")">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon @item.Icon"></i>
+                        <span class="menu-text">
+                            @item.MenuName
+                        </span>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
+                    <b class="arrow"></b>
+                    @Html.Action("Child", "Home", new { id = item.Id.ToString(), controllerName = controller, actionName = action, breadCrumb = breadcrumb, group = ViewBag.GroupID, listMenu = list })
+                </li>
+            }
+            else
+            {
+                <li class="@string.Format("{0}", ((controller.Equals(item.ControllerName) && action.Equals(item.ActionName)) || (controller.Equals(item.ControllerName) && !controller.Contains("Report")))? "active" : "")">
+                    @if (item.isSystem)
+                    {
+                        <a href="@Url.Action(item.ActionName, item.ControllerName, new { group = ViewBag.GroupID, Area = "" })">
+                            <i class="menu-icon @item.Icon"></i>
+                            <span class="menu-text">
+                                @item.MenuName
+                            </span>
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action(item.ActionName, string.Format("{0}{1}", direct, item.ControllerName), new { group = ViewBag.GroupID})">
+                            <i class="menu-icon @item.Icon"></i>
+                            <span class="menu-text">
+                                @item.MenuName
+                            </span>
+                        </a>
+                    }
+                </li>
+            }
+        }
+    }
+</ul>

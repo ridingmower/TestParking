@@ -1,0 +1,44 @@
+﻿
+@model List<Kztek.Model.CustomModel.SelectListModel>
+
+@*<style>
+    #Modal_AutoCapture .modal-dialog {
+        width: 50%;
+    }
+</style>*@
+<div id="Modal_AutoCapture" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Thời hạn
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="frmAutoCapture" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-12">
+                                        @Html.DropDownList("autocapture", new SelectList(Model, "ItemValue", "ItemText"), new { @class = "form-control chosen-select" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-mini" id="btnClose" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-info btn-mini" id="btnCompleted">Hoàn thành</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

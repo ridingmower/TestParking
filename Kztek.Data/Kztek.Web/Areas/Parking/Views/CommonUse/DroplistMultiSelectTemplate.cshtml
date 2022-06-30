@@ -1,0 +1,26 @@
+﻿@using System.Data
+@model DataTable
+
+@{
+    var list = (List<string>)ViewBag.Selected;
+}
+
+@if (Model.Rows.Count > 0)
+{
+    <select id="@ViewBag.iName" class="multiselect" multiple="" style="display:none;">
+        @foreach (DataRow item in Model.Rows)
+        {
+            if (list != null && list.Count > 0)
+            {
+
+                <option value="@item[ViewBag.ivalue]" @string.Format("{0}", (list != null && list.Contains(item[ViewBag.ivalue]) ? "selected" : ""))>@item[ViewBag.itext]</option>
+
+            }
+            else
+            {
+                <option value="@item[ViewBag.ivalue]">@item[ViewBag.itext]</option>
+            }
+
+        }
+    </select>
+}

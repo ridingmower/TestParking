@@ -1,0 +1,1864 @@
+﻿<root>
+	<tblCard>
+		<share>
+			<Text key="selectCardGrp" value="--Chọn nhóm thẻ--"/>
+		</share>
+		<Index>
+			<Text key="Title" value="Danh sách thẻ"/>
+			<Text key="TitleEx" value="Danh_sách_thẻ"/>
+			<Text key="CardNo" value="CardNo" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="CardGroup" value="Nhóm thẻ" />
+			<Text key="Plate" value="Biển số" />
+			<Text key="ExpireDate" value="Ngày hết hạn" />
+			<Text key="CustomerCode" value="Mã khách hàng" />
+			<Text key="CustomerName" value="Khách hàng" />
+			<Text key="CustomerGroupName" value="Nhóm khách hàng" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="ImportDate" value="Ngày đăng ký" />
+			<Text key="IsLock" value="Trạng thái" />
+			<Text key="IsLockTrue" value="Đang hoạt động" />
+			<Text key="IsLockFalse" value="Không hoạt động" />
+			<Text key="Action" value="Xử lý" />
+			<Text key="NumberRow" value="STT" />
+			<Text key="ContractCode" value="Mã hợp đồng" />
+			<Text key="VehicleNames" value="Tên xe" />
+			<Text key="Identity Card" value="Số chứng minh thư" />
+			<Text key="phone" value="Số điện thoại" />
+			<Text key="add" value="Địa chỉ" />
+			<Text key="Inactive" value="Sử dụng" />
+			<Text key="DateCreated" value="Ngày tạo" />
+			<Text key="DateRegisted" value="Ngày đăng ký" />
+			<Text key="DateCreatedCard" value="Ngày đăng ký" />
+			<Text key="Compartment" value="Căn hộ" />
+			<Text key="Keyword" value="Từ khóa:" />
+			<Text key="KeywordPlaceholder" value="Số thẻ, mã thẻ, mã khách hàng" />
+			<Text key="FromDate" value="Từ ngày:" />
+			<Text key="ToDate" value="Đến ngày:" />
+			<Text key="CustomerGroupFilter" value="Nhóm khách hàng" />
+			<Text key="CustomerGroupFilterPlaceholder" value="--Lựa chọn--" />
+			<Text key="StatusFilter" value="Trạng thái" />
+			<Text key="StatusFilterPlaceholder" value="--Lựa chọn trạng thái--" />
+			<Text key="CardGroupFilter" value="Nhóm thẻ" />
+			<Text key="CardGroupFilterPlaceholder" value="--Lựa chọn--" />
+			<Text key="NoFilter" value="Không lọc theo ngày" />
+			<Text key="FilterByCreated" value="Lọc theo ngày tạo" />
+			<Text key="FilterByRegistration" value="Lọc theo ngày đăng ký" />
+			<Text key="FilterByExpire" value="Lọc theo ngày hết hạn" />
+
+			<Text key="LockCard" value="Khóa thẻ" />
+			<Text key="OpenCard" value="Mở thẻ" />
+			<Text key="DeleteCard" value="Xóa thẻ" />
+
+			<Text key="SelectedCard" value="Đã lựa chọn" />
+
+			<Text key="import" value=" Nhập tệp danh sách thẻ vào hệ thống" />
+			<Text key="dowload" value="Tải xuống tệp danh sách thẻ mẫu" />
+			<Text key="converting" value="Đang chuyển đổi ..." />
+			<Text key="stopConvert" value="Dừng chuyển đổi ..." />
+			<Text key="IdentityCard" value="Chứng minh thư" />
+		</Index>
+		<Create>
+			<Text key="CardInfo" value="Thông tin thẻ" />
+
+			<Text key="CardPrimary" value="Thẻ chính" />
+
+			<Text key="CardNo" value="Số thẻ" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="CardGroup" value="Nhóm thẻ" />
+			<Text key="Description" value="Mô tả" />
+			<Text key="DateRegisted" value="Ngày tạo" />
+			<Text key="DateReleased" value="Ngày phát" />
+			<Text key="DateActive" value="Ngày đăng ký" />
+			<Text key="DateExpired" value="Ngày hết hạn" />
+			<Text key="DateCreated" value="Ngày tạo" />
+			<Text key="CardIsLock" value="Khóa thẻ" />
+			<Text key="DateCreatedCard" value="Ngày đăng ký" />
+
+			<Text key="CustomerInfo" value="Thông tin khách hàng" />
+
+			<Text key="CustomerSearch" value="Tìm kiếm" />
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Tên KH" />
+			<Text key="CustomerMobile" value="SĐT" />
+			<Text key="CustomerIdentify" value="CMT" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="CustomerAvatar" value="Ảnh đại diện" />
+
+			<Text key="VehicleInfo" value="Thông tin xe" />
+
+			<Text key="Plate" value="Biển số" />
+			<Text key="Name" value="Tên xe" />
+
+			<Text key="PlatePlaceholder" value="Biển số " />
+			<Text key="NamePlaceholder" value="Tên xe " />
+		</Create>
+		<Update>
+			<Text key="CardInfo" value="Thông tin thẻ" />
+
+			<Text key="CardPrimary" value="Thẻ chính" />
+
+			<Text key="CardNo" value="Số thẻ" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="CardGroup" value="Nhóm thẻ" />
+			<Text key="Description" value="Mô tả" />
+			<Text key="DateCreate" value="Ngày tạo" />
+			<Text key="DateRegisted" value="Ngày đăng ký" />
+			<Text key="DateReleased" value="Ngày phát" />
+			<Text key="DateActive" value="Ngày hoạt động" />
+			<Text key="DateExpired" value="Ngày hết hạn" />
+			<Text key="CardIsLock" value="Khóa thẻ" />
+
+			<Text key="CustomerInfo" value="Thông tin khách hàng" />
+
+			<Text key="CustomerSearch" value="Tìm kiếm" />
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Tên KH" />
+			<Text key="CustomerMobile" value="SĐT" />
+			<Text key="CustomerIdentify" value="CMT" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="CustomerAvatar" value="Ảnh đại diện" />
+
+			<Text key="VehicleInfo" value="Thông tin xe" />
+
+			<Text key="Plate" value="Biển số" />
+			<Text key="Name" value="Tên xe" />
+
+			<Text key="PlatePlaceholder" value="Biển số " />
+			<Text key="NamePlaceholder" value="Tên xe " />
+		</Update>
+	</tblCard>
+
+	<ActiveCard>
+		<Index>
+			<Text key="Title" value="Gia hạn thẻ"/>
+
+			<Text key="Keyword" value="Từ khóa:" />
+			<Text key="CardGroupFilter" value="Nhóm thẻ" />
+			<Text key="CustomerGroupFilter" value="Nhóm khách hàng" />
+			<Text key="NewDateExtend" value="Ngày gia hạn mới:" />
+			<Text key="NewFee" value="Phí:" />
+			<Text key="AllowNegativeDay" value="Cho phép gia hạn âm ngày?" />
+			<Text key="SearchPlaceHolder" value="Mã thẻ, Mã khách hàng" />
+			<Text key="SelectedCard" value="Thẻ đã chọn" />
+
+			<Text key="Order" value="STT" />
+			<Text key="CardNo" value="Số thẻ" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="DateExpired" value="Ngày hết hạn" />
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Họ tên" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="Vehicle" value="Phương tiện" />
+			<Text key="CardGroup" value="Nhóm thẻ" />
+			<Text key="Address" value="Địa chỉ" />
+
+
+			<Text key="DeleteAll" value="Xóa hết" />
+			<Text key="Delete" value="Xóa" />
+
+			<Text key="Page" value="Trang " />
+			<Text key="Record" value="Tổng bản ghi " />
+
+			<Text key="WarningSelected" value="Vui lòng chọn thẻ muốn gia hạn." />
+
+			<Text key="ExtendAction" value="Gia hạn" />
+			<Text key="ExtendCard" value="thẻ" />
+			<Text key="DateStart" value="Ngày bắt đầu:" />
+		</Index>
+	</ActiveCard>
+
+	<ActiveCardList>
+		<Index>
+			<Text key="Title" value="Lịch sử gia hạn"/>
+			<Text key="TitleEx" value="Lịch_sử_gia_hạn"/>
+			<Text key="TitleDetail" value="Danh sách gia hạn chi tiết"/>
+			<Text key="TitleDetailEx" value="Danh_sách_gia_hạn_chi_tiết"/>
+			<Text key="Keyword" value="Từ khóa:" />
+			<Text key="FromDate" value="Từ ngày:" />
+			<Text key="ToDate" value="Đến ngày:" />
+			<Text key="CardGroupFilter" value="Nhóm thẻ" />
+			<Text key="CustomerGroupFilter" value="Nhóm khách hàng" />
+			<Text key="UserFilter" value="User:" />
+			<Text key="SearchPlaceHolder" value="Từ khóa" />
+			<Text key="Order" value="STT" />
+			<Text key="CardNo" value="Số thẻ" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="CustomerName" value="Họ tên" />
+			<Text key="CustomerGroup" value="Nhóm khách hàng" />
+			<Text key="OldDate" value="Thời hạn cũ" />
+			<Text key="NewDate" value="Thời hạn mới" />
+			<Text key="Fee" value="Giá" />
+			<Text key="User" value="Người thực hiện" />
+			<Text key="DateCreated" value="Ngày tạo" />
+			<Text key="DatePayment" value="Ngày thanh toán" />
+			<Text key="Action" value="Xử lý" />
+			<Text key="NumberRow" value="STT" />
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="dayDifference" value="Ngày chênh lệch"/>
+			<Text key="amount" value="Phí"/>
+			<Text key="DateCreate" value="Ngày tạo"/>
+			<Text key="StaffMade" value="NV thực hiện"/>
+			<Text key="DatePay" value="Ngày thanh toán"/>
+		</Index>
+	</ActiveCardList>
+
+	<ActiveCardDateActive>
+		<Index>
+			<Text key="Title" value="Kích hoạt thẻ"/>
+
+			<Text key="Keyword" value="Từ khóa:" />
+			<Text key="CardGroupFilter" value="Nhóm thẻ" />
+			<Text key="CustomerGroupFilter" value="Nhóm khách hàng" />
+			<Text key="NewDateActive" value="Ngày mới:" />
+			<Text key="SearchPlaceHolder" value="Mã thẻ, mã khách han" />
+			<Text key="SelectedCard" value="Lựa chọn" />
+
+			<Text key="Order" value="STT" />
+			<Text key="CardNo" value="Số thẻ" />
+			<Text key="CardNumber" value="Mã thẻ" />
+
+			<Text key="CustomerName" value="Họ tên" />
+			<Text key="Vehicle" value="Phương tiện" />
+			<Text key="CardGroup" value="Nhóm thẻ" />
+
+			<Text key="DateActive" value="Ngày kích hoạt" />
+
+			<Text key="DeleteAll" value="Xóa tất cả" />
+			<Text key="Delete" value="Xóa" />
+
+			<Text key="Page" value="Trang " />
+			<Text key="Record" value="Tổng bản ghi " />
+
+			<Text key="WarningSelected" value="Vui lòng chọn thẻ muốn kích hoạt" />
+
+			<Text key="ActiveAction" value="Kích hoạt" />
+			<Text key="ActiveCard" value="Thẻ" />
+
+		</Index>
+	</ActiveCardDateActive>
+
+	<tblCustomer>
+		<share>
+			<Text key="typtCus" value="--Lựa chọn--"/>
+		</share>
+		<Index>
+			<Text key="Title" value="Danh sách khách hàng"/>
+			<Text key="TitleEx" value="Danh_sách_khách_hàng"/>
+			<Text key="Keyword" value="Từ khóa:" />
+			<Text key="CustomerGroupFilter" value="Nhóm KH" />
+			<Text key="StatusFilter" value="Trạng thái" />
+
+			<Text key="Order" value="STT" />
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Tên KH" />
+			<Text key="CustomerMobile" value="Điện thoại" />
+			<Text key="CustomerContract" value="Contract" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="Status" value="Trạng thái" />
+			<Text key="Action" value="Thao tác" />
+			<Text key="NumberRow" value="STT" />
+			<Text key="IdentityCard" value="Chứng minh thư" />
+			<Text key="add" value="Địa chỉ" />
+			<Text key="phone" value="SĐT" />
+			<Text key="CardNumber" value="Mã thẻ" />
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="active" value="Hoạt động"/>
+			<Text key="IsLockTrue" value="Hoạt động" />
+			<Text key="IsLockFalse" value="Ngừng hoạt động" />
+			<Text key="Compartment" value="Căn hộ" />
+
+		</Index>
+		<Create>
+			<Text key="Title" value="Tạo mới KH"/>
+			<Text key="CustomerTab" value="Khách hàng" />
+
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Tên KH" />
+			<Text key="CustomerIdentify" value="CMND" />
+			<Text key="CustomerMobile" value="Điện thoại" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="CustomerContract" value="Hợp đồng" />
+			<Text key="ContractStart" value="Ngày bắt đầu HĐ" />
+			<Text key="ContractEnd" value="Ngày kết thúc HĐ" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="CustomerAllowAccess" value="Cho phép đăng nhập" />
+			<Text key="CustomerUsername" value="Tên đăng nhập" />
+			<Text key="CustomerPassword" value="Mật khẩu" />
+			<Text key="CustomerRePassword" value="Nhập lại mật khẩu" />
+			<Text key="CustomerAvatar" value="Ảnh đại diện" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Sửa thông tin KH"/>
+			<Text key="CustomerTab" value="Khách hàng" />
+
+			<Text key="CustomerCode" value="Mã KH" />
+			<Text key="CustomerName" value="Tên KH" />
+			<Text key="CustomerIdentify" value="CMND" />
+			<Text key="CustomerMobile" value="Điện thoại" />
+			<Text key="CustomerGroup" value="Nhóm KH" />
+			<Text key="CustomerContract" value="Hợp đồng" />
+			<Text key="ContractStart" value="Ngày bắt đầu HĐ" />
+			<Text key="ContractEnd" value="Ngày kết thúc HĐ" />
+			<Text key="CustomerAddress" value="Địa chỉ" />
+			<Text key="CustomerAllowAccess" value="Cho phép đăng nhập" />
+			<Text key="CustomerUsername" value="Tên đăng nhập" />
+			<Text key="CustomerPassword" value="Mật khẩu" />
+			<Text key="CustomerRePassword" value="Nhập lại mật khẩu" />
+			<Text key="CustomerAvatar" value="Ảnh đại diện" />
+			<Text key="CustomerIsLock" value="Ngừng sử dụng" />
+			<Text key="Compartment" value="Căn hộ" />
+		</Update>
+	</tblCustomer>
+
+	<tblCustomerGroup>
+		<Index>
+			<Text key="Title" value="Nhóm khách hàng"/>
+
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới nhóm khách hàng"/>
+
+			<Text key="CustomerGroupName" value="Tên nhóm khách hàng" />
+			<Text key="CustomerGroupParent" value="Cấp cha" />
+			<Text key="Ordering" value="Số thứ tự" />
+			<Text key="IsLock" value="Ngừng sử dụng" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật nhóm khách hàng"/>
+
+			<Text key="CustomerGroupName" value="Tên nhóm khách hàng" />
+			<Text key="CustomerGroupParent" value="Cấp cha" />
+			<Text key="Ordering" value="Số thứ tự" />
+			<Text key="IsLock" value="Ngừng sử dụng" />
+		</Update>
+	</tblCustomerGroup>
+
+	<tblSubCard>
+		<Index>
+			<Text key="Title" value="Thẻ phụ"/>
+			<Text key="TitleExcel" value="Thẻ_phụ"/>
+			<Text key="MainCard" value="Mã thẻ chính"/>
+			<Text key="CardNumber" value="Mã thẻ"/>
+			<Text key="CardNo" value="CardNo"/>
+			<Text key="Action" value="Thao tác"/>
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="import" value=" Nhập tệp danh sách thẻ phụ vào hệ thống" />
+			<Text key="dowload" value="Tải xuống tệp danh sách thẻ mẫu" />
+			<Text key="converting" value="Đang chuyển đổi ..." />
+			<Text key="stopConvert" value="Dừng chuyển đổi ..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới"/>
+			<Text key="MainCard" value="Mã thẻ chính"/>
+			<Text key="CardNumber" value="Mã thẻ"/>
+			<Text key="CardNo" value="CardNo"/>
+			<Text key="Placeholder" value="CardNo | Mã thẻ" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật"/>
+			<Text key="MainCard" value="Mã thẻ chính"/>
+			<Text key="CardNumber" value="Mã thẻ"/>
+			<Text key="CardNo" value="CardNo"/>
+			<Text key="Placeholder" value="CardNo | Mã thẻ" />
+		</Update>
+	</tblSubCard>
+
+	<tblCardGroup>
+		<Index>
+			<Text key="Title" value="Danh sách nhóm thẻ"/>
+			<Text key="CardGroupName" value="Tên"/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Inactive" value="Chưa kích hoạt"/>
+			<Text key="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới nhóm thẻ"/>
+			<Text key="CardGroupName" value="Tên nhóm thẻ"/>
+			<Text key="CardGroupNamePlaceholder" value="tên nhóm thẻ..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="CardTypes" value="Loại thẻ"/>
+			<Text key="IsHaveMoneyExcessTime" value="Tính tiền thẻ thuê bao quá giờ"/>
+			<Text key="VehicleGroup" value="Nhóm xe"/>
+
+			<Text key="LaneAssign" value="Phân làn cho nhóm thẻ"/>
+
+			<Text key="EnableFree" value="Miễn phí trong khoảng thời gian (phút) &lt;="/>
+
+			<Text key="DayTimeFrom" value="TG ban ngày(TG hợp lệ thẻ thuê bao) từ"/>
+			<Text key="DayTimeTo" value="đến"/>
+			<Text key="Formulation" value="Tính phí theo"/>
+			<Text key="SortOrder" value="STT"/>
+
+			<Text key="IsCheckPlate" value="Kiểm tra biển số"/>
+			<Text key="IsHaveMoneyExpiredDate" value="Tính tiền thuê bao hết hạn sử dụn"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật nhóm thẻ"/>
+			<Text key="CardGroupName" value="Tên nhóm thẻ"/>
+			<Text key="CardGroupNamePlaceholder" value="tên nhóm thẻ..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="CardTypes" value="Loại thẻ"/>
+			<Text key="IsHaveMoneyExcessTime" value="Tính tiền thẻ thuê bao quá giờ"/>
+			<Text key="VehicleGroup" value="Nhóm xe"/>
+
+			<Text key="LaneAssign" value="Phân làn cho nhóm thẻ"/>
+
+			<Text key="EnableFree" value="Miễn phí trong khoảng thời gian (phút) &lt;="/>
+
+			<Text key="DayTimeFrom" value="TG ban ngày(TG hợp lệ thẻ thuê bao) từ"/>
+			<Text key="DayTimeTo" value="đến"/>
+			<Text key="Formulation" value="Tính phí theo"/>
+			<Text key="SortOrder" value="STT"/>
+
+			<Text key="IsCheckPlate" value="Kiểm tra biển số"/>
+			<Text key="IsHaveMoneyExpiredDate" value="Tính tiền thuê bao hết hạn sử dụn"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+		</Update>
+		<FormulationBlock>
+			<Text key="Block0" value="Block 0"/>
+			<Text key="Block1" value="Block 1"/>
+			<Text key="Block2" value="Block 2"/>
+			<Text key="Block3" value="Block 3"/>
+			<Text key="Block4" value="Block 4"/>
+			<Text key="Block5" value="Block 5"/>
+
+			<Text key="Time" value="Thời gian (phút)"/>
+		</FormulationBlock>
+		<FormulationEachTurn>
+			<Text key="Fee" value="Phí lượt"/>
+		</FormulationEachTurn>
+		<FormulationTimePeriod>
+			<Text key="TimePeriod" value="khoáng thời gian"/>
+			<Text key="Fee" value="Phí tương ứng"/>
+		</FormulationTimePeriod>
+	</tblCardGroup>
+
+	<tblFee>
+		<Shared>
+			<Text key="select" value="--Chọn nhóm thẻ--" />
+		</Shared>
+		<Index>
+			<Text key="Title" value="Danh sách phí thuê bao" />
+
+			<Text key="FeeName" value="Tên" />
+			<Text key="CardGroupName" value="Nhóm thẻ" />
+			<Text key="FeeLevel" value="Mức phí" />
+			<Text key="Period" value="Thời gian" />
+			<Text key="Action" value="Action" />
+
+			<Text key="KeywordPlaceholder" value="CardNo, CardNumber, CustomerCode..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới phí thuê bao" />
+
+			<Text key="FeeName" value="Tên" />
+			<Text key="FeeNamePlaceholder" value="Tên..." />
+			<Text key="CardGroupName" value="Nhóm thẻ" />
+			<Text key="CardGroupNamePlaceholder" value="--Nhóm thẻ--" />
+			<Text key="FeeLevel" value="Mức phí" />
+			<Text key="CurrencyUnit" value="Vnđ" />
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật phí thuê bao" />
+
+			<Text key="FeeName" value="Tên" />
+			<Text key="FeeNamePlaceholder" value="Tên..." />
+			<Text key="CardGroupName" value="Nhóm thẻ" />
+			<Text key="CardGroupNamePlaceholder" value="--Nhóm thẻ--" />
+			<Text key="FeeLevel" value="Mức phí" />
+			<Text key="CurrencyUnit" value="Vnđ" />
+		</Update>
+	</tblFee>
+
+	<tblBlackList>
+		<Index>
+			<Text key ="Title" value="Danh sách biển số đen"/>
+			<Text key ="Name" value="Tên"/>
+			<Text key ="Plate" value="Biển số"/>
+			<Text key ="Description" value="Mô tả"/>
+			<Text key ="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Biển số đen"/>
+			<Text key ="Name" value="Tên xe"/>
+			<Text key ="Plate" value="Biển số"/>
+			<Text key ="Description" value="Mô tả"/>
+			<Text key ="Action" value="Thao tác"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Biển số đen"/>
+			<Text key ="Name" value="Tên xe"/>
+			<Text key ="Plate" value="Biển số"/>
+			<Text key ="Description" value="Mô tả"/>
+			<Text key ="Action" value="Thao tác"/>
+		</Update>
+	</tblBlackList>
+
+	<tblGate>
+		<Index>
+			<Text key="Title" value="Danh sách cổng"/>
+			<Text key="GateName" value="Tên cổng"/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Inactive" value="Chưa kích hoạt"/>
+			<Text key="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới cổng"/>
+			<Text key="GateName" value="Tên"/>
+			<Text key="GateNamePlaceholder" value="Tên..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="SortOrder" value="Thứ tự"/>
+			<Text key="SortOrderPlaceholder" value="Thứ tự..."/>
+			<Text key="Deactive?" value="Ngừng sử dụng?"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Thêm mới cổng"/>
+			<Text key="GateName" value="Tên"/>
+			<Text key="GateNamePlaceholder" value="Tên..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="SortOrder" value="Thứ tự"/>
+			<Text key="SortOrderPlaceholder" value="Thứ tự..."/>
+			<Text key="Deactive?" value="Ngừng sử dụng?"/>
+		</Update>
+	</tblGate>
+
+	<tblPC>
+		<Index>
+			<Text key="Title" value="Danh sách máy tính" />
+
+			<Text key="ComputerName" value="Tên máy tính" />
+			<Text key="IPAddress" value="Địa chỉ IP" />
+			<Text key="GateName" value="Cổng" />
+			<Text key="Description" value="Mô tả" />
+			<Text key="Status" value="Trạng thái" />
+			<Text key="Active" value="Kích hoạt" />
+			<Text key="Inactive" value="Chưa kích hoạt" />
+			<Text key="Action" value="Thao tác" />
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="GateNamePlaceholder" value="--Chọn cổng--"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới máy tính"/>
+			<Text key="ComputerName" value="Tên máy tính"/>
+			<Text key="ComputerNamePlaceholder" value="Nhập tên máy tính"/>
+			<Text key="IPAddress" value="Địa chỉ IP"/>
+			<Text key="IPAddressPlaceholder" value="Nhập IP"/>
+			<Text key="GateName" value="Tên cổng"/>
+			<Text key="GateNamePlaceholder" value="Chọn cổng"/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả.."/>
+			<Text key="PicPathIn" value="Đường dẫn ảnh vào"/>
+			<Text key="PicPathInPlaceholder" value="Đường dẫn ảnh vào.."/>
+			<Text key="PicPathOut" value="Đường dẫn ảnh ra"/>
+			<Text key="PicPathOutPlaceholder" value="Đường dẫn ảnh ra.."/>
+			<Text key="VideoPath" value="Đường dẫn video"/>
+			<Text key="VideoPathPlaceholder" value="Đường dẫn video.."/>
+			<Text key="SortOrder" value="STT"/>
+			<Text key="Deactive?" value="Ngừng sử dụng?"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Update PC"/>
+			<Text key="ComputerName" value="Tên máy tính"/>
+			<Text key="ComputerNamePlaceholder" value="Nhập tên máy tính"/>
+			<Text key="IPAddress" value="Địa chỉ IP"/>
+			<Text key="IPAddressPlaceholder" value="Nhập IP"/>
+			<Text key="GateName" value="Tên cổng"/>
+			<Text key="GateNamePlacholder" value="Chọn cổng"/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả.."/>
+			<Text key="PicPathIn" value="Đường dẫn ảnh vào"/>
+			<Text key="PicPathInPlaceholder" value="Đường dẫn ảnh vào.."/>
+			<Text key="PicPathOut" value="Đường dẫn ảnh ra"/>
+			<Text key="PicPathOutPlaceholder" value="Đường dẫn ảnh ra.."/>
+			<Text key="VideoPath" value="Đường dẫn video"/>
+			<Text key="VideoPathPlaceholder" value="Đường dẫn video.."/>
+			<Text key="SortOrder" value="STT"/>
+			<Text key="Deactive?" value="Ngừng sử dụng?"/>
+			<Text key="GateNamePlaceholder" value="--Chọn cổng--"/>
+		</Update>
+	</tblPC>
+
+	<tblCamera>
+		<Index>
+			<Text key="Title" value="Danh sách camera"/>
+			<Text key="CameraName" value="Tên camera"/>
+			<Text key="HttpUrl" value="Địa chỉ"/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt" />
+			<Text key="Inactive" value="Chưa kích hoạt" />
+			<Text key="Action" value="Thao tác" />
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--" />
+      <Text key="ControllerPlaceholder" value="--Chọn BĐK--" />
+      <Text key="CardgroupPlaceholder" value="--Chọn nhóm thẻ--" />
+      <Text key="ControllerID" value="Bộ điều khiển"/>
+      <Text key="CardGroupID" value="Nhóm thẻ"/>
+      <Text key="Date" value="Ngày tạo"/>
+      <Text key="TitleDynamic" value="Danh sách cấu hình"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới camera"/>
+      <Text key="TitleDynamic" value="Thêm mới"/>
+			<Text key="CameraName" value="Tên camera"/>
+			<Text key="CameraNamePlaceholder" value="Nhập tên camera.."/>
+			<Text key="PCID" value="Máy tính"/>
+			<Text key="PCIDPlaceholder" value="--Chọn máy tính--"/>
+			<Text key="HttpURL" value="Địa chỉ"/>
+			<Text key="HttpURLPlaceholder" value="Ip Address.."/>
+			<Text key="HttpPort" value="Cổng HTTP"/>
+			<Text key="HttpPortPlaceholder" value="Cổng HTTP.."/>
+			<Text key="RtspPort" value="Cổng RTSP"/>
+			<Text key="RtspPortPlaceholder" value="Cổng RTSP.."/>
+			<Text key="UserName" value="Tên đăng nhập"/>
+			<Text key="UserNamePlaceholder" value="Tên đăng nhập.."/>
+			<Text key="Password" value="Mật khẩu"/>
+			<Text key="Channel" value="Kênh"/>
+			<Text key="CameraType" value="Loại camera"/>
+			<Text key="StreamType" value="Định dạng truyền ảnh"/>
+			<Text key="Resolution" value="Độ phân giải"/>
+			<Text key="ResolutionPlaceholder" value="Độ phân giải.."/>
+			<Text key="FrameRate" value="Số hình/s"/>
+			<Text key="SDK" value="SDK"/>
+			<Text key="EnableRecording" value="Ghi hình camera"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+      <Text key="ControllerID" value="Bộ điều khiển"/>
+      <Text key="CardGroupID" value="Nhóm thẻ"/>
+
+		</Create>
+		<Update>
+			<Text key="Title" value="Chỉnh sửa camera"/>
+      <Text key="TitleDynamic" value="Cập nhật"/>
+			<Text key="CameraName" value="Tên camera"/>
+			<Text key="CameraNamePlaceholder" value="Nhập tên camera.."/>
+			<Text key="PCID" value="Máy tính"/>
+			<Text key="PCIDPlaceholder" value="--Chọn máy tính--"/>
+			<Text key="HttpURL" value="Địa chỉ"/>
+			<Text key="HttpURLPlaceholder" value="Ip Address.."/>
+			<Text key="HttpPort" value="Cổng HTTP"/>
+			<Text key="HttpPortPlaceholder" value="Cổng HTTP.."/>
+			<Text key="RtspPort" value="Cổng RTSP"/>
+			<Text key="RtspPortPlaceholder" value="Cổng RTSP.."/>
+			<Text key="UserName" value="Tên đăng nhập"/>
+			<Text key="UserNamePlaceholder" value="Tên đăng nhập.."/>
+			<Text key="Password" value="Mật khẩu"/>
+			<Text key="Channel" value="Kênh"/>
+			<Text key="CameraType" value="Loại camera"/>
+			<Text key="StreamType" value="Định dạng hình ảnh"/>
+			<Text key="Resolution" value="Độ phân giải"/>
+			<Text key="ResolutionPlaceholder" value="Độ phân giải.."/>
+			<Text key="FrameRate" value="Số hình/s"/>
+			<Text key="SDK" value="SDK"/>
+			<Text key="EnableRecording" value="Ghi hình camera"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+      <Text key="ControllerID" value="Bộ điều khiển"/>
+      <Text key="CardGroupID" value="Nhóm thẻ"/>
+		</Update>
+	</tblCamera>
+
+	<tblController>
+		<Index>
+			<Text key="Title" value="Danh sách bộ điều khiển "/>
+			<Text key="ControllerName" value="Tên"/>
+			<Text key="Comport" value="Comport/IP"/>
+			<Text key="PCName" value="Tên máy tính"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt" />
+			<Text key="Inactive" value="Chưa kích hoạt" />
+			<Text key="Action" value="Thao tác" />
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới bộ điều khiển"/>
+			<Text key="ControllerName" value="Tên bộ điều khiển"/>
+			<Text key="ControllerNamePlaceholder" value="Tên bộ điều khiển..."/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--"/>
+			<Text key="CommunicationType" value="Giao thức truyền thông"/>
+			<Text key="Comport" value="Tên cổng COM"/>
+			<Text key="ComportPlaceholder" value="COM1"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="BaudratePlaceholder" value="9600"/>
+			<Text key="IP" value="Địa chỉ IP"/>
+			<Text key="IPPlaceholder" value="Địa chỉ IP..."/>
+			<Text key="Port" value="Port"/>
+			<Text key="PortPlaceholder" value="80"/>
+			<Text key="LineTypeID" value="Loại bộ điều khiển"/>
+			<Text key="Reader1Type" value="Đầu đọc 1"/>
+			<Text key="Reader2Type" value="Đầu đọc 2"/>
+			<Text key="Address" value="Address (RS232/485/422)"/>
+			<Text key="Inactive" value="Dừng dử dụng"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật bộ điều khiển"/>
+			<Text key="ControllerName" value="Tên bộ điều khiển"/>
+			<Text key="ControllerNamePlaceholder" value="Tên bộ điều khiển..."/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--"/>
+			<Text key="CommunicationType" value="Giao thức truyền thông"/>
+			<Text key="Comport" value="Tên cổng COM"/>
+			<Text key="ComportPlaceholder" value="COM1"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="BaudratePlaceholder" value="9600"/>
+			<Text key="IP" value="Địa chỉ IP"/>
+			<Text key="IPPlaceholder" value="Địa chỉ IP..."/>
+			<Text key="Port" value="Port"/>
+			<Text key="PortPlaceholder" value="80"/>
+			<Text key="LineTypeID" value="Loại bộ điều khiển"/>
+			<Text key="Reader1Type" value="Đầu đọc 1"/>
+			<Text key="Reader2Type" value="Đầu đọc 2"/>
+			<Text key="Address" value="Address (RS232/485/422)"/>
+			<Text key="Inactive" value="Dừng dử dụng"/>
+		</Update>
+	</tblController>
+
+	<tblLane>
+		<Index>
+			<Text key="Title" value="Danh sách làn vào ra"/>
+			<Text key="LaneName" value="Tên làn"/>
+			<Text key="LaneType" value="Loại Làn"/>
+			<Text key="ComputerName" value="Tên máy tính"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt" />
+			<Text key="Inactive" value="Chưa kích hoạt" />
+			<Text key="Action" value="Thao tác" />
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="ComputerNamePlaceholder" value="--Tên máy tính--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới làn"/>
+			<Text key="LaneName" value="Tên làn"/>
+			<Text key="LaneNamePlaceholder" value="Nhập tên làn.."/>
+			<Text key="PCID" value="Máy tính"/>
+			<Text key="PCIDPlaceholder" value="--Chọn máy tính--"/>
+			<Text key="LaneType" value="Loại làn"/>
+			<Text key="Cam1" value="C1. Ô tô"/>
+			<Text key="Cam2" value="C2. Xe máy"/>
+			<Text key="Cam3" value="C3. Toàn cảnh"/>
+			<Text key="Cam4" value="C4. Ô tô"/>
+			<Text key="Cam5" value="C5. Xe máy"/>
+			<Text key="Cam6" value="C6. Toàn cảnh"/>
+			<Text key="CheckPlateLevelIn" value="Kiểm tra BS lúc vào"/>
+			<Text key="CheckPlateLevelOut" value="Kiểm tra BS lúc ra"/>
+      <Text key="OpenBarrieIn" value="Mở barrie vào"/>
+      <Text key="OpenBarrieOut" value="Mở barrie ra"/>
+			<Text key="IsLoop" value="Sử dụng vòng (Loop)"/>
+			<Text key="IsPrint" value="Tự động in biên lai"/>
+			<Text key="IsFree" value="Nút miễn phí cho xe ưu tiên "/>
+			<Text key="IsLED" value="Hiển thị LED"/>
+			<Text key="AccessForEachSide" value="Phân quyền cho từng nửa giao diện trái-phải"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+
+			<Text key="CameraPlaceholder" value="--Chọn camera--"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật làn "/>
+			<Text key="LaneName" value="Tên làn"/>
+			<Text key="LaneNamePlaceholder" value="Nhập tên làn.."/>
+			<Text key="PCID" value="Máy tính"/>
+			<Text key="PCIDPlaceholder" value="--Chọn máy tính--"/>
+			<Text key="LaneType" value="Loại làn"/>
+			<Text key="Cam1" value="C1. Ô tô"/>
+			<Text key="Cam2" value="C2. Xe máy"/>
+			<Text key="Cam3" value="C3. Toàn cảnh"/>
+			<Text key="Cam4" value="C4. Ô tô"/>
+			<Text key="Cam5" value="C5. Xe máy"/>
+			<Text key="Cam6" value="C6. Toàn cảnh"/>
+			<Text key="CheckPlateLevelIn" value="Kiểm tra BS lúc vào"/>
+			<Text key="CheckPlateLevelOut" value="Kiểm tra BS lúc ra"/>
+      <Text key="OpenBarrieIn" value="Mở barrie vào"/>
+      <Text key="OpenBarrieOut" value="Mở barrie ra"/>
+			<Text key="IsLoop" value="Sử dụng vòng (Loop)"/>
+			<Text key="IsPrint" value="Tự động in biên lai"/>
+			<Text key="IsFree" value="Nút miễn phí cho xe ưu tiên "/>
+			<Text key="IsLED" value="Hiển thị LED"/>
+			<Text key="AccessForEachSide" value="Phân quyền cho từng nửa giao diện trái-phải"/>
+			<Text key="Inactive" value="Ngừng sử dụng"/>
+
+			<Text key="CameraPlaceholder" value="--Chọn camera--"/>
+			<Text key="selectCamera" value="--Chọn Camera--"/>
+		</Update>
+	</tblLane>
+
+	<tblLED>
+		<Index>
+			<Text key="Title" value="Danh sách LED"/>
+			<Text key="Name" value="Tên"/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="Comport" value="Comport"/>
+			<Text key="Baudrate" value="Baudrate"/>
+			<Text key="LedType" value="Thiết bị hiển thị"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Hoạt động" />
+			<Text key="Inactive" value="Không hoạt động" />
+			<Text key="Action" value="Thao tác" />
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--" />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới LED"/>
+			<Text key="Name" value="Tên"/>
+			<Text key="NamePlaceholder" value="Nhập tên LED.."/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="PCNamePlaceholder" value="Chọn máy tính"/>
+			<Text key="Comport" value="COM(IP)"/>
+			<Text key="Baudrate" value="Baudrate(Port)"/>
+			<Text key="Address" value="Địa chỉ(232/485/422)"/>
+			<Text key="SideIndex" value="Giao diện"/>
+			<Text key="LedType" value="Thiết bị hiển thị"/>
+			<Text key="Active" value="Kích hoạt"/>
+
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật LED"/>
+			<Text key="Name" value="Tên"/>
+			<Text key="NamePlaceholder" value="Nhập tên LED.."/>
+			<Text key="PCName" value="Máy tính"/>
+			<Text key="PCNamePlaceholder" value="--Chọn máy tính--"/>
+			<Text key="Comport" value="COM(IP)"/>
+			<Text key="Baudrate" value="Baudrate(Port)"/>
+			<Text key="Address" value="Địa chỉ(232/485/422)"/>
+			<Text key="SideIndex" value="Giao diện"/>
+			<Text key="LedType" value="Thiết bị hiển thị"/>
+			<Text key="Active" value="Kích hoạt"/>
+		</Update>
+	</tblLED>
+
+	<tblFtpAccount>
+		<Index>
+			<Text key="Title" value="Danh sách kết nối FTP"/>
+			<Text key="FtpHost" value="Tên host"/>
+			<Text key="FtpUser" value="Tên đăng nhập"/>
+			<Text key="FtpPass" value="Mật khẩu"/>
+			<Text key="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..." />
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới kết nối FTP"/>
+			<Text key="FtpHost" value="Tên host"/>
+			<Text key="FtpHostPlaceholder" value="Tên host..."/>
+			<Text key="FtpUser" value="Tên đăng nhập"/>
+			<Text key="FtpUserPlaceholder" value="Tên đăng nhập..."/>
+			<Text key="FtpPass" value="Mật khẩu"/>
+			<Text key="FtpPassPlaceholder" value="Mật khẩu..."/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Chỉnh sửa kết nối FTP"/>
+			<Text key="FtpHost" value="Tên host"/>
+			<Text key="FtpHostPlaceholder" value="Tên host..."/>
+			<Text key="FtpUser" value="Tên đăng nhập"/>
+			<Text key="FtpUserPlaceholder" value="Tên đăng nhập..."/>
+			<Text key="FtpPass" value="Mật khẩu"/>
+			<Text key="FtpPassPlaceholder" value="Mật khẩu..."/>
+		</Update>
+	</tblFtpAccount>
+
+	<User>
+		<Index>
+			<Text key="Title" value="Danh sách người dùng"/>
+			<Text key="Name" value="Tên người dùng"/>
+			<Text key="Phone" value="Số điện thoại"/>
+			<Text key="Username" value="Tên đăng nhập"/>
+			<Text key="DateCreated" value="Ngày tạo"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Inactive" value="Chưa kích hoạt"/>
+			<Text key="IsAdmin" value="Vai trò"/>
+			<Text key="IsAdminTrue" value="Admin"/>
+			<Text key="IsAdminFalse" value="User"/>
+			<Text key="Roles" value="Quyền hạn"/>
+			<Text key="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..."/>
+			<Text key="selected" value="Selected"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Tạo mới người dùng"/>
+			<Text key="Tab_Info" value="Thông tin cơ bản"/>
+			<Text key="Tab_Role" value="Danh sách quyền hạn"/>
+
+			<Text key="Username" value="Tài khoản đăng nhập"/>
+			<Text key="UsernamePlaceholder" value="Tên tài khoản..."/>
+			<Text key="Password" value="Mật khẩu"/>
+			<Text key="RePassword" value="Nhập lại mật khẩu"/>
+			<Text key="IsAdmin" value="Is Admin"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Avatar" value="Ảnh đại diện"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật người dùng"/>
+			<Text key="Tab_Info" value="Thông tin cơ bản"/>
+			<Text key="Tab_Role" value="Danh sách quyền hạn"/>
+
+			<Text key="Username" value="Tài khoản đăng nhập"/>
+			<Text key="UsernamePlaceholder" value="Tên tài khoản..."/>
+			<Text key="Password" value="Mật khẩu"/>
+			<Text key="RePassword" value="Nhập lại mật khẩu"/>
+			<Text key="IsAdmin" value="Is Admin"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Avatar" value="Ảnh đại diện"/>
+		</Update>
+	</User>
+
+	<Role>
+		<Index>
+			<Text key="Title" value="Danh sách vai trò"/>
+			<Text key="ID" value="ID"/>
+			<Text key="RoleName" value="Tên vai trò"/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="Status" value="Trạng thái"/>
+			<Text key="Active" value="Kích hoạt"/>
+			<Text key="Inactive" value="Không kích hoạt"/>
+			<Text key="Action" value="Thao tác"/>
+
+			<Text key="KeywordPlaceholder" value="Từ khóa..."/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới vai trò"/>
+			<Text key="Tab_Info" value="Thông tin cơ bản"/>
+			<Text key="Tab_Menu" value="Danh mục hệ thống"/>
+			<Text key="RoleName" value="Tên vai trò"/>
+			<Text key="RoleNamePlaceholder" value="Tên vai trò..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="Active" value="Kích hoạt"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật vai trò"/>
+			<Text key="Tab_Info" value="Thông tin cơ bản"/>
+			<Text key="Tab_Menu" value="Danh mục hệ thống"/>
+			<Text key="RoleName" value="Tên vai trò"/>
+			<Text key="RoleNamePlaceholder" value="Tên vai trò..."/>
+			<Text key="Description" value="Mô tả"/>
+			<Text key="DescriptionPlaceholder" value="Mô tả..."/>
+			<Text key="Active" value="Kích hoạt"/>
+		</Update>
+	</Role>
+
+	<MenuFunction>
+		<Index>
+			<Text key="Title" value="Danh sách menu"/>
+		</Index>
+		<Create>
+			<Text key="Title" value="Thêm mới menu"/>
+			<Text key="MenuName" value="Tên menu"/>
+			<Text key="MenuNamePlaceholder" value="Tên menu..."/>
+			<Text key="ControllerName" value="Tên controller"/>
+			<Text key="ControllerNamePlaceholder" value="Tên controller..."/>
+			<Text key="ActionName" value="Tên action"/>
+			<Text key="ActionNamePlaceholder" value="Tên action..."/>
+			<Text key="ParentId" value="Cấp cha"/>
+			<Text key="MenuType" value="Loại"/>
+			<Text key="Icon" value="Icon"/>
+			<Text key="IconPlaceholder" value="Icon..."/>
+			<Text key="MenuGroupListId" value="Nhóm"/>
+			<Text key="MenuGroupListIdPlaceholder" value="Nhóm..."/>
+			<Text key="MenuGroupListIdNote" value="Id nhóm cách nhau bằng dấu &#34;,&#34;"/>
+			<Text key="OrderNumber" value="Số thứ tự"/>
+			<Text key="isSystem" value="Thuộc chức năng hệ thống"/>
+			<Text key="Active" value="Sử dụng"/>
+		</Create>
+		<Update>
+			<Text key="Title" value="Cập nhật menu"/>
+			<Text key="MenuName" value="Tên menu"/>
+			<Text key="ControllerName" value="Tên controller"/>
+			<Text key="ControllerNamePlaceholder" value="Tên controller..."/>
+			<Text key="ActionName" value="Tên action"/>
+			<Text key="ActionNamePlaceholder" value="Tên action..."/>
+			<Text key="ParentId" value="Cấp cha"/>
+			<Text key="MenuType" value="Loại"/>
+			<Text key="Icon" value="Icon"/>
+			<Text key="IconPlaceholder" value="Icon..."/>
+			<Text key="MenuGroupListId" value="Nhóm"/>
+			<Text key="MenuGroupListIdPlaceholder" value="Nhóm..."/>
+			<Text key="MenuGroupListIdNote" value="Id nhóm cách nhau bằng dấu &#34;,&#34;"/>
+			<Text key="OrderNumber" value="Số thứ tự"/>
+			<Text key="isSystem" value="Thuộc chức năng hệ thống"/>
+			<Text key="Active" value="Sử dụng"/>
+			<Text key="MenuNamePlaceholder" value="Tên menu..."/>
+
+
+		</Update>
+	</MenuFunction>
+
+	<tblSystemConfig>
+		<Index>
+			<Text key="Title" value="Tham số hệ thống"/>
+			<Text key="Company" value="Tên công ty"/>
+			<Text key="Tel" value="Số điện thoại"/>
+			<Text key="Fax" value="Số fax"/>
+			<Text key="Tax" value="Mã số thuế"/>
+			<Text key="Address" value="Địa chỉ"/>
+			<Text key="FeeName" value="Tên biểu phí"/>
+			<Text key="Logo" value="Logo"/>
+			<Text key="DelayTime" value="DelayTime"/>
+			<Text key="Para1" value="P1(MS)"/>
+			<Text key="Para2" value="P2(KH)"/>
+			<Text key="EnableDeleteCardFailed" value="cho phép xóa thẻ lỗi"/>
+			<Text key="EnableSoundAlarm" value="Cảnh báo bầng âm thanh"/>
+			<Text key="EnableAlarmMessageBox" value="Hiển thị hộp thoại cảnh báo lúc ra"/>
+			<Text key="EnableAlarmMessageBoxIn" value="Hiển thị hộp thoại cảnh báo lúc vào"/>
+      <Text key="SaveEventButton" value="Lưu toàn bộ sự kiện nút ấn"/>
+		</Index>
+	</tblSystemConfig>
+
+	<tblLog>
+		<Index>
+			<Text key="Title" value="Nhật ký hệ thống"/>
+
+			<Text key="Date" value="Ngày tháng"/>
+			<Text key="ComputerName" value="Máy tính"/>
+			<Text key="UserName" value="Người dùng"/>
+			<Text key="SubSystemCode" value="Ứng dụng"/>
+			<Text key="ObjectName" value="Đối tượng"/>
+			<Text key="Actions" value="Thao tác"/>
+			<Text key="Description" value="Mô tả"/>
+
+			<Text key="Keyword" value="Từ khóa"/>
+			<Text key="KeywordPlaceholder" value="Từ khóa..."/>
+			<Text key="FromDate" value="Từ ngày:"/>
+			<Text key="ToDate" value="Đến ngày:"/>
+			<Text key="ActionFilter" value="Hành động:"/>
+			<Text key="UserFilter" value="Người dùng:"/>
+
+		</Index>
+	</tblLog>
+
+	<!--Báo cáo-->
+	<report>
+		<reportSearch>
+			<Text key="keyWord" value="Từ khóa"/>
+			<Text key="keywordPlaceholder" value="Mã thẻ, Biển số..." />
+			<Text key="customerGroup" value="Nhóm khách hàng"/>
+			<Text key="fromDate" value="Từ ngày" />
+			<Text key="toDate" value="Đến ngày" />
+			<Text key="checkByTime" value="Tìm theo thời gian" />
+			<Text key="lane" value="Làn" />
+			<Text key="user" value="Người dùng" />
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="select" value="--Lựa chọn--"/>
+			<Text key="time" value="Thời điểm"/>
+			<Text key="vehicleGroup" value="Nhóm phương tiện"/>
+			<Text key="checkByTimeIn" value="Lọc theo thời gian vào" />
+			<Text key="checkByTimeOut" value="Lọc theo thời gian ra" />
+			<Text key="chooseDate" value="Chọn ngày"/>
+			<Text key="cardIsAboutExpire" value="Thẻ sắp hết hạn"/>
+			<Text key="expiredCard" value="Thẻ hết hạn"/>
+			<Text key="action" value="Hành động"/>
+			<Text key="totalAmount" value="Tổng tiền"/>
+			<Text key="Filter_by_registration_date" value="Lọc theo đăng ký"/>
+			<Text key="Filter_by_release_date" value="Lọc theo ngày phát hành"/>
+			<Text key="bookkeeper" value="Người lập báo cáo"/>
+			<Text key="approver" value="Người phê duyệt"/>
+			<Text key="total" value="Tổng"/>
+		</reportSearch>
+
+		<!--Xe trong bãi hiện tại-->
+		<reportIn>
+			<Text key="title" value="Xe trong bãi hiện tại"/>
+			<Text key="titleExcell" value="Xe_trong_bãi_hiện_tại"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="timeOut" value="Thời gian ra"/>
+			<Text key="imageIn" value="Ảnh vào"/>
+			<Text key="imageOut" value="Ảnh ra"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="user" value="Người dùng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="monitoringIn" value="Giám sát vào"/>
+			<Text key="expiredDate" value="Ngày hết hạn"/>
+			<Text key="remainingTime" value="Thời gian còn lại"/>
+			<Text key="action" value="Xử lý"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="stt" value="STT"/>
+			<Text key="mainCard" value="Mã thẻ chính"/>
+		</reportIn>
+
+
+		<!--Xe trong bãi tại thời điểm bất kỳ-->
+		<reportVehicleInAnyTime>
+			<Text key="title" value="Xe trong bãi tại thời điểm bất kỳ"/>
+			<Text key="titleExcell" value="Xe_trong_bãi_tại_thời_điểm_bất_kỳ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="groupName" value="Tên nhóm"/>
+			<Text key="quantity" value="Số lượng"/>
+		</reportVehicleInAnyTime>
+
+		<!--Chi tiết xe trong bãi tại thời điểm bất kỳ-->
+		<reportDetailVehicleInAnyTime>
+			<Text key="title" value="Chi tiết xe trong bãi tại thời điểm bất kỳ"/>
+			<Text key="titleExcell" value="Chi_tiết_xe_trong_bãi_tại_thời_điểm_bất_kỳ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="imageIn" value="Hình ảnh vào"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Người dùng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="monitoringIn" value="Giám sát vào"/>
+		</reportDetailVehicleInAnyTime>
+
+		<!--Báo cáo xe ra-->
+		<reportInOut>
+			<Text key="title" value=" Báo cáo xe ra"/>
+			<Text key="titleExcell" value="Báo_cáo_xe_ra"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="timeOut" value="Thời gian ra"/>
+			<Text key="imageIn" value="Ảnh vào"/>
+			<Text key="imageOut" value="Ảnh ra"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="lanceOut" value="Làn ra"/>
+			<Text key="monitoringIn" value="Giám sát vào"/>
+			<Text key="monitoringOut" value="Giám sát ra"/>
+			<Text key="amount" value="Số tiền"/>
+			<Text key="action" value="Xử lý"/>
+		</reportInOut>
+
+		<!--Báo cáo xe vào-->
+		<ReportVehicleComeIn>
+			<Text key="title" value="Báo cáo xe vào"/>
+			<Text key="titleExcell" value="Báo_cáo_xe_vào"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="imageIn" value="Ảnh vào"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="monitoringIn" value="Giám sát vào"/>
+			<Text key="action" value="Xử lý"/>
+		</ReportVehicleComeIn>
+
+		<!--Chi tiết thu tiền thẻ lượt-->
+		<ReportDetailMoneyCardDay>
+			<Text key="title" value="Chi tiết thu tiền thẻ lượt"/>
+			<Text key="titleExcell" value="Chi_tiết_thu_tiền_thẻ_lượt"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="timeOut" value="Thời gian ra"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="lanceOut" value="Làn ra"/>
+			<Text key="monitoringIn" value="Giám sát vào"/>
+			<Text key="monitoringOut" value="Giám sát ra"/>
+			<Text key="amount" value="Số tiền"/>
+			<Text key="timeAll" value="Tổng thời gian"/>
+			<Text key="action" value="Xử lý"/>
+			<Text key="total" value="Tổng"/>
+			<Text key="moneyin" value="Tiền vào"/>
+			<Text key="moneyout" value="Tiền ra"/>
+			<Text key="paystate" value="Trạng thái tiền vào"/>
+			<Text key="totalinout" value="Tổng đã thanh toán"/>
+		</ReportDetailMoneyCardDay>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo nhóm thẻ-->
+		<ReportTotalMoneyByCardGroup>
+			<Text key="title" value="Tổng hợp thu tiền thẻ lượt theo nhóm thẻ"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_lượt_theo_nhóm_thẻ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="quantity" value="Số lượng"/>
+			<Text key="amount" value="Số tiền"/>
+		</ReportTotalMoneyByCardGroup>
+
+    <!--Tổng hợp thu tiền thẻ lượt theo nhóm thẻ-->
+    <ReportTotalByCardGroup_LOTTE>
+      <Text key="title" value="Tổng hợp thu tiền theo nhóm thẻ"/>
+      <Text key="titleEx" value="Tổng_hợp_thu_tiền_theo_nhóm_thẻ"/>
+    </ReportTotalByCardGroup_LOTTE>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo làn đường-->
+		<ReportTotalMoneyByLane>
+			<Text key="title" value="Tổng hợp thu tiền thẻ lượt theo làn đường"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_lượt_theo_làn_đường"/>
+			<Text key="stt" value="STT"/>
+			<Text key="lane" value="Làn đường"/>
+			<Text key="amount" value="Số tiền"/>
+		</ReportTotalMoneyByLane>
+
+		<!--Tổng hợp thu tiền thẻ lượt theo người dùng-->
+		<ReportTotalMoneyByUser>
+			<Text key="title" value="Tổng hợp thu tiền thẻ lượt theo người dùng"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_lượt_theo_người_dùng"/>
+			<Text key="stt" value="STT"/>
+			<Text key="user" value="Người dùng"/>
+			<Text key="amount" value="Số tiền"/>
+		</ReportTotalMoneyByUser>
+
+		<!--Chi tiết thu tiền thẻ tháng-->
+		<ReportDetailMoneyCardMonthTRANSERCO>
+			<Text key="title" value="Chi tiết thu tiền thẻ tháng"/>
+			<Text key="titleEx" value="Chi_tiết_thu_tiền_thẻ_tháng"/>
+			<Text key="keywordPlaceholder" value="Mã thẻ ..."/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="customerGroup" value="Nhóm khách hàng"/>
+			<Text key="durationOld" value="Thời hạn cũ"/>
+			<Text key="durationNew" value="Thời hạn mới"/>
+			<Text key="amount" value="Phí(VNĐ)"/>
+			<Text key="payment" value="Thanh toán"/>
+			<Text key="staffMade" value="NV thực hiện"/>
+			<Text key="executionDate" value="Ngày thực hiện"/>
+			<Text key="contractCode" value="Mã hợp đồng"/>
+			<Text key="address" value="Địa chỉ"/>
+		</ReportDetailMoneyCardMonthTRANSERCO>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo nhóm thẻ-->
+		<ReportTotalMoneyCardMonthByCardGroup>
+			<Text key="title" value="Tổng hợp thu tiền thẻ tháng theo nhóm thẻ"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_tháng_theo_nhóm_thẻ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardGroupName" value="Tên nhóm thẻ"/>
+			<Text key="amount" value="Số tiền(VNĐ)"/>
+		</ReportTotalMoneyCardMonthByCardGroup>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo người dùng-->
+		<ReportTotalMoneyCardMonthByUser>
+			<Text key="title" value="Tổng hợp thu tiền thẻ tháng theo người dùng"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_tháng_theo_người_dùng"/>
+			<Text key="stt" value="STT"/>
+			<Text key="userName" value="Tên người dùng"/>
+			<Text key="amount" value="Số tiền"/>
+		</ReportTotalMoneyCardMonthByUser>
+
+		<!--Tổng hợp thu tiền thẻ tháng theo nhóm khách hàng-->
+		<ReportTotalMoneyCardMonthByGroupUser>
+			<Text key="title" value="Tổng hợp thu tiền thẻ tháng theo nhóm khách hàng"/>
+			<Text key="titleEx" value="Tổng_hợp_thu_tiền_thẻ_tháng_theo_nhóm_khách_hàng"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cusGrp" value="Nhóm khách hàng"/>
+			<Text key="amount" value="Số tiền"/>
+		</ReportTotalMoneyCardMonthByGroupUser>
+
+		<!--Báo cáo lượt ra vào miễn phí toàn phần-->
+		<!--Báo cáo lượt ra vào miễn phí 1 phần-->
+		<ReportVehicleFreeAll>
+			<Text key="titleAll" value="Báo cáo lượt ra vào miễn phí"/>
+			<Text key="titleExAll" value="Lượt_ra_vào_miễn_phí"/>
+			<Text key="titlePart" value="Báo cáo lượt ra vào miễn phí một phần"/>
+			<Text key="titleExPart" value="Lượt_ra_vào_miễn_phí_một_phần"/>
+			<Text key="stt" value="STT"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời điểm vào"/>
+			<Text key="timeOut" value="Thời điểm ra"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="lanceOut" value="Làn ra"/>
+			<Text key="monitoringIn" value="Kiểm soát vào"/>
+			<Text key="monitoringOut" value="Kiểm soát ra"/>
+			<Text key="amount" value="Số tiền"/>
+			<Text key="voucher" value="Voucher"/>
+			<Text key="total" value="Tổng"/>
+			<Text key="amountFree" value="Số tiền miễn phí"/>
+
+		</ReportVehicleFreeAll>
+
+		<!--Thời hạn thẻ tháng-->
+		<ReportCardExpire>
+			<Text key="title" value="Thời hạn thẻ tháng"/>
+			<Text key="titleEx" value="Thời_hạn_thẻ_tháng"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="customerCode" value="Mã khách hàng"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="add" value="Địa chỉ"/>
+			<Text key="phone" value="Sđt"/>
+			<Text key="expirationDate" value="Ngày hết hạn"/>
+		</ReportCardExpire>
+
+		<!--Chi tiết xử lý thẻ-->
+		<ReportCardProcessDetail>
+			<Text key="title" value="Chi tiết xử lý thẻ"/>
+			<Text key="titleEx" value="Chi_tiết_xử_lý_thẻ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="time" value="Thời gian"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="codeCard" value="Mã thẻ"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="behavior" value="Thao tác"/>
+			<Text key="cardHolder" value="Chủ thẻ"/>
+			<Text key="cusGrp" value="Nhóm khách hàng"/>
+			<Text key="add" value="Địa chỉ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="staffMade" value="Nhân viên xử lý"/>
+
+		</ReportCardProcessDetail>
+
+		<!--Tổng hợp xử lý thẻ-->
+		<ReportCardProcess>
+			<Text key="title" value="Tổng hợp xử lý thẻ"/>
+			<Text key="titleEx" value="Tổng_hợp_xử_lý_thẻ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="addCard" value="Thêm thẻ"/>
+			<Text key="cardIssuance" value="Phát thẻ"/>
+			<Text key="changeCard" value="Đổi thẻ"/>
+			<Text key="returnCard" value="Trả thẻ"/>
+			<Text key="openCard" value="Mở thẻ"/>
+			<Text key="lockCard" value="Khóa thẻ"/>
+			<Text key="delCard" value="Xóa thẻ"/>
+			<Text key="activeCard" value="Kích hoạt thẻ"/>
+		</ReportCardProcess>
+
+		<!--Sự kiện cảnh báo-->
+		<ReportAlarm>
+			<Text key="title" value="Sự kiện cảnh báo"/>
+			<Text key="titleEx" value="Sự kiện cảnh báo"/>
+			<Text key="keywordPlaceholder" value="Mã thẻ..." />
+			<Text key="stt" value="STT"/>
+			<Text key="time" value="Thời gian"/>
+			<Text key="cardCode" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="image" value="Hình ảnh"/>
+			<Text key="warning" value="Cảnh báo"/>
+			<Text key="lane" value="Làn đường"/>
+			<Text key="monitoring" value="Giám sát"/>
+			<Text key="explanation" value="Diễn giải"/>
+		</ReportAlarm>
+		<!--other-->
+
+		<!--Chi tiết thông tin thẻ-->
+		<ReportCustomerList>
+			<Text key="title" value="Chi tiết thông tin thẻ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="customerCode" value="Mã khách hàng"/>\
+			<Text key="customergrp" value="Nhóm khách hàng"/>
+			<Text key="name" value="Họ tên"/>
+			<Text key="add" value="Địa chỉ"/>
+			<Text key="phone" value="Điện thoại"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="expirationDate" value="Ngày hết hạn"/>
+			<Text key="Date_of_card_entry" value="Ngày nhập thẻ"/>
+			<Text key="type" value="Trạng thái"/>
+			<Text key="cardCode" value="Mã thẻ"/>
+		</ReportCustomerList>
+
+
+		<!--Báo cáo chi tiết thẻ theo căn hộ-->
+		<ReportCardDetailByCompartment>
+			<Text key="title" value="Báo cáo chi tiết thẻ theo căn hộ"/>
+			<Text key="stt" value="STT"/>
+			<Text key="apartment" value="Căn hộ"/>
+			<Text key="customerCode" value="Mã KH"/>
+			<Text key="customergrp" value="Nhóm KH"/>
+			<Text key="name" value="Tên khách hàng"/>
+			<Text key="cardGroup" value="nhóm thẻ"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardCode" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="expirationDate" value="Ngày đăng ký"/>
+			<Text key="Date_of_card_entry" value="Ngày phát thẻ"/>
+			<Text key="Card_cancellation_date" value="Ngày hủy thẻ"/>
+			<Text key="staff_made" value="NV thực hiện"/>
+		</ReportCardDetailByCompartment>
+
+		<!-- Báo cáo tổng hợp theo mã thẻ cho lượt vào ra phát sinh phụ trội-->
+		<ReportTotalSubventionByCardNumber>
+			<Text key="title" value="Báo cáo tổng hợp theo mã thẻ cho lượt vào ra phát sinh phụ trội"/>
+			<Text key="title_EX" value="Báo_cáo_tổng_hợp_theo_mã_thẻ_cho_lượt_vào_ra_phát_sinh_phụ_trội"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardId" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="customerGroup" value="Nhóm khách hàng"/>
+			<Text key="cost" value="Phí"/>
+		</ReportTotalSubventionByCardNumber>
+
+		<!--Báo cáo chi tiết xe phát sinh phí phụ trội-->
+		<ReportVehicleMoneyByCardMonth>
+			<Text key="title" value="Báo cáo chi tiết xe phát sinh phí phụ trội"/>
+			<Text key="title_EX" value="Báo_cáo_chi_tiết_xe_phát_sinh_phí_phụ_trội"/>
+			<Text key="stt" value="STT"/>
+			<Text key="cardNo" value="CardNo"/>
+			<Text key="cardId" value="Mã thẻ"/>
+			<Text key="licensePlate" value="Biển số"/>
+			<Text key="timeIn" value="Thời gian vào"/>
+			<Text key="customer" value="Khách hàng"/>
+			<Text key="cardGroup" value="Nhóm thẻ"/>
+			<Text key="cost" value="Phí"/>
+			<Text key="lanceIn" value="Làn vào"/>
+			<Text key="lanceOut" value="Làn ra"/>
+			<Text key="monitoringIn" value="Kiểm soát vào"/>
+			<Text key="monitoringOut" value="Kiểm soát ra"/>
+		</ReportVehicleMoneyByCardMonth>
+
+		<ReportCardCompartment>
+			<Text key="title" value="Thẻ theo căn hộ"/>
+			<Text key="titleDetail" value="Báo cáo chi tiết thẻ theo căn hộ"/>
+			<Text key="titleDetail_EX" value="Báo_cáo_chi_tiết_thẻ_theo_căn_hộ"/>
+			<Text key="titleTotal" value="Báo cáo tổng hợp thẻ theo căn hộ"/>
+			<Text key="titleTotal_EX" value="Báo_cáo_tổng_hợp_thẻ_theo_căn_hộ"/>
+			<Text key="Compartment" value="Căn hộ"/>
+			<Text key="CAR_REG" value="Ôtô đăng ký"/>
+			<Text key="CAR_NOTUSE" value="Ôtô không sử dụng"/>
+			<Text key="CAR_USE" value="Ôtô sử dụng"/>
+			<Text key="CYCLE_REG" value="Xe máy đăng ký"/>
+			<Text key="CYCLE_NOTUSE" value="XM không sử dụng"/>
+			<Text key="CYCLE_USE" value="Xe máy sử dụng"/>
+			<Text key="BIKE_REG" value="Xe đạp đăng ký"/>
+			<Text key="BIKE_NOTUSE" value="XĐ không sử dụng"/>
+			<Text key="BIKE_USE" value="Xe đạp sử dụng"/>
+		</ReportCardCompartment>
+
+	</report>
+
+	<Home>
+		<Index>
+			<Text key="fromdate" value="Từ ngày"/>
+			<Text key="todate" value="Đến ngày"/>
+			<Text key="vehiclein" value="Xe vào"/>
+			<Text key="vehicleout" value="Xe ra"/>
+		</Index>
+		<Action>
+			<Text key="Create" value="Thêm mới" />
+			<Text key="Update" value="Cập nhật" />
+			<Text key="Delete" value="Xóa" />
+			<Text key="Import" value="Nhập excel" />
+			<Text key="Export" value="Xuất excel" />
+			<Text key="Reset" value="Nạp lại" />
+			<Text key="Search" value="Tìm kiếm" />
+			<Text key="Print" value="Print" />
+			<Text key="decentralization" value="Phân quyền" />
+
+			<Text key="Save" value="Lưu" />
+			<Text key="SaveAndExit" value="Lưu và thoát" />
+			<Text key="Refresh" value="Nhập lại" />
+			<Text key="BackToList" value="Quay lại" />
+			<Text key="exit" value="Thoát" />
+
+			<Text key="ChangeCustomer" value="Đổi khách hàng" />
+			<Text key="ReturnCard" value="Trả thẻ" />
+
+			<Text key="nonSelect" value="--Lựa chọn--" />
+			<Text key="allSelect" value="--Đã chọn tất cả--" />
+			<Text key="nSelect" value="--Đã chọn--" />
+
+		</Action>
+
+		<notification>
+			<Text key="notification" value="Thông báo" />
+			<Text key="deleteConfirm" value="Bạn có chắc chắn muốn xóa bản ghi này?" />
+			<Text key="DeleteSuccess" value="Xóa thành công" />
+			<Text key="DeleteFail" value="Xóa không thành công" />
+			<Text key="LstDelSuccess" value="Xóa tất cả danh sách thành công" />
+			<Text key="addSuccess" value="Tạo mới thành công" />
+			<Text key="updateSuccess" value="Update thành công" />
+			<Text key="updateFailed" value="Update không thành công" />
+
+			<Text key="del_menu_fail" value="Không thể xóa menu đang kích hoạt" />
+			<Text key="del_user_fail" value="Không thể xóa Người dùng là Admin" />
+
+			<Text key="record_already_exist" value="Bản ghi đã tồn tại" />
+			<Text key="record_does_not_exist" value="Bản ghi không tồn tại" />
+			<Text key="card_does_not_exist_in_the_system" value="Thẻ không tồn tại trong hệ thống" />
+			<Text key="card_is_existing_in_the_event" value="Thẻ đang tồn tại trong sự kiện. Không thể xóa" />
+			<Text key="lockCardConfirm" value="Bạn có chắc chắn muốn khóa những thẻ này?" />
+			<Text key="openCardConfirm" value="Bạn có chắc chắn muốn mở khóa những thẻ này?" />
+			<Text key="reason" value="Lý do của bạn là gì ?" />
+			<Text key="err" value="Có lỗi xảy ra. Vui lòng thử lại" />
+			<Text key="please_select_card" value="Vui lòng chọn thẻ" />
+			<Text key="changeAnotherCustomer" value="Vui lòng nhập mã khách hàng mới. Nhấn 'Lưu và thoát' để lưu thay đổi." />
+			<Text key="returnCardFromCustomer" value="Trả thẻ thành công. Nhấn 'Lưu và thoát' để lưu thay đổi" />
+			<Text key="Please_enter_the_CardNo" value="Vui lòng nhập số thẻ" />
+			<Text key="Please_enter_the_Card_Number" value="Vui lòng nhập mã thẻ" />
+			<Text key="please_select_card_group" value="Vui lòng chọn nhóm thẻ" />
+			<Text key="Card_code_already_exists" value="mã thẻ đã tồn tại" />
+			<Text key="messErrExtendCard" value="Vui lòng chọn dang sách thẻ muốn gia hạn" />
+			<Text key="ConfirmExtendCard" value="Bạn chắc chắn muốn gia hạn những thẻ này?" />
+			<Text key="select_card_activate" value="Vui lòng chọn thẻ muốn kích hoạt" />
+			<Text key="enter_customer_name" value="Vui lòng nhập tên khách hàng" />
+			<Text key="enter_customer_code" value="Vui lòng nhập mã khách hàng" />
+			<Text key="Customer_code_already_exists" value="Mã khách hàng đã tồn tại" />
+			<Text key="correct_password" value="Vui lòng nhập lại đúng mật khẩu" />
+
+			<Text key="enter_CardGrp_name" value="Vui lòng nhập tên nhóm thẻ" />
+			<Text key="CardGrp_lane" value="Vui lòng phân làn cho nhóm thẻ" />
+			<Text key="CardGrp_already_exists" value="Nhóm thẻ đã tồn tại" />
+
+			<Text key="cusGrp_name" value="Vui lòng nhập tên Nhóm Khách Hàng" />
+			<Text key="enter_name" value="Vui lòng nhập tên" />
+			<Text key="exists_name" value="Tên đã tồn tại" />
+
+			<Text key="exists_Number_plate" value="Thông tin biển số đã tồn tại" />
+
+			<Text key="enter_Number_plate" value="Vui lòng nhập biển số" />
+			<Text key="Message_del_fail_computer" value="Đang sử dụng trong máy tính. Không thể xóa" />
+			<Text key="Computer_Name" value="Vui lòng nhập tên máy tính" />
+			<Text key="ip" value="Vui lòng nhập địa chỉ Ip" />
+			<Text key="ip_already_exists" value="Địa chỉ ip đã tồn tại" />
+			<Text key="Camera_Name" value="Vui lòng nhập tên Camera" />
+			<Text key="Camera_already_exists" value="Tên Camera đã tồn tại" />
+			<Text key="Controller_Name" value="Vui lòng nhập tên bộ điều khiển" />
+			<Text key="Controller_Name_already_exists" value="Tên bộ điều khiển đã tồn tại" />
+			<Text key="Lane_Name" value="Vui lòng nhập tên làn" />
+			<Text key="Lane_Name_already_exists" value="Tên bộ điều khiển đã tồn tại" />
+			<Text key="interface" value="Vui lòng chọn giao diện" />
+			<Text key="addIp" value="Vui lòng nhập Địa chỉ(232/485/422)" />
+			<Text key="LED_Name_already_exists" value="LED Name đã tồn tại" />
+			<Text key="LEDName" value="Vui lòng nhập tên LED" />
+      <Text key="Info_already_exists" value="Thông tin đã tồn tại" />
+
+			<Text key="ErMenu" value="Có lỗi xảy ra trong quá trình khởi tạo" />
+			<Text key="menu_Name" value="Vui lòng nhập tên menu" />
+			<Text key="Role_Name" value="Vui lòng nhập tên quyền" />
+			<Text key="Role_New" value="Thêm mới vai trò" />
+			<Text key="Role_update" value="Cập nhật vai trò" />
+			<Text key="Role_User" value="Bạn chắc chắn muốn phân quyền các người dùng này?" />
+
+			<Text key="User_name_already_exists" value="Tên người dùng đã tồn tại" />
+			<Text key="re_enter_pass_correct" value=" Vui lòng nhập lại đúng mật khẩu" />
+			<Text key="re_enter_pass" value="Vui lòng nhập lại mật khẩu" />
+			<Text key="Admin_account" value=" Đây là tài khoản Admin không thể xóa" />
+			<Text key="Username_already_exists" value="Tên người dùng đã tồn tại. Vui lòng nhập tên gười dùng khác" />
+			<Text key="Email_already_exists" value="Email đã tồn tại. Vui lòng nhập tên email khác" />
+			<Text key="re-enter_new_password" value="Vui lòng nhập lại password mới" />
+			<Text key="re-enter_old_password" value="Vui lòng nhập lại password cũ" />
+			<Text key="choose_authority" value="Vui lòng chọn quyền" />
+			<Text key="choose_user" value="Vui long chọn người dùng" />
+			<Text key="re-pass" value="Bạn chắc chắn muốn phục hồi mật khẩu tài khoản này?" />
+			<Text key="Successful_recovery" value="Phục hồi thành công" />
+			<Text key="Recovery_failed" value="Phục hồi thất bại" />
+			<Text key="enter_MainCard_name" value="Vui lòng nhập mã thẻ chính" />
+
+		</notification>
+
+		<MenuFunction>
+			<!--Home-->
+			<Text key="Home" value="Bàn làm việc" />
+			<!--tblCard-->
+			<Text key="controller_67797447" value="Quản lý thẻ" />
+			<Text key="tblCard_Index" value="Danh sách thẻ" />
+			<Text key="tblCard_Create" value="Thêm mới" />
+			<Text key="tblCard_Update" value="Cập nhật" />
+			<Text key="controller_43820046" value="Gia hạn thẻ" />
+			<Text key="ActiveCard_Index" value="Gia hạn mới" />
+			<Text key="ActiveCardList_Index" value="DS Đã gia hạn" />
+			<Text key="ActiveCardDateActive_Index" value="Kích hoạt thẻ" />
+			<!--tblCustomer-->
+			<Text key="controller_55844880" value="Quản lý khách hàng" />
+			<Text key="tblCustomer_Index" value="Danh sách khách hàng" />
+			<Text key="tblCustomer_Create" value="Thêm mới" />
+			<Text key="tblCustomer_Update" value="Cập nhật" />
+			<!--Directory-->
+			<Text key="controller_71080602" value="Danh mục" />
+
+			<Text key="tblCardGroup_Index" value="Nhóm thẻ" />
+			<Text key="tblCardGroup_Create" value="Thêm mới" />
+			<Text key="tblCardGroup_Update" value="Cập nhật" />
+
+			<Text key="tblCompartment_Index" value="Nhóm căn hộ" />
+
+			<Text key="tblCustomerGroup_Index" value="Nhóm khách hàng" />
+			<Text key="tblCustomerGroup_Create" value="Thêm mới" />
+			<Text key="tblCustomerGroup_Update" value="Cập nhật" />
+
+			<Text key="tblFee_Index" value="Phí thuê bao" />
+			<Text key="tblFee_Create" value="Thêm mới" />
+			<Text key="tblFee_Update" value="Cập nhật" />
+
+			<Text key="tblBlackList_Index" value="Biển số đen" />
+			<Text key="tblBlackList_Create" value="Thêm mới" />
+			<Text key="tblBlackList_Update" value="Cập nhật" />
+			<!--Device-->
+			<Text key="controller_81507875" value="Cài đặt thiết bị" />
+
+			<Text key="tblGate_Index" value="Cổng" />
+			<Text key="tblGate_Create" value="Thêm mới" />
+			<Text key="tblGate_Update" value="Cập nhật" />
+
+			<Text key="tblPC_Index" value="Máy tính" />
+			<Text key="tblPC_Create" value="Thêm mới" />
+			<Text key="tblPC_Update" value="Cập nhật" />
+
+			<Text key="tblCamera_Index" value="Cameras" />
+			<Text key="tblCamera_Create" value="Thêm mới" />
+			<Text key="tblCamera_Update" value="Cập nhật" />
+
+			<Text key="tblController_Index" value="Bộ điều khiển" />
+			<Text key="tblController_Create" value="Thêm mới" />
+			<Text key="tblController_Update" value="Cập nhật" />
+
+			<Text key="tblLane_Index" value="Làn vào/ra" />
+			<Text key="tblLane_Create" value="Thêm mới" />
+			<Text key="tblLane_Update" value="Cập nhật" />
+
+			<Text key="tblLED_Index" value="LED hiển thị" />
+			<Text key="tblLED_Create" value="Thêm mới" />
+			<Text key="tblLED_Update" value="Cập nhật" />
+
+			<!--System-->
+			<Text key="controller_35537716" value="Hệ thống" />
+
+			<Text key="User_Index" value="Người dùng" />
+			<Text key="User_Create" value="Thêm mới" />
+			<Text key="User_Update" value="Cập nhật" />
+
+			<Text key="Role_Index" value="Vai trò, quyền hạn" />
+			<Text key="Role_Create" value="Thêm mới" />
+			<Text key="Role_Update" value="Cập nhật" />
+
+			<Text key="MenuFunction_Index" value="Danh mục hệ thống" />
+			<Text key="MenuFunction_Create" value="Create" />
+			<Text key="MenuFunction_Update" value="Update" />
+
+			<Text key="tblSystemConfig_Index" value="Tham số hệ thống" />
+			<Text key="tblLog_Index" value="Nhật ký hệ thống" />
+			<!--Report-->
+			<Text key="controller_81478553" value="Báo cáo"/>
+
+			<Text key="controller_93393965" value="Xe trong bãi"/>
+			<Text key="Report_ReportIn" value="Xe trong bãi hiện tại"/>
+			<Text key="Report_ReportVehicleInAnyTime" value="Tổng hợp xe trong bãi đến thời điểm bất kỳ"/>
+			<Text key="Report_ReportDetailVehicleInAnyTime" value="Chi tiết xe trong bãi tại thời điểm bất kỳ"/>
+
+			<Text key="controller_65558701" value="Xe vào / ra"/>
+			<Text key="Report_ReportInOut" value="Xe ra khỏi bãi"/>
+			<Text key="Report_ReportVehicleComeIn" value="Xe vào bãi"/>
+
+			<Text key="controller_108250286" value="Thu tiền thẻ lượt"/>
+			<Text key="Report_ReportDetailMoneyCardDay" value="Chi tiết thu tiền thẻ lượt"/>
+			<Text key="Report_ReportTotalMoneyByCardGroup" value="Tổng hợp thu tiền thẻ lượt theo nhóm thẻ"/>
+			<Text key="Report_ReportTotalMoneyByLane" value="Tổng hợp thu tiền thẻ lượt theo làn đường"/>
+			<Text key="Report_ReportTotalMoneyByUser" value="Tổng hợp thu tiền thẻ lượt theo người dùng"/>
+
+			<Text key="controller_69053990" value="Thu tiền thẻ tháng"/>
+			<Text key="Report_ReportDetailMoneyCardMonth" value="Chi tiết thu tiền thẻ tháng"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByCardGroup" value="Tổng hợp thu tiền thẻ tháng theo nhóm thẻ"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByCustomerGroup" value="Tổng hợp thu tiền thẻ tháng theo nhóm khách hàng"/>
+			<Text key="Report_ReportTotalMoneyCardMonthByUser" value="Tổng hợp thu tiền thẻ tháng theo người dùng"/>
+
+			<Text key="controller_112087670" value="Báo cáo lượt xe ra vào miễn phí"/>
+			<Text key="Report_ReportVehicleFreeAll" value="Miễn phí hoàn toàn"/>
+			<Text key="Report_ReportVehicleFreeApart" value="Miễn phí một phần"/>
+
+			<Text key="Report_ReportCardExpire" value="Thời hạn thẻ"/>
+
+			<Text key="controller_69624132" value="Xử lý thẻ"/>
+			<Text key="Report_ReportCardProcessDetail" value="Chi tiết xử lý thẻ"/>
+			<Text key="Report_ReportCardProcess" value="Báo cáo tổng hợp xử lý thẻ"/>
+
+			<Text key="Report_ReportAlarm" value="Sự kiện cảnh báo"/>
+
+			<Text key="controller_163427001" value="Khác"/>
+			<Text key="Report_ReportCustomerList" value="Chi tiết thông tin thẻ"/>
+			<Text key="Report_ReportCardDetailByCompartment" value="Báo cáo chi tiết thẻ theo căn hộ"/>
+			<Text key="Report_ReportCardTotalByCompartment" value="Báo cáo tổng hợp thẻ theo căn hộ"/>
+			<Text key="Report_ReportPrint" value="Báo cáo in HĐ"/>
+			<Text key="Report_ReportVehicleOutByHand" value="Báo cáo cho xe ra thủ công"/>
+			<Text key="Report_ReportDetailMoneyCardDay3" value="Chi tiết thu tiền thẻ lượt 3"/>
+			<Text key="Report_ReportTotalByCardGroup" value="Tổng hợp theo nhóm thẻ"/>
+			<Text key="Report_ReportVehicleEvent" value="Báo cáo chi tiết thu tiền của xe đỗ vị trí Taxi Hà Nội"/>
+			<Text key="Report_ReportTotalMoneyByVehicleEvent" value="Báo cáo tổng hợp doanh thu vé lượt theo vị trí đỗ xe"/>
+			<Text key="Report_ReportTotalMoneyAndVehicleByCardGroup" value="Bảng tổng hợp doanh thu trông giữ xe"/>
+			<Text key="Report_ReportTotalMoneyByCardGroupCAB2VCT" value="Báo cáo doanh thu theo ca"/>
+			<Text key="Report_ReportVehicleTooDay" value="Báo cáo xe đỗ quá ngày"/>
+			<Text key="Report_ReportInOutByCustomer" value="báo cáo nhóm thẻ nhân viên"/>
+
+			<Text key="Report_ReportInternal" value="Báo cáo nội bộ"/>
+			<Text key="Report_ReportPublic" value="Báo cáo công khai"/>
+		</MenuFunction>
+
+		<Breadcrumb>
+			<Text key="Homepage" value="Trang chủ"/>
+		</Breadcrumb>
+
+		<Header>
+			<Text key="Manage" value="Quản lý"/>
+			<Text key="Account" value="Tài khoản"/>
+			<Text key="Logout" value="Đăng xuất"/>
+		</Header>
+	</Home>
+
+	<SelectList>
+		<CustomerStatusType>
+			<Text key="active" value="Kích hoạt"/>
+			<Text key="inactive" value="Dừng hoạt động"/>
+		</CustomerStatusType>
+
+		<LaneTypes1>
+			<Text key="chooseAction" value="--Chọn Loại--"/>
+			<Text key="in" value=" Vào "/>
+			<Text key="out" value=" Ra "/>
+		</LaneTypes1>
+
+		<CheckPlateLevelOuts>
+			<Text key="4char" value=" So sánh >= 4 ký tự"/>
+			<Text key="all" value="So sánh tất cả ký tự"/>
+			<Text key="noCheck" value="Không so sánh"/>
+      <Text key="CheckAllPlate" value="So sánh biển đăng ký, biển vào, biển ra"/>
+      <Text key="CheckPlateInOut" value="Chỉ so sánh biển vào, biển ra"/>
+      <Text key="CheckPlateOutAndRegistration" value="Chỉ so sánh biển ra, biển đăng ký"/>
+      <Text key="CardMonth" value="Thẻ tháng"/>
+		</CheckPlateLevelOuts>
+    <OpenBarrie>
+      <Text key="noOpen" value="Không mở barrie"/>
+      <Text key="noOpenAndnoCheck" value="Không mở barrie và kiểm tra biển số"/>
+      <Text key="OpenAllTicket" value="Tự mở với mọi loại thẻ"/>
+      <Text key="OnlyCardMonthAndAllType" value="Thẻ tháng đúng BS đăng ký và thẻ lượt"/>
+      <Text key="AutoInOutSame" value="Chỉ mở khi BS vào ra giống nhau"/>
+      <Text key="AutoInOutDifferent" value="Mở với mọi trường hợp"/>
+      <Text key="OnlyCardMonth" value="Chỉ mở với thẻ tháng đúng BS đăng ký"/>
+      <Text key="OnlyTurnMonth" value="Chỉ mở với thẻ lượt"/>
+      <Text key="OnlyMonthCard" value="Chỉ mở với thẻ tháng"/>
+    </OpenBarrie>
+		<ControllerType>
+			<Text key="chooseControllerType" value="--Chọn Loại--"/>
+		</ControllerType>
+
+		<CameraTypes1>
+			<Text key="CamType" value="--Chọn loại camera--"/>
+		</CameraTypes1>
+
+		<StreamType>
+			<Text key="StreamType" value="--Chọn định truyền ảnh--"/>
+		</StreamType>
+
+		<SDKs1>
+			<Text key="SDKs1" value="--Chọn loại--"/>
+		</SDKs1>
+
+		<CustomerGroupID>
+			<Text key="SlectlistCusGrp" value="--Chọn nhóm khách hàng--"/>
+		</CustomerGroupID>
+
+		<CardTypes>
+			<Text key="monthlyTicket" value="Thuê bao"/>
+			<Text key="ticketEachTime" value="Vé lượt"/>
+			<Text key="freeTicket" value="Vé miến phí"/>
+		</CardTypes>
+
+		<FormulationList>
+			<Text key="turn" value="Lượt"/>
+			<Text key="block" value="Block"/>
+			<Text key="periodTime" value="khoảng thời gian"/>
+		</FormulationList>
+
+		<menuFunction>
+			<Text key="menuFunction" value="--Chọn danh mục--"/>
+		</menuFunction>
+
+		<CardStatus>
+			<Text key="select" value="-- Lựa chọn trạng thái --"/>
+			<Text key="active" value="Thẻ hoạt động"/>
+			<Text key="inactive" value="Thẻ khóa"/>
+		</CardStatus>
+
+		<CardGroup>
+			<Text key="SlectlistCardGrp" value="--Chọn nhóm thẻ--"/>
+		</CardGroup>
+
+		<ActionCard>
+			<Text key="select" value="--Chọn thao tác--"/>
+			<Text key="add" value="Thêm thẻ"/>
+			<Text key="release" value="Phát thẻ"/>
+			<Text key="return" value="Trả thẻ"/>
+			<Text key="change" value="Đổi thẻ"/>
+			<Text key="del" value="Xóa thẻ"/>
+			<Text key="lock" value="Khóa thẻ"/>
+			<Text key="unlock" value="Mở thẻ"/>
+			<Text key="active" value="Kích hoạt thẻ"/>
+		</ActionCard>
+
+		<AlarmCodes>
+			<Text key="unknownCard" value="Không xác định được thẻ"/>
+			<Text key="lock" value="Thẻ bị khóa"/>
+			<Text key="permissions" value="Sai quyền truy cập"/>
+			<Text key="inParking" value="Xe đã vào bãi"/>
+			<Text key="notInParking" value="Xe chưa vào bãi"/>
+			<Text key="openBarrieByComputer" value="Mở barrie bằng máy tính"/>
+			<Text key="openBarrieByButton" value="Mở barrie bằng nút ấn"/>
+			<Text key="eventEscapeIn" value="Sự kiện escape vào"/>
+			<Text key="eventEscapeOut" value="Sự kiện escape ra"/>
+			<Text key="Card_expired" value="Thẻ hết hạn sử dụng"/>
+			<Text key="Invalid_license_plates" value="Biển số không hợp lệ"/>
+			<Text key="Black_list" value="Danh sách đen"/>
+			<Text key="lock_License_plate" value="Biển số bị khóa"/>
+			<Text key="License_plate_expired" value="Biển số hết hạn sử dụng"/>
+			<Text key="Locked_tag_group" value="Nhóm thẻ bị khóa"/>
+			<Text key="License_plate_do_not_match" value="Biển số không khớp "/>
+			<Text key="Vehicles_beyond_the_magnetic_ring" value="Xe đè vòng từ"/>
+
+			<!--dự án hòa phát mandarin garden 15/7/2019 dungdt
+      Sự kiện cảnh báo chưa có trường thông tin: "Không tồn tại trên hệ thống"-->
+			<Text key="Not_exist_on_the_system" value="Không tồn tại trên hệ thống"/>
+		</AlarmCodes>
+
+		<GroupMenuList>
+			<Text key="67810176" value="Dịch vụ tòa nhà"/>
+			<Text key="98818976" value="Quản lý vào ra"/>
+			<Text key="12878956" value="Bãi xe thông minh"/>
+			<Text key="61119719" value="Tủ đồ thông minh"/>
+			<Text key="75675733" value="Cư dân"/>
+		</GroupMenuList>
+		<HubList1>
+			<Text key="select" value="--Lựa chọn--"/>
+			<Text key="left" value="Trái"/>
+			<Text key="right" value="Phải"/>
+			<Text key="all" value="All"/>
+		</HubList1>
+	</SelectList>
+
+	<Login>
+		<Index>
+			<Text key="AccountInfo" value="Thông tin tài khoản"/>
+			<Text key="UserNamePlaceholder" value="Nhập tên đăng nhập"/>
+			<Text key="PasswordPlaceholder" value="Nhập mật khẩu"/>
+			<Text key="Remember" value="Ghi nhớ"/>
+			<Text key="ButtonLogin" value="Đăng nhập"/>
+		</Index>
+	</Login>
+</root>

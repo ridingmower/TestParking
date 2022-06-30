@@ -1,0 +1,436 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportCardProcess>
+
+@{
+    ViewBag.Title = "ReportCardProcessDetail";
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var listaction = (List<SelectListModel>)ViewBag.Action;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportCardProcessDetail");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportCardProcessDetail", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        @*@Html.Hidden("column", column)
+            @Html.Hidden("desc", isDescSort)*@
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["keyWord"]:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="@DictionarySearch["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["customerGroup"]:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroupCs, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["action"]:
+            @Html.DropDownList("_action", new SelectList(ViewBag.Action, "ItemValue", "ItemText", ViewBag.ActionValue), new { @class = "form-control chosen-select" })
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["user"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.UserDT, itemValue = "Id", itemText = "Username", selectedValues = ViewBag.UserId, Modelname = "ddluser", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("user")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["cardGroup"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd line-height-450">
+
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportCardProcessDetail" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportCardProcessDetail" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportCardProcessDetail" })
+
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center">@Dictionary["stt"]</th>
+                    <th class="center">@Dictionary["time"]</th>
+                    <th class="center">@Dictionary["cardNo"]</th>
+                    <th class="center">@Dictionary["codeCard"]</th>
+                    <th class="center hidden-480">@Dictionary["cardGroup"]</th>
+                    <th class="center hidden-480">@Dictionary["behavior"]</th>
+                    <th class="center hidden-480">@Dictionary["cardHolder"]</th>
+                    <th class="center hidden-480">@Dictionary["cusGrp"]</th>
+                    <th class="center hidden-480">@Dictionary["add"]</th>
+                    <th class="center hidden-480">@Dictionary["licensePlate"]</th>
+                    <th class="center hidden-480">@Dictionary["staffMade"]</th>
+                    <th class="center hidden-480">Thông tin cũ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td>@item.RowNumber</td>
+                            <td>
+                                @Convert.ToDateTime(item.Date).ToString("dd/MM/yyy HH:mm:ss")
+                            </td>
+                            <td>
+                                @item.CardNo
+                            </td>
+                            <td>
+                                @item.CardNumber
+                            </td>
+
+                            <td>
+                                @{
+                                    var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupID)) : null;
+
+                                    if (objcardGroup != null)
+                                    {
+                                        <span>@objcardGroup.CardGroupName</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Actions))
+                                {
+                                    var a = listaction.Where(n => n.ItemValue.Contains(item.Actions));
+                                    if (a != null && a.Any())
+                                    {
+                                        switch (item.Actions)
+                                        {
+                                            case "ADD":<span class="label label-success">Thêm thẻ</span>
+                                                break;
+                                            case "DELETE":<span class="label label-danger">Xóa thẻ</span>
+                                                break;
+                                            case "CHANGE":<span class="label label-info">Đổi thẻ</span>
+                                                break;
+                                            case "RELEASE":<span class="label label-purple">Phát thẻ</span>
+                                                break;
+                                            case "RETURN":<span class="label">Trả thẻ</span>
+                                                break;
+                                            case "LOCK":<span class="label label-light">Khóa thẻ</span>
+                                                break;
+                                            case "UNLOCK":<span class="label label-grey">Mở thẻ</span>
+                                                break;
+                                            case "ACTIVE":<span class="label label-pink">Kích hoạt thẻ</span>
+                                                break;
+                                            case "CHANGEPLA":<span class="label label-grey">Đổi biển số</span>
+                                                break;
+                                            case "UPDATEINFO":<span class="label label-pink">Đổi nhóm thẻ</span>
+                                                break;
+                                            default: <span></span>
+                                                break;
+
+                                        }
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @item.CustomerName
+                            </td>
+                            <td>
+                                @{
+                                    var objcustomerGroup = listCustomerGroup != null ? listCustomerGroup.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID)) : null;
+
+                                    if (objcustomerGroup != null)
+                                    {
+                                        <span>@objcustomerGroup.CustomerGroupName</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @item.Address
+                            </td>
+                            <td>
+
+
+                                @{
+                                    var plates = ( item.Plate != "" ? item.Plate : "") + (item.Plate2 != "" ? "," + item.Plate2 : "");
+                                      <span>    @plates </span>
+                                    }
+                              
+
+                            </td>
+                            <td>
+                                @{
+                                    var objuser = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserID)) : null;
+
+                                    if (objuser != null)
+                                    {
+                                        <span>@objuser.Username</span>
+                                    }
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    if (item.OldInfoCP != null)
+                                    {
+                                        var OldCp = Newtonsoft.Json.JsonConvert.DeserializeObject<Kztek.Model.Models.CardCustom>(item.OldInfoCP);
+
+                                        if (OldCp.CardNo != null)
+                                        {
+                                            <p>Số thẻ : @OldCp.CardNo</p>
+                                        }
+                                        else
+                                        {
+
+                                        }
+
+                                        if (OldCp.Plate1 == null || OldCp.Plate1 == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>Biển số 1 : @OldCp.Plate1</p>
+                                        }
+                                        if (OldCp.Plate2 == null || OldCp.Plate2 == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>Biển số 2 : @OldCp.Plate2</p>
+                                        }
+                                        if (OldCp.Plate3 == null || OldCp.Plate3 == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>Biển số 3 : @OldCp.Plate3</p>
+                                        }
+
+                                        if (OldCp.CustomerCode != null)
+                                        {
+                                            <p>Mã KH : @OldCp.CustomerCode</p>
+                                        }
+                                        else
+                                        {
+
+                                        }
+                                        if (OldCp.CustomerName == null || OldCp.CustomerName == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>Tên KH : @OldCp.CustomerName</p>
+                                        }
+                                        if (OldCp.Mobile == null || OldCp.Mobile == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>SĐT : @OldCp.Mobile</p>
+                                        }
+
+                                        if (OldCp.CardGrname == null || OldCp.CardGrname == "")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <p>Nhóm thẻ : @OldCp.CardGrname</p>
+                                        }
+                                    }
+
+
+
+                                }
+
+                            </td>
+                            @*<td>@((ReportController)this.ViewContext.Controller)     GetExpireDate()</td>
+                                <td>@GetDays()</td>*@
+                            @*<td>
+                                    @if (user.Admin)
+                                    {
+                                        <a href="javascript:void(0)" class="btnDelete red" idata="@item.Id.ToString()" title="Xóa">
+                                            <i class="ace-icon fa fa-trash bigger-120"></i>
+                                        </a>
+                                    }
+                                </td>*@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportCardProcessDetail", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               _action = ViewBag.ActionValue,
+               user = ViewBag.UserId,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               customergroup = ViewBag.CustomerGroupId
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        })
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddluser').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#user').val(str);
+            });
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportIn').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportIn').submit();
+            });
+
+            //Xóa 1 bản ghi
+            $('.btnDelete').click(function () {
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+                if (confirm('Bạn chắc chắn muốn xóa bản ghi này?')) {
+                    $.ajax({
+                        url: _prefixParkingDomain + '/Report/DeleteEventIn',
+                        data: { id: _id },
+                        type: 'json',
+                        //async:false,
+                        success: function (data) {
+                            if (data.Success) {
+                                cmd.parent().parent().fadeOut();
+                                toastr.success(data.Message)
+                            } else {
+                                toastr.error(data.Message)
+                            }
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+}
+

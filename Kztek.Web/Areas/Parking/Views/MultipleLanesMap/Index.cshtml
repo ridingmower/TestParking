@@ -1,0 +1,101 @@
+﻿@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+@model List<Kztek.Model.Models.MultipleLanesMap>
+@{
+    ViewBag.Title = "Danh sách nhiều làn";
+}
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+<div class="row">
+    @using (Html.BeginForm("Index", "MultipleLanesMap", FormMethod.Get, new { id = "frmLane" }))
+    {
+        @Html.Hidden("countpc", Model.Count)
+
+
+        <div class="form-group">
+            <label class="col-sm-1 control-label no-padding-right menu-text"> Số lượng giao diện</label>
+            <div class="col-sm-1 col-xs-12">
+                <input type="number" name="countpc" id="countpcid" class="form-control" min="0" max="9" value="0" />
+            </div>
+
+        </div>
+
+    }
+
+</div>
+<br />
+<div id="boxModal">
+
+</div>
+<div id="showpc"></div>
+
+<div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+    <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+        <i class="ace-icon fa fa-cog bigger-130"></i>
+    </div>
+
+    <div class="ace-settings-box clearfix open" id="ace-settings-box">
+        <!-- /.pull-left -->
+        <div class="bg-rightbox">
+            <div class="clearfix lineButton">
+                <div class="col-md-12 input-group">
+                  
+                    <button class="btn btn-info" type="button" id="btn_Delete">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Xóa
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /.pull-left -->
+    </div><!-- /.ace-settings-box -->
+</div>
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/MultipleLanesController.js"></script>
+    <script>
+
+       
+        $(document).ready(function () {
+
+            var vlue = $('#countpc').val();
+            var cpi = $('#countpcid').val(vlue);
+            MultipleLanesController.showPc(vlue);
+          
+
+            $('#countpcid').click(function () {
+                var cmd = $(this);
+                var vlue = cmd.val();
+                MultipleLanesController.showPc(vlue);
+            });
+            $("#btn_Delete").click(function () {
+                var m = 2;
+                $.ajax({
+                    url: _prefixParkingDomain + '/MultipleLanesMap/DeleteAll',
+                    type: 'json',
+
+                    success: function (data) {
+
+                        if (data.isSuccess) {
+                            var cpi = $('#countpcid').val(0);
+                            var c = $('#countpcid').val();
+                            var value = $('#Count').val(c);
+                            var vlue = $('#Count').val();
+                            MultipleLanesController.showPc(vlue);
+                            toastr.success(data.Message, "");
+                        } else {
+                            toastr.error(data.Message, "");
+                        }
+                    }
+                });
+            });
+
+        });
+    </script>
+}

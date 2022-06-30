@@ -1,0 +1,121 @@
+﻿@model Kztek.Model.Models.Role
+@using Kztek.Web.Core.Functions
+@{
+    ViewBag.Title = "Thêm mới vai trò";
+    string selected = (string)ViewBag.Selected;
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Role", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"] 
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-md-7 col-xs-12">
+        <h3 class="header smaller lighter blue">@Dictionary["Tab_Info"] </h3>
+        @using (Html.BeginForm("Create", "Role", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", @id = "frmCreateRole" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["RoleName"]  <span style="color:red">*</span></label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBoxFor(n => n.RoleName, new { @class = "form-control", @placeholder = Dictionary["RoleNamePlaceholder"]  })
+                    @Html.ValidationMessageFor(n => n.RoleName, "", new { @class = "text-danger" })
+                    @Html.Hidden("SaveAndCountinue", false)
+                    @Html.Hidden("menufunctionvalues", selected)
+                    @Html.Hidden("group", groupID)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Description"]  </label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBoxFor(n => n.Description, new { @class = "form-control", @placeholder = Dictionary["DescriptionPlaceholder"]  })
+                    @Html.ValidationMessageFor(n => n.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Active"]  </label>
+                <div class="col-sm-6">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Active, new { @class = "ace", @checked = "true" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9 input-group">
+                    <button class="btn btn-success" type="submit" id="Countinue">
+                        <i class="ace-icon fa fa-refresh bigger-110"></i>
+                        @DictionaryAction["Save"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        @DictionaryAction["SaveAndExit"] 
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        @DictionaryAction["Refresh"] 
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <a href="@Url.Action("Index", "Role", new { group = groupID })" class="btn btn-yellow">
+                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                        @DictionaryAction["BackToList"] 
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-5 col-xs-12">
+        <h3 class="header smaller lighter blue">@Dictionary["Tab_Menu"] </h3>
+        <div style="overflow-y:scroll;height:400px;position:relative">
+            @Html.Action("MenuFunctionList", "Role", new { str = selected, gId = groupID })
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".chkCheckBox").click(function () {
+                var cmd = $(this);
+                cmd.parent().parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            $("span.liMenuFunction").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.liMenuFunction').parent().parent().fadeToggle();
+            });
+
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+            $("#frmCreateRole").submit(function () {
+                var str = "";
+                $("input[name='chkCheckBox']").each(function () {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+                    if ($(this).is(":checked")) {
+                        str = str + id + ",";
+                    }
+                });
+                $("#menufunctionvalues").val(str);
+            });
+        });
+    </script>
+}

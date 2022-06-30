@@ -1,0 +1,261 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.tblCustomer>
+
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var list = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.listCustomerGroup;
+    //var listCard = (List<Futech.Model.Models.Parking.PK_CardCustomer>)ViewBag.listCardCustomer;
+
+    bool isDescSort = Convert.ToBoolean(ViewBag.DescValue);
+    string column = Convert.ToString(ViewBag.columnValue);
+    string selected = (string)ViewBag.selectedIdValue;
+
+    var levels = (IEnumerable<Kztek.Model.Models.tblAccessLevel>)ViewBag.llevels;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (@Model.TotalItem)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblCustomer", FormMethod.Get, new { id = "frmCustomerMap" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        @Html.Hidden("selectedId", selected)
+
+        <div class="col-md-3 col-lg-2 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" id="key" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa..." class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupValue), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("customerstatus", new SelectList(ViewBag.CustomerStatusList, "ItemValue", "ItemText", ViewBag.CustomerStatusValue), "-- Lựa chọn --", new { @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-4 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <div id="boxCustomerActions" style="display:inline;margin-left:15px">
+            @if (CheckAuthorizeAction.CheckActionPemission("tblCustomer", "Authorize"))
+            {
+                <div style="display:inline-flex">
+                    @Html.DropDownList("accesslevel", new SelectList(ViewBag.llevels, "AccessLevelID", "AccessLevelName"), "--Lựa chọn--", new { @class = "form-control chosen-select" })
+
+                </div>
+
+                <button type="button" class="btn btn-pink btn-sm btn-white btn-bold" onclick="AuthorizeAllCustomer('@Request.Url.PathAndQuery')">
+                    <i class="fa fa-save"></i>
+                    Phân quyền <span>@Model.TotalItem</span> khách hàng
+                </button>
+            }
+        </div>
+    </div>
+    <div class="col-md-4 col-xs-12">
+        <div class="pull-right">
+            @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+            {
+                <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                    <i class=" fa fa-plus"></i> Thêm mới
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="text-left">STT</th>
+                    <th class="text-left" idata="CustomerCode"> Mã khách hàng <i class=""></i></th>
+                    <th class="text-left" idata="CustomerName"> Tên khách hàng <i class=""></i></th>
+                    <th class="text-left">Số điên thoại</th>
+                    <th class="text-left">Địa chỉ</th>
+                    <th class="text-left" idata="CustomerGroupID">Nhóm khách hàng <i class=""></i></th>
+                    <th class="text-left" idata="Authorize"> Quyền <i class=""></i> </th>
+                    <th class="text-left" idata="Active"> Trạng thái <i class=""></i> </th>
+                    <th class="text-left" idata="AccessLevel"> Trạng thái nạp <i class=""></i> </th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.CustomerID.ToString() ) ? "info" : "")">
+                            <td class="text-left">@count</td>
+                            <td class="text-left">
+                                @item.CustomerCode
+                            </td>
+
+                            <td class="text-left">
+                                @item.CustomerName
+                            </td>
+
+                            <td class="text-left">
+                                @item.Mobile
+                            </td>
+
+                            <td class="text-left">
+                                @item.Address
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    var obj = list.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID));
+                                    if (obj != null)
+                                    {
+                                        <span>@obj.CustomerGroupName</span>
+                                    }
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @{ 
+                                    var oLevel = levels.FirstOrDefault(n => n.AccessLevelID.ToString() == item.AccessLevelID);
+                                    if (oLevel != null)
+                                    {
+                                        <span>@oLevel.AccessLevelName</span>
+                                    }
+                                }
+                            </td>
+                           
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Ngừng hoạt động</span>
+                                }
+                            </td>
+
+                            <td class="center">
+                                @Html.Action("CardUploadStatus", new { userfinger = item.UserIDofFinger, accesslevel = item.AccessLevelID })
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.CustomerID, key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.CustomerID })
+
+                                    @if (CheckAuthorizeAction.CheckActionPemission("tblCard", "Index"))
+                                    {
+                                        <a href="@Url.Action("Index", "tblCard", new { customerid = item.CustomerID.ToString() })" title="Thẻ" target="_blank">
+                                            <i class="fa fa-credit-card warning"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblCustomer", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               customergroup = ViewBag.customergroupValue,
+               customerstatus = ViewBag.customerstatusValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        function AuthorizeAllCustomer(url) {
+            bootbox.confirm("'Bạn chắc chắn muốn phân quyền tất cả khách hàng?", function (result) {
+                if (result) {
+                    var key = $("#key").val();
+                    var levelid = $("#accesslevel").val();
+                    var cgid = $("#customergroup").val();
+                    var cs = $("#customerstatus").val();
+
+                    $.ajax({
+                        url: _prefixAccessDomain + '/tblCustomer/ActionToCustomers',
+                        data: { key: key, levelid: levelid, cgid: cgid, cs: cs },
+                        type: 'json',
+                        async: true,
+                        success: function (data) {
+                            if (data.isSuccess) {
+                                toastr.success(data.Message);
+
+                                window.location.href = url;
+                            } else {
+                                toastr.error(data.Message);
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            DeleteSubmit(_prefixParkingDomain + '/tblCustomer/Delete');
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmCustomerMap').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmCustomerMap').submit();
+            });
+
+            @*var urlSt = '/Parking/tblCustomer/Index?key=' + '@ViewBag.Keyword' + '&page=' +'@Model.PageIndex'+'&customergroup=' + @ViewBag.CustomerGroupValue +'&customerstatus=' + '@ViewBag.CustomerStatusValue';
+
+            OrderColumnInTable("", "@column", "@isDescSort", urlSt);*@
+
+            //
+            $("#frmCustomerMap").find("input[name=key]").keypress(function (e) {
+                if (e.which === 13) {
+                    $("#frmCustomerMap").submit();
+                }
+            });
+        });
+    </script>
+}

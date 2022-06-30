@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Kztek.Model.Models.tblLane>
+
+@{
+    string listSelected = (string)ViewBag.Selected;
+}
+
+<select multiple class="form-control" name="duallistbox_demo1[]" id="cbLaneList">
+    @if (Model.Any())
+    {
+        foreach (var item in Model)
+        {
+            if (!string.IsNullOrWhiteSpace(listSelected) && listSelected.Contains(item.LaneID.ToString()))
+            {
+                <option value="@item.LaneID" selected>@item.LaneName</option>
+            }
+            else
+            {
+                <option value="@item.LaneID">@item.LaneName</option>
+            }
+        }
+    }
+</select>

@@ -1,0 +1,143 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.BM_ApartmentCustom>
+
+@{
+    ViewBag.Title = "Danh sách căn hộ";
+    string objId = (string)ViewBag.objId;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "BM_Apartment", FormMethod.Get, new { id = "frmFee" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.Keyword" placeholder="từ khóa" class="form-control" />
+        </div>
+
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm </button>
+            <a href="@Url.Action("Index", "BM_Apartment")" class="btn btn-sm btn-purple" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+            </a>
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Action("Actions", "Home", new { ActionName = "Create", ControllerName = controller, group = ViewBag.Group })
+
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center" width="80">STT</th>
+                    <th class="center">Tên</th>
+                    <th class="center">Tầng</th>
+                    <th class="center">Tòa</th>
+                    <th class="center" width="150">Ngày tạo</th>
+                    <th class="center" width="80"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(objId) && objId == item.Id.ToString() ) ? "info" : "")">
+                             <td class="text-left">
+                                @item.RowNumber
+                            </td>
+                            <td class="text-left">
+                                @item.Name
+                            </td>
+
+                            <td class="text-left">
+                                @item.FloorName
+                            </td>
+                             <td class="text-left">
+                                @item.BuildingName
+                            </td>
+                            <td class="center">
+                                @item.DateCreated.ToString("dd/MM/yyyy")
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                  
+                                    <a href="@Url.Action("Create", controller, new { @id = item.Id})" class="green" title="Cập nhật">
+                                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                    </a>
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "BM_Apartment", new
+           {
+               page = x,
+               key = ViewBag.Keyword
+
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmFee");
+
+            $('.btnDelete').click(function () {
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+
+                bootbox.confirm("Bạn chắc chắn muốn xóa bản ghi này?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: _prefixResidentDomain + '/BM_Apartment/Delete',
+                            data: { id: _id },
+                            type: 'json',
+                            //async:false,
+                            success: function (data) {
+                                if (data.isSuccess) {
+                                    cmd.parent().parent().parent().fadeOut();
+                                    toastr.success(data.Message, "Thông báo");
+                                } else {
+                                    toastr.error(data.Message, "Thông báo");
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+}

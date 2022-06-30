@@ -1,0 +1,73 @@
+﻿@using Kztek.Web.Core.Functions
+
+@model List<Kztek.Model.Models.tblCardExtend>
+
+@{
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("ActiveCard", "Index");
+}
+
+@if (Model != null && Model.Any())
+{
+    var count = 0;  
+    foreach (var item in Model)
+    {     
+        count++;
+        <tr style="width:100%">
+            <td>
+                @count
+            </td>
+
+            <td style="width:10%" class="text-left">
+                @item.CardNo
+            </td>
+
+            <td style="width:15%" class="text-left">
+                @item.CardNumber
+            </td>
+            <td style="width:10%" class="text-left">
+                @if (item.ExpireDate != null)
+                {
+                    var status = Kztek.Web.Core.Functions.FunctionHelper.GetStatusDateByDay(Convert.ToDateTime(item.ExpireDate.Value));
+                    <span>@Html.Raw(status)</span>
+                }
+            </td>
+            <td style="width:10%" class="text-left">
+                <span>@item.CustomerName</span>
+            </td>
+             <td class="text-left">
+                @if (item.Price != "0")
+                {
+                    <span>@Convert.ToInt32(item.Price).ToString("###,###")</span>
+                }
+                else
+                {
+                    <span>@item.Price</span>
+                }
+
+
+            </td>
+            <td style="width:10%" class="text-left">
+                <span>@item.CustomerGroupName</span>
+            </td>
+
+            <td style="width:20%" class="text-left">
+                <span>@item.Plate1</span>, <span>@item.Plate2</span>, <span>@item.Plate3</span>
+            </td>
+
+            <td style="width:15%" class="text-left">
+                @item.CardGroupName
+            </td>
+
+
+            <td class="center" style="width:15%">
+                <button type="button" class="btn btn-sm btn-danger" onclick="RemoveExtendCard('@item.CardID.ToString()')">
+                    <i class="fa fa-trash bigger-110" aria-hidden="true"></i>
+                    <span>
+                        @Dictionary["Delete"]
+                    </span>
+                </button>
+            </td>
+        </tr>
+    }
+}
+

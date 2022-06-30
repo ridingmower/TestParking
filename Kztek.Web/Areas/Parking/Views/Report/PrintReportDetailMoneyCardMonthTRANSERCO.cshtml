@@ -1,0 +1,242 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model List<Kztek.Model.Models.ReportDetailMoneyCardMonthTRANSERCO>
+
+@{
+    ViewBag.Title = "Chi tiết thu tiền thẻ tháng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    string money = (string)ViewBag.totalMoney;
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12" style="height:55px;">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">TRUNG TÂM QUẢN LÝ KHAI THÁC TÒA NHÀ</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">PHÒNG KINH DOANH</h4>
+
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: 'Times New Roman';text-align:center;font-size:18px;font-weight:bold;">CHI TIẾT THU TIỀN THẺ THÁNG</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: 'Times New Roman';text-align:center;font-size:12px;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover" style="border:solid #000 !important;
+    border-width:1px 0 0 1px !important;">
+                <thead>
+                    <tr class="headerSort" style="font-family: 'Times New Roman';">
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> STT </th>
+                        <th class="center" idata="CardNo" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Số thẻ <i class=""></i></th>
+                        <th class="center" idata="CardNumber" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Mã thẻ <i class=""></i></th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Nhóm thẻ </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Khách hàng </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Biển số </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Mã hợp đồng </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Nhóm KH </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thời hạn cũ </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thời hạn mới </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Phí(VNĐ) </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thanh toán </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> NV thực hiện </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Ngày thực hiện </th>
+                        @*<th class="text-left">Xử lý</th>*@
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            <tr style="font-size:12px;font-family: 'Times New Roman';">
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">@count</td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.CardNo
+                                </td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.CardNumber
+                                </td>
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @{
+                                        var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupID)) : null;
+
+                                        if (objcardGroup != null)
+                                        {
+                                            <span>@objcardGroup.CardGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.CustomerID
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.Plate
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.Description
+                                </td>
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @{
+                                        var objcustomerGroup = listCustomerGroup != null ? listCustomerGroup.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID)) : null;
+
+                                        if (objcustomerGroup != null)
+                                        {
+                                            <span>@objcustomerGroup.CustomerGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @Convert.ToDateTime(item.OldExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @Convert.ToDateTime(item.NewExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @if (!string.IsNullOrEmpty(item.FeeLevel) && !item.FeeLevel.Equals("0"))
+                                    {
+                                        @Convert.ToInt64(item.FeeLevel).ToString("###,###")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @if (item.IsTransferPayment)
+                                    {
+                                        <span>Chuyển khoản</span>
+                                    }
+                                    else
+                                    {
+
+                                        <span>Tiền mặt</span>
+                                    }
+                                </td>
+                                <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @{
+                                        var objuser = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserID)) : null;
+
+                                        if (objuser != null)
+                                        {
+                                            <span>@objuser.Username</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @Convert.ToDateTime(item.Date).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                @*<td class="center">
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-info btnShowDetail" data-toggle="collapse" data-target="@string.Format(".boxDetail_{0}", item.Id.ToString())" aria-controls="@string.Format(".boxDetail_{0}", item.Id.ToString())" idata="@item.Id.ToString()">
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                    </td>*@
+                            </tr>
+                            @*@Html.Action("ViewDetailCardActive", "PK_Report", new { obj = item })*@
+                        }
+
+                        <tr>
+                            @*<td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">#</td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>*@
+                            <td colspan="10" style="text-align:center;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;font-family: 'Times New Roman';">TỔNG: @ViewBag.StringMoney</td>
+                            @*<td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>*@
+                            <td class="center" style="text-align:center;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;font-family: 'Times New Roman';">@money</td>
+                            <td colspan="3" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            @*<td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>
+                            <td style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"></td>*@
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div><!-- /.span -->
+
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <p style="font-style: oblique;font-size:12px;float:right;padding-right:70px;font-family: 'Times New Roman';">
+                            Hà Nội, ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </p>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:35px;border-style:hidden;">
+
+
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">P. TÀI CHÍNH - KẾ TOÁN</h4>
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">P. KINH DOANH</h4>
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">NGƯỜI LẬP BẢNG</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+<script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

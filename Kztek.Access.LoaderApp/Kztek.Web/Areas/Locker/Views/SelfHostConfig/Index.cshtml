@@ -1,0 +1,124 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.tblLockerSelfHost>
+
+@{
+    ViewBag.Title = "Danh sách selfhost";
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listPC = (IEnumerable<Kztek.Model.Models.tblLockerPC>)ViewBag.pcsList;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "SelfHostConfig", FormMethod.Get, new { id = "frmSelfHostConfig" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.Keyword" placeholder="Từ khóa..." class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("pcs", new SelectList(ViewBag.pcsList, "Id", "PCName", ViewBag.pcsValue), "-- Chọn máy tính --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue, pcs = ViewBag.pcsValue })" class="btn btn-primary btn-sm btn-white btn-bold">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên</th>
+                    <th class="text-left">Địa chỉ</th>
+                    <th class="text-left">Tên máy tính</th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.Hostname
+                            </td>
+
+                            <td class="text-left">
+                                @item.Address
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    var objPC = listPC.FirstOrDefault(n => n.Id.ToString() == item.PCID);
+                                    if (objPC != null)
+                                    {
+                                        <span>@objPC.PCName ( <span>@objPC.IPAddress</span> )</span>
+                                    }
+                                }
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.Id, key = ViewBag.keyValue, pcs = ViewBag.pcsValue, page = Model.PageIndex })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "SelfHostConfig", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               pcs = ViewBag.pcsValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmSelfHostConfig");
+            DeleteSubmit(_prefixLockerDomain + '/SelfHostConfig/Delete');
+        });
+    </script>
+}

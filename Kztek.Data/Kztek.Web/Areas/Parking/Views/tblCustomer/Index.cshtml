@@ -1,0 +1,308 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblCustomer>
+
+@{
+    ViewBag.Title = "Danh sách khách hàng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var list = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.listCustomerGroup;
+    //var listCard = (List<Futech.Model.Models.Parking.PK_CardCustomer>)ViewBag.listCardCustomer;
+
+    bool isDescSort = Convert.ToBoolean(ViewBag.DescValue);
+    string column = Convert.ToString(ViewBag.columnValue);
+    string selected = (string)ViewBag.selectedIdValue;
+    var lstCompartment = (List<Kztek.Model.Models.tblCompartment>)ViewBag.Compartments;
+    var DictionaryShare = FunctionHelper.GetLocalizeDictionary("tblCustomer", "share");
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCustomer", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"] (@Model.TotalItem)
+    </h1>
+</div>
+
+
+@using (Html.BeginForm("Index", "tblCustomer", FormMethod.Get, new { id = "frmCustomerMap" }))
+{
+
+    @Html.Hidden("chkExport", "0")
+    @Html.Hidden("selectedId", selected)
+    <div class="row">
+        <div class="col-md-3 col-lg-2 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="@Dictionary["Keyword"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupValue), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("customerstatus", new SelectList(ViewBag.CustomerStatusList, "ItemValue", "ItemText", ViewBag.CustomerStatusValue), DictionaryShare["typtCus"], new { @class = "form-control" })
+        </div>
+    </div>
+    <div class=" row">
+        <div class="col-md-3 col-lg-4 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })
+            @Html.Action("Actions", "Home", new { ActionName = "Import", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    </div>
+}
+
+@Html.Action("ModalImportCard")
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @*@if (CheckActionInGroup.CheckPermission(controller, "Create", ViewBag.Group))
+            {
+                @Html.Action("Actions", "Home", new { ActionName = "Create", ControllerName = controller, group = ViewBag.Group, customergroup = ViewBag.CustomerGroupValue, key = ViewBag.Keyword })
+            }*@
+
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> @DictionaryAction["Create"]
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="text-left">@Dictionary["Order"]</th>
+                    <th class="text-left" idata="CustomerCode"> @Dictionary["CustomerCode"] <i class=""></i></th>
+                    <th class="text-left" idata="CustomerName"> @Dictionary["CustomerName"] <i class=""></i></th>
+                    <th class="text-left">@Dictionary["CustomerMobile"]</th>
+                    <th class="text-left">@Dictionary["CustomerAddress"]</th>
+                    <th class="text-left">Căn hộ</th>
+                    <th class="text-left" idata="CustomerGroupID">@Dictionary["CustomerGroup"] <i class=""></i></th>
+                    @*<th class="text-left">Thẻ</th>
+        <th class="text-left">Biển số</th>*@
+                    <th class="text-left" idata="Active"> @Dictionary["Status"] <i class=""></i> </th>
+                    <th class="text-left">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.CustomerID.ToString() ) ? "info" : "")">
+                    <td class="text-left">@count</td>
+                    <td class="text-left">
+                        @item.CustomerCode
+                    </td>
+
+                    <td class="text-left">
+                        @item.CustomerName
+                    </td>
+
+                    <td class="text-left">
+                        @item.Mobile
+                    </td>
+
+                    <td class="text-left">
+                        @item.Address
+                    </td>
+                    <td class="text-left">
+                        @{
+                            if (item.CompartmentId != null)
+                            {
+                                var objCompartment = lstCompartment != null ? lstCompartment.FirstOrDefault(n => n.CompartmentID.ToString().ToLower() == item.CompartmentId.ToLower()) : null;
+
+                                if (objCompartment != null)
+                                {
+                                    <span>@objCompartment.CompartmentName</span>
+                                }
+                            }
+
+
+                        }
+                    </td>
+                    <td class="text-left">
+                        @{
+                            var cusgroupid = !string.IsNullOrEmpty(item.CustomerGroupID) ? item.CustomerGroupID.ToLower() : "";
+                            var obj = list.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(cusgroupid));
+                            if (obj != null)
+                            {
+                                <span>@obj.CustomerGroupName</span>
+                            }
+                        }
+                    </td>
+                    @*@{
+            var objListCard = listCard.Where(n => n.Customer["_id"].ToString().Equals(item._id.ToString())).ToList();
+            var formatCard = "";
+            var plates = "";
+            if (objListCard.Any())
+            {
+                var count1 = 0;
+                foreach (var itemCard in objListCard)
+                {
+                    count1++;
+
+                    formatCard += string.Format("{0}{1}", itemCard.Card["CardNo"].ToString(), count1 == objListCard.Count ? "" : ",");
+
+                    if (itemCard.Vehicles != null && itemCard.Vehicles.Any())
+                    {
+                        var count2 = 0;
+                        foreach (var itemVehicle in itemCard.Vehicles)
+                        {
+                            count2++;
+
+                            plates += string.Format("{0}{1}", itemVehicle["Plate"].ToString(), count2 == itemCard.Vehicles.Count ? "" : ",");
+                        }
+                        if (count1 != objListCard.Count)
+                        {
+                            plates += ",";
+                        }
+                    }
+                }
+            }
+            <td class="text-left">@formatCard</td>
+            <td class="text-left">@plates</td>
+        }*@
+
+                    <td class="center">
+                        @if (item.Inactive == false)
+                        {
+                            <span class="label label-sm label-success">@Dictionary["IsLockTrue"]</span>
+                        }
+                        else
+                        {
+                            <span class="label label-sm label-warning">@Dictionary["IsLockFalse"]</span>
+                        }
+                    </td>
+
+                    <td class="center">
+                        <div class="btn-group">
+                            @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                            {
+                                <a href="@Url.Action("Update", controller, new { id = item.CustomerID, key = ViewBag.keyValue, customergroup = ViewBag.customergroupValue, customerstatus = ViewBag.customerstatusValue })" class="green" title="Cập nhật">
+                                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                </a>
+                            }
+
+                            @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.CustomerID })
+
+                            @if (CheckAuthorizeAction.CheckActionPemission("tblCard", "Index"))
+                            {
+                                <a href="@Url.Action("Index", "tblCard", new { customerid = item.CustomerID.ToString() })" title="Thẻ" target="_blank">
+                                    <i class="fa fa-credit-card warning"></i>
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblCustomer", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               customergroup = ViewBag.customergroupValue,
+               customerstatus = ViewBag.customerstatusValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        function saveNewFileCard() {
+            $('.loading1').css('display', 'block');
+            $('#proccess').css('display', 'block');
+            $("#messs").css('display', 'none');
+
+            var file = $("#modalImportCard").find("input[name=FileUpload]").prop("files");
+
+            var formdata = new FormData();
+
+            for (i = 0; i < file.length; i++) {
+                //Appending each file to FormData object
+                formdata.append(file[i].name, file[i]);
+            }
+
+            $.ajax({
+                type: "POST",
+                url: _prefixParkingDomain + '/tblCustomer/ImportFile',
+                data: formdata,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.isSuccess) {
+                        $('.loading1').css('display', 'none');
+
+                        toastr.success(response.Message);
+
+                        window.location.href = "/Parking/tblCustomer";
+                    }
+                    else {
+                        toastr.error(response.Message);
+                    }
+
+                },
+                error: function (error) {
+                    alert("errror");
+                    console.log(error);
+                }
+            });
+        }
+        $(document).ready(function () {
+            DeleteSubmit(_prefixParkingDomain + '/tblCustomer/Delete');
+            // import excel
+            $("button[name=btnImport]").click(function () {
+                $("#modalImportCard").modal("show");
+            });
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmCustomerMap').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmCustomerMap').submit();
+            });
+
+            @*var urlSt = '/Parking/tblCustomer/Index?key=' + '@ViewBag.Keyword' + '&page=' +'@Model.PageIndex'+'&customergroup=' + @ViewBag.CustomerGroupValue +'&customerstatus=' + '@ViewBag.CustomerStatusValue';
+
+            OrderColumnInTable("", "@column", "@isDescSort", urlSt);*@
+
+            //
+            $("#frmCustomerMap").find("input[name=key]").keypress(function (e) {
+                if (e.which === 13) {
+                    $("#frmCustomerMap").submit();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,98 @@
+﻿@model Kztek.Model.CustomModel.iLocker.LockerOpenManual
+@{
+                /**/
+
+                ViewBag.Title = "Mở tủ thủ công";
+                string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @Html.HiddenFor(n => n.TaskViewId)
+
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        <input type="text" name="key" id="key" value="@ViewBag.Keyword" placeholder="Từ khóa..." class="form-control" />
+    </div>
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        @Html.DropDownList("controllerid", new SelectList(Model.DataController, "Id", "ControllerName", ViewBag.ControllerID), "-- Chọn bộ điều khiển --", new { @class = "form-control chosen-select" })
+    </div>
+    <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+        <button class="btn btn-sm btn-primary" type="button" id="btnLockerSearch">
+            <i class="fa fa-search"></i>
+            Tìm kiếm
+        </button>
+        <button class="btn btn-sm btn-default" type="button" id="btnLockerReset">
+            <i class="fa fa-refresh"></i>
+            Reset
+        </button>
+    </div>
+</div>
+
+<hr class="hr hr-12" />
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="form-group">
+            <button type="button" class="btn btn-sm btn-info btn-white btn-bold" id="btnUnlockSelectedLocker">
+                <i class="fa fa-upload"></i>
+                Mở <span class="LockerSelected"></span> tủ đã chọn
+            </button>
+        </div>
+    </div>
+
+    <div class="col-xs-9">
+        <table class="table table-bordered" id="tblLocker">
+            <thead>
+                <tr>
+                    <th class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" id="chkCheckALLLocker" />
+                            <span class="lbl"></span>
+                        </label>
+                    </th>
+                    <th class="center">
+                        Tên tủ
+                    </th>
+                    <th class="center">
+                        Bộ điều khiển
+                    </th>
+                    <th class="center">
+                        Thao tác
+                    </th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div class="col-xs-3">
+        <div id="boxLockerProcess">
+
+        </div>
+    </div>
+
+    <div class="col-xs-12">
+        <span class="pull-left pagination">Trang: <span id="CardPageIndex">0</span> / <span id="CardPageCount">0</span> - Số bản ghi: <span class="CardCount">0</span></span>
+    </div>
+
+    <div class="col-xs-12">
+
+        <div id="LockerPaging"></div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/jquery.twbsPagination.js"></script>
+    <script src="~/Areas/Locker/Scripts/OpenManualController.js"></script>
+    <script>
+        $(document).ready(function () {
+            OpenManualController.LockerData();
+        });
+    </script>
+
+}

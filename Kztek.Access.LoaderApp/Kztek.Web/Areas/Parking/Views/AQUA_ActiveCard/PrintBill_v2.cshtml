@@ -1,0 +1,177 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Functions
+@using Kztek.Web.Attributes
+
+@using System.Data
+
+@model List<Kztek.Model.Models.tblActiveCardCustomViewModel>
+
+@{
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+    var system = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+    var money = (long)ViewBag.TotalPrice;
+    var strmoney = "";
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12" style="height:80px;">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:left;font-size:12px;font-weight:bold;">@system.Company</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:left;font-size:12px;font-weight:bold;">Địa chỉ: @system.Address</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:left;font-size:12px;font-weight:bold;">Mã số thuế: @system.Tax - SĐT: @system.Tel</h4>
+                    </td>
+                    @*<td>
+                            <h5 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h5>
+                            <h5 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h5>
+                        </td>*@
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:18px;font-weight:bold;">HÓA ĐƠN THU TIỀN GIA HẠN THẺ</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover" style="border:solid #000 !important;
+    border-width:1px 0 0 1px !important;">
+                <thead>
+                    <tr class="headerSort" style="font-family: 'Times New Roman';">
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> STT </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Mã thẻ </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Khách hàng </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> BKS </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thời hạn cũ </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thời hạn mới </th>
+                        @*<th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Số tiền </th>*@
+                    </tr>
+
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            //money += item.FeeLevel;
+                            <tr style="font-size:12px;font-family: 'Times New Roman';">
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">@count</td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.CardNumber
+                                </td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.CustomerName
+                                </td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @item.Plate
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @Convert.ToDateTime(item.OldExpireDate).ToString("dd/MM/yyyy")
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @Convert.ToDateTime(item.NewExpireDate).ToString("dd/MM/yyyy")
+                                </td>
+                                @*<td class="text-right" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @if (item.FeeLevel > 0)
+                                    {
+                                        <span>@item.FeeLevel.ToString("###,###")</span>
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+
+                                </td>*@
+                            </tr>
+
+                        }
+
+                        strmoney = FunctionHelper.DocTienBangChu(money, " đồng");
+                        <tr style="font-family: 'Times New Roman';">
+                            <th colspan="5" style="text-align:center;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                TỔNG: @strmoney
+                            </th>
+                            <th style="text-align:right;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                @if (money > 0)
+                                {
+                                    <span>@money.ToString("###,###")</span>
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /.span -->
+
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <p style="font-style: oblique;font-size:12px;float:right;padding-right:30px;font-family: 'Times New Roman';">
+                            Hà Nội, ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </p>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:35px;border-style:hidden;">
+
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">NGƯỜI NỘP TIỀN</h4>
+                    </td>
+
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">NGƯỜI LẬP HÓA ĐƠN</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <button type="button" id="btnAdd" onclick="printDiv('Print')" class="btn btn-info btn-sm pull-right">
+            <i class="fa fa-print"></i>
+            Print
+        </button>
+    </div>
+</div>
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

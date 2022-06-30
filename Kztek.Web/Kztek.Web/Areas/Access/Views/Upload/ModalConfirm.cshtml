@@ -1,0 +1,23 @@
+﻿@{ 
+    var all = (bool)ViewBag.isAllValue;
+    var str = (string)ViewBag.strValue;
+}
+
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận</h5>
+            </div>
+            <div class="modal-body">
+
+                @Html.Raw(str)
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="UploadConfirm('@ViewBag.nameValue','@string.Format("{0}", all ? "true" : "false")', '@ViewBag.actionTakeValue')">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

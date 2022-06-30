@@ -1,0 +1,223 @@
+﻿@model Kztek.Web.Models.VNPAY_Custom
+@using Kztek.Web.Core.Functions
+
+@{
+    ////ViewBag.Title = "Create";
+}
+
+<div class="page-header">
+    <h1>
+        VNPAY
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Index", "VNQPAY", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "formVNQPAY" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">Loại hàng hóa <span class="error">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownList("vnp_OrderType", new SelectList(ViewBag.TypesOfGoods, "ItemValue", "ItemText", ""), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.vnp_OrderType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Số tiền <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Amount, new { @class = "form-control", @placeholder = "Số tiền thanh toán",@value= "100000" })
+                    @Html.ValidationMessageFor(n => n.vnp_Amount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Nội dung thanh toán <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_OrderInfo, new { @class = "form-control", @placeholder = "Nội dung thanh toán", @value= "Nhap noi dung thanh toan" })
+                    @Html.ValidationMessageFor(n => n.vnp_OrderInfo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">Ngân hàng</label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownList("vnp_BankCode", new SelectList(ViewBag.Bank, "ItemValue", "ItemText", ""), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.vnp_BankCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">Ngôn ngữ <span class="error">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownList("vnp_Locale", new SelectList(ViewBag.cboLanguage, "ItemValue", "ItemText", ""), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.vnp_Locale, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">Thời hạn thanh toán <span class="error">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="input-group">
+                        @Html.TextBoxFor(n => n.vnp_ExpireDate, new { @class = "form-control daterangpicker" })
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(n => n.vnp_ExpireDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            //----------
+            <h3>Thông tin hóa đơn (Billing)</h3>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> FirstName <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_FirstName, new { @class = "form-control", @placeholder = "Họ tên", @value= "VAN XO" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> LastName <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_LastName, new { @class = "form-control", @placeholder = "Họ tên", @value = "Nguyen" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Email <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_Email, new { @class = "form-control", @placeholder = "Email",@value= "xonv@vnpay.vn" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Số điện thoại <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_Mobile, new { @class = "form-control", @placeholder = "SDT", @value = "0934998386" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_Mobile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Địa chỉ <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_Address, new { @class = "form-control", @placeholder = "Địa chỉ",@value= "22 Lang Ha" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Mã bưu điện <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_Address, new { @class = "form-control", @placeholder = "mã bưu điện",@value= "100000" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Tỉnh/TP <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_City, new { @class = "form-control", @placeholder = "Tỉnh/TP", @value= "Hà Nội" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_City, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Quốc gia <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Bill_Country, new { @class = "form-control", @placeholder = "Quốc gia",@value= "VN" })
+                    @Html.ValidationMessageFor(n => n.vnp_Bill_Country, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            //---------------
+            @*<h3> Thông tin giao hàng (Shipping)</h3>*@
+
+            //----------
+            <h3>Thông tin gửi Hóa đơn điện tử (Invoice)</h3>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Tên KH <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Customer, new { @class = "form-control", @placeholder = "Họ tên KH",@value= "Lê Văn Phổ" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Customer, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Công ty <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Company, new { @class = "form-control", @placeholder = "công ty", @value= "Công ty Cổ phần giải pháp Thanh toán Việt Nam" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Company, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Địa chỉ <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Address, new { @class = "form-control", @placeholder = "Đại chỉ", @value= "22 Láng Hạ, Phường Láng Hạ, Quận Đống Đa, TP Hà Nội" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Mã số thuế <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Taxcode, new { @class = "form-control", @placeholder = "MST",@value= "0102182292" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Taxcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right">Loại hóa đơn <span class="error">*</span></label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownList("vnp_Inv_Type", new SelectList(ViewBag.TypeInvoices, "ItemValue", "ItemText", ""), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Email <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Email, new { @class = "form-control", @placeholder = "Email", @value= "pholv@vnpay.vn" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Số điện thoại <span class="error">*</span> </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.vnp_Inv_Phone, new { @class = "form-control", @placeholder = "SDT", @value= "02437764668" })
+                    @Html.ValidationMessageFor(n => n.vnp_Inv_Phone, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9 input-group">
+                    <button class="btn btn-success" type="submit" id="Countinue">
+                        <i class="ace-icon fa fa-refresh bigger-110"></i>
+                        Lưu
+                    </button>
+                    @*&nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        Lưu và thoát
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        Refresh
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <a href="" class="btn btn-yellow">
+                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                        BackToList
+                    </a>*@
+                </div>
+            </div>
+        }
+    </div>
+</div>

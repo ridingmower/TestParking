@@ -1,0 +1,20 @@
+﻿@model List<Kztek.Model.Models.tblCardExtend>
+@{
+    var listcardgroup = (IEnumerable<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model)
+    {
+        var cardgroup = listcardgroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupId));
+        if (cardgroup != null && !string.IsNullOrEmpty(item.Price) && Convert.ToDouble(item.Price) > 0)
+        {
+            <p style="margin-top:10px;font-weight:bold;color:darkred;font-size:18px;">
+                @cardgroup.CardGroupName<span>(VNĐ):</span> <span style="float:right;">@Convert.ToDouble(item.Price).ToString("###,###")</span>
+            </p>
+        }
+
+    }
+}
+

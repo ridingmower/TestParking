@@ -1,0 +1,284 @@
+﻿@model Kztek.Model.CustomModel.AdminLoginModel
+@using Kztek.Web.Core.Functions;
+
+@{
+    Layout = null;
+    //Kztek.Data.KztekEntities db = new Kztek.Data.KztekEntities();
+    //bool isExist = db.Users.Any();
+    var systemname = System.Configuration.ConfigurationManager.AppSettings["SystemName"];
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("Login", "Index");
+    var objSystem = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8" />
+    <title>@systemname</title>
+
+    <meta name="description" content="overview &amp; stats" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!--Basic css-->
+    @Styles.Render("~/Content/AdminLayout/Admincss")
+
+    <link href="~/Content/AdminLayout/font-awesome/4.5.0/css/font-awesome.css" rel="stylesheet" />
+
+    <link href="~/Content/AdminLayout/css/fonts.googleapis.com.css" rel="stylesheet" />
+
+    <!-- ace settings handler -->
+    @*<script src="~/Content/AdminLayout/js/ace-extra.js"></script>*@
+
+    <link href="~/Content/ToastrJquery/toastr.css" rel="stylesheet" />
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body class="login-layout" style="@string.Format("{0}",objSystem != null && !string.IsNullOrEmpty(objSystem.Background) ? string.Format("background: url('{0}');background-repeat: no-repeat;background-size: 100% 100%;",objSystem.Background) : "")">
+    <div class="main-container">
+        <div class="main-content">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
+                    <div class="login-container">
+                        <div class="center">
+                            <h1>
+                                <i class="ace-icon fa fa-leaf green"></i>
+                                <span class="red"> @systemname </span>
+                            </h1>
+                            <h4 class="blue" id="id-company-text"> LOGIN </h4>
+                        </div>
+                        <div class="position-relative">
+                            <div id="login-box" class="login-box visible widget-box no-border">
+                                <div class="widget-body">
+
+                                    <div class="widget-main">
+                                        <h4 class="header blue lighter bigger">
+                                            <i class="ace-icon fa fa-coffee green"></i>
+                                            @Dictionary["AccountInfo"]
+                                        </h4>
+
+                                        <div class="space-6"></div>
+
+                                        @using (Html.BeginForm("Index", "Login", FormMethod.Post))
+                                        {
+                                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                                            <fieldset>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.UserName, new {@class= "form-control",@placeholder= Dictionary["UserNamePlaceholder"] })
+                                                        <i class="ace-icon fa fa-user"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <span class="block input-icon input-icon-right">
+                                                        @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @placeholder = Dictionary["PasswordPlaceholder"], @type = "password" })
+                                                        <i class="ace-icon fa fa-lock"></i>
+                                                    </span>
+                                                </label>
+
+                                                <label class="block clearfix">
+                                                    <div id="boxListStation"></div>
+                                                </label>
+
+                                                <div class="space"></div>
+
+                                                <div class="clearfix">
+                                                    <label class="inline">
+                                                        @Html.CheckBox("remember",new { @class="ace"})
+                                                        @*<input type="checkbox" name="remember" id="remember" class="ace" value="" />*@
+                                                        <span class="lbl"> @Dictionary["Remember"] </span>
+                                                    </label>
+
+                                                    <button type="submit" id="test1" class="width-35 pull-right btn btn-sm btn-primary">
+                                                        <i class="ace-icon fa fa-key"></i>
+                                                        <span class="bigger-110 hidden-sm hidden-xs">@Dictionary["ButtonLogin"]</span>
+                                                    </button>
+                                                </div>
+
+                                                <div class="space"></div>
+                                            </fieldset>
+                                        }
+                                    </div><!-- /.widget-main -->
+                                    
+                                </div>
+                            </div><!-- /.widget-body -->
+                        </div><!-- /.login-box -->
+                    </div><!-- /.position-relative -->
+
+                    <div class="navbar-fixed-top align-right">
+                        <br />
+                        &nbsp;
+                        <a id="btn-login-dark" href="#">Dark</a>
+                        &nbsp;
+                        <span class="blue">/</span>
+                        &nbsp;
+                        <a id="btn-login-blur" href="#">Blur</a>
+                        &nbsp;
+                        <span class="blue">/</span>
+                        &nbsp;
+                        <a id="btn-login-light" href="#">Light</a>
+                        &nbsp; &nbsp; &nbsp;
+                    </div>
+                </div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.main-content -->
+    </div><!-- /.main-container -->
+    <!-- basic scripts -->
+    <!--[if !IE]> -->
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/ToastrJquery/toastr.js"></script>
+    <!-- <![endif]-->
+    <!--[if IE]>
+    <script src="assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if ('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+    </script>
+
+    <!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#test1").addClass("disabled");
+
+            $("#login-box").find("#UserName").change(function () {
+                var username = $("#login-box").find("#UserName").val();
+                var pass = $("#login-box").find("#Password").val();
+                CheckAccount(username, pass);
+            });
+            $("#login-box").find("#Password").change(function () {
+                var username = $("#login-box").find("#UserName").val();
+                var pass = $("#login-box").find("#Password").val();
+                CheckAccount(username, pass);
+            });
+        });
+
+        function CheckAccount(username, password) {
+            var Div = $("#boxListStation");
+
+            $.ajax({
+                url: '/Login/CheckAccount',
+                data: { username: username, pass: password},
+                type: 'json',
+                //async:false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        if (data.admin) {
+                            Div.html('');
+                            $("#test1").removeClass("disabled");
+                        } else {
+                            $.ajax({
+                                url: '/Login/ListStationByUser',
+                                data: { id: data.userid },
+                                type: 'json',
+                                //async:false,
+                                success: function (data) {
+                                    Div.html('');
+                                    Div.html(data);
+                                    $("#test1").removeClass("disabled");
+                                }
+                            });
+                        }
+                    } else {
+                        $.ajax({
+                            url: '/Login/ListStationByUser',
+                            data: { id: "" },
+                            type: 'json',
+                            //async:false,
+                            success: function (data) {
+                                Div.html('');
+                                Div.html(data);
+                                $("#test1").addClass("disabled");
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        //you don't need this, just used for changing background
+        jQuery(function ($) {
+
+            var login_layout = readCookie("login_layout");
+            if (login_layout != "") {
+                if (login_layout == "dark") {
+                    $('body').attr('class', 'login-layout');
+                    $('#id-text2').attr('class', 'white');
+                    $('#id-company-text').attr('class', 'blue');
+                }
+                else if (login_layout == "blur") {
+                    $('body').attr('class', 'login-layout blur-login');
+                    $('#id-text2').attr('class', 'white');
+                    $('#id-company-text').attr('class', 'light-blue');
+                }
+                else {
+                    $('body').attr('class', 'login-layout light-login');
+                    $('#id-text2').attr('class', 'grey');
+                    $('#id-company-text').attr('class', 'blue');
+                }
+            } else {
+                $('body').attr('class', 'login-layout light-login');
+                $('#id-text2').attr('class', 'grey');
+                $('#id-company-text').attr('class', 'blue');
+            }
+
+            $('#btn-login-dark').on('click', function (e) {
+                $('body').attr('class', 'login-layout');
+                $('#id-text2').attr('class', 'white');
+                $('#id-company-text').attr('class', 'blue');
+
+                createCookie("login_layout", "dark", 30);
+                e.preventDefault();
+            });
+            $('#btn-login-light').on('click', function (e) {
+                $('body').attr('class', 'login-layout light-login');
+                $('#id-text2').attr('class', 'grey');
+                $('#id-company-text').attr('class', 'blue');
+
+                createCookie("login_layout", "light", 30);
+                e.preventDefault();
+            });
+            $('#btn-login-blur').on('click', function (e) {
+                $('body').attr('class', 'login-layout blur-login');
+                $('#id-text2').attr('class', 'white');
+                $('#id-company-text').attr('class', 'light-blue');
+
+                createCookie("login_layout", "blur", 30);
+                e.preventDefault();
+            });
+
+        });
+    </script>
+    <script>
+        function createCookie(name, value, days) {
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                var expires = "; expires=" + date.toGMTString();
+            }
+            else var expires = "";
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        function eraseCookie(name) {
+            createCookie(name, "", -1);
+        }
+    </script>
+</body>
+</html>

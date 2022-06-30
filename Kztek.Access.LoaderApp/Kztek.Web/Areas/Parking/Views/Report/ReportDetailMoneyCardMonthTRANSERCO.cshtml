@@ -1,0 +1,457 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportDetailMoneyCardMonthTRANSERCO>
+
+@{
+    ViewBag.Title = "Chi tiết thu tiền thẻ tháng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    string money = (string)ViewBag.totalMoney;
+    var listEventSelected = (List<string>)ViewBag.selectedEventValue;
+
+    string path = HttpContext.Current.Request.Url.PathAndQuery;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportDetailMoneyCardMonthTRANSERCO");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportDetailMoneyCardMonthTRANSERCO", "Report", FormMethod.Get, new { id = "frmReportDetailMoneyCardMonth" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+           @DictionarySearch["keyWord"]
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="@Dictionary["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["customerGroup"]:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroupsC, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["user"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.UserDT, itemValue = "Id", itemText = "Username", selectedValues = ViewBag.UserId, Modelname = "ddluser", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("user")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["cardGroup"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+
+        <div class="col-md-12 col-lg-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportDetailMoneyCardMonthTRANSERCO" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportDetailMoneyCardMonthTRANSERCO" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "ReportDetailMoneyCardMonthTRANSERCO" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportDetailMoneyCardMonthTRANSERCO" })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-md-6 col-xs-12">
+        <div id="boxCardAction"></div>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            <label class="pos-rel">
+                                <input type="checkbox" class="ace" id="chkCheckALL" />
+                                <span class="lbl"></span>
+                            </label>
+                        </th>
+                        <th class="center"> @Dictionary["stt"] </th>
+                        <th class="text-left" idata="CardNo">@Dictionary["cardNo"]<i class=""></i></th>
+                        <th class="text-left" idata="CardNumber"> @Dictionary["codeCard"]<i class=""></i></th>
+                        <th class="text-left"> @Dictionary["cardGroup"] </th>
+                        <th class="text-left"> @Dictionary["customer"] </th>
+                        <th class="text-left"> @Dictionary["licensePlate"]</th>
+                        <th class="text-left"> @Dictionary["contractCode"]</th>
+                        <th class="text-left"> @Dictionary["customerGroup"]</th>
+                        <th class="text-left"> @Dictionary["durationOld"] </th>
+                        <th class="text-left"> @Dictionary["durationNew"]</th>
+                        <th class="text-left"> @Dictionary["amount"] </th>
+                        <th class="text-left"> @Dictionary["payment"]</th>
+                        <th class="text-left"> @Dictionary["staffMade"] </th>
+                        <th class="text-left"> @Dictionary["executionDate"]</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @Html.Hidden("listid", "")
+                    @if (Model.Data.Any())
+                    {
+                        var count = (Model.PageIndex - 1) * Model.PageSize;
+                        foreach (var item in Model.Data)
+                        {
+
+                            count++;
+                            <tr>
+                                <td class="center">
+                                    <label class="pos-rel">
+                                        <input type="checkbox" id="chk_@item.Id.ToString()" name="Id" value="@item.Id.ToString()" class="ace chkCheck" @string.Format("{0}", (listEventSelected != null && listEventSelected.Any(n => n.Equals(item.Id))) ? "checked" : "") />
+                                        <span class="lbl"></span>
+                                    </label>
+                                </td>
+                                <td class="center">@count</td>
+
+                                <td class="text-left">
+                                    @item.CardNo
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CardNumber
+                                </td>
+                                <td>
+                                    @{
+                                        var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupID)) : null;
+
+                                        if (objcardGroup != null)
+                                        {
+                                            <span>@objcardGroup.CardGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="text-left">
+                                    @item.CustomerID
+                                </td>
+                                <td class="text-left">
+                                    @item.Plate
+                                </td>
+                                <td class="text-left">
+                                    @item.Description
+                                </td>
+                                <td>
+                                    @{
+                                        var objcustomerGroup = listCustomerGroup != null ? listCustomerGroup.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID)) : null;
+
+                                        if (objcustomerGroup != null)
+                                        {
+                                            <span>@objcustomerGroup.CustomerGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.OldExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.NewExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center">
+                                    @if (!string.IsNullOrEmpty(item.FeeLevel) && !item.FeeLevel.Equals("0"))
+                                    {
+                                        @Convert.ToInt64(item.FeeLevel).ToString("###,###")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+                                <td class="center">
+                                    @if (item.IsTransferPayment)
+                                    {
+                                        <span>Chuyển khoản</span>
+                                    }
+                                    else
+                                    {
+
+                                        <span>Tiền mặt</span>
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        var objuser = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserID)) : null;
+
+                                        if (objuser != null)
+                                        {
+                                            <span>@objuser.Username</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.Date).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                @*<td class="center">
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-info btnShowDetail" data-toggle="collapse" data-target="@string.Format(".boxDetail_{0}", item.Id.ToString())" aria-controls="@string.Format(".boxDetail_{0}", item.Id.ToString())" idata="@item.Id.ToString()">
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                    </td>*@
+                            </tr>
+                            @*@Html.Action("ViewDetailCardActive", "PK_Report", new { obj = item })*@
+                        }
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td>#</td>
+                        <td></td>
+                        <td>TỔNG SỐ</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                        <td class="center">@money</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportDetailMoneyCardMonthTRANSERCO", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               customergroup = ViewBag.CustomerGroupId,
+               user = ViewBag.UserId,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+
+            loadModalSelected('@Model.TotalItem', '@path');
+
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddluser').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#user').val(str);
+            });
+
+            $(".btnShowDetail").click(function () {
+                var cmd = $(this);
+
+                var id = cmd.attr("idata")
+
+                var value = cmd.parent().parent().parent().find(".boxDetail_" + id).first().attr("aria-expanded");
+
+                if (value === "true") {
+                    cmd.find("i").removeClass().addClass("fa fa-caret-down");
+                } else {
+                    cmd.find("i").removeClass().addClass("fa fa-caret-up");
+                }
+            })
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportDetailMoneyCardMonth').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportDetailMoneyCardMonth').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var customergroupid = $("#customergroup").val();
+                var value = '';
+                $.ajax({
+                    url: _prefixParkingDomain + '/Report/GetTypeCustomerGroup',
+                    data: { id: customergroupid },
+                    type: 'json',
+                    async: false,
+                    success: function (data) {
+
+                        value = data;
+                    }
+                });
+
+
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _key = $('input[name=key]').val();
+                var _cardgroup = $('#cardgroup').val();
+                var _customergroup = $('#customergroup').val();
+                var _user = $('#user').val();
+                var url = '/Parking/Report/' + value + '?fromdate=' + _frdate + '&todate=' + _todate + '&key=' + _key + '&cardgroup=' + _cardgroup + '&customergroup=' + _customergroup + '&user=' + _user;
+                window.open(url, '_blank');
+            });
+
+            $("#chkCheckALL").click(function () {
+                if ($(this).is(":checked")) {
+                    var choices = [];
+                    $('.chkCheck').each(function () {
+                        if ($(this).is(":checked")) {
+                            var cn = $(this).val();
+                            choices.push(cn);
+                        }
+                    });
+
+                    AddRemoveCardChoice(choices, '@Model.TotalItem', true);
+
+                } else {
+                    var unchoices = [];
+
+                    $('.chkCheck').each(function () {
+                        if (!$(this).is(":checked")) {
+                            var cn = $(this).val();
+                            unchoices.push(cn);
+                        }
+                    });
+
+                    AddRemoveCardChoice(unchoices, '@Model.TotalItem', false);
+                }
+            });
+
+             $('.chkCheck').click(function () {
+                if ($(this).is(":checked")) {
+                    var choices = [];
+                    var cn = $(this).val();
+                    choices.push(cn);
+                    AddRemoveCardChoice(choices, '@Model.TotalItem', true);
+
+                } else {
+                    var unchoices = [];
+                    var cn1 = $(this).val();
+                    unchoices.push(cn1);
+                    AddRemoveCardChoice(unchoices, '@Model.TotalItem', false);
+                }
+            });
+        });
+        function AddRemoveCardChoice(choices, totalItem, isAdd) {
+        $.ajax({
+            url: _prefixParkingDomain + '/Report/AddOrRemoveOneAllSeleted',
+            data: { Id: choices, isAdd: isAdd },
+            type: 'json',
+            async: true,
+            success: function (data) {
+                loadModalSelected(totalItem);
+            }
+        });
+        };
+
+        function loadModalSelected(totalItem, url) {
+            $.ajax({
+                url: _prefixParkingDomain + '/Report/ModalSelected',
+                type: 'GET',
+                data: {
+                    totalItem: totalItem,
+                    url: url
+                },
+                success: function (response) {
+                    $('#boxCardAction').html('');
+
+                    $('#boxCardAction').html(response);
+                }
+            });
+        }
+
+        function RemoveAll(totalItem, url) {
+            $.ajax({
+                url: _prefixParkingDomain + '/Report/RemoveAllSeleted',
+                data: {},
+                type: 'json',
+                async: true,
+                success: function (data) {
+                    //PK_CardController.loadModalButton(totalItem);
+                    var _frdate = $('input[name=fromdate]').val();
+                    var _todate = $('input[name=todate]').val();
+                    var _key = $('input[name=key]').val();
+                    var _cardgroup = $('#cardgroup').val();
+                    var _customergroup = $('#customergroup').val();
+                    var _user = $('#user').val();
+                    var _url = '/Parking/Report/ReportDetailMoneyCardMonthTRANSERCO?fromdate=' + _frdate + '&todate=' + _todate + '&key=' + _key + '&cardgroup=' + _cardgroup + '&customergroup=' + _customergroup + '&user=' + _user;
+                    window.location.href = _url;
+                }
+            });
+        }
+
+        function RemoveAllSelected(total, url) {
+            RemoveAll(total, url);
+        }
+
+    </script>
+}
+
+

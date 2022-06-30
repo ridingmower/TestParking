@@ -1,0 +1,16 @@
+﻿@model List<Kztek.Model.Models.tblLockerSelfHost>
+
+
+@if (Model.Any())
+{
+    <p>
+        Địa chỉ: 
+
+        @foreach (var item in Model)
+        {
+            <span class="label label-sm label-primary">
+                @item.Address
+            </span>
+        }
+    </p>
+}

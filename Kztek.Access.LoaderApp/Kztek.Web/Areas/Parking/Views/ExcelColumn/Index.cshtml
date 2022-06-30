@@ -1,0 +1,119 @@
+﻿
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ExcelColumnCustom>
+
+@{
+    ViewBag.Title = "Danh sách";
+    string objId = (string)ViewBag.objId;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "ExcelColumn", FormMethod.Get, new { id = "frmFee" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.Keyword" placeholder="Từ khóa..." class="form-control" />
+        </div>
+       
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</button>
+            <a href="@Url.Action("Index", "ExcelColumn")" class="btn btn-sm btn-purple" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+            </a>
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Action("Actions", "Home", new { ActionName = "Create", ControllerName = controller, group = ViewBag.Group })
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center">STT</th>
+                    <th class="center">Menu</th>
+                    <th class="center">Danh sách cột excel</th>
+                    <th class="center">Trạng thái</th>
+                    <th class="center" width="80">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    int count = 0;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(objId) && objId == item.Id.ToString() ) ? "info" : "")">
+                            <td class="center">@count</td>
+                            <td class="text-left">
+                                @item.MenuFunctionName
+                            </td>
+
+                            <td class="text-left">
+                                @item.ColName
+                            </td>
+
+                            <td class="center">
+                                @if (item.Active)
+                                {
+                                    <span class="label label-sm label-success">Hoạt động</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Ngừng hoạt động</span>
+                                }
+                            </td>
+
+                         
+                            <td class="center">
+                                <div class="btn-group">
+                                    @Html.Action("Actions", "Home", new { ActionName = "Update", ControllerName = controller, id = item.Id, pageNumber = Model.PageIndex, group = ViewBag.Group })
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "ExcelColumn", new
+           {
+               page = x,
+               key = ViewBag.Keyword,
+    
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmFee");
+            DeleteSubmit(_prefixParkingDomain + '/ExcelColumn/Delete');
+        });
+    </script>
+}

@@ -1,0 +1,184 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ReportInOutByCustomer>
+
+@{
+    ViewBag.Title = "ReportInOutByCustomer";
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+}
+
+<div class="page-header">
+    <h1>
+        Báo cáo nhóm thẻ của nhân viên (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportInOutByCustomer", "Report", FormMethod.Get, new { id = "frmReportVehicleTooDay" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ, Biển số..." class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Nhóm khách hàng:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportVehicleTooDay" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportVehicleTooDay" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportVehicleTooDay" })
+
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="10">
+                        STT
+                    </th>
+                    <th class="center" width="40" idata="Card"> CardNo <i class=""></i></th>
+                    <th class="center" width="40"> Mã thẻ </th>
+                    <th class="center" idata="Customer">Nhân viên <i class=""></i></th>
+                    <th class="center" width="30">Số ngày sử dụng</th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="center">@item.RowNumber</td>
+                            <td class="center">
+                                @item.CardNo
+                            </td>
+                            <td class="center">
+                                @item.CardNumber
+                            </td>
+                          
+                            <td>
+                                @item.CustomerName
+                            </td>
+
+                            <td class="center">
+                                @item.Day
+                            </td>
+                           
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportInOutByCustomer", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               customergroup = ViewBag.CustomerGroupId
+           }))
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportVehicleTooDay').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportVehicleTooDay').submit();
+            });
+
+
+        });
+    </script>
+}
+

@@ -1,0 +1,104 @@
+﻿@using Kztek.Web.Core.Functions
+@{
+
+    var _dt = (System.Data.DataTable)ViewBag.dt;
+    var user = GetCurrentUser.GetUser();
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">Bảng tổng hợp doanh thu trông giữ xe</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th style="text-align: center;">STT</th>
+                        <th style="text-align: center;">Nhóm thẻ</th>
+                        <th style="text-align: center;">Tổng số xe vào</th>
+                        <th style="text-align: center;">Tổng số xe ra</th>
+                        <th style="text-align: center;">Doanh thu(VNĐ)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (_dt != null && _dt.Rows.Count > 0)
+                    {
+                        var count = 0;
+                        foreach (System.Data.DataRow item in _dt.Rows)
+                        {
+                            count++;
+                            <tr>
+                                <td>@count</td>
+                                <td>
+                                    <span>@item["CardGroupName"].ToString()</span>
+                                </td>
+                                <td>
+                                    <span>@item["TotalVehicleIn"].ToString()</span>
+                                </td>
+                                <td>
+                                    <span>@item["TotalVehicleOut"].ToString()</span>
+                                </td>
+                                <td>
+                                    <span>@item["Moneys"].ToString()</span>
+                                </td>
+                            </tr>
+                        }
+                        <tr style="font-weight: bold;">
+                            <td>#</td>
+                            <td>Tổng số</td>
+                            <td>@ViewBag.TotalIn.ToString()</td>
+                            <td>@ViewBag.TotalOut.ToString()</td>
+                            <td>@ViewBag.TotalMoneys.ToString()</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Người lập báo cáo
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            @if (user != null)
+                            {
+                                @user.Name
+                            }
+                        </h6>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

@@ -1,0 +1,3475 @@
+<?xml version="1.0" standalone="yes"?>
+<TinhThanh>
+	<Rows>
+		<TinhThanhID>30</TinhThanhID>
+		<Name>Hà Nội</Name>
+		<ParentID>0</ParentID>
+	</Rows>
+	<Rows>
+		<TinhThanhID>35</TinhThanhID>
+		<Name>TP Hồ Chí Minh</Name>
+		<ParentID>0</ParentID>
+	</Rows>
+  <Rows>
+    <TinhThanhID>76</TinhThanhID>
+    <Name>An Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>7</TinhThanhID>
+    <Name>Bà Rịa - Vũng Tàu</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>8</TinhThanhID>
+    <Name>Bạc Liêu</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>9</TinhThanhID>
+    <Name>Bắc Cạn</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>10</TinhThanhID>
+    <Name>Bắc Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>11</TinhThanhID>
+    <Name>Bắc Ninh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>12</TinhThanhID>
+    <Name>Bến Tre</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>13</TinhThanhID>
+    <Name>Bình Dương</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>14</TinhThanhID>
+    <Name>Bình  Đinh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>15</TinhThanhID>
+    <Name>Bình Phước</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>16</TinhThanhID>
+    <Name>Bình Thuận</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>18</TinhThanhID>
+    <Name>Cà Mau</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>19</TinhThanhID>
+    <Name>Cao Bằng</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>20</TinhThanhID>
+    <Name>Cần Thơ</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>21</TinhThanhID>
+    <Name>Đà Nẵng</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>22</TinhThanhID>
+    <Name>Đăk lắk</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>23</TinhThanhID>
+    <Name>Đăk Nông</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>24</TinhThanhID>
+    <Name>Điện Biên</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>25</TinhThanhID>
+    <Name>Đồng Nai</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>26</TinhThanhID>
+    <Name>Đồng Tháp</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>27</TinhThanhID>
+    <Name>Gia Lai</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>28</TinhThanhID>
+    <Name>Hà Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>29</TinhThanhID>
+    <Name>Hà Nam</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+
+  <Rows>
+    <TinhThanhID>31</TinhThanhID>
+    <Name>Hà Tĩnh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>32</TinhThanhID>
+    <Name>Hải Dương</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>33</TinhThanhID>
+    <Name>Hải Phòng</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>34</TinhThanhID>
+    <Name>Hòa Bình</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+
+  <Rows>
+    <TinhThanhID>36</TinhThanhID>
+    <Name>Hậu Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>37</TinhThanhID>
+    <Name>Hưng Yên</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <!--<Rows>
+    <TinhThanhID>72</TinhThanhID>
+    <Name>Hưng Yên</Name>
+    <ParentID>0</ParentID>
+  </Rows>-->
+  <Rows>
+    <TinhThanhID>38</TinhThanhID>
+    <Name>Khánh Hòa</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>39</TinhThanhID>
+    <Name>Kiên Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>40</TinhThanhID>
+    <Name>Kon Tum</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>41</TinhThanhID>
+    <Name>Lai Châu</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>42</TinhThanhID>
+    <Name>Lào Cai</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>43</TinhThanhID>
+    <Name>Lạng Sơn</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>44</TinhThanhID>
+    <Name>Lâm Đồng</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>45</TinhThanhID>
+    <Name>Long An</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>47</TinhThanhID>
+    <Name>Nam Định</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>48</TinhThanhID>
+    <Name>Nghệ An</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>49</TinhThanhID>
+    <Name>Ninh Bình</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>50</TinhThanhID>
+    <Name>Ninh Thuận</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>51</TinhThanhID>
+    <Name>Phú Thọ</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>52</TinhThanhID>
+    <Name>Phú Yên</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>53</TinhThanhID>
+    <Name>Quảng Bình</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>54</TinhThanhID>
+    <Name>Quảng Nam</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>55</TinhThanhID>
+    <Name>Quảng Ngãi</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>56</TinhThanhID>
+    <Name>Quảng Ninh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>57</TinhThanhID>
+    <Name>Quảng Trị</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>58</TinhThanhID>
+    <Name>Sóc Trăng</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>59</TinhThanhID>
+    <Name>Sơn La</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>60</TinhThanhID>
+    <Name>Tây Ninh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>61</TinhThanhID>
+    <Name>Thái Bình</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>62</TinhThanhID>
+    <Name>Thái Nguyên</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>63</TinhThanhID>
+    <Name>Thanh Hóa</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>65</TinhThanhID>
+    <Name>Thừa Thiên Huế</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>66</TinhThanhID>
+    <Name>Tiền Giang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>67</TinhThanhID>
+    <Name>Trà Vinh</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>68</TinhThanhID>
+    <Name>Tuyên Quang</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>69</TinhThanhID>
+    <Name>Vĩnh Long</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>70</TinhThanhID>
+    <Name>Vĩnh Phúc</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>71</TinhThanhID>
+    <Name>Yên Bái</Name>
+    <ParentID>0</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>73</TinhThanhID>
+    <Name>Long Xuyên</Name>
+    <ParentID>5</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>74</TinhThanhID>
+    <Name>Châu Đốc</Name>
+    <ParentID>5</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>75</TinhThanhID>
+    <Name>Tân Châu</Name>
+    <ParentID>5</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>77</TinhThanhID>
+    <Name>An Phú</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>78</TinhThanhID>
+    <Name>Châu  Phú</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>79</TinhThanhID>
+    <Name>Châu  Thành</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>80</TinhThanhID>
+    <Name>Chợ Mới</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>81</TinhThanhID>
+    <Name>Phú Tân</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>82</TinhThanhID>
+    <Name>Thoại Sơn</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>83</TinhThanhID>
+    <Name>Tịnh Biên</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>84</TinhThanhID>
+    <Name>Tri tôn</Name>
+    <ParentID>76</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>85</TinhThanhID>
+    <Name>Long Điền</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>91</TinhThanhID>
+    <Name>Đất Đỏ</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>92</TinhThanhID>
+    <Name>Châu Đức</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>93</TinhThanhID>
+    <Name>Tân Thành</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>94</TinhThanhID>
+    <Name>Côn Đảo</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>95</TinhThanhID>
+    <Name>Xuyên Mộc</Name>
+    <ParentID>7</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>96</TinhThanhID>
+    <Name>Phước Long</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>97</TinhThanhID>
+    <Name>Hồng Dân</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>98</TinhThanhID>
+    <Name>Vĩnh Lợi</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>99</TinhThanhID>
+    <Name>Giá Rai</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>100</TinhThanhID>
+    <Name>Đông Hải</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>102</TinhThanhID>
+    <Name>Hòa Bình</Name>
+    <ParentID>8</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>103</TinhThanhID>
+    <Name>Chợ Mới</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>104</TinhThanhID>
+    <Name>Ba Bể</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>105</TinhThanhID>
+    <Name>Bạch Thông</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>106</TinhThanhID>
+    <Name>Chợ Đồn</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>107</TinhThanhID>
+    <Name>Na Rì</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>108</TinhThanhID>
+    <Name>Ngân Sơn</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>109</TinhThanhID>
+    <Name>Pác Nạm</Name>
+    <ParentID>9</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>110</TinhThanhID>
+    <Name>Yên Thế</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>111</TinhThanhID>
+    <Name>Tân Yên</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>112</TinhThanhID>
+    <Name>Hiệp Hòa</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>113</TinhThanhID>
+    <Name>Sơn Động</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>114</TinhThanhID>
+    <Name>Việt Yên</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>115</TinhThanhID>
+    <Name>Lục Ngạn</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>116</TinhThanhID>
+    <Name>Lục Nam</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>117</TinhThanhID>
+    <Name>Yên Dũng</Name>
+    <ParentID>10</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>118</TinhThanhID>
+    <Name>Gia Bình</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>119</TinhThanhID>
+    <Name>Lương Tài</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>120</TinhThanhID>
+    <Name>Quế Võ</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>121</TinhThanhID>
+    <Name>Tiên Du</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>122</TinhThanhID>
+    <Name>Thuận Thành</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>123</TinhThanhID>
+    <Name>Từ Sơn</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>125</TinhThanhID>
+    <Name>Yên Phong</Name>
+    <ParentID>11</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>126</TinhThanhID>
+    <Name>Ba Tri</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>127</TinhThanhID>
+    <Name>Bình Đại</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>128</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>129</TinhThanhID>
+    <Name>Chợ Lách</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>131</TinhThanhID>
+    <Name>Giồng Trôm</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>132</TinhThanhID>
+    <Name>Mỏ Cày Bắc</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>133</TinhThanhID>
+    <Name>Mỏ Cày Nam</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>134</TinhThanhID>
+    <Name>Thạch Phú</Name>
+    <ParentID>12</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>135</TinhThanhID>
+    <Name>Dĩ An</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>136</TinhThanhID>
+    <Name>Bến Cát</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>137</TinhThanhID>
+    <Name>Dầu Tiếng</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>138</TinhThanhID>
+    <Name>Tân Uyên</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>139</TinhThanhID>
+    <Name>Thủ Dầu Một</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>140</TinhThanhID>
+    <Name>Thuận An</Name>
+    <ParentID>13</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>141</TinhThanhID>
+    <Name>Quy Nhơn</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>142</TinhThanhID>
+    <Name>An Nhơn</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>143</TinhThanhID>
+    <Name>An Đảo</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>144</TinhThanhID>
+    <Name>Hoài Ân</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>145</TinhThanhID>
+    <Name>Hoài Nhơn</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>146</TinhThanhID>
+    <Name>Phú Cát</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>147</TinhThanhID>
+    <Name>Phù Mỹ</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>148</TinhThanhID>
+    <Name>Tuy Phước</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>149</TinhThanhID>
+    <Name>Tây Sơn</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>150</TinhThanhID>
+    <Name>Vân canh</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>151</TinhThanhID>
+    <Name>Vĩnh Thạnh</Name>
+    <ParentID>14</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>152</TinhThanhID>
+    <Name>Đồng Xoài</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>153</TinhThanhID>
+    <Name>Bình Long</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>154</TinhThanhID>
+    <Name>Phước Long</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>155</TinhThanhID>
+    <Name>Bù Đăng</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>158</TinhThanhID>
+    <Name>Bù Đốp</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>159</TinhThanhID>
+    <Name>Bù Gia Mập</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>160</TinhThanhID>
+    <Name>Chơn Thành</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>161</TinhThanhID>
+    <Name>Đồng Phú</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>162</TinhThanhID>
+    <Name>Hớn Quản</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>163</TinhThanhID>
+    <Name>Lộc Ninh</Name>
+    <ParentID>15</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>164</TinhThanhID>
+    <Name>Phan Thiết</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>165</TinhThanhID>
+    <Name>La Gi</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>166</TinhThanhID>
+    <Name>Tuy Phong</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>167</TinhThanhID>
+    <Name>Bắc Bình</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>168</TinhThanhID>
+    <Name>Hàm Thuận Bắc</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>169</TinhThanhID>
+    <Name>Hàm Thuận Nam</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>170</TinhThanhID>
+    <Name>Tánh Linh</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>171</TinhThanhID>
+    <Name>Hàm Tân</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>172</TinhThanhID>
+    <Name>Đức  Linh</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>173</TinhThanhID>
+    <Name>Phú Quý</Name>
+    <ParentID>16</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>174</TinhThanhID>
+    <Name>Đầm Dơi</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>175</TinhThanhID>
+    <Name>Ngọc Hiển</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>176</TinhThanhID>
+    <Name>Cái Nước</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>177</TinhThanhID>
+    <Name>Trần Văn Thời</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>178</TinhThanhID>
+    <Name>U Minh</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>179</TinhThanhID>
+    <Name>Thới Bình</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>180</TinhThanhID>
+    <Name>Năm Căn</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>181</TinhThanhID>
+    <Name>Phú Tân</Name>
+    <ParentID>18</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>182</TinhThanhID>
+    <Name>Bảo Lạc</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>183</TinhThanhID>
+    <Name>Bảo Lâm</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>184</TinhThanhID>
+    <Name>Hạ Lang</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>185</TinhThanhID>
+    <Name>Hà Quảng</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>186</TinhThanhID>
+    <Name>Hòa An</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>187</TinhThanhID>
+    <Name>Nguyên Bình</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>188</TinhThanhID>
+    <Name>Phục Hòa</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>189</TinhThanhID>
+    <Name>Quảng Uyên</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>190</TinhThanhID>
+    <Name>Thạch An</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>191</TinhThanhID>
+    <Name>Thông Nông</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>192</TinhThanhID>
+    <Name>Trà Lĩnh</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>193</TinhThanhID>
+    <Name>Trùng Khánh</Name>
+    <ParentID>19</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>194</TinhThanhID>
+    <Name>Ninh Kiều</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>195</TinhThanhID>
+    <Name>Bình Thủy</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>196</TinhThanhID>
+    <Name>Cái Răng</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>197</TinhThanhID>
+    <Name>Ô Môn</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>198</TinhThanhID>
+    <Name>Thốt Nốt</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>199</TinhThanhID>
+    <Name>Phong Điền</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>200</TinhThanhID>
+    <Name>Cờ Đỏ</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>201</TinhThanhID>
+    <Name>Thới Lai</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>202</TinhThanhID>
+    <Name>Vĩnh Thạnh</Name>
+    <ParentID>20</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>203</TinhThanhID>
+    <Name>Plei Ku</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>204</TinhThanhID>
+    <Name>An Khê</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>205</TinhThanhID>
+    <Name>Ayun Pa</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>206</TinhThanhID>
+    <Name>Chư Pak</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>207</TinhThanhID>
+    <Name>Chư Prong</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>208</TinhThanhID>
+    <Name>Chư Sê</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>209</TinhThanhID>
+    <Name>Đăk Đoa</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>210</TinhThanhID>
+    <Name>Đăk Pơ</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>211</TinhThanhID>
+    <Name>Đức Cơ</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>212</TinhThanhID>
+    <Name>La Giai</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>213</TinhThanhID>
+    <Name>La Pa</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>214</TinhThanhID>
+    <Name>Mang Yang</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>215</TinhThanhID>
+    <Name>Phú Thiện</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>216</TinhThanhID>
+    <Name>chư Puh</Name>
+    <ParentID>27</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>217</TinhThanhID>
+    <Name>Đồng Văn</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>218</TinhThanhID>
+    <Name>Bắc Mê</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>219</TinhThanhID>
+    <Name>Bắc Quang</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>220</TinhThanhID>
+    <Name>Hoàng Su Phì</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>221</TinhThanhID>
+    <Name>Mèo Vạc</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>222</TinhThanhID>
+    <Name>Quản Bạ</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>223</TinhThanhID>
+    <Name>Quang Bình</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>224</TinhThanhID>
+    <Name>Vị Xuyên</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>225</TinhThanhID>
+    <Name>Xín Mần</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>226</TinhThanhID>
+    <Name>Yên Minh</Name>
+    <ParentID>28</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>227</TinhThanhID>
+    <Name>Phủ Lý</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>228</TinhThanhID>
+    <Name>Duy Tiên</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>229</TinhThanhID>
+    <Name>Kim Bảng</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>230</TinhThanhID>
+    <Name>Lý Nhân</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>231</TinhThanhID>
+    <Name>Thanh Liêm</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>232</TinhThanhID>
+    <Name>Bình Lục</Name>
+    <ParentID>29</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>233</TinhThanhID>
+    <Name>Ba Đình</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>234</TinhThanhID>
+    <Name>Cầu Giấy</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>235</TinhThanhID>
+    <Name>Đống Đa</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>236</TinhThanhID>
+    <Name>Hà Đông</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>237</TinhThanhID>
+    <Name>Hai Bà Trưng</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>238</TinhThanhID>
+    <Name>Hoàn kiếm</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>239</TinhThanhID>
+    <Name>Hoàng Mai</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>240</TinhThanhID>
+    <Name>Long Biên</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>241</TinhThanhID>
+    <Name>Tây Hồ</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>242</TinhThanhID>
+    <Name>Thanh Xuân</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>243</TinhThanhID>
+    <Name>Sơn Tây</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>244</TinhThanhID>
+    <Name>Bà Vì</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>245</TinhThanhID>
+    <Name>Chương Mỹ</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>246</TinhThanhID>
+    <Name>Mỹ Đức</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>247</TinhThanhID>
+    <Name>Phúc Thọ</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>248</TinhThanhID>
+    <Name>Phú Xuyên</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>249</TinhThanhID>
+    <Name>Thạch Thất</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>250</TinhThanhID>
+    <Name>Quốc Oai</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>251</TinhThanhID>
+    <Name>Đan Phượng</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>252</TinhThanhID>
+    <Name>Hoài Đức</Name>
+    <ParentID>30</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>253</TinhThanhID>
+    <Name>Hồng Lĩnh</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>254</TinhThanhID>
+    <Name>Cẩm Xuyên</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>255</TinhThanhID>
+    <Name>Can Lộc</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>256</TinhThanhID>
+    <Name>Đức Thọ</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>257</TinhThanhID>
+    <Name>Hương Khê</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>258</TinhThanhID>
+    <Name>Hương Sơn</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>259</TinhThanhID>
+    <Name>Kỳ Anh</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>260</TinhThanhID>
+    <Name>Nghi Xuân</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>261</TinhThanhID>
+    <Name>Thạch Hà</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>262</TinhThanhID>
+    <Name>Vũ  Quang</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>263</TinhThanhID>
+    <Name>Lộc Hà</Name>
+    <ParentID>31</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>265</TinhThanhID>
+    <Name>Hải Châu</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>266</TinhThanhID>
+    <Name>Thanh Khê</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>267</TinhThanhID>
+    <Name>Sơn Trà</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>268</TinhThanhID>
+    <Name>Ngũ Hành Sơn</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>269</TinhThanhID>
+    <Name>Liên Chiểu</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>270</TinhThanhID>
+    <Name>Cẩm Lệ</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>271</TinhThanhID>
+    <Name>Hòa Vang</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>272</TinhThanhID>
+    <Name>Hoàng Sa</Name>
+    <ParentID>21</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>273</TinhThanhID>
+    <Name>Buôn Ma Thuật</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>274</TinhThanhID>
+    <Name>Ea H'Leo</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>275</TinhThanhID>
+    <Name>Ea Sóup</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>276</TinhThanhID>
+    <Name>Buôn Đôn</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>277</TinhThanhID>
+    <Name>Cư M'gar</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>278</TinhThanhID>
+    <Name>Krong Bu'k</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>279</TinhThanhID>
+    <Name>Krong Năng</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>280</TinhThanhID>
+    <Name>Ea kar</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>281</TinhThanhID>
+    <Name>M' Dr ắk</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>282</TinhThanhID>
+    <Name>Krông Bông</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>283</TinhThanhID>
+    <Name>Krông Pắc</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>284</TinhThanhID>
+    <Name>Krông Ana</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>285</TinhThanhID>
+    <Name>Lắk</Name>
+    <ParentID>22</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>286</TinhThanhID>
+    <Name>Gia nghĩa</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>287</TinhThanhID>
+    <Name>Cư Jút</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>288</TinhThanhID>
+    <Name>Đắk Glong</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>289</TinhThanhID>
+    <Name>Đắk  Mil</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>290</TinhThanhID>
+    <Name>Đắk R' Lấp</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>291</TinhThanhID>
+    <Name>Đắk Song</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>292</TinhThanhID>
+    <Name>Krông Nô</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>293</TinhThanhID>
+    <Name>Tuy Đức</Name>
+    <ParentID>23</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>294</TinhThanhID>
+    <Name>Mường Láy</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>295</TinhThanhID>
+    <Name>Điện Biên</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>296</TinhThanhID>
+    <Name>Điện Biên Đông</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>297</TinhThanhID>
+    <Name>Mường Ảng</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>298</TinhThanhID>
+    <Name>Mường Chà</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>299</TinhThanhID>
+    <Name>Mường Nhé</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>300</TinhThanhID>
+    <Name>Tủa Chùa</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>301</TinhThanhID>
+    <Name>Tuần Giáo</Name>
+    <ParentID>24</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>302</TinhThanhID>
+    <Name>Biên Hòa </Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>303</TinhThanhID>
+    <Name>Long Khánh</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>304</TinhThanhID>
+    <Name>Định Quân</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>305</TinhThanhID>
+    <Name>Long Thành</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>306</TinhThanhID>
+    <Name>Nhơn Trạch</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>307</TinhThanhID>
+    <Name>Tân Phú</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>308</TinhThanhID>
+    <Name>Thống Nhất</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>309</TinhThanhID>
+    <Name>Vĩnh Cửu</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>310</TinhThanhID>
+    <Name>Xuân Lộc</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>311</TinhThanhID>
+    <Name>Cẩm Mỹ</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>312</TinhThanhID>
+    <Name>Trảng Bom</Name>
+    <ParentID>25</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>313</TinhThanhID>
+    <Name>Cao Lãnh</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>314</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>315</TinhThanhID>
+    <Name>Hồng Ngự</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>316</TinhThanhID>
+    <Name>Lai Vung</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>317</TinhThanhID>
+    <Name>Lấp Vò</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>318</TinhThanhID>
+    <Name>Tam Nông</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>319</TinhThanhID>
+    <Name>Tân Hồng</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>320</TinhThanhID>
+    <Name>Thanh Bình</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>321</TinhThanhID>
+    <Name>Tháp Mười</Name>
+    <ParentID>26</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>322</TinhThanhID>
+    <Name>Chí Linh</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>323</TinhThanhID>
+    <Name>Bình Giang</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>324</TinhThanhID>
+    <Name>Cẩm Giàng</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>325</TinhThanhID>
+    <Name>Gia Lộc</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>326</TinhThanhID>
+    <Name>Kim Thành</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>327</TinhThanhID>
+    <Name>Kim Môn</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>328</TinhThanhID>
+    <Name>Nam Sách</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>329</TinhThanhID>
+    <Name>Thanh Hà</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>330</TinhThanhID>
+    <Name>Thanh Miện</Name>
+    <ParentID>32</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>331</TinhThanhID>
+    <Name>Dương Kinh</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>335</TinhThanhID>
+    <Name>Đồ Sơn</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>336</TinhThanhID>
+    <Name>Hải An</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>337</TinhThanhID>
+    <Name>Kiến An</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>338</TinhThanhID>
+    <Name>Hồng Bàng</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>340</TinhThanhID>
+    <Name>Ngô Quyền</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>341</TinhThanhID>
+    <Name>Lê Chân</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>342</TinhThanhID>
+    <Name>An Dương</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>343</TinhThanhID>
+    <Name>An Lão</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>344</TinhThanhID>
+    <Name>Bạch Long Vỹ</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>345</TinhThanhID>
+    <Name>Cát Hải</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>346</TinhThanhID>
+    <Name>Kiến Thụy</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>347</TinhThanhID>
+    <Name>Tiên Lãng</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>348</TinhThanhID>
+    <Name>Vĩnh Bảo</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>349</TinhThanhID>
+    <Name>Thủy Nguyên</Name>
+    <ParentID>33</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>350</TinhThanhID>
+    <Name>Lương Sơn</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>351</TinhThanhID>
+    <Name>Cao Phong</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>352</TinhThanhID>
+    <Name>Đà Bắc</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>353</TinhThanhID>
+    <Name>Kim Bôi</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>354</TinhThanhID>
+    <Name>Kì Sơn</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>355</TinhThanhID>
+    <Name>Lạc Sơn</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>356</TinhThanhID>
+    <Name>Lạc Thủy</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>357</TinhThanhID>
+    <Name>Mai Châu</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>358</TinhThanhID>
+    <Name>Tân Lạc</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>359</TinhThanhID>
+    <Name>Yên Thủy</Name>
+    <ParentID>34</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>360</TinhThanhID>
+    <Name>Quận 1</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>361</TinhThanhID>
+    <Name>Quận 2</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>362</TinhThanhID>
+    <Name>Quận 3</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>363</TinhThanhID>
+    <Name>Quận 4</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>364</TinhThanhID>
+    <Name>Quận 5</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>365</TinhThanhID>
+    <Name>Quận 6</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>366</TinhThanhID>
+    <Name>Quận 7</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>367</TinhThanhID>
+    <Name>Quận 8</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>368</TinhThanhID>
+    <Name>Quận 9</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>369</TinhThanhID>
+    <Name>Quận 10</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>370</TinhThanhID>
+    <Name>Quận 11</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>371</TinhThanhID>
+    <Name>Quận 12</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>372</TinhThanhID>
+    <Name>Gò Vấp</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>373</TinhThanhID>
+    <Name>Tân Bình</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>374</TinhThanhID>
+    <Name>Tân Phú</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>375</TinhThanhID>
+    <Name>Bình Thạnh</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>376</TinhThanhID>
+    <Name>Phú Nhuận</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>377</TinhThanhID>
+    <Name>Thủ Đức</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>378</TinhThanhID>
+    <Name>Bình Tân</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>379</TinhThanhID>
+    <Name>Củ Tri</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>380</TinhThanhID>
+    <Name>Bình Chánh</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>381</TinhThanhID>
+    <Name>hooc Môn</Name>
+    <ParentID>35</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>382</TinhThanhID>
+    <Name>Vị Thanh</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>383</TinhThanhID>
+    <Name>Ngã Bảy</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>384</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>385</TinhThanhID>
+    <Name>Châu Thành A</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>386</TinhThanhID>
+    <Name>Long Mỹ</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>387</TinhThanhID>
+    <Name>Phụng Hiệp</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>388</TinhThanhID>
+    <Name>Vị Thủy</Name>
+    <ParentID>36</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>389</TinhThanhID>
+    <Name>Ân thi</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>390</TinhThanhID>
+    <Name>Khoái Châu</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>391</TinhThanhID>
+    <Name>Kim Động</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>392</TinhThanhID>
+    <Name>Mỹ Hòa</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>393</TinhThanhID>
+    <Name>Phù Cừ</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>394</TinhThanhID>
+    <Name>Tiên Lữ</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>395</TinhThanhID>
+    <Name>Văn Giang</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>396</TinhThanhID>
+    <Name>Văn Lâm</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>397</TinhThanhID>
+    <Name>Yên Mỹ</Name>
+    <ParentID>37</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>398</TinhThanhID>
+    <Name>Nha Trang</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>399</TinhThanhID>
+    <Name>Cam Ranh</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>400</TinhThanhID>
+    <Name>Ninh Hòa</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>401</TinhThanhID>
+    <Name>Vạn Ninh</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>402</TinhThanhID>
+    <Name>Diên Khánh</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>403</TinhThanhID>
+    <Name>Khánh Vinh</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>404</TinhThanhID>
+    <Name>Khánh Sơn</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>405</TinhThanhID>
+    <Name>Cam Lâm</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>406</TinhThanhID>
+    <Name>Trường Sơn</Name>
+    <ParentID>38</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>407</TinhThanhID>
+    <Name>Rạch Giá</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>408</TinhThanhID>
+    <Name>Hà Tiên</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>409</TinhThanhID>
+    <Name>An Biên</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>410</TinhThanhID>
+    <Name>An Minh</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>411</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>412</TinhThanhID>
+    <Name>Giồng Riềng</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>413</TinhThanhID>
+    <Name>Gò Quao</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>414</TinhThanhID>
+    <Name>Hòn Đất</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>415</TinhThanhID>
+    <Name>Kiên Hải</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>416</TinhThanhID>
+    <Name>Kiên Lương</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>417</TinhThanhID>
+    <Name>Phú Quốc</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>418</TinhThanhID>
+    <Name>Tân Hiệp</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>419</TinhThanhID>
+    <Name>Vĩnh Thuận</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>421</TinhThanhID>
+    <Name>U Minh Thượng</Name>
+    <ParentID>39</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>422</TinhThanhID>
+    <Name>Đắk Glei</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>423</TinhThanhID>
+    <Name>Đak Hà</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>424</TinhThanhID>
+    <Name>Đak Tô</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>425</TinhThanhID>
+    <Name>Kon Plong</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>426</TinhThanhID>
+    <Name>Kon Rẫy</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>427</TinhThanhID>
+    <Name>Ngọc Hồi</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>428</TinhThanhID>
+    <Name>Sa Thầy</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>429</TinhThanhID>
+    <Name>Tu Mơ Rông</Name>
+    <ParentID>40</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>430</TinhThanhID>
+    <Name>Mường Tè</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>431</TinhThanhID>
+    <Name>Phong Thổ</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>432</TinhThanhID>
+    <Name>Sìn Hồ</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>433</TinhThanhID>
+    <Name>Tam Đường</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>434</TinhThanhID>
+    <Name>Than Uyên</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>435</TinhThanhID>
+    <Name>Tân Uyên</Name>
+    <ParentID>41</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>436</TinhThanhID>
+    <Name>Bát Xát</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>437</TinhThanhID>
+    <Name>Bảo Thắng</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>438</TinhThanhID>
+    <Name>Bảo Yên</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>439</TinhThanhID>
+    <Name>Bắc Hà </Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>440</TinhThanhID>
+    <Name>Mường Khương</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>441</TinhThanhID>
+    <Name>Sa Pa</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>442</TinhThanhID>
+    <Name>Xi Ma Cai</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>443</TinhThanhID>
+    <Name>Văn Bàn</Name>
+    <ParentID>42</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>444</TinhThanhID>
+    <Name>Tràng Đình</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>445</TinhThanhID>
+    <Name>Văn Lãng</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>446</TinhThanhID>
+    <Name>Văn Quang</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>447</TinhThanhID>
+    <Name>Bình Gia</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>448</TinhThanhID>
+    <Name>Bắc Sơn</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>449</TinhThanhID>
+    <Name>Hữu Lũng</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>450</TinhThanhID>
+    <Name>Chi Lăng</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>451</TinhThanhID>
+    <Name>Cao Lộc</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>452</TinhThanhID>
+    <Name>Lộc Bình</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>453</TinhThanhID>
+    <Name>Đình Lập</Name>
+    <ParentID>43</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>454</TinhThanhID>
+    <Name>Đà Lạt</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>455</TinhThanhID>
+    <Name>Bảo Lộc</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>456</TinhThanhID>
+    <Name>Bảo Lâm</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>457</TinhThanhID>
+    <Name>Cát Tiên</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>458</TinhThanhID>
+    <Name>Di Linh</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>459</TinhThanhID>
+    <Name>Đam Rông</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>460</TinhThanhID>
+    <Name>Đạ huoai</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>461</TinhThanhID>
+    <Name>Đạ Tẻh</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>462</TinhThanhID>
+    <Name>Đơn Dương</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>463</TinhThanhID>
+    <Name>Lạc Dương</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>464</TinhThanhID>
+    <Name>Lâm Hà</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>465</TinhThanhID>
+    <Name>Đức Trọng</Name>
+    <ParentID>44</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>466</TinhThanhID>
+    <Name>Tân An</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>467</TinhThanhID>
+    <Name>Bến Lức</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>468</TinhThanhID>
+    <Name>Cần Đước</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>469</TinhThanhID>
+    <Name>Cần Giuộc</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>470</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>471</TinhThanhID>
+    <Name>Đức Hòa</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>472</TinhThanhID>
+    <Name>Đức Huệ</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>473</TinhThanhID>
+    <Name>Mộc Hóa</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>474</TinhThanhID>
+    <Name>Tân Hưng</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>475</TinhThanhID>
+    <Name>Tân Trụ</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>476</TinhThanhID>
+    <Name>Thanh Hóa</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>477</TinhThanhID>
+    <Name>Thủ Thừa</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>478</TinhThanhID>
+    <Name>Vĩnh Hưng</Name>
+    <ParentID>45</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>479</TinhThanhID>
+    <Name>Giao Thủy</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>480</TinhThanhID>
+    <Name>Hải Hậu</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>481</TinhThanhID>
+    <Name>Mỹ lộc</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>482</TinhThanhID>
+    <Name>Nam Trực</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>483</TinhThanhID>
+    <Name>Nghĩa Hưng</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>484</TinhThanhID>
+    <Name>Trực Ninh</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>485</TinhThanhID>
+    <Name>Vụ Bản</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>486</TinhThanhID>
+    <Name>Xuân Trường</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>487</TinhThanhID>
+    <Name>ý Yên</Name>
+    <ParentID>47</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>488</TinhThanhID>
+    <Name>Cửa Lò</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>489</TinhThanhID>
+    <Name>Thái Hòa</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>490</TinhThanhID>
+    <Name>Anh Sơn</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>491</TinhThanhID>
+    <Name>Con Cuông</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>492</TinhThanhID>
+    <Name>Diễn Châu</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>493</TinhThanhID>
+    <Name>Đô Lương </Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>494</TinhThanhID>
+    <Name>Hưng Nguyên</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>495</TinhThanhID>
+    <Name>Quỳ Châu</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>496</TinhThanhID>
+    <Name>Kỳ Sơn</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>497</TinhThanhID>
+    <Name>Nam Đàn</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>498</TinhThanhID>
+    <Name>Nghi Lộc</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>499</TinhThanhID>
+    <Name>Nghĩa Đàn</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>500</TinhThanhID>
+    <Name>Quế Phong</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>501</TinhThanhID>
+    <Name>Quỳnh Hợp</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>502</TinhThanhID>
+    <Name>Quỳnh Lưu</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>503</TinhThanhID>
+    <Name>Tân Kỳ</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>504</TinhThanhID>
+    <Name>Thanh Chương</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>505</TinhThanhID>
+    <Name>Tương Dương</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>506</TinhThanhID>
+    <Name>Yên Thành</Name>
+    <ParentID>48</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>507</TinhThanhID>
+    <Name>Tam Bình</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>508</TinhThanhID>
+    <Name>Nho Quan</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>509</TinhThanhID>
+    <Name>Gia Viễn</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>510</TinhThanhID>
+    <Name>Hoa Lư</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>511</TinhThanhID>
+    <Name>Yên Khánh</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>512</TinhThanhID>
+    <Name>Yên Mô</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>513</TinhThanhID>
+    <Name>Kim Sơn</Name>
+    <ParentID>49</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>514</TinhThanhID>
+    <Name>Phan Rang - Tháp Chàm</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>515</TinhThanhID>
+    <Name>Bắc Ái</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>516</TinhThanhID>
+    <Name>Ninh Hải</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>517</TinhThanhID>
+    <Name>Ninh Phước</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>518</TinhThanhID>
+    <Name>Ninh Sơn</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>519</TinhThanhID>
+    <Name>Thuận Bắc</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>520</TinhThanhID>
+    <Name>Thuận Nam</Name>
+    <ParentID>50</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>521</TinhThanhID>
+    <Name>Việt Trì </Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>522</TinhThanhID>
+    <Name>Cẩm Khê</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>523</TinhThanhID>
+    <Name>Đoan Hùng</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>524</TinhThanhID>
+    <Name>Hạ Hòa</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>525</TinhThanhID>
+    <Name>Lâm Thao</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>526</TinhThanhID>
+    <Name>Phù Ninh</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>527</TinhThanhID>
+    <Name>Tam Nông</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>528</TinhThanhID>
+    <Name>Tân Sơn</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>529</TinhThanhID>
+    <Name>Thanh Ba</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>530</TinhThanhID>
+    <Name>Thanh Sơn</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>531</TinhThanhID>
+    <Name>Thanh Thủy</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>532</TinhThanhID>
+    <Name>Yên Lập</Name>
+    <ParentID>51</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>533</TinhThanhID>
+    <Name>Tuy Hòa</Name>
+    <ParentID>52</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>534</TinhThanhID>
+    <Name>Sông Cầu</Name>
+    <ParentID>52</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>535</TinhThanhID>
+    <Name>Đông Hòa</Name>
+    <ParentID>52</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>536</TinhThanhID>
+    <Name>Tuy An</Name>
+    <ParentID>52</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>537</TinhThanhID>
+    <Name>Đồng Hới</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>538</TinhThanhID>
+    <Name>Minh Hóa</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>539</TinhThanhID>
+    <Name>Tuyên  Hóa</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>540</TinhThanhID>
+    <Name>Quảng Trạch</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>541</TinhThanhID>
+    <Name>Bố Trạch</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>542</TinhThanhID>
+    <Name>Quảng Ninh</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>543</TinhThanhID>
+    <Name>Lệ Thủy</Name>
+    <ParentID>53</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>544</TinhThanhID>
+    <Name>Tam kỳ</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>545</TinhThanhID>
+    <Name>Hội An</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>546</TinhThanhID>
+    <Name>Điện Bàn</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>547</TinhThanhID>
+    <Name>Thăng Bình</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>548</TinhThanhID>
+    <Name>Bắc Trà My</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>549</TinhThanhID>
+    <Name>Nam Trà My</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>550</TinhThanhID>
+    <Name>Núi Thành</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>551</TinhThanhID>
+    <Name>Phước Sơn</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>552</TinhThanhID>
+    <Name>Tiên Phước</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>553</TinhThanhID>
+    <Name>Hiệp Đức</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>554</TinhThanhID>
+    <Name>Nông Sơn</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>555</TinhThanhID>
+    <Name>Đông Giang</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>556</TinhThanhID>
+    <Name>Nam Giang</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>557</TinhThanhID>
+    <Name>Đại Lộc</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>558</TinhThanhID>
+    <Name>Phú Ninh</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>559</TinhThanhID>
+    <Name>Tây Giang</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>560</TinhThanhID>
+    <Name>Duy Xuyên</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>561</TinhThanhID>
+    <Name>Quế Sơn</Name>
+    <ParentID>54</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>562</TinhThanhID>
+    <Name>Ba tơ</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>563</TinhThanhID>
+    <Name>Bình Sơn</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>564</TinhThanhID>
+    <Name>Đức Phổ</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>565</TinhThanhID>
+    <Name>Minh Long</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>566</TinhThanhID>
+    <Name>Mộ Đức</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>567</TinhThanhID>
+    <Name>Nghĩa Hành</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>568</TinhThanhID>
+    <Name>Sơn Hà</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>569</TinhThanhID>
+    <Name>Sơn Tây</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>570</TinhThanhID>
+    <Name>Tây Trà</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>571</TinhThanhID>
+    <Name>Trà Bồng</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>572</TinhThanhID>
+    <Name>Tư Nghĩa</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>573</TinhThanhID>
+    <Name>Lý Sơn</Name>
+    <ParentID>55</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>574</TinhThanhID>
+    <Name>Hạ Long</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>575</TinhThanhID>
+    <Name>Móng Cái</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>576</TinhThanhID>
+    <Name>Uông Bí</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>577</TinhThanhID>
+    <Name>Cẩm Phả</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>578</TinhThanhID>
+    <Name>Quảng yên</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>579</TinhThanhID>
+    <Name>Đông Triều</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>580</TinhThanhID>
+    <Name>Tiên Yên</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>581</TinhThanhID>
+    <Name>Bình Yên</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>582</TinhThanhID>
+    <Name>Ba Chế</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>583</TinhThanhID>
+    <Name>Cô Tô</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>584</TinhThanhID>
+    <Name>Đầm Hà</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>585</TinhThanhID>
+    <Name>Hải Hà</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>586</TinhThanhID>
+    <Name>Hoành Bồ</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>587</TinhThanhID>
+    <Name>Vân Đồn</Name>
+    <ParentID>56</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>588</TinhThanhID>
+    <Name>Đông Hà</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>589</TinhThanhID>
+    <Name>Cam Lộ</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>590</TinhThanhID>
+    <Name>Cồn Cỏ</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>591</TinhThanhID>
+    <Name>Da krong</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>592</TinhThanhID>
+    <Name>Gio Linh</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>593</TinhThanhID>
+    <Name>Hải Lăng</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>594</TinhThanhID>
+    <Name>Hướng Hóa</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>595</TinhThanhID>
+    <Name>Triệu Phong</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>596</TinhThanhID>
+    <Name>Vĩnh Long</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>597</TinhThanhID>
+    <Name>Vĩnh Linh</Name>
+    <ParentID>57</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>598</TinhThanhID>
+    <Name>Vĩnh Châu</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>599</TinhThanhID>
+    <Name>Cù Lao Dung</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>600</TinhThanhID>
+    <Name>Kế Sách</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>601</TinhThanhID>
+    <Name>Kế Sách</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>602</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>603</TinhThanhID>
+    <Name>Mỹ Tú </Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>604</TinhThanhID>
+    <Name>Mỹ Xuyên</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>605</TinhThanhID>
+    <Name>Ngã Năm</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>606</TinhThanhID>
+    <Name>Trần Đề</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>607</TinhThanhID>
+    <Name>Thạnh Trị</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>608</TinhThanhID>
+    <Name>Long Phú</Name>
+    <ParentID>58</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>609</TinhThanhID>
+    <Name>Quỳnh Nhai</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>610</TinhThanhID>
+    <Name>Mường La</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>611</TinhThanhID>
+    <Name>Thuận Châu</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>612</TinhThanhID>
+    <Name>Phù Yên</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>613</TinhThanhID>
+    <Name>Bắc  Yên</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>614</TinhThanhID>
+    <Name>Mai Sơn</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>615</TinhThanhID>
+    <Name>Sông Mã</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>616</TinhThanhID>
+    <Name>Yên Châu</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>617</TinhThanhID>
+    <Name>Mộc Châu</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>618</TinhThanhID>
+    <Name>Sốp Cộp</Name>
+    <ParentID>59</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>619</TinhThanhID>
+    <Name>Tân Biên</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>620</TinhThanhID>
+    <Name>Tân Châu</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>621</TinhThanhID>
+    <Name>Dương Minh Châu</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>622</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>623</TinhThanhID>
+    <Name>Hòa Thành</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>624</TinhThanhID>
+    <Name>Bến Cầu </Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>625</TinhThanhID>
+    <Name>Gò Dầu</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>626</TinhThanhID>
+    <Name>Trảng Bàng</Name>
+    <ParentID>60</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>627</TinhThanhID>
+    <Name>Đông Hưng</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>628</TinhThanhID>
+    <Name>Hưng Hà</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>629</TinhThanhID>
+    <Name>Kiến Xương</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>630</TinhThanhID>
+    <Name>Quỳnh Phụ</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>631</TinhThanhID>
+    <Name>Tiền Hải</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>632</TinhThanhID>
+    <Name>Vũ Thư</Name>
+    <ParentID>61</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>633</TinhThanhID>
+    <Name>Sông Công</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>634</TinhThanhID>
+    <Name>Đại Từ</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>635</TinhThanhID>
+    <Name>Định Hóa</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>636</TinhThanhID>
+    <Name>Đồng Hỷ</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>637</TinhThanhID>
+    <Name>Phổ Yên</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>638</TinhThanhID>
+    <Name>Phú Bình</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>639</TinhThanhID>
+    <Name>Phú Lương</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>640</TinhThanhID>
+    <Name>Võ Nhai</Name>
+    <ParentID>62</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>641</TinhThanhID>
+    <Name>Bỉm Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>642</TinhThanhID>
+    <Name>Sầm Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>643</TinhThanhID>
+    <Name>Bá Thước</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>644</TinhThanhID>
+    <Name>Cẩm Thủy</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>645</TinhThanhID>
+    <Name>Đông Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>646</TinhThanhID>
+    <Name>Hà Trung</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>647</TinhThanhID>
+    <Name>Hậu Lộc</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>648</TinhThanhID>
+    <Name>Hoằng Hóa</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>649</TinhThanhID>
+    <Name>Lang Chánh</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>650</TinhThanhID>
+    <Name>Mường Lát</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>651</TinhThanhID>
+    <Name>Nga Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>652</TinhThanhID>
+    <Name>Ngọc Lặc</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>653</TinhThanhID>
+    <Name>Như Thanh</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>654</TinhThanhID>
+    <Name>Như Xuân</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>655</TinhThanhID>
+    <Name>Nông Cống</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>656</TinhThanhID>
+    <Name>Quan Hóa</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>657</TinhThanhID>
+    <Name>Quan Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>658</TinhThanhID>
+    <Name>Quảng Xương</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>659</TinhThanhID>
+    <Name>Thạch Thành</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>660</TinhThanhID>
+    <Name>Thiệu Hóa</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>661</TinhThanhID>
+    <Name>Thọ Xuân</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>662</TinhThanhID>
+    <Name>Thường Xuân</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>663</TinhThanhID>
+    <Name>Tĩnh Gia</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>664</TinhThanhID>
+    <Name>Triệu Sơn</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>665</TinhThanhID>
+    <Name>Vĩnh Lộc</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>666</TinhThanhID>
+    <Name>Yên Định</Name>
+    <ParentID>63</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>667</TinhThanhID>
+    <Name>A Lưới</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>668</TinhThanhID>
+    <Name>Hương Thủy</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>669</TinhThanhID>
+    <Name>Hương Trà</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>670</TinhThanhID>
+    <Name>Nam Đông</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>671</TinhThanhID>
+    <Name>Phong Điền</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>672</TinhThanhID>
+    <Name>Phú lộc</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>673</TinhThanhID>
+    <Name>Phú Vang</Name>
+    <ParentID>65</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>675</TinhThanhID>
+    <Name>Mỹ Tho</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>676</TinhThanhID>
+    <Name>Cái Bè</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>677</TinhThanhID>
+    <Name>Gò công</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>678</TinhThanhID>
+    <Name>Gò Công Tây</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>679</TinhThanhID>
+    <Name>Gò Công Đông</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>680</TinhThanhID>
+    <Name>Chợ Gạo</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>681</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>682</TinhThanhID>
+    <Name>Tân Phước</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>683</TinhThanhID>
+    <Name>Cai Lậy</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>684</TinhThanhID>
+    <Name>Tân Phú Đông</Name>
+    <ParentID>66</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>685</TinhThanhID>
+    <Name>Càng Long</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>686</TinhThanhID>
+    <Name>Cầu Kè</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>687</TinhThanhID>
+    <Name>Tiểu Cần</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>688</TinhThanhID>
+    <Name>Châu Thành</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>689</TinhThanhID>
+    <Name>Cầu Ngang</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>690</TinhThanhID>
+    <Name>Trà Cú</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>691</TinhThanhID>
+    <Name>Duyên Hải</Name>
+    <ParentID>67</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>692</TinhThanhID>
+    <Name>Chiêm Hóa</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>693</TinhThanhID>
+    <Name>Hàm Yên</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>694</TinhThanhID>
+    <Name>Na Hang</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>695</TinhThanhID>
+    <Name>Sơn Dương</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>696</TinhThanhID>
+    <Name>Yên Sơn</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>697</TinhThanhID>
+    <Name>Lâm Bình</Name>
+    <ParentID>68</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>698</TinhThanhID>
+    <Name>Bình Minh</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>699</TinhThanhID>
+    <Name>Bình Tân</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>700</TinhThanhID>
+    <Name>Long Hồ</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>701</TinhThanhID>
+    <Name>Mang Thít</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>702</TinhThanhID>
+    <Name>Tam Bình</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>703</TinhThanhID>
+    <Name>Trà Ôn</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>704</TinhThanhID>
+    <Name>Vũng Liêm</Name>
+    <ParentID>69</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>705</TinhThanhID>
+    <Name>Phúc Yên</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>706</TinhThanhID>
+    <Name>Bình Xuyên</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>707</TinhThanhID>
+    <Name>Lập Thạch</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>708</TinhThanhID>
+    <Name>Sông Lô</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>709</TinhThanhID>
+    <Name>Tam Dương</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>710</TinhThanhID>
+    <Name>Tam Đảo</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>711</TinhThanhID>
+    <Name>Vĩnh Tường</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>712</TinhThanhID>
+    <Name>Yên Lạc</Name>
+    <ParentID>70</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>713</TinhThanhID>
+    <Name>Nghĩa Lộ</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>714</TinhThanhID>
+    <Name>Lục Yên</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>715</TinhThanhID>
+    <Name>Mù Cang Chải</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>716</TinhThanhID>
+    <Name>Trấn Yên</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>717</TinhThanhID>
+    <Name>Trạm Tấu</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>718</TinhThanhID>
+    <Name>Văn Chấn</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>719</TinhThanhID>
+    <Name>Văn Yên</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+  <Rows>
+    <TinhThanhID>720</TinhThanhID>
+    <Name>yên Bình</Name>
+    <ParentID>71</ParentID>
+  </Rows>
+</TinhThanh>

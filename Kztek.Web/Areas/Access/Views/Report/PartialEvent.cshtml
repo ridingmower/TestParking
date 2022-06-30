@@ -1,0 +1,33 @@
+﻿@using Kztek.Model.Models
+@model Kztek.Model.Models.tblCustomer
+
+@{
+    var type = (string)ViewBag.Type;
+}
+@if (Model != null)
+{
+    if (type.Equals("customer"))
+    {
+        <span>@Model.CustomerName</span>
+    }
+    else if (type.Equals("customercode"))
+    {
+        <span>@Model.CustomerCode</span>
+    }
+    else if (type.Equals("avatar"))
+    {
+        <div class="ace-thumbnails clearfix">
+
+            <a href="@Model.Avatar" data-rel="colorbox" title="Ảnh" class="cboxElement img_box" data-spzoom="">
+                <img class="msg-photo" src="@Model.Avatar" alt="thumb" width="30" height="30">
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <span>@Model.Address</span>
+    }
+
+}
+

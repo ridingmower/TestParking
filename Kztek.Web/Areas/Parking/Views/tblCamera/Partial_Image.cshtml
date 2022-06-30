@@ -1,0 +1,34 @@
+﻿
+@{ 
+    var path = (string)ViewBag.Path;
+}
+@if (!string.IsNullOrEmpty(path))
+{
+    <div class="container">
+
+        <div>
+            @*<img id="image" src="~/uploads/picture.jpg" alt="Picture" />*@
+            <img id="image" src="@path" alt="Picture" />
+        </div>
+        <p>Data: <span id="data"></span></p>
+        <p>Crop Box Data: <span id="cropBoxData"></span></p>
+        <p>
+
+            <button class="btn btn-sm btn-primary" id="btnCrop" type="button">
+                <i class="fa fa-crop"></i>
+                Crop
+            </button>
+            <button class="btn btn-sm btn-success" id="btnSave" type="button">
+                <i class="fa fa-save"></i>
+                Save
+            </button>
+            <button class="btn btn-sm btn-danger" id="btnDel" type="button">
+                <i class="fa fa-remove"></i>
+                Delete
+            </button>
+        </p>
+        <div id="result"></div>
+
+    </div>
+}
+

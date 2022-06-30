@@ -1,0 +1,304 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Core.Helpers
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportDetailMoneyCardDay_LAOCAI>
+
+@{
+    ViewBag.Title = "PrintReportDetailMoneyCardDay";
+
+    var listLane = (List<Kztek.Model.Models.tblLane>)ViewBag.Lanes;
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    var key = ViewBag.Key;
+
+    string filterLink = ViewBag.FilterLink;
+    string totalMoney = ViewBag.TotalMoney.ToString();
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportDetailMoneyCardDay");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+
+    var objsystem = (Kztek.Model.Models.tblSystemConfig)ViewBag.System;
+    bool ischeck = (objsystem != null && objsystem.FeeName == "BVDK_THANHPHO_VINH") ? true : false;
+}
+
+@*<div class="hr hr-18 dotted hr-24"></div>
+@if (Model.Data.Any())
+{
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="pull-left">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("LAOCAI_PrintReportDetailMoneyCardDay", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               lane = ViewBag.LaneId,
+               user = ViewBag.UserId,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue
+           }))
+            </div>
+        </div>
+    </div>
+}*@
+
+<div class="row">
+    <div class="col-xs-12">
+        <form class="form-horizontal">
+            @*<div class="form-group col-xs-12 col-sm-3">
+                    <input type="text" id="txtPageSize" value="@ViewBag.PageSize" placeholder="Số bản ghi" class="form-control" />
+                </div>*@
+            <div class="form-group col-xs-12 col-sm-3">
+                <span class="input-group-btn">
+                    @*<button type="button" id="btnRefresh" class="btn btn-primary btn-sm">
+                            <i class="fa fa-refresh"></i>
+                            Refresh
+                        </button>*@
+                    <button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+                        <i class="fa fa-print"></i>
+                        Print
+                    </button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div id="Print">
+    @if (ischeck)
+    {
+        <div class="row">
+            <div class="col-xs-12" style="height:55px;">
+                <table class="table" style="margin-bottom:unset;">
+                    <tr style="height:10px;border-style:hidden;">
+                        <td>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Company</h4>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">@objsystem.Address</h4>
+                            @*<h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;text-transform: uppercase;">@objsystem.Tel - @objsystem.Fax</h4>*@
+                        </td>
+                        <td>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                            <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h4>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;"> Chi tiết thu tiền thẻ lượt khi vào</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            @DictionarySearch["fromDate"] <strong>@ViewBag.fromdateValue</strong> @DictionarySearch["toDate"] <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">@Dictionary["stt"]</th>
+                        <th class="text-left" idata="Card">@Dictionary["cardNo"]</th>
+                        <th class="text-left">@Dictionary["codeCard"]</th>
+                        <th class="text-left"> @Dictionary["licensePlate"]</th>
+                        <th class="text-left">@Dictionary["timeIn"]</th>
+                        @*<th class="text-left">@Dictionary["timeOut"]</th>*@
+                        <th class="text-left hidden-480" idata="CardGroup">@Dictionary["cardGroup"]<i class=""></i></th>
+                        <th class="text-left hidden-480" idata="Customer">@Dictionary["customer"]<i class=""></i></th>
+                        <th class="text-left hidden-480">@Dictionary["lanceIn"]</th>
+                        @*<th class="text-left hidden-480">@Dictionary["lanceOut"]</th>*@
+                        <th class="text-left">@Dictionary["monitoringIn"]</th>
+                        @*<th class="text-left">@Dictionary["monitoringOut"]</th>*@
+                        @*<th class="text-left">@Dictionary["moneyout"]</th>*@
+                        <th class="text-left">@Dictionary["moneyin"]</th>
+                        <th class="text-left">@Dictionary["paystate"]</th>
+                        @*<th class="text-left">@Dictionary["totalinout"]</th>*@
+                        @*<th class="hidden-480">@Dictionary["timeAll"]</th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = (Model.PageIndex - 1) * Model.PageSize;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                            <tr>
+                                <td class="text-center">
+                                    @item.RowNumber
+                                </td>
+                                <td>
+                                    @item.CardNo
+                                </td>
+                                <td>
+                                    @item.CardNumber
+                                </td>
+                                <td>
+                                    @item.Plate
+                                </td>
+                                <td>
+                                    @Convert.ToDateTime(item.DateTimeIn).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                @*<td>
+                                    @Convert.ToDateTime(item.DateTimeOut).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>*@
+                                <td>
+                                    @{
+                                        var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.ItemValue.ToString().Equals(item.CardGroupID)) : null;
+
+                                        if (objcardGroup != null)
+                                        {
+                                            <span>@objcardGroup.ItemText</span>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @item.CustomerName
+                                </td>
+                                <td>
+                                    @{
+                                        var objLaneIn = listLane != null ? listLane.FirstOrDefault(n => n.LaneID.ToString().Equals(item.LaneIDIn)) : null;
+
+                                        if (objLaneIn != null)
+                                        {
+                                            <span>@objLaneIn.LaneName</span>
+                                        }
+                                    }
+                                </td>
+                                @*<td>
+                                    @{
+                                        var objLaneOut = listLane != null ? listLane.FirstOrDefault(n => n.LaneID.ToString().Equals(item.LaneIDOut)) : null;
+
+                                        if (objLaneOut != null)
+                                        {
+                                            <span>@objLaneOut.LaneName</span>
+                                        }
+                                    }
+                                </td>*@
+                                <td>
+                                    @{
+                                        var objuserIn = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserIDIn)) : null;
+
+                                        if (objuserIn != null)
+                                        {
+                                            <span>@objuserIn.Username</span>
+                                        }
+                                    }
+                                </td>
+                                @*<td>
+                                    @{
+                                        var objuserOut = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserIDOut)) : null;
+
+                                        if (objuserOut != null)
+                                        {
+                                            <span>@objuserOut.Username</span>
+                                        }
+                                    }
+                                </td>*@
+                                @*<td class="text-right">
+                                    @item.Moneys.FormatMoney()
+                                </td>*@
+                                <td class="text-right">
+                                    @string.Format("{0:n0}", item.MoneyIn)
+                                </td>
+                                <td class="text-right">
+                                    @if (item.PayState == 0)
+                                    {
+                                        <span>Chưa thanh toán</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Đã thanh toán</span>
+                                    }
+
+                                </td>
+                                @*<td class="text-right">
+                                    @if (item.PayState == 0)
+                                    {
+                                        @item.Moneys.FormatMoney()
+                                    }
+                                    else
+                                    {
+                                        var total = (!string.IsNullOrEmpty(item.Moneys) ? Convert.ToDecimal(item.Moneys) : 0) + item.MoneyIn;
+
+                                        <span>  @string.Format("{0:n0}", total)</span>
+                                    }
+                                </td>*@
+                                @*<td>
+                                    <span>@StringUtil.CalculateTimeDiff(item.DateTimeIn, item.DateTimeOut)</span>
+                                </td>*@
+                            </tr>
+                        }
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td>#</td>
+                        <td>@Dictionary["total"]</td>
+                        <td></td>
+                        <td></td>
+                        @*<td></td>
+                        <td></td>
+                        <td></td>*@
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-right">@totalMoney.FormatMoney()</td>
+                        <td></td>
+
+                        @*<td></td>*@
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    </div>
+
+    @if (ischeck)
+    {
+
+        <div class="row">
+            <div class="col-xs-12" style="height:30px;">
+                <table class="table">
+                    <tr style="border-style:hidden;">
+                        <td>
+                            <p style="font-size:12px;float:right;padding-right:70px;font-family: 'Times New Roman';font-weight:bold;">
+                                NGƯỜI LẬP
+                            </p>
+
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+    <script type="text/javascript">
+
+    </script>
+}

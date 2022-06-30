@@ -1,0 +1,152 @@
+﻿@using Kztek.Web.Core.Functions
+@using System.Data
+@{
+    DataTable dt_TX = ViewBag.dtCardGroup_TX;
+    DataTable dt_NotTX = ViewBag.dtCardGroup_NotTX;
+    var user = GetCurrentUser.GetUser();
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">Báo cáo tổng hợp doanh thu vé lượt theo vị trí đỗ xe</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th>STT</th>
+                        <th style="text-align:center;">Vị trí đỗ</th>
+                        <th style="text-align:center;">Lượt vào</th>
+                        <th style="text-align:center;">Lượt ra</th>
+                        <th style="text-align:center;">Số tiền(VNĐ)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (dt_TX.Rows.Count > 0)
+                        {
+                            var a = dt_TX.Rows.Count + 1;
+                            <th rowspan="@a">1</th>
+                        }
+                        else
+                        {
+                            <th>1</th>
+                        }
+                        <td>
+                            Bãi xe Taxi Hà Nội
+                        </td>
+                        <td>@ViewBag.totalIn_TX</td>
+                        <td>@ViewBag.totalOut_TX</td>
+                        <td style="text-align:right;">@ViewBag.totalMoneys_TX</td>
+                    </tr>
+                    @if (dt_TX.Rows.Count > 0)
+                    {
+                        int count = 0;
+                        foreach (System.Data.DataRow drTX in dt_TX.Rows)
+                        {
+                            count++;
+                            <tr>
+                                <td style="padding-left:40px;">
+                                    1.@count <span>@drTX["CardGroupName"].ToString()</span>
+                                </td>
+                                <td> <span>@drTX["TotalVehicleIn"].ToString()</span> </td>
+                                <td> <span>@drTX["TotalVehicleOut"].ToString()</span> </td>
+                                <td style="text-align:right;">
+                                    <span>@drTX["Moneys"].ToString()</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    <tr>
+                        @if (dt_NotTX.Rows.Count > 0)
+                        {
+                            var b = dt_NotTX.Rows.Count + 1;
+                            <th rowspan="@b">2</th>
+                        }
+                        else
+                        {
+                            <th>2</th>
+                        }
+                        <td>
+                            Bãi xe xí nghiệp
+                        </td>
+                        <td>@ViewBag.totalIn_NotTX</td>
+                        <td>@ViewBag.totalOut_NotTX</td>
+                        <td style="text-align:right;">@ViewBag.totalMoneys_NotTX</td>
+                    </tr>
+                    @if (dt_NotTX.Rows.Count > 0)
+                    {
+                        int _count = 0;
+                        foreach (System.Data.DataRow drNotTX in dt_NotTX.Rows)
+                        {
+                            _count++;
+                            <tr>
+                                <td style="padding-left:40px;">
+                                    2.@_count <span>@drNotTX["CardGroupName"].ToString()</span>
+                                </td>
+                                <td> <span>@drNotTX["TotalVehicleIn"].ToString()</span> </td>
+                                <td> <span>@drNotTX["TotalVehicleOut"].ToString()</span> </td>
+                                <td style="text-align:right;">
+                                    <span>@drNotTX["Moneys"].ToString()</span>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    <tr style="font-weight:bold;">
+                        <td>#</td>
+                        <td>Tổng số</td>
+                        <td>@ViewBag.totalIn</td>
+                        <td>@ViewBag.totalOut</td>
+                        <td style="text-align:right;">@ViewBag.totalMoneys</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            Người lập báo cáo
+                        </h6>
+                        <h6 style="font-size:12px;text-align:right;font-family: 'Times New Roman';font-weight:bold;">
+                            @if (user != null)
+                            {
+                                @user.Name
+                            }
+                        </h6>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

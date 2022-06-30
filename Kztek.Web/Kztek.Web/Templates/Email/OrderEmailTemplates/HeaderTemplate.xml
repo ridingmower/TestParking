@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<template>
+  <content>
+    <![CDATA[
+		  <div style='background:#f6f6f6;padding:35px 20px 20px 20px;'>
+        <table cellspacing='0' cellpadding='0' width='100%' align='center' style='font-family:'Times New Roman', Times, serif;font-size:14px;'>
+          <tr style='height:45px;background:#FF9900;'>
+             <td style='padding:0 15px;'>
+                <a href='http://babo.vn' style='color:#fff;font-weight:bold;display:block;font-size:18px;line-height:45px;text-decoration:none;'>babo.vn</a>
+              </td>
+          </tr>
+          <tr style='background:#FFF;'>
+            <td style='color:#444444;border:1px solid #dddddd;padding:0 20px;'>
+              <p style='font-size: 18px;color: #444444;font-weight: bold;'>
+                COD Xác nhận đơn hàng
+              </p>
+              <p>
+                Xin chào {0} ,
+              </p>
+              <p>
+                Cảm ơn bạn đã mua hàng tại <a href='http://babo.vn' style='font-weight:bold'>Babo.vn</a>.
+                Đơn đặt hàng của bạn có mã số là <b>{1}</b>, thông tin chi tiết vui lòng xem bên dưới:
+              </p>
+              <p style='display:block;font-size:11px;text-align:right;'>
+                Được đặt hàng lúc: {2};
+              </p>
+              <p>
+              <p>
+                <table cellpadding='0' cellspacing='0' width='100%' style='margin-top:20px;'>
+                  <tr>
+                    <td>
+                      <span>Họ và Tên: <b>{3}</b></span>
+                    </td>
+                    <td>
+                      <span>Điện thoại: <b>{4}</b></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>Mã đơn hàng: {5}</span>
+                    </td>
+                    <td>
+                      <span>Email: <a href='mailto:" + bo.Email + "'>{6}</a></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>Vận chuyển: {7}</span>
+                    </td>
+                    <td>
+                      <span>Thanh toán: {8}</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <span>Quận/Huyện: <b>{9}</b></span>
+                    </td>
+                    <td>
+                      <span>Thành phố: <b>{10}</b></a></span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan='2'>
+                      <span>Địa chỉ: {11}</span>
+                    </td>
+                  </tr>
+                </table>
+              </p>
+
+        <table cellpadding='0' cellspacing='0' width='100%' style='border-top: 1px solid #DDD;border-left: 1px solid #DDD;margin-top:20px;'>
+          <tbody>
+            <tr style='background: #FAFAFA;height: 30px;'>
+              <th width='50' align='center' style='border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;'>STT</th>
+              <th style='border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;'>Tên sản phẩm
+              </th>
+              <th width='90' align='center' style='border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;'>Số lượng</th>
+              <th width='100' align='center' style='border-bottom: 1px solid #DDD;border-right: 1px solid #DDD;'>Thành tiền</th>
+            </tr>
+		]]>
+  </content>
+</template>

@@ -1,0 +1,8 @@
+﻿@using System.Data
+@model DataTable
+@{
+    var lstCardGroup = (List<string>)ViewBag.LSTCardGroup;
+}
+
+
+@Html.Action("DroplistMultiSelectTemplate2", "CommonUse", new { _dt = Model, itemValue = "ItemValue", itemText = "ItemText", selectedValues = (lstCardGroup != null && lstCardGroup.Count > 0) ? lstCardGroup : new List<string>(), Modelname = "ddlCardGroup" })

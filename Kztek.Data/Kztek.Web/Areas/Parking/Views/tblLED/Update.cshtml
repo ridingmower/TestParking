@@ -1,0 +1,144 @@
+﻿@model Kztek.Model.Models.tblLEDView
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Update";
+    //Layout = Futech.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    int pn = Convert.ToInt32(ViewBag.PN);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblLED", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @if (ViewBag.Error != null)
+    {
+        <strong style="color:green">@ViewBag.Error</strong>
+    }
+</div>
+
+<div class="col-xs-12">
+
+    @using (Html.BeginForm("Update", "tblLED", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        @Html.HiddenFor(n => n.LEDID)
+
+        @Html.Hidden("page", pn)
+        @Html.Hidden("key", (string)ViewBag.keyValue)
+        @Html.Hidden("pc", (string)ViewBag.pcValue)
+        @Html.Hidden("group", (string)ViewBag.groupValue)
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> @Dictionary["Name"]   </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(n => n.LEDName, new { @class = "form-control", @placeholder = Dictionary["NamePlaceholder"] })
+                @Html.ValidationMessageFor(n => n.LEDName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-2"> @Dictionary["PCName"] </label>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(n => n.PCID, new SelectList(ViewBag.PCs, "PCID", "ComputerName"), Dictionary["PCNamePlaceholder"])
+                @Html.ValidationMessageFor(n => n.PCID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> @Dictionary["Comport"] </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(n => n.Comport, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Comport, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> @Dictionary["Baudrate"] </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(n => n.Baudrate, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Baudrate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> @Dictionary["Address"] </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(n => n.Address, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> Số dòng </label>
+            <div class="col-sm-4">
+                @Html.TextBoxFor(n => n.RowNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.RowNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-2"> @Dictionary["SideIndex"] </label>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(n => n.SideIndex, new SelectList(ViewBag.SideIndex, "ItemValue", "ItemText"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.SideIndex, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label no-padding-right" for="form-field-2"> @Dictionary["LedType"] </label>
+            <div class="col-sm-4">
+                @Html.DropDownListFor(n => n.LedType, new SelectList(ViewBag.LedType, "ItemText", "ItemText"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.LedType)
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-4">
+                <label class="inline">
+                    @Html.CheckBoxFor(n => n.EnableLED, new { @class = "ace", @checked = "true" })
+                    <span class="lbl">@Dictionary["Active"] </span>
+                </label>
+            </div>
+        </div>
+
+        <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+            <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                <i class="ace-icon fa fa-cog bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                <!-- /.pull-left -->
+                <div class="bg-rightbox">
+                    <div class="clearfix lineButton">
+                        <div class="col-md-12 input-group">
+                            <button class="btn btn-success" type="submit" id="Countinue">
+                                <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                @DictionaryAction["Save"]
+                            </button>
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                @DictionaryAction["Refresh"]
+                            </button>
+                            <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue, selectedId = Model.LEDID.ToString(), page = pn })" class="btn btn-yellow">
+                                <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                @DictionaryAction["BackToList"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.pull-left -->
+            </div><!-- /.ace-settings-box -->
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#SideIndex").val('@Model.SideIndex');
+            $("#LedType").val('@Model.LedType');
+            $("#PCID").val('@Model.PCID');
+        });
+    </script>
+
+}

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<template>
+  <content>
+    <![CDATA[
+		  <div style='background:#f6f6f6;padding:35px 20px 20px 20px;'>
+        <table cellspacing='0' cellpadding='0' width='100%' align='center' style='font-family:'Times New Roman', Times, serif;font-size:14px;'>
+          <tr style='height:45px;background:#FF9900;'>
+            <td style='padding:0 15px;'>
+                <a href='http://babo.vn' style='color:#fff;font-weight:bold;display:block;font-size:16px;line-height:45px;text-decoration:none;'>babo.vn</a>
+            </td>
+          </tr>
+          <tr style='background:#FFF;'>
+            <td style='color:#444444;border:1px solid #dddddd;padding:0 20px;'>
+              <p style='font-size: 18px;color: #444444;font-weight: bold;'>
+                Xác nhận đăng ký thành công
+              </p>
+              <p>Xin chào {0} ({1}),</p>
+              <p>
+                Chào mừng quý khách hàng đến với <a href='http://babo.vn' style='font-size:14px;color:#004c92;text-decoration:none;'>babo.vn</a>! Chúng tôi rất hân hạnh được chào đón quý khách.
+              </p>
+              <p>
+                Là thành viên của  <a href='http://babo.vn' style='font-size:14px;color:#004c92;text-decoration:none;'>babo.vn</a>, quý khách hàng sẽ là người đầu tiên nhận được tin tức về những chương trình khuyến mãi độc quyền và giảm giá đặc biệt. Ngoài ra, những thông tin về các mặt hàng mới nhất sẽ luôn được cập nhật đến quý khách hàng.
+              </p>
+              <p>
+                Nếu có bất kỳ thắc mắc gì, vui lòng liên hệ với bộ phận Chăm Sóc Khách Hàng: <a href="mailTo:info@babo.vn">info@babo.vn</a>
+              </p>
+              <p>
+                Chúc quý khách hàng mua sắm vui vẻ và có một ngày tốt lành tại  <a href='http://babo.vn' style='font-size:14px;color:#004c92;text-decoration:none;'>babo.vn</a>!
+              </p>
+              <p>
+                Trân trọng,<br />
+                Đội ngũ babo.vn.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td>
+                <table cellpadding='0' cellspacing='0' align='center' style='font-size:12px;color:#444444;font-family:'Times New Roman', Times, serif;'>
+                  <tr>
+                    <td  align='center' style='padding:20px 0;'>
+                      <a href='http://babo.vn' style='font-size:12px;color:#444444;text-decoration:none;'>@ 2013 babo.vn</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style='line-height:1.5em;' valign='top'>
+                      <b>Số 11 Tô Vĩnh Diện, Khương Trung, Thanh Xuân, Hà Nội</b><br />
+                      Tel: 04-3562 7737<br />
+                      Hotline: 0948 91 3838<br />
+					  Email: lienhe@babo.com.vn
+					  <br />
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+		]]>
+  </content>
+</template>

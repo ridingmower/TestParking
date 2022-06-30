@@ -1,0 +1,166 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblAccessCameraCustomViewModel>
+
+@{
+    ViewBag.Title = "Danh sách camera";
+    string groupValue = (string)ViewBag.groupValue;
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupValue);
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    string selected = (string)ViewBag.selectedIdValue;
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblAccessCamera", FormMethod.Get, new { id = "frmCamera" }))
+    {
+        @Html.Hidden("group", groupValue)
+        @Html.Hidden("selectedId", selected)
+
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("control", new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName", ViewBag.controllerValue),"-Bộ điều khiển-", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller, new { group = ViewBag.groupValue, key = ViewBag.keyValue, controller = ViewBag.controllerValue })" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên camera</th>
+                    <th class="text-left hidden-480">Url</th>
+                    <th class="text-left hidden-480">Tên bộ điều khiển</th>
+                    <th class="text-left">Trạng thái</th>
+                    <th class="text-left" width="80"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.CameraID.ToString() ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.CameraName
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.HttpUrl
+                            </td>
+
+                            <td class="text-left hidden-480">
+                                @item.ControllerName
+                            </td>
+
+                            <td class="center">
+                                @if (item.Inactive == false)
+                                {
+                                    <span class="label label-sm label-success">Kích hoạt</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-sm label-warning">Chưa kích hoạt</span>
+                                }
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    <a href="javascript:void(0)" idata="@item.CameraID.ToString()" class="btnCamera blue">
+                                        <i class="ace-icon fa fa-eye bigger-120"></i>
+                                    </a>
+
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.CameraID, group = groupValue, key = ViewBag.keyValue, page = Model.PageIndex, controller = ViewBag.controllerValue })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.CameraID })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblAccessCamera", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               controller = ViewBag.controllerValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmCamera");
+            DeleteSubmit(_prefixAccessDomain + '/tblAccessCamera/Delete');
+            CameraRequest(_prefixAccessDomain + '/tblAccessCamera/ViewCam');
+        });
+
+        function CameraRequest(url) {
+            $('.btnCamera').click(function () {
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+                $.ajax({
+                    url: url,
+                    data: { id: _id },
+                    type: 'json',
+                    //async:false,
+                    success: function (data) {
+                        if (!data.isSuccess) {
+                            toastr.error(data.Message, data.Message);
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+}

@@ -1,0 +1,25 @@
+﻿@model List<Kztek.Model.CustomModel.SelectListModel5>
+
+@{
+    string listSelected = (string)ViewBag.SelectedValues;
+    string id = (string)ViewBag.objIdValue;
+    bool update = (bool)ViewBag.Updateable;
+}
+
+<select multiple class="form-control" name="duallistbox_demo1[]" id="cbDoorList" onchange="SelectedDoor('@listSelected','@id', '@update')">
+    @if (Model.Any())
+    {
+        var lstSelected = listSelected.Split(';').ToList();
+        foreach (var item in Model)
+        {
+            if (!string.IsNullOrWhiteSpace(listSelected) && lstSelected.Any(n => n.Equals(item.ItemSecondValue + "#" + item.ItemValue)))
+            {
+                <option value="@item.ItemValue" idata="@item.ItemSecondValue" selected> @item.ItemText </option>
+            }
+            else
+            {
+                <option value="@item.ItemValue" idata="@item.ItemSecondValue"> @item.ItemText </option>
+            }
+        }
+    }
+</select>

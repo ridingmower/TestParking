@@ -1,0 +1,110 @@
+﻿@model Kztek.Model.Models.tblAccessDoor
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div class="page-header">
+    <h1>
+        Thêm mới cửa
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Create", "tblDoor", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("SaveAndCountinue", false)
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Output</label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.DoorName, new { @class = "form-control", @placeholder = "Nhập Output" })
+                    @Html.ValidationMessageFor(n => n.DoorName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Bộ điều khiển </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.ControllerID, new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName"), "--Chọn bộ điều khiển--", new { @class = "form-control chosen-select" })
+                    @Html.ValidationMessageFor(n => n.ControllerID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> ReaderIndex </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.ReaderIndex, new { @class = "form-control", @placeholder = "" })
+                    @Html.ValidationMessageFor(n => n.ReaderIndex, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Ordering </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Ordering, new { @class = "form-control", @placeholder = "", @Value = ViewBag.Ordering })
+                    @Html.ValidationMessageFor(n => n.ReaderIndex, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Ngừng sử dụng </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBox("Inactive", false, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    Lưu
+                                </button>
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    Lưu và thoát
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    Nhập lại
+                                </button>
+                                <a href="@ViewBag.urlValue" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    Quay lại
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+        });
+    </script>
+}

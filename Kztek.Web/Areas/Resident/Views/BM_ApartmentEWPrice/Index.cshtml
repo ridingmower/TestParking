@@ -1,0 +1,79 @@
+﻿@model Kztek.Model.Models.BM_ApartmentEWPrice
+@using Kztek.Web.Core.Functions
+@{
+    ViewBag.Title = "Quy ước tiền điện, nước";
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("BM_ApartmentEWPrice", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Index", "BM_ApartmentEWPrice", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Giá điện</label>
+                <div class="col-sm-4 col-xs-12">
+                    <input type="text" id="txtEPrice" name="txtEPrice" value="@Convert.ToInt64(Model.Electricity_Price)" class="form-control numbericMoney" />
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Giá nước </label>
+                <div class="col-sm-4 col-xs-12">
+                    <input type="text" id="txtWPrice" name="txtWPrice" value="@Convert.ToInt64(Model.Water_Price)" class="form-control numbericMoney" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> Ngày áp dụng </label>
+                <div class="col-sm-4 col-xs-12">
+                    <div class="input-group">
+                        <input type="text" name="dtpDate" value="@Model.Date_Price.ToString("dd/MM/yyyy")" class="form-control input-mask-date daterangpicker" />
+                        <span class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-4 col-md-8 input-group">
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        @DictionaryAction["Save"]
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+        });
+    </script>
+}
+
+

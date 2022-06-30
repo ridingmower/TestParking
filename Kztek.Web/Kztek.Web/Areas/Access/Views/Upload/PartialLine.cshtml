@@ -1,0 +1,4 @@
+﻿
+@model List<Kztek.Model.CustomModel.SelectListModel>
+
+@Html.DropDownList("ddlline", new SelectList(Model, "ItemValue", "ItemText"), new { @style = "width:100%", @class = "form-control chosen-select" })

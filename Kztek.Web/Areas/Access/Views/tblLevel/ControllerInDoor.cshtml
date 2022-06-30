@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Kztek.Model.Models.tblAccessController>
+
+@{
+    var listTimezone = (List<Kztek.Model.Models.tblAccessTimezone>)ViewBag.ListTimeZone;
+}
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <div class="itemControllerTime">
+            <div>
+                <span idata="@item.ControllerID.ToString()" id="idController" class="line-height-250">
+                    @item.ControllerName
+                </span>
+            </div>
+            <div>
+                @Html.DropDownList("timezone", new SelectList(listTimezone, "Id", "TimezoneName"), new { @class = "form-control chosen-select" })
+            </div>
+        </div>
+    }
+}

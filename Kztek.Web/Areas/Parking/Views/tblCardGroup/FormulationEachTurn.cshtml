@@ -1,0 +1,11 @@
+﻿
+@using Kztek.Web.Core.Functions
+@{ 
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCardGroup", "FormulationEachTurn");
+}
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> @Dictionary["Fee"]  </label>
+    <div class="col-sm-4 col-xs-12">
+        <input type="text" name="txtEachFee" id="txtEachFree" value="@ViewBag.ValueText" class="form-control formatMoney" placeholder="" />
+    </div>
+</div>

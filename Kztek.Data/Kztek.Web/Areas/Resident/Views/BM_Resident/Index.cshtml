@@ -1,0 +1,170 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.BM_Resident>
+
+@{
+    ViewBag.Title = "Danh sách cư dân";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var list = (List<Kztek.Model.Models.BM_ResidentGroup>)ViewBag.LstResidentGroup;
+
+    string selected = (string)ViewBag.selectedIdValue;
+
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (@Model.TotalItem)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "BM_Resident", FormMethod.Get, new { id = "frmCustomerMap" }))
+    {
+        <div class="row">
+            @Html.Hidden("chkExport", "0")
+            @Html.Hidden("selectedId", selected)
+
+            <div class="col-md-3 col-lg-2 col-xs-12 col-sm-12 divboxmd">
+                <input type="text" id="key" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa..." class="form-control" />
+            </div>
+            <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+                @Html.DropDownList("residentGroup", new SelectList(ViewBag.ResidentGroup, "ItemValue", "ItemText", ViewBag.ResidentGroupValue), new { @class = "form-control chosen-select" })
+            </div>
+            <div class="hr hr-18 dotted hr-24"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-xs-12 col-sm-12 divboxmd">
+                @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+                @* @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })*@
+
+                @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+            </div>
+
+            <div class="pull-right  col-xs-14 col-sm-2 divboxmd">
+                @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+                {
+                    <a href="@Url.Action("Create", controller, new { key = ViewBag.keyValue, customergroup = ViewBag.ResidentGroup})" class="btn btn-sm btn-primary btn-white btn-bold">
+                        <i class=" fa fa-plus"></i> Thêm mới
+                    </a>
+                }
+            </div>
+
+        </div>
+
+    }
+
+</div>
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="text-left">STT</th>
+                    <th class="text-left" idata="CustomerName"> Tên cư dân <i class=""></i></th>
+                    <th class="text-left">Số điên thoại</th>
+                    <th class="text-left">Email</th>
+                    <th class="text-left" idata="CustomerGroupID">Nhóm cư dân <i class=""></i></th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(selected) && selected == item.Id.ToString() ) ? "info" : "")">
+                            <td class="text-left">@count</td>
+
+                            <td class="text-left">
+                                @item.Name
+                            </td>
+
+                            <td class="text-left">
+                                @item.Mobile
+                            </td>
+
+                            <td class="text-left">
+                                @item.Email
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    var obj = list.FirstOrDefault(n => n.Id.ToString().Equals(item.ResidentGroupId));
+                                    if (obj != null)
+                                    {
+                                        <span>@obj.Name</span>
+                                    }
+                                }
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                    {
+                                        <a href="@Url.Action("Update", controller, new { id = item.Id, key = ViewBag.keyValue, residentGroupId = ViewBag.ResidentGroupValue})" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    }
+
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "BM_Resident", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               customergroup = ViewBag.customergroupValue,
+               selectedId = selected
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            DeleteSubmit(_prefixResidentDomain + '/BM_Resident/Delete');
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmCustomerMap').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmCustomerMap').submit();
+            });
+            //
+            $("#frmCustomerMap").find("input[name=key]").keypress(function (e) {
+                if (e.which === 13) {
+                    $("#frmCustomerMap").submit();
+                }
+            });
+        });
+    </script>
+}

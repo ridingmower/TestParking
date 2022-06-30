@@ -1,0 +1,177 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.AlarmTurnFPT>
+
+@{
+  
+}
+
+<div class="page-header">
+    <h1>
+        Cảnh báo quá lượt sử dụng(<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("FPT_AlarmExceededTurn", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="control-label no-padding-right"> Từ khóa: </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Biển số" class="form-control" />
+        </div>
+
+        <div class="col-md-3 col-xs-12 divboxmd">
+            <label class="control-label no-padding-right"> Từ ngày: </label>
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            <label class="control-label no-padding-right"> Đến ngày: </label>
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+          <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="control-label no-padding-right"> > Số lượt: </label>
+            <input type="number" min="0" name="turn" value="@ViewBag.Turn" class="form-control" />
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label no-padding-right">
+                Nhóm thẻ:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "--Lựa chọn--" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+      
+    </div>
+      
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "FPT_AlarmExceededTurn" })
+
+        
+            <a href="/Parking/Report/FPT_AlarmExceededTurn" class="btn btn-primary btn-white btn-bold" type="submit">
+                <i class="fa fa-refresh green" aria-hidden="true"></i>
+                Reset
+            </a>
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "FPT_AlarmExceededTurn" })
+
+        </div>
+    </div>
+       
+
+    }
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-8">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center" width="50">
+                            STT
+                        </th>
+                     
+                        <th class="center">Biển số</th>
+                     
+                        <th class="center">Nhóm thẻ</th>
+                      
+                        <th class="center" width="150">Số lượt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = (Model.PageIndex - 1) * Model.PageSize;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                            <tr>
+                                <td>@item.RowNumber</td>
+                                <td>
+                                    @item.PlateOut
+                                </td>
+                                <td>
+                                    @item.CardGroupName
+                                </td>
+                                <td align="right">
+                                    @item.turn
+                                </td>                       
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-8">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("FPT_AlarmExceededTurn", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               turn = ViewBag.Turn
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+   
+    <script>
+    
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+         
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportIn').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportIn').submit();
+            });
+
+        });
+    </script>
+}
+

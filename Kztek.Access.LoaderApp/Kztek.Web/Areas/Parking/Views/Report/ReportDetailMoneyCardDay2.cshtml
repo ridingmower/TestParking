@@ -1,0 +1,82 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ReportVehicleComeIn>
+
+@{
+    ViewBag.Title = "ReportDetailMoneyCardDay2";
+
+    var listLane = (List<Kztek.Model.Models.tblLane>)ViewBag.LaneList;
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+}
+
+<div class="row">
+    @using (Html.BeginForm("ReportDetailMoneyCardDay2", "Report", FormMethod.Get, new { id = "frmReportDetailMoneyCardDay2" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        @*@Html.Hidden("column", column)
+            @Html.Hidden("desc", isDescSort)*@
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ, Biển số..." class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Nhóm thẻ:
+            @Html.DropDownList("cardgroup", new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName", ViewBag.CardGroupId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Làn:
+            @Html.DropDownList("lane", new SelectList(ViewBag.Lanes, "LaneID", "LaneName", ViewBag.LaneId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Người dùng:
+            @Html.DropDownList("user", new SelectList(ViewBag.Users, "Id", "Username", ViewBag.UserId), "-- Lựa chọn --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-6 hidden-sm hidden-xs divboxmd line-height-450">
+            &nbsp;
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd line-height-450">
+            <button class="btn btn-sm btn-primary" type="button" name="btnFilter">
+                <i class="fa fa-search"></i>
+                Tìm kiếm
+            </button>
+
+            <button class="btn btn-white btn-default export" type="button" name="btnExport">
+                <i class="fa fa-file-excel-o green"></i>
+                Excel
+            </button>
+
+            <a href="@Url.Action("ReportDetailMoneyCardDay2", "Report")" class="btn btn-sm btn-purple" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                Reset
+            </a>
+
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>

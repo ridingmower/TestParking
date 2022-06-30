@@ -1,0 +1,288 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblCardCustomViewModel>
+
+@{
+    ViewBag.Title = "ReportDetailCardCompartment";
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    bool checkByTime = Convert.ToBoolean(ViewBag.CheckByTime);
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+    var lstCompartment = (List<Kztek.Model.Models.tblCompartment>)ViewBag.LstCompartment;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportCardCompartment");
+    var DictionaryCard = FunctionHelper.GetLocalizeDictionary("tblCard", "Create");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["titleDetail"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportDetailCardCompartment", "Report", FormMethod.Get, new { id = "frmReportDetailCardCompartment" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["keyWord"] </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="@DictionarySearch["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["customerGroup"] </label>
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        @*<div class="col-md-3 col-xs-12 divboxmd">
+                <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["fromDate"] </label>
+                <div class="input-group">
+                    @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 divboxmd">
+                <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["toDate"] </label>
+                <div class="input-group">
+                    @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>*@
+        <div class=" col-xs-12 col-md-2  divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">
+                Căn hộ
+            </label>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CompartmentsDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.CompartmentsId, Modelname = "ddlcompartment", labelName = DictionarySearch["select"] })
+                @Html.Hidden("compartmentid")
+            </div>
+        </div>
+
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">
+                @DictionarySearch["cardGroup"]
+            </label>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = DictionarySearch["select"] })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportDetailCardCompartment" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportDetailCardCompartment" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportDetailCardCompartment" })
+
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            STT
+                        </th>
+                        <th class="text-left" idata="CardNo"> @Dictionary["Compartment"]</th>
+                        <th class="text-left"> @DictionaryCard["CustomerCode"] </th>
+                        <th class="text-left"> @DictionaryCard["CustomerName"] </th>
+                        <th class="text-left"> @DictionaryCard["CustomerGroup"] </th>
+                        <th class="text-left" idata="CardNumber"> @DictionaryCard["CardNumber"]</th>
+                        <th class="text-left" idata="CardNo"> @DictionaryCard["CardNo"]</th>
+                        <th class="text-left"> @DictionaryCard["CardGroup"] </th>
+
+                        <th class="text-left"> @DictionaryCard["Plate"] </th>
+
+
+                        <th class="text-left"> @DictionaryCard["DateRegisted"] </th>
+
+                        <th class="text-left"> @DictionaryCard["DateReleased"] </th>
+
+                        <th class="text-left"> @DictionaryCard["DateExpired"] </th>
+
+                        <th class="text-left"> @DictionaryCard["DateCreated"]</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        foreach (var item in Model.Data)
+                        {
+                            <tr>
+                                <td class="text-left">
+                                    @item.RowNumber
+                                </td>
+                                <td class="text-left">
+                                    @{
+                                        if (item.CompartmentId != null)
+                                        {
+                                            var ob = lstCompartment != null ? lstCompartment.FirstOrDefault(n => n.CompartmentID.ToString().ToLower() == item.CompartmentId.ToLower()) : null;
+                                            if (ob != null)
+                                            {
+                                                <span> @ob.CompartmentName</span>
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        }
+
+                                    }
+
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CustomerCode
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CustomerName
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CustomerGroupName
+                                </td>
+                                <td class="text-left">
+                                    @item.CardNumber
+                                </td>
+                                <td class="text-left">
+                                    @item.CardNo
+                                </td>
+                                <td class="text-left">
+                                    @item.CardGroupName
+                                </td>
+
+                                <td class="text-left">
+                                    @if (!string.IsNullOrWhiteSpace(item.Plate1))
+                                    {
+                                        <span>@item.Plate1</span>
+                                    }
+
+
+                                    @if (!string.IsNullOrWhiteSpace(item.Plate2))
+                                    {
+                                        <span>, @item.Plate2</span>
+                                    }
+
+                                    @if (!string.IsNullOrWhiteSpace(item.Plate3))
+                                    {
+                                        <span>, @item.Plate3</span>
+                                    }
+                                </td>
+                                <td class="text-left">
+                                    @if (item.DateRegister != null)
+                                    {
+                                        <span>
+                                            @item.DateRegister.Value.ToString("dd/MM/yyyy")
+                                        </span>
+                                    }
+                                </td>
+                                <td class="text-left">
+                                    @if (item.DateRelease != null)
+                                    {
+                                        <span>
+                                            @item.DateRelease.Value.ToString("dd/MM/yyyy")
+                                        </span>
+                                    }
+                                </td>
+
+                                <td class="text-left">
+                                    @if (item.ExpireDate != null)
+                                    {
+                                        var status = Kztek.Web.Core.Functions.FunctionHelper.GetStatusDateByDay(Convert.ToDateTime(item.ExpireDate));
+                                        <span>@Html.Raw(status)</span>
+                                    }
+                                </td>
+
+                                 <td class="text-left">
+                                    @if (item.ImportDate != null)
+                                    {
+                                        <span>
+                                            @item.ImportDate.Value.ToString("dd/MM/yyyy")
+                                        </span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportDetailCardCompartment", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               customergroup = ViewBag.CustomerGroupId
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            $('#ddlcompartment').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#compartmentid').val(str);
+            });
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportDetailCardCompartment').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportDetailCardCompartment').submit();
+            });
+
+        });
+    </script>
+}

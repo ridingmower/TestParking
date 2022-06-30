@@ -1,0 +1,108 @@
+﻿
+
+Select ROW_NUMBER() OVER (ORDER BY a.[Date] DESC) AS RowNumber,
+	a.[ID]
+      ,a.[ClientId]
+      ,a.[Date]
+      ,a.[AreaCode]
+      ,a.[EventCode]
+      ,a.[PicPath1]
+      ,a.[PicName1]
+      ,a.[PicPath2]
+      ,a.[PicName2]
+      ,a.[Plate]
+      ,a.[DriverName]
+      ,a.[StationName]
+      ,a.[GateType]
+      ,a.[GateName]
+      ,a.[DateCommand]
+	  ,'' as Type
+INTO #Results 
+From    (
+    SELECT [ID]
+      ,[ClientId]
+      ,[Date]
+      ,[AreaCode]
+      ,[EventCode]
+      ,[PicPath1]
+      ,[PicName1]
+      ,[PicPath2]
+      ,[PicName2]
+      ,[Plate]
+      ,[DriverName]
+      ,[StationName]
+      ,[GateType]
+      ,[GateName]
+      ,[DateCommand]
+  FROM [dbo].[tblVehicleEvent_DAY]
+    Union
+    SELECT [ID]
+      ,[ClientId]
+      ,[Date]
+      ,[AreaCode]
+      ,[EventCode]
+      ,[PicPath1]
+      ,[PicName1]
+      ,[PicPath2]
+      ,[PicName2]
+      ,[Plate]
+      ,[DriverName]
+      ,[StationName]
+      ,[GateType]
+      ,[GateName]
+      ,[DateCommand]
+  FROM [dbo].[tblVehicleEvent_GB]
+	
+) As a
+
+
+SELECT * FROM #Results
+WHERE RowNumber BETWEEN ((@Page-1) * @ItemsPerPage + 1) AND (@Page * @ItemsPerPage)
+
+DROP TABLE #Results
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ var query = (from e in tblVehicleEvent_DAYRepository.Table orderby e.Date select new EventDAY {
+                Id=e.ID.ToString(),
+                CountRecord = "",
+                EventGroupId = "",
+                ShowDate = "",
+                Date = e.Date,
+                AreaCode = e.AreaCode,
+                EventCode = e.EventCode,
+                ColorCode = "",
+                EventName = "",
+                Plate = e.Plate,
+                GateName = e.GateName,
+                ShowGateType=""
+            }).Union(from h in tblVehicleEvent_HISTORYRepository.Table select new EventDAY
+            {
+                Id = h.ID.ToString(),
+                CountRecord = "",
+                EventGroupId = "",
+                ShowDate = "",
+                Date = h.Date,
+                AreaCode = h.AreaCode,
+                EventCode = h.EventCode,
+                ColorCode = "",
+                EventName = "",
+                Plate = h.Plate,
+                GateName = h.GateName,
+                ShowGateType = ""
+            });

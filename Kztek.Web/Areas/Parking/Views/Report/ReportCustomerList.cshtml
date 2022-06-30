@@ -1,0 +1,198 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReportCustomerList>
+
+@{
+    ViewBag.Title = "ReportCustomerList";
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportCustomerList");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportCustomerList", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["keyWord"]
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder=" @DictionarySearch["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            @DictionarySearch["customerGroup"]:
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-4 col-xs-12 divboxmd" style="padding-top:18px;">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportCustomerList" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportCustomerList" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportCustomerList" })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center">@Dictionary["stt"]</th>
+                    <th class="text-left">@Dictionary["customerCode"]</th>
+                    <th class="text-left">@Dictionary["customergrp"]</th>
+                    <th class="text-left hidden-480">@Dictionary["name"]</th>
+                    <th class="text-left hidden-480">@Dictionary["add"]</th>
+                    <th class="center hidden-480">@Dictionary["phone"]</th>
+                    <th class="text-left hidden-480">@Dictionary["cardGroup"]</th>
+                    <th class="center hidden-480">@Dictionary["cardNo"]</th>
+                    <th class="center hidden-480">@Dictionary["cardCode"]</th>
+                    <th class="center hidden-480">@Dictionary["licensePlate"]</th>
+                    <th class="center hidden-480">@Dictionary["expirationDate"]</th>
+                    <th class="center hidden-480">@Dictionary["Date_of_card_entry"]</th>
+                    <th class="center hidden-480">@Dictionary["type"]</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="center">@item.RowNumber</td>
+                            <td class="text-left">
+                                @item.CustomerCode
+                            </td>
+                            <td class="text-left">
+                                @item.CustomerGroupName
+                            </td>
+                            <td class="text-left hidden-480">
+                                @item.CustomerName
+                            </td>
+                            <td class="text-left hidden-480">
+                                @item.Address
+                            </td>
+                            <td class="center hidden-480">
+                                @item.Mobile
+                            </td>
+                            <td class="text-left hidden-480">
+                                @item.CardGroupName
+                            </td>
+                            <td class="center hidden-480">
+                                @item.CardNo
+                            </td>
+                            <td class="center hidden-480">
+                                @item.CardNumber
+                            </td>
+                            <td class="center hidden-480">
+                                @item.Plate
+                            </td>
+                            <td class="center hidden-480">
+                                @if (!string.IsNullOrEmpty(item.ExpireDate))
+                                {
+                                    @Convert.ToDateTime(item.ExpireDate).ToString("dd/MM/yyy")
+                                }
+
+                            </td>
+                            <td class="center hidden-480">
+                                @if (!string.IsNullOrEmpty(item.ImportDate))
+                                {
+                                    @Convert.ToDateTime(item.ImportDate).ToString("dd/MM/yyy")
+                                }
+
+                            </td>
+                            <td class="center hidden-480">
+                                @item.IsLock
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportCustomerList", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               customergroup = ViewBag.CustomerGroupId
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportIn').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportIn').submit();
+            });
+
+
+        });
+    </script>
+}
+

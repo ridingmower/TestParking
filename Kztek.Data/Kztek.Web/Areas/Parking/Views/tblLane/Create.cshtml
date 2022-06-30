@@ -1,0 +1,407 @@
+﻿@model Kztek.Model.Models.tblLane
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = Futech.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblLane", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+
+    var openBarrie = (List<Kztek.Model.CustomModel.SelectListModel6>)ViewBag.OpenBarrie;
+
+    var checkPlates = (List<Kztek.Model.CustomModel.SelectListModel6>)ViewBag.CheckPlates;
+
+    var checkPlateIN = checkPlates.Where(n => n.Type == "IN").ToList();
+
+    var checkPlateOutOp1 = checkPlates.Where(n => n.Type == "OUT").Take(3).ToList();
+
+    var checkPlateOutOp2 = checkPlates.Where(n => n.Type == "OUT").Skip(3).ToList();
+
+    var openBarrieIN = openBarrie.Where(n => n.ItemValue == 0 || n.ItemValue == 2 || n.ItemValue == 3).ToList();
+
+    var openBarrieOp1 = openBarrie.Where(n => n.ItemValue == 0 || n.ItemValue == 4 || n.ItemValue == 5).ToList();
+
+    var openBarrieOp2 = openBarrie.Where(n => n.ItemValue == 2 || n.ItemValue == 6 || n.ItemValue == 7 || n.ItemValue == 8).ToList();
+
+}
+<style>
+    .boxHiddenCamera {
+        display: none;
+    }
+</style>
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Create", "tblLane", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("SaveAndCountinue", false)
+            @Html.Hidden("key", (string)ViewBag.keyValue)
+            @Html.Hidden("pc", (string)ViewBag.pcValue)
+            @Html.Hidden("vehicleL", "")
+            @Html.Hidden("vehicleR", "")
+            @Html.Hidden("cardL", "")
+            @Html.Hidden("cardR", "")
+            @Html.Hidden("group", (string)ViewBag.GroupID)
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["LaneName"] </label>
+                <div class="col-sm-7 col-xs-12">
+                    @Html.TextBoxFor(n => n.LaneName, new { @class = "form-control", @placeholder = Dictionary["LaneNamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.LaneName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["PCID"] </label>
+                <div class="col-sm-7 col-xs-12">
+                    @Html.DropDownListFor(n => n.PCID, new SelectList(ViewBag.PCs, "PCID", "ComputerName"), @Dictionary["PCIDPlaceholder"], new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.PCID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["LaneType"] </label>
+                <div class="col-sm-7 col-xs-12">
+                    @Html.DropDownListFor(n => n.LaneType, new SelectList(ViewBag.LaneType, "ItemValue", "ItemText"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.LaneType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["Cam1"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    <div id="boxC1">
+                        <select class="form-control">
+                            <option value>@Dictionary["CameraPlaceholder"]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="boxHiddenCamera">
+                    <label class="col-sm-1 control-label no-padding-right"> @Dictionary["Cam4"] </label>
+                    <div class="col-sm-3 col-xs-12">
+                        <div id="boxC4">
+                            <select class="form-control">
+                                <option value>@Dictionary["CameraPlaceholder"]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["Cam2"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    <div id="boxC2">
+                        <select class="form-control">
+                            <option value>@Dictionary["CameraPlaceholder"]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="boxHiddenCamera">
+                    <label class="col-sm-1 control-label no-padding-right"> @Dictionary["Cam5"] </label>
+                    <div class="col-sm-3 col-xs-12">
+                        <div id="boxC5">
+                            <select class="form-control">
+                                <option value>@Dictionary["CameraPlaceholder"]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["Cam3"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    <div id="boxC3">
+                        <select class="form-control">
+                            <option value>@Dictionary["CameraPlaceholder"]</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="boxHiddenCamera">
+                    <label class="col-sm-1 control-label no-padding-right"> @Dictionary["Cam6"] </label>
+                    <div class="col-sm-3 col-xs-12">
+                        <div id="boxC6">
+                            <select class="form-control">
+                                <option value>@Dictionary["CameraPlaceholder"]</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["CheckPlateLevelIn"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.CheckPlateLevelIn, new SelectList(checkPlateIN, "ItemValue", "ItemText"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CheckPlateLevelIn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["CheckPlateLevelOut"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.CheckPlateLevelOut, new SelectList(checkPlateOutOp1, "ItemValue", "ItemText"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CheckPlateLevelOut, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.CheckPlateOutOption2, new SelectList(checkPlateOutOp2, "ItemValue", "ItemText"), new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["OpenBarrieIn"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.OpenBarrieIn, new SelectList(openBarrieIN, "ItemValue", "ItemText"), new { @class = "form-control" })
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> @Dictionary["OpenBarrieOut"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.OpenBarrieOption1, new SelectList(openBarrieOp1, "ItemValue", "ItemText"), new { @class = "form-control" })
+                   
+                </div>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.OpenBarrieOption2, new SelectList(openBarrieOp2, "ItemValue", "ItemText"), new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">
+                    Loại xe làn trái
+                </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.VehicleType, itemValue = "ItemValue", itemText = "ItemText", selectedValues = Model.VehicleTypeLeft, Modelname = "ddlvehicleLeft" })
+                </div>
+                <label class="col-sm-1 control-label no-padding-right"> Loại xe làn phải </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.VehicleType, itemValue = "ItemValue", itemText = "ItemText", selectedValues = Model.VehicleTypeRight, Modelname = "ddlvehicleRight" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">
+                    Loại thẻ làn trái
+                </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardType, itemValue = "ItemValue", itemText = "ItemText", selectedValues = Model.CardTypeLeft, Modelname = "ddlcardLeft" })
+                </div>
+                <label class="col-sm-1 control-label no-padding-right"> Loại thẻ làn phải </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardType, itemValue = "ItemValue", itemText = "ItemText", selectedValues = Model.CardTypeRight, Modelname = "ddlcardRight" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> STT </label>
+                <div class="col-sm-2 col-xs-12">
+                    @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "STT" })
+                    @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"></label>
+                <div class="col-sm-7">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsLoop, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsLoop"] </span>
+                    </label>
+                </div>
+               
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"></label>
+                <div class="col-sm-7">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsPrint, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsPrint"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"></label>
+                <div class="col-sm-7">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsFree, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsFree"] </span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> </label>
+                <div class="col-sm-7">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsLED, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["IsLED"] </span>
+                    </label>
+                </div>
+            </div>
+            @*<div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right"> </label>
+                <div class="col-sm-7">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.AccessForEachSide, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["AccessForEachSide"] </span>
+                    </label>
+                </div>
+            </div>*@
+            <div class="form-group">
+                <label class="col-sm-3 control-label no-padding-right">  </label>
+                <div class="col-sm-2">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                        <span class="lbl"> @Dictionary["Inactive"] </span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn btn-info" type="submit" id="BackToList">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    @DictionaryAction["SaveAndExit"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        function GetListCamera(pcID, number) {
+            $.ajax({
+                url: _prefixParkingDomain + '/tblLane/ListCameraByPC',
+                data: { pcID: pcID, cameraNumber: number },
+                success: function (data) {
+                    $("#boxC" + number).html('');
+                    $("#boxC" + number).html(data);
+                }
+            });
+        }
+        $(document).ready(function () {
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+            $("#BackToList").click(function () {
+                $("#SaveAndCountinue").val('false');
+            });
+
+            $("#PCID").change(function () {
+                var id = $(this).val();
+                var lanetype = $("#LaneType").val();
+
+                if (lanetype === "" || lanetype === "0" || lanetype === "1") {
+                    $(".boxHiddenCamera").fadeOut();
+
+                    GetListCamera(id, "1");
+                    GetListCamera(id, "2");
+                    GetListCamera(id, "3");
+                } else {
+                    $(".boxHiddenCamera").fadeIn();
+
+                    GetListCamera(id, "1");
+                    GetListCamera(id, "2");
+                    GetListCamera(id, "3");
+                    GetListCamera(id, "4");
+                    GetListCamera(id, "5");
+                    GetListCamera(id, "6");
+                }
+            });
+
+            $("#LaneType").change(function () {
+                var id = $("#PCID").val();
+                var lanetype = $(this).val();
+
+                if (lanetype === "" || lanetype === "0" || lanetype === "1") {
+                    $(".boxHiddenCamera").fadeOut();
+
+                    GetListCamera(id, "1");
+                    GetListCamera(id, "2");
+                    GetListCamera(id, "3");
+                } else {
+                    $(".boxHiddenCamera").fadeIn();
+
+                    GetListCamera(id, "1");
+                    GetListCamera(id, "2");
+                    GetListCamera(id, "3");
+                    GetListCamera(id, "4");
+                    GetListCamera(id, "5");
+                    GetListCamera(id, "6");
+                }
+            })
+
+            $('#ddlvehicleLeft').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#vehicleL').val(str);
+            });
+
+            $('#ddlvehicleRight').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#vehicleR').val(str);
+            });
+
+            $('#ddlcardLeft').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardL').val(str);
+            });
+
+            $('#ddlcardRight').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardR').val(str);
+            });
+        });
+    </script>
+}

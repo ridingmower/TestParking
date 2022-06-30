@@ -1,0 +1,158 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.tblAccessControllerMemory_Custom>
+
+@{
+
+
+    var controllers = (List<Kztek.Model.Models.tblAccessController>)ViewBag.Controllers;
+    var CardJoinCustomer = (List< Kztek.Model.Models.tblCardCustom >)ViewBag.Card_Customer;
+}
+
+<div class="page-header">
+    <h1>
+        Báo cáo chi tiết thông tin thẻ trong BĐK (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportDetailCardInController", "Report", FormMethod.Get, new { id = "frmReportDetailCardInController" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ khóa </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ..." class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Bộ điều khiển </label>
+            @Html.DropDownList("controllerid", new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName", ViewBag.ControllerId),"--Lựa chọn--" ,new { @class = "form-control chosen-select" })
+        </div>
+
+
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportDetailCardInController" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportDetailCardInController" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportDetailCardInController" })
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-8">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            STT
+                        </th>
+                        <th class="text-center">Mã thẻ</th>
+                        <th class="text-center">Khách hàng</th>
+                        <th class="text-center">Bộ điều khiển</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+
+                        foreach (var item in Model.Data)
+                        {
+
+                            <tr>
+                                <td class="text-center">
+                                    @item.RowNumber
+                                </td>
+                                <td class="">
+                                    @item.CardNumber
+                                </td>
+                                <td>
+                                    @{ 
+                                        var obj = CardJoinCustomer != null ? CardJoinCustomer.FirstOrDefault(n => n.CardNumber == item.CardNumber) : null;
+                                        if (obj != null)
+                                        {
+                                            @obj.CustomerName
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        var objController = controllers != null ? controllers.FirstOrDefault(n => n.ControllerID.ToString() == item.ControllerID) : null;
+                                        if (objController != null)
+                                        {
+                                            @objController.ControllerName
+
+                                        }
+                                    }
+                                </td>
+
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-8">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportDetailCardInController", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               controllerid = ViewBag.ControllerId,
+             
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportDetailCardInController').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportDetailCardInController').submit();
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventIn')
+        });
+    </script>
+}
+
+
+
+

@@ -1,0 +1,294 @@
+﻿
+
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using System.Data
+@model DataTable
+
+@{
+    ViewBag.Title = "ReportChartMoneyByTime";
+
+}
+
+<div class="page-header">
+    <h1>
+        Biểu đồ doanh thu theo thời gian
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportChartMoneyByTime", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+       
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Làn:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.LaneDT, itemValue = "LaneID", itemText = "LaneName", selectedValues = ViewBag.LaneId, Modelname = "ddllane", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("lane")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm xe:
+            </div>
+
+            @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.VehicleGroupDT, itemValue = "VehicleGroupID", itemText = "VehicleGroupName", selectedValues = ViewBag.VehicleGroupId, Modelname = "ddlvehiclegroupid", labelName = "-- Lựa chọn --" })
+            @Html.Hidden("vehiclegroupid")
+
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportChartMoneyByTime" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportChartMoneyByTime" })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row" style="height:500px;">
+    <div class="col-xs-12">
+        <div id="income"></div>
+    </div>
+</div>
+@if (Model != null && Model.Rows.Count > 0)
+{
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="divScroll">
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                        <tr class="headerSort">
+
+                            @foreach (DataColumn dc in Model.Columns)
+                            {
+                                if (dc.ColumnName.Equals("VehicleGroupID"))
+                                {
+                                    <th style="text-align: center;"></th>
+                                }
+                                else
+                                {
+                                    <th style="text-align: center;">@dc.ColumnName</th>
+                                }
+
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (int i = 0; i < Model.Rows.Count; i++)
+                        {
+                            <tr>
+                                @for (int j = 0; j < Model.Columns.Count; j++)
+                                {
+
+                                <td style="@string.Format("{0}",j == 0 ? "font-weight:bold;" : "")">
+                                    @if (!string.IsNullOrEmpty(Model.Rows[i][j].ToString()))
+                                    {
+                                        if (j != 0)
+                                        {
+                                            if (Model.Rows[i][j].ToString() == "0")
+                                            {
+                                                <span>0</span>
+                                            }
+                                            else
+                                            {
+                                                <span>@string.Format(new System.Globalization.CultureInfo("en-US"), "{0:0,0}",  Convert.ToDecimal(Model.Rows[i][j].ToString()))</span>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <span>@Model.Rows[i][j].ToString() (VNĐ)</span>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+
+                                }
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+}
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            load();
+
+            $('#ddlvehiclegroupid').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#vehiclegroupid').val(str);
+            });
+            $('#ddllane').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#lane').val(str);
+            });
+            
+            $('button[name=btnFilter]').click(function () {
+                load();
+                $('#frmReportIn').submit();
+            });
+
+
+        });
+        function load() {
+            var formData = new FormData();
+
+            formData.append('lane', $('#lane').val());
+           
+            formData.append('vehiclegroupid', $('#vehiclegroupid').val());
+            formData.append('fromdate', $('#fromdate').val());
+            formData.append('todate', $('#todate').val());
+
+            $.ajax({
+                url: "/Parking/Report/GetReportChartMoneyByTime",
+                type: "POST",
+                datatype: "json",
+                data: formData,
+
+                enctype: 'multipart/form-data',
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    LoadChart(data.JsonResult, data.listcolumn);
+                }
+            });
+
+        }
+        function LoadChart(dt, listcolumn) {
+
+            var listobj = JSON.parse(dt);
+            var arrcolor = ["tomato", "#D2B48C", "orange", "dodgerblue", "mediumseagreen", "gray", "slateblue", "violet", "lightgray", "#B8860B", "#800080", "#808000", "#8B4513"];
+            var arr = [];
+            for (i = 0; i < listobj.length;i++) {
+                var arr1 = [];
+                for (j = 0; j < listcolumn.length; j++) {
+                    var objIn = {
+                        label: listcolumn[j],
+                        y: listobj[i][listcolumn[j]]
+                    }
+
+                    arr1.push(objIn);
+                }
+
+                var obj = {
+                    type: "column",
+                    showInLegend: true,
+                 
+                    name: listobj[i].VehicleGroupID,
+                    color: arrcolor[i],
+                    dataPoints: arr1
+                   
+                }
+                arr.push(obj);
+            }
+
+            var chart = new CanvasJS.Chart("income", {
+                title: {
+                    text: "Biểu đồ doanh thu theo thời gian",
+                    fontFamily: "Times New Roman",
+                    fontSize: "28",
+                    fontWeight: "bold"
+                },
+                axisX: {
+                    interval: 1
+                },
+                
+                axisY: {
+                    valueFormatString: "#,### VNĐ",
+                },
+                animationEnabled: true,
+                legend: {
+                    cursor: "pointer",
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        }
+                        else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+                },
+
+                toolTip: {
+                    shared: true,
+                    content: function (e) {
+                        var str = '';
+                        var total = 0;
+                        var totalformat = '';
+                        var str3;
+                        var str2;
+                        for (var i = 0; i < e.entries.length; i++) {
+                            var money = e.entries[i].dataPoint.y.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                            var str1 = "<span style= 'color:" + e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>: <strong>" + money + "</strong> <br/>";
+                            total = e.entries[i].dataPoint.y + total;
+                            str = str.concat(str1);
+                        }
+                        totalformat = total.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+                        str2 = "<span style = 'color:DodgerBlue; '><strong>" + e.entries[0].dataPoint.label + "</strong></span><br/>";
+                        str3 = "<span style = 'color:Tomato '>Tổng(VNĐ): </span><strong>" + totalformat + "</strong><br/>";
+
+                        return (str2.concat(str)).concat(str3);
+                    }
+
+                },
+                data: arr
+            });
+
+            chart.render();
+        };
+
+    </script>
+
+}
+
+
+
+

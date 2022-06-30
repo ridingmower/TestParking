@@ -1,0 +1,190 @@
+﻿@model List<Kztek.Model.Models.MenuFunction>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Hệ thống";
+
+    string groupID = (string)ViewBag.GroupID;
+    Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(groupID);
+    var listGroupAllow = (List<string>)ViewBag.listGroupAllow;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("MenuFunction", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryNoti = FunctionHelper.GetLocalizeDictionary("Home", "notification");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"] 
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <a href="@Url.Action("Create", "MenuFunction", new { group = groupID })" class="btn btn-sm btn-primary btn-white btn-bold">
+            <i class=" fa fa-plus"></i> @DictionaryAction["Create"] 
+        </a>
+        <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-white btn-bold btnMutilDelete">
+            <span> <i class="fa fa-trash"></i>@DictionaryAction["Delete"] </span>
+        </a>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="treeCustom" style="list-style-type:none">
+            @if (Model.Any())
+            {
+                var listParent = Model.Where(c => c.ParentId == "0").ToList();
+                if (listParent.Any())
+                {
+                    foreach (var item0 in listParent)
+                    {
+                        var strActive = item0.Active ? "" : "text-decoration:line-through";
+                        var child = Model.Where(c => c.ParentId == item0.Id).ToList();
+                        <li>
+                            <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item0.Id" />
+                            <span class="showButton lbl" style="@strActive">
+                                <span>@item0.OrderNumber</span>. @item0.MenuName
+                                @*<span class="hideblock">
+                                        <a href="@Url.Action("Update", "MenuFunction", new { @id = item0.Id })" class="green" title="Cập nhật">
+                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                        </a>
+                                    </span>*@
+                            </span>
+                            <span>
+                                <a href="@Url.Action("Update", new {id = item0.Id, group = groupID})" title="@string.Format("/{0}/{1}", item0.ControllerName, item0.ActionName)">
+                                    <i class="ace-icon fa fa-pencil-square-o"></i>
+                                </a>
+                            </span>
+                            <span class="pull-right">
+                                @Html.Action("ShowGroupName", new { groupList = item0.MenuGroupListId, issystem = item0.isSystem })
+                            </span>
+                            @if (child.Any())
+                            {
+                                @Html.Action("MenuChilden", "MenuFunction", new { childList = child, AllList = Model })
+                            }
+
+                        </li>
+                    }
+                }
+
+            }
+        </ul>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+<input type="hidden" name="notification" value="@DictionaryNoti["notification"]" />
+<input type="hidden" name="delConfrim" value="@DictionaryNoti["deleteConfirm"]" />
+<input type="hidden" name="delSuccess" value="@DictionaryNoti["DeleteSuccess"]" />
+<input type="hidden" name="delFail" value="@DictionaryNoti["del_menu_fail"]" />
+<input type="hidden" name="updateFailed" value="@DictionaryNoti["updateFailed"]" />
+<input type="hidden" name="updateSuccess" value="@DictionaryNoti["updateSuccess"]" />
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var noti = $('input[name=notification]').val();
+            var delConfrim = $('input[name=delConfrim]').val();
+            var delSuccess = $('input[name=delSuccess]').val();
+            var updateFailed = $('input[name=updateFailed]').val();
+            var updateSuccess = $('input[name=updateSuccess]').val();
+            var delFail = $('input[name=delFail]').val();
+
+            $('#ac_hethong').addClass('open');
+            $('#ac_danhmuchethong').addClass('open active');
+
+            $(".showButton").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.showButton').parent().parent().toggle();
+            });
+
+            //Check box
+            $(".chkCheckBox").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            //Xóa 1 bản ghi
+            $('.btnDelete').click(function () {
+                
+                var cmd = $(this);
+                var _id = cmd.attr('idata');
+                if (confirm(delConfrim)) {
+                    $.ajax({
+                        url: '/MenuFunction/Delete',
+                        data: { id: _id },
+                        type: 'json',
+                        //async:false,
+                        success: function (data) {
+                            if (data) {
+                                cmd.parent().parent().parent().fadeOut();
+                                toastr.success(delSuccess, noti)
+                            } else {
+                                toastr.error(delFail, noti)
+                            }
+                        }
+                    });
+                }
+            });
+            //Xóa nhiều bản ghi
+            $('.btnMutilDelete').click(function () {
+                var lstdeleteId = "";
+                $("input[name='chkCheckBox']").each(function () {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+                    if ($(this).is(":checked")) {
+                        lstdeleteId = lstdeleteId + id + ",";
+                    }
+                });
+                if (confirm(delConfrim)) {
+                    //post danh sách ID
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: "/MenuFunction/MutilDelete",
+                        data: "{'lstId':'" + lstdeleteId + "'}",
+                        dataType: "json",
+                        async: "false",
+                        success: function (data) {
+                            if (data) {
+                                toastr.success(delSuccess, noti)
+                                window.location.href = "/MenuFunction/Index";
+                            } else {
+                                toastr.error(delFail, noti)
+                            }
+                        }
+                    });
+                }
+            })
+            //Duyệt nhiều
+            $("#btnDuyet").click(function () {
+                var lstapproveId = "";
+                $("input[name='chkCheckBox']").each(function () {
+                    var id = $(this).prop("value");
+                    if ($(this).is(":checked")) {
+                        lstapproveId = lstapproveId + id + ",";
+                    }
+                });
+                var nhaptrangthai = $("#chonduyet").val();
+                //post danh sách ID
+                $.ajax({
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    url: "/MenuFunction/Active",
+                    data: "{'lstId':'" + lstapproveId + "', 'nhaptrangthai':'" + nhaptrangthai + "'}",
+                    dataType: "json",
+                    async: "false",
+                    success: function (data) {
+                        if (data) {
+                            toastr.success(updateSuccess, noti)
+                            window.location.href = "/MenuFunction/Index";
+                        } else {
+                            toastr.error(updateFailed, noti)
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

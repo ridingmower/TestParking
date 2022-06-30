@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Kztek.Model.Models.SystemRecord>
+
+@if (Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td class="col-xs-3" style="word-wrap:break-word">
+                @item.Filename
+            </td>
+            <td class="col-xs-3" style="word-wrap:break-word">
+                @item.Description
+            </td>
+            <td class="col-xs-3" style="word-wrap:break-word">
+                @item.DateCreated.ToString("dd/MM/yyyy")
+            </td>
+            <td class="col-xs-3" style="word-wrap:break-word">
+                @item.ComputerName
+            </td>
+        </tr>
+        <tr style="clear:both"></tr>
+    }
+}

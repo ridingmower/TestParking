@@ -1,0 +1,106 @@
+﻿@model Kztek.Model.Models.DynamicCard
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Update";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.Group);
+
+    int pn = Convert.ToInt32(ViewBag.PN);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCamera", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["TitleDynamic"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "DynamicCard", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(n => n.Id)
+
+            @Html.Hidden("page", pn)
+            @Html.Hidden("key", (string)ViewBag.keyValue)
+            @Html.Hidden("pc", (string)ViewBag.pcValue)
+            @Html.Hidden("group", (string)ViewBag.groupValue)
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["PCID"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.PCID, new SelectList(ViewBag.PCs, "PCID", "ComputerName", Model.PCID), new { @class = "form-control chosen-select" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["ControllerID"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.ControllerID, new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName", Model.ControllerID), new { @class = "form-control chosen-select" })
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Button </label>
+                <div class="col-sm-4 col-xs-12">
+                    <input type="number" min="0" class="form-control" name="Button" id="Button" value="@Model.Button" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CardGroupID"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.CardGroupID, new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName", Model.CardGroupID), new { @class = "form-control chosen-select" })
+
+                </div>
+            </div>
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue, pc = ViewBag.pcValue, selectedId = Model.Id.ToString(), page = pn })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+           
+        });
+    </script>
+}

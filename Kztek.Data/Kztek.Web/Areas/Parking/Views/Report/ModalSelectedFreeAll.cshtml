@@ -1,0 +1,28 @@
+﻿@using Kztek.Web.Attributes
+@model List<string>
+
+@{ 
+    var total = (int)ViewBag.totalItemValue;
+    var url = (string)ViewBag.urlValue;
+}
+
+<div style="display:inline">
+    Đã chọn: @Model.Count / @total
+
+    @if (Model.Count > 0)
+    {
+        <a href="javascript:void(0)" class="red" title="Xóa tất cả bản ghi đã chọn" onclick="RemoveAllSelected('@total', '@url')">
+            <i class="fa fa-remove"></i>
+        </a>
+    }
+</div>
+<div style="display:inline;margin-left:15px">
+    @if (CheckAuthorizeAction.CheckActionPemission("Report", "DeleteFree"))
+    {
+        <button type="button" class="btn btn-pink btn-sm btn-white btn-bold" onclick="DeleteFree()">
+            <i class="fa fa-money"></i>
+            Tính phí
+        </button>
+    }
+
+</div>

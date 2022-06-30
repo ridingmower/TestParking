@@ -1,0 +1,100 @@
+﻿@model List<Kztek.Model.CustomModel.SelectListModel>
+
+<style>
+    #Modal_SearchService .modal-dialog {
+        width: 60%;
+    }
+</style>
+<div id="Modal_SearchService" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+    <div class="modal-dialog modal-md">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Thêm dịch vụ
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="@string.Format("frmSearchService")" class="form-horizontal">
+                    <div class="row">
+                       
+                        <div class="col-xs-12 col-sm-3">
+                            <div class="form-horizontal">
+                                <div class="form-group" style="margin-bottom:unset;">
+                                    <label class="col-xs-12 col-sm-12 control-label-left StyleLabel"> Từ khóa: </label>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-12">
+                                        <input type="text" name="txtKey" class="form-control" placeholder="Từ khóa" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3" style="padding-top:20px;">
+                            <div class="col-sm-12 divboxmd">
+                                <button class="btn btn-sm btn-primary" type="button" name="btnSearchService"><i class="fa fa-search" aria-hidden="true"></i> Tìm kiếm</button>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding-top:10px;">
+                        <div class="row divPadding">
+                            <div class="tblHeader clearfix">
+                                <div class="col-xs-12">
+                                    <table class="table table-striped table-bordered" id="tblSearchService" style="margin:0">
+                                        <colgroup>
+
+                                            <col style="width:5%">
+                                            <col>
+                                          
+                                            <col style="width:20% ">
+                                            <col style="width:20% ">
+                                        </colgroup>
+                                        <thead>
+                                            <tr>
+                                                <th class="center">
+                                                    <label>
+                                                        <input type="checkbox" id="chkAllHeaderService" class="ace"><span class="lbl"></span>
+                                                    </label>
+
+                                                </th>
+
+                                                <th class="center">
+                                                   Dịch vụ
+                                                </th>
+                                                <th class="center">
+                                                    Giá
+                                                </th>
+                                                <th class="center">
+                                                    Thời gian thu
+                                                </th>
+                                               
+                                            </tr>
+                                        </thead>
+
+                                    </table>
+                                </div>
+
+                            </div>
+                            <div class="tblTablList clearfix" id="divPaddingService">
+                                @Html.Action("Partial_SearchService", "BM_Apartment")
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-mini" id="btnCloseSearchService" data-dismiss="modal">Thoát</button>
+                <button type="button" class="btn btn-info btn-mini" idata="@ViewBag.Id" id="btnCompletedSearchService">Hoàn thành</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

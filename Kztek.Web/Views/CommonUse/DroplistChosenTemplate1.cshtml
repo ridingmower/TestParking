@@ -1,0 +1,16 @@
+﻿@using System.Data
+@model DataTable
+
+@if (Model.Rows.Count > 0)
+{
+
+    <select id="@ViewBag.iName" name="@ViewBag.iName" class="chosen-select form-control" style="display:none;">
+        <option value>-- @ViewBag.iLabel --</option>
+        @foreach (DataRow item in Model.Rows)
+        {
+            <option value="@item[ViewBag.ivalue]" @string.Format("{0}", item[ViewBag.ivalue] == ViewBag.Selected ? "selected" : "")>@item[ViewBag.itext] (@item[ViewBag.isecondtext])</option>
+        }
+    </select>
+}
+
+

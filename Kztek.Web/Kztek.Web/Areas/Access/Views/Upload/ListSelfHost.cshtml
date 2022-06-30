@@ -1,0 +1,12 @@
+﻿@model List<Kztek.Model.Models.SelfHostConfig>
+
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <span class="label label-sm label-info">
+            @item.Address
+        </span>
+    }
+}

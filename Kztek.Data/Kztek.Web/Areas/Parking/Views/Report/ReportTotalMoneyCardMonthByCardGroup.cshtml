@@ -1,0 +1,164 @@
+﻿@model List<Kztek.Model.Models.ReportTotalMoneyCardMonthByCardGroup>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "ReportTotalMoneyCardMonthByCardGroup";
+
+    //string money = Convert.ToDouble((double)ViewBag.totalMoney).ToString("###,###");
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportTotalMoneyCardMonthByCardGroup");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+       @Dictionary["title"]
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("ReportTotalMoneyCardMonthByCardGroup", "Report", FormMethod.Post, new { id = "frmReportTotalMoneyCardMonthByCardGroup" }))
+    {
+        @Html.Hidden("chkExport", "0")
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["cardGroup"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 divboxmd line-height-450">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportTotalMoneyCardMonthByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportTotalMoneyCardMonthByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "ReportTotalMoneyCardMonthByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportTotalMoneyCardMonthByCardGroup" })
+
+        </div>
+    </div>
+      
+       
+    }
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="50">
+                        @Dictionary["stt"]
+                    </th>
+                    <th class="text-left">@Dictionary["cardGroupName"]</th>
+                    <th class="center">@Dictionary["amount"]</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    var count = 0;
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        <tr>
+                            <td align="center">@count</td>
+                            <td>
+                                <a href="@Url.Action("ReportDetailMoneyCardMonth", new { cardgroup = item.Id, fromdate = ViewBag.fromdateValue, todate= ViewBag.todateValue})" target="_blank">
+                                    @item.GroupName
+                                </a>
+
+                            </td>
+                            <td align="center">
+                                @if (item.Moneys > 0)
+                                {
+                                    @item.Moneys.ToString("###,###")
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            @*<tfoot>
+                    <tr>
+                        <td>#</td>
+                        <td>TỔNG SỐ</td>
+                        <td>@money</td>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportTotalMoneyCardMonthByCardGroup').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportTotalMoneyCardMonthByCardGroup').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _cardgroup = $('#cardgroup').val();
+                var url = '/Parking/Report/PrintReportTotalMoneyCardMonthByCardGroup?fromdate=' + _frdate + '&todate=' + _todate + '&cardgroup=' + _cardgroup;
+                window.open(url, '_blank');
+            });
+
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+﻿@using Kztek.Model.Models
+
+@model List<Kztek.Model.Models.MenuFunction>
+
+@{
+    var listMenuFunction = (List<Kztek.Model.Models.MenuFunction>)ViewBag.MenuList;
+    var lstRoleMenu = (List<Kztek.Model.Models.RoleMenu>)ViewBag.RoleMenuList;
+}
+
+@if (Model.Any())
+{
+    <ul style="display:none" class="submenu1">
+        @foreach (var item in Model.OrderBy(n => n.OrderNumber))
+        {
+            var child = listMenuFunction.Any(n => n.ParentId.Equals(item.Id));
+            if (child)
+            {
+                if (lstRoleMenu != null && lstRoleMenu.Any(n => n.MenuId.Equals(item.Id)))
+                {
+                    <li>
+                        <i class="ace-icon fa fa-plus-circle"></i>
+                        <label>
+                            <input type="checkbox" name="chkCheckBoxValue" class="chkCheckBoxValue ace" value="@item.Id" checked />
+                            <span class="liMenuName lbl">@item.MenuName</span>
+                        </label>
+                        @Html.Action("MenuFunctionChild", "Role", new { parentid = item.Id, roleid = ViewBag.RoleId })
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <i class="ace-icon fa fa-plus-circle"></i>
+                        <label>
+                            <input type="checkbox" name="chkCheckBoxValue" class="chkCheckBoxValue ace" value="@item.Id" />
+                            <span class="liMenuName lbl">@item.MenuName</span>
+                        </label>
+                        @Html.Action("MenuFunctionChild", "Role", new { parentid = item.Id, roleid = ViewBag.RoleId })
+                    </li>
+                }
+
+            }
+            else
+            {
+                if (lstRoleMenu != null && lstRoleMenu.Any(n => n.MenuId.Equals(item.Id)))
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" name="chkCheckBoxValue" class="chkCheckBoxValue ace" value="@item.Id" checked />
+                            <span class="liMenuName lbl">@item.MenuName</span>
+                        </label>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <label>
+                            <input type="checkbox" name="chkCheckBoxValue" class="chkCheckBoxValue ace" value="@item.Id" />
+                            <span class="liMenuName lbl">@item.MenuName</span>
+                        </label>
+                    </li>
+                }
+            }
+        }
+    </ul>
+}

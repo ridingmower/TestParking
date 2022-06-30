@@ -1,0 +1,142 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+
+@{
+    ViewBag.Title = "Báo cáo thu tiền theo nhóm thẻ lượt";
+    var _dt = (System.Data.DataTable)ViewBag.dt;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("BVDK_ReportTotalMoneyByCardGroup", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Nhóm thẻ:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "CardGroupID", itemText = "CardGroupName", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "BVDK_ReportTotalMoneyByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "BVDK_ReportTotalMoneyByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "BVDK_ReportTotalMoneyByCardGroup" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "BVDK_ReportTotalMoneyByCardGroup" })
+        </div>
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th style="text-align: center;width:50px;">STT</th>
+                    <th style="text-align: center;">Nhóm thẻ</th>                  
+                    <th style="text-align: center;">Doanh thu(VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (_dt != null && _dt.Rows.Count > 0)
+                {
+                    var count = 0;
+                    foreach (System.Data.DataRow item in _dt.Rows)
+                    {
+                        count++;
+                        <tr>
+                            <td style="text-align: center;">@count</td>
+                            <td style="text-align: left;">
+                                <span>@item["CardGroupName"].ToString()</span>
+                            </td>
+                           
+                            <td style="text-align: right;">
+                                <span>@item["Moneys"].ToString()</span>
+                            </td>
+                        </tr>
+                    }
+                    <tr style="font-weight: bold;">
+                        <td style="text-align: center;">#</td>
+                        <td style="text-align: left;">Tổng số</td>
+                     
+                        <td style="text-align: right;">@ViewBag.TotalMoneys.ToString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section scripts{
+    <script>
+        
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportIn').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportIn').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _cardgroup = $('#cardgroup').val();
+                var url = '/Parking/Report/PrintBVDK_ReportTotalMoneyByCardGroup?fromdate=' + _frdate + '&todate=' + _todate + '&cardgroup=' + _cardgroup;
+                window.open(url, '_blank');
+            });
+        });
+    </script>
+}
+

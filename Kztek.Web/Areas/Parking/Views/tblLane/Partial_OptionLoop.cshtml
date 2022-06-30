@@ -1,0 +1,7 @@
+﻿@model List<Kztek.Model.CustomModel.SelectListModel>
+
+<label class="col-sm-1 control-label no-padding-right"> Tính tiền xe theo </label>
+<div class="col-sm-3 col-xs-12">
+    @Html.DropDownList("ddlOptionLoop", new SelectList(Model, "ItemValue", "ItemText", ViewBag.Selected), new { @class = "form-control" })
+    
+</div>

@@ -1,0 +1,181 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model List<Kztek.Model.Models.ReportDetailMoneyCardMonth>
+
+@{
+    ViewBag.Title = "Chi tiết thu tiền thẻ tháng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    string money = (string)ViewBag.totalMoney;
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportDetailMoneyCardMonthTRANSERCO");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h2 style="font-family: Arial;text-align:center;">@Dictionary["title"]</h2>
+                        <div id="div_information" style="margin: 10px auto; font-family: Arial;text-align:center;" runat="server">
+                            @DictionarySearch["fromDate"] <strong>@ViewBag.fromdateValue</strong> @DictionarySearch["toDate"] <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center"> @Dictionary["stt"] </th>
+                        <th class="text-left" idata="CardNo"> @Dictionary["cardNo"] <i class=""></i></th>
+                        <th class="text-left" idata="CardNumber"> @Dictionary["codeCard"] <i class=""></i></th>
+                        <th class="text-left">@Dictionary["cardGroup"] </th>
+                        <th class="text-left">@Dictionary["customer"] </th>
+                        <th class="text-left">@Dictionary["customerGroup"]  </th>
+                        <th class="text-left">@Dictionary["licensePlate"] </th>
+                        <th class="text-left">@Dictionary["address"]  </th>
+                        <th class="text-left">@Dictionary["durationOld"] </th>
+                        <th class="text-left">@Dictionary["durationNew"]</th>
+                        <th class="text-left">@Dictionary["amount"] </th>
+                        <th class="text-left">@Dictionary["staffMade"] </th>
+                        <th class="text-left">@Dictionary["executionDate"] </th>
+                        @*<th class="text-left">Xử lý</th>*@
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model)
+                        {
+                            count++;
+                            <tr>
+                                <td class="center">@count</td>
+
+                                <td class="text-left">
+                                    @item.CardNo
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CardNumber
+                                </td>
+                                <td>
+                                    @{
+                                        var objcardGroup = listcardGroup != null ? listcardGroup.FirstOrDefault(n => n.CardGroupID.ToString().Equals(item.CardGroupID)) : null;
+
+                                        if (objcardGroup != null)
+                                        {
+                                            <span>@objcardGroup.CardGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="text-left">
+                                    @item.CustomerID
+                                </td>
+                                <td>
+                                    @{
+                                        var objcustomerGroup = listCustomerGroup != null ? listCustomerGroup.FirstOrDefault(n => n.CustomerGroupID.ToString().Equals(item.CustomerGroupID)) : null;
+
+                                        if (objcustomerGroup != null)
+                                        {
+                                            <span>@objcustomerGroup.CustomerGroupName</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="text-left">
+                                    @item.Plate
+                                </td>
+                                <td class="text-left">
+                                    @item.Address
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.OldExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.NewExpireDate).ToString("dd/MM/yyy")
+                                </td>
+                                <td class="center">
+                                    @if (!string.IsNullOrEmpty(item.FeeLevel) && !item.FeeLevel.Equals("0"))
+                                    {
+                                        @Convert.ToInt64(item.FeeLevel).ToString("###,###")
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </td>
+                                <td>
+                                    @{
+                                        var objuser = listuser != null ? listuser.FirstOrDefault(n => n.Id.ToString().Equals(item.UserID)) : null;
+
+                                        if (objuser != null)
+                                        {
+                                            <span>@objuser.Username</span>
+                                        }
+                                    }
+                                </td>
+                                <td class="center">
+                                    @Convert.ToDateTime(item.Date).ToString("dd/MM/yyy HH:mm:ss")
+                                </td>
+                                @*<td class="center">
+                                        <a href="javascript:void(0)" class="btn btn-sm btn-info btnShowDetail" data-toggle="collapse" data-target="@string.Format(".boxDetail_{0}", item.Id.ToString())" aria-controls="@string.Format(".boxDetail_{0}", item.Id.ToString())" idata="@item.Id.ToString()">
+                                            <i class="fa fa-caret-down"></i>
+                                        </a>
+                                    </td>*@
+                            </tr>
+                            @*@Html.Action("ViewDetailCardActive", "PK_Report", new { obj = item })*@
+                        }
+                    }
+                </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td>#</td>
+                        <td></td>
+                        <td>@DictionarySearch["total"]</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="center">@money</td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+                </tfoot>
+            </table>
+        </div><!-- /.span -->
+
+    </div><!-- /.row -->
+</div>
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

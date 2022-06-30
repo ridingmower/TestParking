@@ -1,0 +1,223 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.Event.tblThaiSonErrorApiTemp_Custom>
+
+@{
+   
+    var users = (List<Kztek.Model.Models.User>)ViewBag.Users;
+}
+
+<div class="page-header">
+    <h1>
+        Danh sách gửi thất bại HDDT (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportErrorApiHDĐT", "Report", FormMethod.Get, new { id = "frmReportErrorApiHDĐT" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ khóa </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="CardNo,Mã thẻ,Biển số..." class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Hình thức gửi </label>
+            @Html.DropDownList("sendType", new SelectList(ViewBag.SendStatusDT, "ItemValue", "ItemText", ViewBag.SendTypeId), "--Lựa chọn--", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Từ ngày  </label>
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> Đến ngày </label>
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportSuccesApiHDĐT" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportSuccesApiHDĐT" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportSuccesApiHDĐT" })
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            STT
+                        </th>
+                        <th class="text-left">Thời gian </th>
+                        <th class="text-left">Số thẻ </th>
+                        <th class="text-left">Mã thẻ</th>
+                        <th class="text-left">Biển số xe</th>
+                        <th class="text-left">Người gửi</th>
+                        <th class="text-left">Thành tiền</th>                       
+                        <th class="hidden-480">Trạng thái</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = (Model.PageIndex - 1) * Model.PageSize;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                    <tr>
+                        <td class="text-center">
+                            @item.RowNumber
+                        </td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:ss:mm")</td>
+                        <td>
+                            @item.CardNo
+                        </td>
+                        <td>
+                            @item.CardNumber
+                        </td>
+                        <td>
+                            @item.PlateNumber
+                        </td>
+                        <td>
+                            @{
+                                var obj = users != null ? users.FirstOrDefault(n => n.Id == item.UserID) : null;
+                                if (obj != null)
+                                {
+                                    @obj.Name
+
+                                }
+                            }
+
+                        </td>
+                        <td>
+                            @item.Cost.ToString("###,###.##")
+                        </td>
+                        <td>
+                            @if (item.IsExpire == false)
+                            {
+                                <label class="label label-default">Gửi lại tự động</label>
+                            }
+                            else if (item.IsExpire == true)
+                            {
+                                <label class="label label-pink">Gửi lại thủ công</label>
+                            }
+                         
+                        </td>                      
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportErrorApiHDĐT", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               sendType = ViewBag.SendTypeId,
+                fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportErrorApiHDĐT').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportErrorApiHDĐT').submit();
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventIn')
+        });
+    </script>
+}
+

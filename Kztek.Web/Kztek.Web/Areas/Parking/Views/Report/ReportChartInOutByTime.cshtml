@@ -1,0 +1,250 @@
+﻿
+@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using System.Data
+@model List<Kztek.Model.Models.ReportChartInOutByLane>
+
+@{
+    ViewBag.Title = "ReportChartInOutByTime";
+    var dt = (System.Data.DataTable)ViewBag.dt;
+}
+
+<div class="page-header">
+    <h1>
+        Biểu đồ xe vào ra theo thời gian
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportChartInOutByTime", "Report", FormMethod.Get, new { id = "frmReportIn" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        @*<div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                Làn:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.LaneDT, itemValue = "LaneID", itemText = "LaneName", selectedValues = ViewBag.LaneId, Modelname = "ddllane", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("lane")
+            </div>
+        </div>*@
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportChartInOutByTime" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportChartInOutByTime" })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row" style="height:500px;">
+    <div class="col-xs-12">
+        <div id="income"></div>
+    </div>
+</div>
+@if (Model != null && Model.Count > 0)
+{
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="divScroll">
+                <table class="table  table-bordered table-hover">
+                    <thead>
+                        <tr class="headerSort">
+                            <th style="text-align: center;"></th>
+
+                            @foreach (var item in Model)
+                            {
+                                <th style="text-align: center;">@item.LaneName</th>
+                            }
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td style="font-weight:bold;">Vào</td>
+                            @foreach (var item1 in Model)
+                            {
+
+                                <td>
+                                    <span>@item1.TotalVehicleIn</span>
+                                </td>
+
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Ra</td>
+                            @foreach (var item1 in Model)
+                            {
+
+                                <td>
+                                    <span>@item1.TotalVehicleOut</span>
+                                </td>
+
+                            }
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        
+        </div>
+
+    </div>
+}
+
+
+@section scripts{
+    <script>
+
+        $(document).ready(function () {
+            load();
+            $('#ddllane').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#lane').val(str);
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                load();
+                $('#frmReportIn').submit();
+            });
+
+
+        });
+        function load() {
+             var dt = [];
+
+            Item = function (LaneName, TotalVehicleIn, TotalVehicleOut) {
+                var obj = this;
+                obj.LaneName = LaneName;
+                obj.TotalVehicleIn = TotalVehicleIn;
+                obj.TotalVehicleOut = TotalVehicleOut;
+            }
+
+            @if (Model != null && Model.Count > 0)
+            {
+                foreach(var item in Model)
+                {
+                   @:dt.push(new Item(ConvertCharacter('@item.LaneName'), '@item.TotalVehicleIn', '@item.TotalVehicleOut'));
+                }
+            }
+
+
+            LoadChart(dt);
+           
+        }
+        function LoadChart(_dt) {
+            var arrIn = [];
+            var arrOut = [];
+            for (i = 0; i < _dt.length; i++) {
+                var objIn = {
+                    label: _dt[i].LaneName,
+                    y: parseInt(_dt[i].TotalVehicleIn)
+                }
+                var objOut = {
+                    label: _dt[i].LaneName,
+                    y: parseInt(_dt[i].TotalVehicleOut)
+                }
+
+                arrIn.push(objIn);
+                arrOut.push(objOut);
+            }
+
+            var chart = new CanvasJS.Chart("income", {
+                title: {
+                    text: "Biểu đồ vào ra theo thời gian",
+                    fontFamily: "Times New Roman",
+                    fontSize: "28",
+                    fontWeight: "bold"
+                },
+                animationEnabled: true,
+                legend: {
+                    cursor: "pointer",
+                    itemclick: function (e) {
+                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                            e.dataSeries.visible = false;
+                        }
+                        else {
+                            e.dataSeries.visible = true;
+                        }
+                        chart.render();
+                    }
+                },
+                axisX: {
+                    interval: 1
+                },
+                toolTip: {
+                    shared: true,
+                    content: function (e) {
+                        var str = '';
+                        var total = 0;
+                        var str3;
+                        var str2;
+                        for (var i = 0; i < e.entries.length; i++) {
+                            var str1 = "<span style= 'color:" + e.entries[i].dataSeries.color + "'> " + e.entries[i].dataSeries.name + "</span>: <strong>" + e.entries[i].dataPoint.y + "</strong> <br/>";
+                            total = e.entries[i].dataPoint.y + total;
+                            str = str.concat(str1);
+                        }
+                        str2 = "<span style = 'color:DodgerBlue; '><strong>" + e.entries[0].dataPoint.label + "</strong></span><br/>";
+                        str3 = "<span style = 'color:Tomato '>Tổng: </span><strong>" + total + "</strong><br/>";
+
+                        return (str2.concat(str)).concat(str3);
+                    }
+
+                },
+                data: [
+                    {
+                        type: "column",
+                        showInLegend: true,
+                        name: "Vào",
+                        color: "rgba(255, 99, 71, 0.8)",
+                        dataPoints: arrIn,
+
+
+                    },
+                    {
+                        type: "column",
+                        showInLegend: true,
+                        name: "Ra",
+                        color: "rgb(123, 123, 249)",
+                        dataPoints: arrOut,
+
+
+                    }
+                ]
+            });
+
+            chart.render();
+        };
+
+    </script>
+
+}
+
+
+

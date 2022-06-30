@@ -1,0 +1,65 @@
+﻿@model Kztek.Model.CustomModel.iLocker.LockerControllerModel
+
+@{ 
+    var count = 0;
+
+}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" class="ace" id="chkCheckALLController" @string.Format("{0}", Model.Selected.Count == Model.Data.Count ? "checked" : "") />
+                    <span class="lbl"></span>
+                </label>
+            </th>
+            <th class="text-left" idata="STT"> STT <i class=""></i></th>
+            <th class="text-left" idata="Controller"> Tên độ điều khiển <i class=""></i></th>
+            <th class="text-left" idata="Status"> Trạng thái <i class=""></i></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Data)
+        {
+            var selected = Model.Selected.Any(n => n.Id == item.Id);
+
+            count++;
+
+            <tr class="@string.Format("{0}", selected ? "info" : "")">
+                <td class="center">
+                    <label class="pos-rel">
+                        <input type="checkbox" id="@item.Id" name="Id" value="@item.Id" class="ace chkCheckController" @string.Format("{0}", selected ? "checked" : "") />
+                        <span class="lbl"></span>
+                    </label>
+                </td>
+                <td>@count</td>
+
+                <td class="text-left">
+                    @item.ControllerName
+                </td>
+
+                <td class="text-left">
+                    @Html.Action("ControllerStatus", new { lineid = item.LineID.ToString(), controllerid = item.Id.ToString() })
+                </td>
+
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td class="center">
+                <div>
+                    <button type="button" class="btn btn-sm btn-default btn-white btn-bold" id="btnReloadDataController">
+                        <i class="fa fa-refresh"></i>
+                        Load lại
+                    </button>
+                </div>
+            </td>
+            <td colspan="3">
+               Đã chọn: @Model.Selected.Count
+            </td>
+        </tr>
+    </tfoot>
+</table>

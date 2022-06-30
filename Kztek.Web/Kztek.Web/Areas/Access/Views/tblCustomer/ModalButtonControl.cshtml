@@ -1,0 +1,31 @@
+﻿@*
+    @model List<string>*@
+
+@using Kztek.Web.Attributes
+
+@{
+    var total = (int)ViewBag.totalItemValue;
+    var url = (string)ViewBag.urlValue;
+}
+
+<div style="display:inline;margin-left:15px">
+    @if (CheckAuthorizeAction.CheckActionPemission("tblCustomer", "Authorize"))
+    {
+        <div style="display:inline-flex">
+            @Html.DropDownList("accesslevel", new SelectList(ViewBag.llevels, "AccessLevelID", "AccessLevelName"), "--Lựa chọn--", new { @class = "form-control chosen-select" })
+
+        </div>
+
+        <button type="button" class="btn btn-pink btn-sm btn-white btn-bold" onclick="AuthorizeAllCustomer('@url')">
+            <i class="fa fa-save"></i>
+            Phân quyền <span>@total</span> thẻ
+        </button>
+    }
+</div>
+
+<script>
+    $(function () {
+        $('.chosen-select').chosen({ allow_single_deselect: true });
+    });
+</script>
+

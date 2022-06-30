@@ -1,0 +1,149 @@
+﻿@model List<Kztek.Model.Models.MultipleLanesMap>
+@{
+    ViewBag.Title = "Danh sách làn - máy tính";
+    var countpc = (int)ViewBag.Count;
+    var lst = (List<Kztek.Model.Models.MultipleLanesMap>)ViewBag.lst;
+    var lspC = (List<Kztek.Model.Models.tblPC>)ViewBag.ListPC;
+    var lstSide = (List<Kztek.Model.CustomModel.SelectListModel>)ViewBag.ListSideIndex;
+    var lstCurrent = (List<Kztek.Model.CustomModel.SelectListModel>)ViewBag.ListCurrectionDirect;
+    var count = 0;
+}
+@Html.Hidden("Count", countpc)
+
+@for (int i = 0; i < countpc; i++)
+{
+    count++;
+
+    <div class="col-sm-4 col-xs-12  " idata="@count" id="tableid_@count">
+        <table class="table table-bordered table-hover ">
+            <tr>
+                <td>
+                    <div class="row ">
+                        <div class="form-group ">
+                            <label class="col-sm-4 text-info">Tên :</label>
+                            <div class="col-sm-8  " id="">
+                                @{
+                                    var obj = Model.FirstOrDefault(n => n.ViewOrder == count);
+                                    if (obj != null)
+                                    {
+                                        <input type="text" readonly class="form-control col-sm-8 col-md-6" id="name" value="@obj.Name">
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" readonly class="form-control col-sm-8 col-md-6" id="name" value="">
+
+                                    }
+
+
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="form-group">
+                            <label class="col-sm-4">Tên máy tính:</label>
+                            <div class="col-sm-8 " id="">
+                                @{
+                                    var obj1 = Model.FirstOrDefault(n => n.ViewOrder == count);
+                                    if (obj1 != null)
+                                    {
+                                        var objPC = lspC != null ? lspC.FirstOrDefault(n => n.PCID.ToString() == obj1.PCid) : null;
+                                        if (objPC != null)
+                                        {
+
+                                            <input type="text" readonly class="form-control col-sm-8 col-md-6" id="pcid" value="@objPC.ComputerName">
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" readonly class="form-control col-sm-8 col-md-6" id="pcid" value="">
+
+                                    }
+
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <div class="form-group">
+                            <label class="col-sm-4">Giao diện :</label>
+                            <div class="col-sm-8 col-xs-12 " id="">
+                                @{
+                                    var obj2 = Model.FirstOrDefault(n => n.ViewOrder == count);
+                                    if (obj2 != null)
+                                    {
+                                        var objside = lstSide != null ? lstSide.FirstOrDefault(n => n.ItemValue == obj2.SideIndex.ToString()) : null;
+                                        if (objside != null)
+                                        {
+                                            @*<span>@objside.ItemText</span>*@
+
+                                            <input type="text" readonly class="form-control col-sm-8 col-md-6" id="sideindex" value="@objside.ItemText">
+
+
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" readonly class="form-control col-sm-8 col-md-6" id="sideindex" value="">
+
+                                    }
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group ">
+                            <label class="col-sm-4">Chiều :</label>
+                            <div class="col-sm-8 col-xs-12 " id="">
+                                @{
+                                    var obj3 = Model.FirstOrDefault(n => n.ViewOrder == count);
+                                    if (obj3 != null)
+                                    {
+                                        var objCurent = lstCurrent != null ? lstCurrent.FirstOrDefault(n => n.ItemValue == obj3.CurrentDirection.ToString()) : null;
+                                        if (objCurent != null)
+                                        {
+
+                                            <input type="text" readonly class="form-control col-sm-8 col-md-6" id="current" value="@objCurent.ItemText">
+
+
+                                        }
+
+
+                                    }
+                                    else
+                                    {
+                                        <input type="text" readonly class="form-control col-sm-8 col-md-6" id="current" value="">
+
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+
+
+        </table><br />
+
+    </div>
+
+}
+
+
+
+
+
+
+
+
+
+

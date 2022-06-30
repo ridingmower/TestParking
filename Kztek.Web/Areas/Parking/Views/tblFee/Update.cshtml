@@ -1,0 +1,109 @@
+﻿@model Kztek.Model.Models.tblFee
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Cập nhật phí thuê bao";
+
+    int pn = Convert.ToInt32(ViewBag.PN);
+    var unit = (string)ViewBag.Unit;
+    var period = (string)ViewBag.Period;
+    var DictionaryShare = FunctionHelper.GetLocalizeDictionary("tblFee", "Shared");
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblFee", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "tblFee", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["FeeName"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.FeeName, new { @class = "form-control", @placeholder = "Nhập tên" })
+                    @Html.ValidationMessageFor(n => n.FeeName, "", new { @class = "text-danger" })
+                    @Html.Hidden("objId", Model.FeeID)
+                    @Html.Hidden("pageNumber", pn)
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["CardGroupName"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.CardGroupID, new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName"), DictionaryShare["select"], new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CardGroupID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["FeeLevel"] </label>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <input type="text" name="txtFeeLevel" id="Feelevel" value="@Convert.ToInt32(Model.FeeLevel).ToString("###,###")" class="form-control formatMoney" />
+                        <span class="input-group-addon">
+                            @Dictionary["CurrencyUnit"]
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    @Html.TextBox("unit", unit, new { @class = "form-control", @Value = unit })
+                    @Html.ValidationMessage("unit", "", new { @class = "text-danger" })
+                </div>
+                <div class="col-sm-1">
+                    @Html.DropDownList("period", new SelectList(ViewBag.TimePeriodTypes, "ItemText", "ItemText"), new { @class = "form-control" })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Sử dụng cho gia hạn </label>
+                <div class="col-sm-4">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.IsUseExtend, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-info" type="submit">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index")" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>

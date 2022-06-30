@@ -1,0 +1,74 @@
+﻿@model Kztek.Model.Models.tblCardGroup
+@using Kztek.Web.Core.Functions
+
+@{ 
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCardGroup", "FormulationBlock");
+}
+
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block0"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block0 > 0 ? Model.Block0.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time0 > 0 ? Model.Time0.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block1"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block1 > 0 ? Model.Block1.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time1 > 0 ? Model.Time1.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block2"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block2 > 0 ? Model.Block2.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time2 > 0 ? Model.Time2.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block3"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block3 > 0 ? Model.Block3.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time3 > 0 ? Model.Time3.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block4"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block4 > 0 ? Model.Block4.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time4 > 0 ? Model.Time4.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>
+
+<div class="form-group">
+    <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Block5"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbBlock" value="@string.Format(Model.Block5 > 0 ? Model.Block5.ToString() : "0")" class="form-control formatMoney" />
+    </div>
+    <label class="col-sm-2 control-label no-padding-right"> @Dictionary["Time"] </label>
+    <div class="col-sm-2">
+        <input type="text" name="nbTime" value="@string.Format(Model.Time5 > 0 ? Model.Time5.ToString() : "0")" class="form-control" />
+    </div>
+
+</div>

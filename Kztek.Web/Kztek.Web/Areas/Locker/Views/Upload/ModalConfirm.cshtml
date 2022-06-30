@@ -1,0 +1,34 @@
+﻿@model Kztek.Model.CustomModel.iLocker.LockerConfirm
+
+
+<div class="modal fade" id="ModalConfirm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    @Html.Hidden("LockerDataJSON", Model.DataLocker)
+    @Html.Hidden("LockerAction", Model.ActionTake)
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Xác nhận</h5>
+            </div>
+
+            <div class="modal-body">
+                @Html.Raw(Model.Description)
+
+                <div class="form-group">
+                    @if (Model.ActionTake == "hủy")
+                    {
+                        <p>
+                            Lưu ý: <strong class="red">Khi xóa đăng ký thẻ với tủ.Vui lòng lấy đồ trước khi thực hiện.</strong>
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnConfirmLocker">Xác nhận</button>
+            </div>
+        </div>
+    </div>
+</div>

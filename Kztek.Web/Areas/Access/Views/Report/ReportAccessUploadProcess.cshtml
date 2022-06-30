@@ -1,0 +1,226 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.ReporttblAccessUploadProcess_Custom>
+
+@{
+
+    var users = (List<Kztek.Model.Models.User>)ViewBag.Users;
+    var controllers = (List<Kztek.Model.Models.tblAccessController>)ViewBag.Controllers;
+   
+}
+
+<div class="page-header">
+    <h1>
+       Báo cáo nạp hủy thẻ (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("ReportAccessUploadProcess", "Report", FormMethod.Get, new { id = "frmReportAccessUploadProcess" }))
+    {
+<div class="row">
+    <div class="col-md-2 col-xs-12 divboxmd">
+        <label class="col-sm-12 control-label no-padding-right"> Từ khóa </label>
+        <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ..." class="form-control" />
+    </div>
+    <div class="col-md-3 col-xs-12 divboxmd">
+        <label class="col-sm-12 control-label no-padding-right"> Từ ngày  </label>
+        <div class="input-group">
+            @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3 col-xs-12 divboxmd">
+        <label class="col-sm-12 control-label no-padding-right"> Đến ngày </label>
+        <div class="input-group">
+            @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+            <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+            </span>
+        </div>
+    </div>
+
+</div>
+    <div class="row">
+        @Html.Hidden("chkExport", "0")
+      
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Bộ điều khiển </label>
+            @Html.DropDownList("controllerid", new SelectList(ViewBag.Controllers, "ControllerID", "ControllerName", ViewBag.ControllerId), "--Lựa chọn--", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Loại dữ liệu </label>
+            @Html.DropDownList("enventype", new SelectList(ViewBag.EvenTypes, "ItemValue", "ItemText", ViewBag.eventype), new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">Hình thức </label>
+            @Html.DropDownList("actions", new SelectList(ViewBag.Actions, "ItemValue", "ItemText", ViewBag.actionid), new { @class = "form-control chosen-select" })
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportAccessUploadProcess" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportAccessUploadProcess" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportAccessUploadProcess" })
+        </div>
+    </div>
+      
+
+    }
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            STT
+                        </th>
+                        <th class="text-center">Thời gian </th>
+                        <th class="text-center">Hình thức </th>
+                        <th class="text-center">Loại dữ liệu</th>
+                        <th class="text-center">Mã thẻ</th>
+                        <th class="text-center">Bộ điều khiển</th>
+                        <th class="text-center">Người dùng</th>
+                        <th class="text-center">Kết quả</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+
+                        foreach (var item in Model.Data)
+                        {
+
+                            <tr>
+                                <td class="text-center">
+                                    @item.RowNumber
+                                </td>
+                                <td>@item.Date.ToString("dd/MM/yyyy HH:ss:mm")</td>
+                                <td class="center">
+                                    @if (item.Actions == "UPLOAD")
+                                    {
+                                        <span class="label label-danger">Nạp thẻ</span>
+                                    }
+                                    else if (item.Actions == "DELETE")
+                                    {
+                                        <span class="label label-warning">Hủy thẻ</span>
+                                    }
+
+                                </td>
+                                <td class="center">
+                                    @if (item.EventType == "CARD")
+                                    {
+                                        <span class="label label-danger">Thẻ</span>
+                                    }
+                                    else if (item.EventType == "FINGER")
+                                    {
+                                        <span class="label label-warning">Vân tay</span>
+                                    }
+                                </td>
+                                <td class="text-center">@item.CardNumber</td>
+                                <td class="text-center">
+                                    @{
+                                        var objController = controllers != null ? controllers.FirstOrDefault(n => n.ControllerID.ToString() == item.TotalControllerIDs) : null;
+                                        if (objController != null)
+                                        {
+                                            @objController.ControllerName
+
+                                        }
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    @{
+                                        var obj = users != null ? users.FirstOrDefault(n => n.Id == item.UserID) : null;
+                                        if (obj != null)
+                                        {
+                                            @obj.Name
+
+                                        }
+                                    }
+
+                                </td>
+                                <td class="center">
+                                    @if (item.Description.Contains("OK"))
+                                    {
+                                        <span class="label label-primary">Thành công</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="label label-warning">Thất bại</span>
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportAccessUploadProcess", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               controllerid = ViewBag.ControllerId,
+               action = ViewBag.actionid,
+               enventype = ViewBag.eventype,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script src="~/Scripts/ExcelColumn.js"></script>
+    <script>
+       
+        $(document).ready(function () {
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportAccessUploadProcess').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportAccessUploadProcess').submit();
+            });
+
+            //Xóa 1 bản ghi
+            DeleteSubmit(_prefixParkingDomain + '/Report/DeleteEventIn')
+        });
+    </script>
+}
+
+
+

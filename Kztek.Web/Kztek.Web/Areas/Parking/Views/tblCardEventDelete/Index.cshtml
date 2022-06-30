@@ -1,0 +1,147 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.Event.tblCardEventDeleteCustom>
+
+@{
+    ViewBag.Title = "Lịch sử sự kiện đã xóa";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title (@Model.TotalItem)
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("Index", "tblCardEventDelete", FormMethod.Get, new { id = "frmCustomerMap" }))
+    {
+        @Html.Hidden("chkExport", "0")
+    <div class="row">
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.keyValue" placeholder="Từ khóa..." class="form-control" />
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-lg-4 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @*@Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = controller })*@
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    </div>
+      
+       
+    }
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="text-left">STT</th>
+                    <th class="text-left">Ngày tạo</th>
+                    <th class="text-left">Id sự kiện</th>
+                    <th class="text-left">Người thực hiện</th>
+                  
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td class="text-left">@count</td>
+                            <td class="text-left">
+                                @item.DateCreated.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+                            <td class="text-left">
+                                @item.EventId
+                            </td>
+                            <td>
+                                @item.Username
+                            </td>
+                          
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblCardEventDelete", new
+           {
+               page = x,
+               key = ViewBag.keyValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            DeleteSubmit(_prefixParkingDomain + '/tblCustomer/Delete');
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmCustomerMap').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmCustomerMap').submit();
+            });
+
+            @*var urlSt = '/Parking/tblCustomer/Index?key=' + '@ViewBag.Keyword' + '&page=' +'@Model.PageIndex'+'&customergroup=' + @ViewBag.CustomerGroupValue +'&customerstatus=' + '@ViewBag.CustomerStatusValue';
+
+            OrderColumnInTable("", "@column", "@isDescSort", urlSt);*@
+
+            //
+            $("#frmCustomerMap").find("input[name=key]").keypress(function (e) {
+                if (e.which === 13) {
+                    $("#frmCustomerMap").submit();
+                }
+            });
+        });
+    </script>
+}

@@ -1,0 +1,63 @@
+﻿@using Kztek.Model.CustomModel
+
+@model PageModel<Kztek.Model.Models.tblCustomerExtend>
+
+@{
+    var selectedCustomer = (List<Kztek.Model.Models.tblCustomerExtend>)ViewBag.selectedCustomer;
+}
+
+@if (Model != null && Model.Data.Any())
+{
+    @Html.Hidden("pageTotal", Model.TotalPage)
+    @Html.Hidden("totalItem", Model.TotalItem)
+    @Html.Hidden("selectedItem", selectedCustomer.Count)
+    var count = (Model.PageIndex - 1) * Model.PageSize;
+    foreach (var item in Model.Data)
+    {
+        var selected = selectedCustomer.Any(n => n.CustomerID.ToString() == item.CustomerID.ToString());
+
+        count++;
+        <tr class="@string.Format("{0}", selected ? "info" : "")">
+            <td class="center">
+                <label class="pos-rel">
+                    <input type="checkbox" id="@item.CustomerID.ToString()" name="Id" value="@item.CustomerID.ToString()" class="ace chkCheckCustomer" @string.Format("{0}", selected ? "checked" : "") />
+                    <span class="lbl"></span>
+                </label>
+            </td>
+            <td>@count</td>
+
+            <td class="text-left">
+                @item.CustomerCode
+            </td>
+
+            <td class="text-left">
+                @item.CustomerName
+            </td>
+
+            <td class="text-left">
+                @item.CustomerGroupName
+            </td>
+
+            <td class="text-left">
+                @item.AccessLevelName
+            </td>
+
+            <td class="text-left">
+                @if (item.AccessExpireDate != null)
+                {
+                    <span>
+                        @Convert.ToDateTime(item.AccessExpireDate).ToString("dd/MM/yyyy")
+                    </span>
+                }
+            </td>
+        </tr>
+    }
+}
+else
+{
+    @Html.Hidden("pageTotal", 0)
+    @Html.Hidden("totalItem", 0)
+    @Html.Hidden("selectedItem", 0)
+}
+
+

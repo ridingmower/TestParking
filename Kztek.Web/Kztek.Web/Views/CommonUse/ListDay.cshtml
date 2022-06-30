@@ -1,0 +1,12 @@
+﻿@model List<Futech.Model.CustomModel.SelectListModel>
+
+@{
+    var list = (string)ViewBag.Selected;
+}
+
+<select id="dayIDs" name="dayIDs" class="multiselect" multiple="" style="display:none;">
+    @foreach (var item in Model)
+    {
+        <option value="@item.ItemValue" @string.Format("{0}", (list != null && list.Contains(item.ItemValue) ? "selected" : ""))>@item.ItemText</option>
+    }
+</select>

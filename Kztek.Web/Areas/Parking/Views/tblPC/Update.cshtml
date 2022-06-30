@@ -1,0 +1,143 @@
+﻿@model Kztek.Model.Models.tblPC
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "Update";
+    //Layout = Kztek.Web.Core.Functions.FunctionHelper.GetLayoutByGroup(ViewBag.groupValue);
+
+    int pn = Convert.ToInt32(ViewBag.PN);
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblPC", "Update");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @using (Html.BeginForm("Update", "tblPC", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.HiddenFor(n => n.PCID)
+
+            @Html.Hidden("page", pn)
+            @Html.Hidden("key", (string)ViewBag.keyValue)
+            @Html.Hidden("gate", (string)ViewBag.gateValue)
+            @Html.Hidden("group", (string)ViewBag.groupValue)
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["ComputerName"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.ComputerName, new { @class = "form-control", @placeholder = "Nhập tên máy tính" })
+                    @Html.ValidationMessageFor(n => n.ComputerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["IPAddress"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.IPAddress, new { @class = "form-control", @placeholder = Dictionary["IPAddressPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.IPAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["GateName"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.DropDownListFor(n => n.GateID, new SelectList(ViewBag.Gates, "GateID", "GateName"), Dictionary["GateNamePlaceholder"] , new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Description"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.Description, new { @class = "form-control", @placeholder = Dictionary["DescriptionPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["PicPathIn"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.PicPathIn, new { @class = "form-control", @placeholder = Dictionary["PicPathInPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.PicPathIn, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["PicPathOut"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.PicPathOut, new { @class = "form-control", @placeholder = Dictionary["PicPathOutPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.PicPathOut, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["VideoPath"] </label>
+                <div class="col-sm-4 col-xs-12">
+                    @Html.TextBoxFor(n => n.VideoPath, new { @class = "form-control", @placeholder = Dictionary["VideoPathPlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.VideoPath, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                    <label class="col-sm-4 control-label no-padding-right"> STT </label>
+                    <div class="col-sm-2 col-xs-12">
+                        @Html.TextBoxFor(n => n.SortOrder, new { @class = "form-control", @placeholder = "STT" })
+                        @Html.ValidationMessageFor(n => n.SortOrder, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Deactive?"] </label>
+                <div class="col-sm-8">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Inactive, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+                <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                    <i class="ace-icon fa fa-cog bigger-130"></i>
+                </div>
+
+                <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                    <!-- /.pull-left -->
+                    <div class="bg-rightbox">
+                        <div class="clearfix lineButton">
+                            <div class="col-md-12 input-group">
+                                <button class="btn btn-success" type="submit" id="Countinue">
+                                    <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                    @DictionaryAction["Save"]
+                                </button>
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    @DictionaryAction["Refresh"]
+                                </button>
+                                <a href="@Url.Action("Index", new { group = ViewBag.groupValue, key = ViewBag.keyValue, gate = ViewBag.gateValue, selectedId = Model.PCID.ToString() })" class="btn btn-yellow">
+                                    <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                    @DictionaryAction["BackToList"]
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.pull-left -->
+                </div><!-- /.ace-settings-box -->
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Ext/PK_GateController.js"></script>
+    <script>
+        $(document).ready(function () {
+            //PK_GateController.loadData('@Model.GateID');
+        });
+    </script>
+}

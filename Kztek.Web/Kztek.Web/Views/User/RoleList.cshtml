@@ -1,0 +1,9 @@
+﻿@model List<Kztek.Model.Models.Role>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var item in Model)
+    {
+        <p><i class="ace-icon fa fa-caret-right"></i> @string.Format("{0}", item != null ? item.RoleName : "")</p>
+    }
+}

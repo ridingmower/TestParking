@@ -1,0 +1,27 @@
+﻿@model Kztek.Model.CustomModel.SelectListModel_FileUpload
+
+<div id="@string.Format("Box_{0}", Model.BoxRenderId)" idata="@string.Format("{0}", Model.BoxRenderId)">
+    
+    @Html.Hidden("hidCustomerId", Model.CustomerId)
+
+    <div class="form-group">
+        <input type="file" name="@string.Format("{0}", Model.FileUploadName)" id="@string.Format("{0}", Model.FileUploadName)" value="" idata="FileUploadUserController"/>
+    </div>
+
+    <ul class="ace-thumbnails clearfix">
+        <li>
+            <a href="@Model.FilePath" data-rel="colorbox" class="cboxElement">
+                <img width="180" height="200" alt="150x150" id="ImageAvatar" src="@string.Format("{0}", !string.IsNullOrWhiteSpace(Model.FilePath) ? Model.FilePath : !string.IsNullOrWhiteSpace(Model.Base64String) ? Model.Base64String : "/Content/Image/default.jpg")">
+                <div class="text">
+                    <div class="inner"></div>
+                </div>
+            </a>
+
+            <div class="tools tools-bottom">
+                <a href="javascript:void(0)" class="btnRemoveImage">
+                    <i class="ace-icon fa fa-times red"></i>
+                </a>
+            </div>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,8 @@
+﻿@model List<Futech.Model.Models.devCamera>
+
+@{ 
+    string name = string.Format("camera{0}", ViewBag.Number);
+}
+
+@Html.DropDownList(name, new SelectList(Model, "ID", "CameraName", ViewBag.selectedCamera), "-- Chọn camera --", new { @class = "form-control" })
+

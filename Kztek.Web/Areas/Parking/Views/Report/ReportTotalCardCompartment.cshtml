@@ -1,0 +1,240 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.TotalCardDepartment>
+
+@{
+    ViewBag.Title = "ReportTotalCardCompartment";
+
+    var listcardGroup = (List<SelectListModel2>)ViewBag.CardGroups;
+
+    bool checkByTime = Convert.ToBoolean(ViewBag.CheckByTime);
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+    var lstCompartment = (List<Kztek.Model.Models.tblCompartment>)ViewBag.LstCompartment;
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportCardCompartment");
+    var DictionaryCard = FunctionHelper.GetLocalizeDictionary("tblCard", "Create");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionarySelectCusGrp = FunctionHelper.GetLocalizeDictionary("SelectList", "CustomerGroupID");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["titleTotal"] (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportTotalCardCompartment", "Report", FormMethod.Get, new { id = "frmReportTotalCardCompartment" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["keyWord"] </label>
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="@DictionarySearch["keywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["customerGroup"] </label>
+            @Html.DropDownList("customergroup", new SelectList(ViewBag.CustomerGroups, "ItemValue", "ItemText", ViewBag.CustomerGroupId), DictionarySelectCusGrp["SlectlistCusGrp"], new { @class = "form-control chosen-select" })
+        </div>
+        @*<div class="col-md-3 col-xs-12 divboxmd">
+                <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["fromDate"] </label>
+                <div class="input-group">
+                    @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12 divboxmd">
+                <label class="col-sm-12 control-label no-padding-right"> @DictionarySearch["toDate"] </label>
+                <div class="input-group">
+                    @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </span>
+                </div>
+            </div>*@
+        <div class=" col-xs-12 col-md-2  divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">
+                Căn hộ
+            </label>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CompartmentsDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.CompartmentsId, Modelname = "ddlcompartment", labelName = DictionarySearch["select"] })
+                @Html.Hidden("compartmentid")
+            </div>
+        </div>
+
+        <div class=" col-xs-12 col-md-2 divboxmd">
+            <label class="col-sm-12 control-label no-padding-right">
+                @DictionarySearch["cardGroup"]
+            </label>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.CardGroupDT, itemValue = "ItemValue", itemText = "ItemText", selectedValues = ViewBag.CardGroupId, Modelname = "ddlcardgroup", labelName = DictionarySearch["select"] })
+                @Html.Hidden("cardgroup")
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportTotalCardCompartment" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportTotalCardCompartment" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportTotalCardCompartment" })
+
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="divScroll">
+            <table class="table  table-bordered table-hover">
+                <thead>
+                    <tr class="headerSort">
+                        <th class="center">
+                            STT
+                        </th>
+                        <th class="text-left" idata="CardNo"> @Dictionary["Compartment"]</th>
+                        <th class="text-left"> @Dictionary["CAR_REG"] </th>
+                        <th class="text-left"> @Dictionary["CAR_NOTUSE"] </th>
+                        <th class="text-left"> @Dictionary["CAR_USE"] </th>
+                        <th class="text-left"> @Dictionary["CYCLE_REG"]</th>
+                        <th class="text-left"> @Dictionary["CYCLE_NOTUSE"]</th>
+                        <th class="text-left"> @Dictionary["CYCLE_USE"] </th>
+                        <th class="text-left"> @Dictionary["BIKE_REG"] </th>
+                        <th class="text-left"> @Dictionary["BIKE_NOTUSE"] </th>
+                        <th class="text-left"> @Dictionary["BIKE_USE"] </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Data.Any())
+                    {
+                        var count = 0;
+                        foreach (var item in Model.Data)
+                        {
+                            count++;
+                            <tr>
+                                <td class="text-left">
+                                    @item.RowNumber
+                                </td>
+                                <td class="text-left">
+                                    @{
+                                        if (item.CompartmentId != null)
+                                        {
+                                            var ob1 = lstCompartment != null ? lstCompartment.FirstOrDefault(n => n.CompartmentID.ToString().ToLower() == item.CompartmentId.ToLower()) : null;
+
+                                            if (ob1 != null)
+                                            {
+                                                <span> @ob1.CompartmentName</span>
+                                            }
+                                            else
+                                            {
+                                                <span>Không có căn hộ </span>
+                                            }
+                                        }
+
+                                    }
+
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CAR_REG
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CAR_NOTUSE
+                                </td>
+
+                                <td class="text-left">
+                                    @item.CAR_USE
+                                </td>
+                                <td class="text-left">
+                                    @item.CYCLE_REG
+                                </td>
+                                <td class="text-left">
+                                    @item.CYCLE_NOTUSE
+                                </td>
+                                <td class="text-left">
+                                    @item.CYCLE_USE
+                                </td>
+                                <td class="text-left">
+                                    @item.BIKE_REG
+                                </td>
+                                <td class="text-left">
+                                    @item.BIKE_NOTUSE
+                                </td>
+                                <td class="text-left">
+                                    @item.BIKE_USE
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportTotalCardCompartment", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               cardgroup = ViewBag.CardGroupId,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue,
+               customergroup = ViewBag.CustomerGroupId
+           }))
+            </div>
+        </div>
+    }
+</div>
+
+@section scripts{
+
+    <script>
+
+
+        $(document).ready(function () {
+            $('#ddlcompartment').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#compartmentid').val(str);
+            });
+
+            $('#ddlcardgroup').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#cardgroup').val(str);
+            });
+
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportTotalCardCompartment').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportTotalCardCompartment').submit();
+            });
+
+        });
+    </script>
+}

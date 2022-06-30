@@ -1,0 +1,39 @@
+﻿@model List<Kztek.Model.Models.MenuFunction>
+
+@{
+    var list = (List<Kztek.Model.Models.MenuFunction>)ViewBag.ListMenu;
+    string groupID = (string)ViewBag.GroupID;
+
+    var listSe = (List<Kztek.Model.Models.MenuFunctionConfig>)ViewBag.selectedValues;
+}
+@if (Model.Any())
+{
+    @*<style>
+        .submenu1 {
+            display: none;
+        }
+    </style>*@
+
+    <ul style="list-style-type:none;" class="submenu1">
+
+        @foreach (var item in Model)
+        {
+            var strActive = item.Active ? "" : "text-decoration:line-through";
+            var child = list.Where(n => n.ParentId.Equals(item.Id)).ToList();
+        <li>
+            <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item.Id" @string.Format("{0}", (listSe != null && listSe.Any(n => n.MenuFunctionId == item.Id)) ? "checked" : "")/>
+            <span class="showButton lbl" style="@strActive">
+                @item.MenuName
+            </span>
+            <span class="pull-right">
+                @Html.Action("ShowGroupName", new { groupList = item.MenuGroupListId, issystem = item.isSystem })
+            </span>
+            @if (child.Any())
+            {
+                @Html.Action("MenuFunctionChild", "Home", new { childList = child, AllList = list, selected = listSe })
+            }
+        </li>
+        }
+
+    </ul>
+}

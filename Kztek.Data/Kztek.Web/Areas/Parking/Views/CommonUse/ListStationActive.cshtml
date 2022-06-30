@@ -1,0 +1,4 @@
+﻿@model IEnumerable<Futech.Model.Models.STA.STA_C_Station>
+
+@Html.DropDownList("stationId", new SelectList(Model, "Id", "Name", ViewBag.Selected), "-- Chọn bến xe --", new { @class = "form-control" })
+

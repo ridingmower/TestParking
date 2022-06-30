@@ -1,0 +1,214 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.ReportVehicleTooDay>
+
+@{
+    ViewBag.Title = "ReportVehicleTooDay";
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+}
+
+<div class="page-header">
+    <h1>
+        Báo cáo xe đỗ quá ngày (<span>@Model.TotalItem</span>)
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("ReportVehicleTooDay", "Report", FormMethod.Get, new { id = "frmReportVehicleTooDay" }))
+    {
+        @Html.Hidden("chkExport", "0")
+        <div class="col-md-2 col-xs-12 divboxmd">
+            Từ khóa:
+            <input type="text" name="key" value="@ViewBag.KeyWord" placeholder="Mã thẻ, Biển số..." class="form-control" />
+        </div>
+
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Từ ngày:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-3 col-xs-12 divboxmd">
+            Đến ngày:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportVehicleTooDay" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportVehicleTooDay" })
+
+         
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportVehicleTooDay" })
+
+        </div>
+
+    }
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center">
+                        STT
+                    </th>
+                    <th class="text-left" idata="Card"> CardNo <i class=""></i></th>
+                    <th class="text-left"> Mã thẻ </th>
+                    <th class="text-left">Biển số</th>
+                    <th class="text-left">Thời gian vào</th>
+                    <th class="text-left">Hình ảnh vào</th>
+                    <th class="text-left">Thời gian ra</th>
+                    <th class="text-left">Hình ảnh ra</th>
+                    <th class="text-left" idata="Customer">Khách hàng <i class=""></i></th>
+                    <th class="text-left">Số ngày quá hạn</th>
+                    @*<th class="text-left">Xử lý</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    var count = (Model.PageIndex - 1) * Model.PageSize;
+                    foreach (var item in Model.Data)
+                    {
+                        count++;
+                        <tr>
+                            <td>@item.RowNumber</td>
+                            <td>
+                                @item.CardNo
+                            </td>
+                            <td>
+                                @item.CardNumber
+                            </td>
+                            <td>
+                                @item.Plate
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.DateTimeIn).ToString("dd/MM/yyy HH:mm:ss")
+                            </td>
+                            <td class="center">
+                                <div class="ace-thumbnails clearfix">
+                                    @if (!string.IsNullOrWhiteSpace(item.PicIn1))
+                                    {
+                                        @Html.Action("ImageFTP", new { filename = item.PicIn1, description = "Ảnh", type = "INOUT" })
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                @Convert.ToDateTime(item.DateTimeOut).ToString("dd/MM/yyy HH:mm:ss")
+                            </td>
+                            <td class="center">
+                                <div class="ace-thumbnails clearfix">
+                                    @if (!string.IsNullOrWhiteSpace(item.PicIn2))
+                                    {
+                                        @Html.Action("ImageFTP", new { filename = item.PicIn2, description = "Ảnh", type = "INOUT" })
+                                    }
+                                </div>
+                            </td>
+                            <td>
+                                @item.CustomerName
+                            </td>
+
+                            <td>
+                                @item.TooDay
+                            </td>
+                            @*<td>
+                                <div class="btn-group">
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = "ReportVehicleTooDay", id = item.Id })
+                                </div>
+                            </td>*@
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("ReportVehicleTooDay", "Report", new
+           {
+               page = x,
+               key = ViewBag.KeyWord,
+               datefrompicker = ViewBag.DateFromPickerValue,
+               fromdate = ViewBag.fromdateValue,
+               todate = ViewBag.todateValue
+
+           }))
+            </div>
+        </div>
+    }
+</div>
+@section scripts{
+   
+    <script>
+        jQuery(function ($) {
+
+            var $overflow = '';
+            var colorbox_params = {
+                rel: 'colorbox',
+                reposition: true,
+                scalePhotos: true,
+                scrolling: false,
+                previous: '<i class="ace-icon fa fa-arrow-left"></i>',
+                next: '<i class="ace-icon fa fa-arrow-right"></i>',
+                close: '&times;',
+                current: '{current} of {total}',
+                maxWidth: '100%',
+                maxHeight: '100%',
+                onOpen: function () {
+                    $overflow = document.body.style.overflow;
+                    document.body.style.overflow = 'hidden';
+                },
+                onClosed: function () {
+                    document.body.style.overflow = $overflow;
+                },
+                onComplete: function () {
+                    $.colorbox.resize();
+                }
+            };
+
+            $('.ace-thumbnails [data-rel="colorbox"]').colorbox(colorbox_params);
+            $("#cboxLoadingGraphic").html("<i class='ace-icon fa fa-spinner orange fa-spin'></i>");//let's add a custom loading icon
+
+
+            $(document).one('ajaxloadstart.page', function (e) {
+                $('#colorbox, #cboxOverlay').remove();
+            });
+
+
+
+        });
+
+        $(document).ready(function () {
+           
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportVehicleTooDay').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportVehicleTooDay').submit();
+            });
+
+           
+        });
+    </script>
+}

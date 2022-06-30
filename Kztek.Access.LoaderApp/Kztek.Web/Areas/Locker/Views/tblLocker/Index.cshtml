@@ -1,0 +1,156 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model PageModel<Kztek.Model.Models.tblLocker>
+
+@{
+    ViewBag.Title = "Danh sách tủ đồ";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listController = (List<Kztek.Model.Models.tblLockerController>)ViewBag.Controllers;
+}
+
+<div class="page-header">
+    <h1>
+        @ViewBag.Title
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblLocker", FormMethod.Get, new { id = "frmLocker" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.Keyword" placeholder="Từ khóa..." class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("controllerid", new SelectList(ViewBag.Controllers, "Id", "ControllerName", ViewBag.ControllerID), "-- Chọn bộ điều khiển --", new { @class = "form-control chosen-select" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = controller })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = controller })
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Action("Actions", "Home", new { ActionName = "Create", ControllerName = controller })
+
+        <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-white btn-bold" id="btnCreateQuick">
+            <i class=" fa fa-plus"></i> Thêm mới nhanh
+        </a>
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">Tên cửa</th>
+                    <th class="text-left">Bộ điều khiển</th>
+                    <th class="text-left">Thẻ</th>
+                    <th class="text-left">Xử lý</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td class="text-left">
+                                @item.Name
+                            </td>
+
+                            <td class="text-left">
+                                @{
+                                    var objC = listController.FirstOrDefault(n => n.Id.ToString() == item.ControllerID);
+                                    if (objC != null)
+                                    {
+                                        <span>@objC.ControllerName</span>
+                                    }
+                                }
+                            </td>
+
+                            <td class="text-left">
+                                @item.CardNumber
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    @Html.Action("Actions", "Home", new { ActionName = "Update", ControllerName = controller, id = item.Id })
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item.Id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblLocker", new
+           {
+               page = x,
+               key = ViewBag.Keyword,
+               controllerid = ViewBag.ControllerIDValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+
+<div id="boxLockerModal">
+
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmLocker");
+            DeleteSubmit(_prefixLockerDomain + '/tblLocker/Delete');
+
+            $("#btnCreateQuick").click(function () {
+                FunctionHelperController.InterfaceSub('boxLockerModal', '', false, 'Locker', _prefixLockerDomain + '/tblLocker/ModelCreateQuick');
+            });
+        });
+
+        $('body').on('click', '#btnSaveLocker', function () {
+
+            var frm = $("#frm_Locker");
+
+            var formData = new FormData();
+            formData.append('prefix', frm.find("#txtPrefix").val());
+            formData.append('startNumber', frm.find("#txtStartNumber").val());
+            formData.append('maxNumber', frm.find("#txtMaxNumber").val());
+            formData.append('controllerid', frm.find("#ControllerID").val());
+
+            bootbox.confirm('Bạn chắc chắn muốn thực hiện thêm mới?', function (result) {
+                if (result) {
+                    var t = FunctionHelperController.Create(formData, _prefixLockerDomain + '/tblLocker/CreateQuick');
+                    t.success(function (data) {
+                        if (data.isSuccess) {
+                            toastr.success(data.Message);
+
+                            window.location.href = _prefixLockerDomain + '/tblLocker/Index';
+                        } else {
+                            toastr.error(data.Message);
+                        }
+                    })
+                    
+                }
+            });
+
+        });
+    </script>
+}

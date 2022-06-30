@@ -1,0 +1,176 @@
+﻿@model Kztek.Model.Models.User
+@using Kztek.Web.Core.Functions
+@{
+    ViewBag.Title = "Thêm mới người dùng";
+
+    string selected = (string)ViewBag.Selected;
+
+    string groupID = (string)ViewBag.GroupID;
+    Layout = "~/Views/Shared/_SuperAdminLayout.cshtml";
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("User", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var isAuthInView = (bool)ViewBag.isAuthInView;
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+<div class="row">
+    <div class="col-md-8 col-xs-12">
+        <h3 class="header smaller lighter blue">@Dictionary["Tab_Info"] </h3>
+        @using (Html.BeginForm("Create", "UserAdmin", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", @id = "frmCreateUser" }))
+        {
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+            @Html.Hidden("rolevalues")
+            @Html.Hidden("authcardgroupid")
+            @Html.Hidden("SaveAndCountinue", false)
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Username"]  <span style="color:red">*</span></label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBoxFor(n => n.Username, new { @class = "form-control", @placeholder = Dictionary["UsernamePlaceholder"] })
+                    @Html.ValidationMessageFor(n => n.Username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Password"]  <span style="color:red">*</span></label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBoxFor(n => n.Password, new { @class = "form-control", @type = "password" })
+                    @Html.ValidationMessageFor(n => n.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["RePassword"]  </label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBox("repass", "", new { @class = "form-control", @type = "password" })
+                    @Html.ValidationMessage("repass", "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> Họ tên</label>
+                <div class="col-sm-6 col-xs-12">
+                    @Html.TextBoxFor(n => n.Name, new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["IsAdmin"]  </label>
+                <div class="col-sm-6">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Admin, new { @class = "ace" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Active"]  </label>
+                <div class="col-sm-6">
+                    <label class="line-height-250">
+                        @Html.CheckBoxFor(n => n.Active, new { @class = "ace", @checked = "true" })
+                        <span class="lbl"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-4 control-label no-padding-right"> @Dictionary["Avatar"]  </label>
+                <div class="col-sm-6">
+                    <input type="file" name="FileUpload" id="FileUpload" />
+                </div>
+            </div>
+
+            <div class="clearfix form-actions">
+                <div class="col-md-offset-3 col-md-9 input-group">
+                    <button class="btn btn-success" type="submit" id="Countinue">
+                        <i class="ace-icon fa fa-refresh bigger-110"></i>
+                        @DictionaryAction["Save"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn btn-info" type="submit">
+                        <i class="ace-icon fa fa-check bigger-110"></i>
+                        @DictionaryAction["SaveAndExit"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <button class="btn" type="reset">
+                        <i class="ace-icon fa fa-undo bigger-110"></i>
+                        @DictionaryAction["Refresh"]
+                    </button>
+                    &nbsp; &nbsp; &nbsp;
+                    <a href="@Url.Action("Index", "UserAdmin")" class="btn btn-yellow">
+                        <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                        @DictionaryAction["BackToList"]
+                    </a>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4 col-xs-12" id="boxRole">
+        <h3 class="header smaller lighter blue">@Dictionary["Tab_Role"] </h3>
+        @Html.Action("RoleListChoice", "UserAdmin", new { roles = selected })
+
+        @if (isAuthInView)
+        {
+            <h3 class="header smaller lighter blue">Nhóm thẻ </h3>
+            @Html.Action("Partial_AuthGroup", "UserAdmin")
+        }
+
+    </div>
+   
+</div>
+
+@section scripts{
+    <script src="~/Scripts/Ext/SY_UserController.js"></script>
+    <script src="~/Scripts/Ext/AuthGroup.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#ac_hethong').addClass('open');
+            $('#ac_userIndex').addClass('open active');
+
+            $(".multiselect-container").css({ "height": "150px","overflow-y":"auto"})
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val('true');
+            });
+
+            $("#frmCreateUser").submit(function () {
+                var str = "";
+                $("input[name='chkCheckBox']").each(function () {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+                    if ($(this).is(":checked")) {
+                        str = str + id + ",";
+                    }
+                });
+                $("#rolevalues").val(str);
+            });
+
+            $("#boxGroupList").find("#ddlGroupList").change(function () {
+                var str = '';
+                $('#boxGroupList ul.multiselect-container li.active').each(function () {
+                    var cmd = $(this);
+                    str += cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#hidGroupList').val(str);
+            });
+
+            $("#Admin").click(function () {
+                var cmd = $(this).is(':checked');
+                if (cmd) {
+                    $("#boxRole").hide();
+                    SY_UserController.CheckGroup();
+
+                } else {
+                    $("#boxRole").show();
+                    SY_UserController.UnCheckGroup();
+                }
+            });
+        });
+    </script>
+}

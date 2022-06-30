@@ -1,0 +1,150 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+
+@model List<Kztek.Model.Models.tblCustomerGroup>
+
+@{
+    ViewBag.Title = "Nhóm khách hàng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    string selected = (string)ViewBag.selectedIdValue;
+}
+
+<div class="page-header">
+    <h1>
+        Nhóm khách hàng
+    </h1>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Create"))
+        {
+            <a href="@Url.Action("Create", controller)" class="btn btn-sm btn-primary btn-white btn-bold">
+                <i class=" fa fa-plus"></i> Thêm mới
+            </a>
+        }
+
+        @if (CheckAuthorizeAction.CheckActionPemission(controller, "Delete"))
+        {
+            <a href="javascript:void(0)" class="btn btn-sm btn-danger btn-white btn-bold btnMutilDelete">
+                <i class="fa fa-trash"></i> Xóa
+            </a>
+        }
+        @{
+            CheckAuthorizeAction.Instance.CheckPemission(controller, "Export");
+            if (CheckAuthorizeAction.Instance.Check)
+            {
+                <button class="btn btn-sm btn-primary btn-white btn-bold" type="button" name="btnExport">
+                    <i class="fa fa-file green" aria-hidden="true"></i>
+                    Export
+                </button>
+            }
+        }
+    </div>
+</div>
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="treeCustom" style="list-style-type:none">
+            @if (Model.Any())
+            {
+                var listParent = Model.Where(c => c.ParentID == "0" || c.ParentID == "").ToList();
+                if (listParent.Any())
+                {
+                    foreach (var item0 in listParent)
+                    {
+                        var strActive = item0.Inactive ? "text-decoration:line-through" : "";
+                        var child = Model.Where(c => c.ParentID == item0.CustomerGroupID.ToString()).ToList();
+                        <li>
+                            <input type="checkbox" name="chkCheckBox" class="chkCheckBox ace" value="@item0.CustomerGroupID.ToString()" />
+                            <span class="showButton lbl" style="@strActive">
+                                @if (selected == item0.CustomerGroupID.ToString())
+                                {
+                                    <span class="label label-info">
+                                        <span>@item0.Ordering</span>. @item0.CustomerGroupName
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span>
+                                        <span>@item0.Ordering</span>. @item0.CustomerGroupName
+                                    </span>
+                                }
+                            </span>
+                            <span>
+                                @if (CheckAuthorizeAction.CheckActionPemission(controller, "Update"))
+                                {
+                                    <a href="@Url.Action("Update", new { id = item0.CustomerGroupID.ToString() })">
+                                        <i class="ace-icon fa fa-pencil-square-o"></i>
+                                    </a>
+                                }
+                            </span>
+                            @if (child.Any())
+                            {
+                                @Html.Action("MenuChilden", "tblCustomerGroup", new { childList = child, AllList = Model, selectedId = selected })
+                            }
+
+                        </li>
+                    }
+                }
+
+            }
+        </ul>
+    </div><!-- /.span -->
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $(".showButton").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li span.showButton').parent().parent().toggle();
+            });
+
+            //Check box
+            $(".chkCheckBox").click(function () {
+                var cmd = $(this);
+                cmd.parent().find('ul li input[type=checkbox]').prop('checked', cmd.is(':checked'));
+            });
+
+            //Xóa nhiều bản ghi
+            $('.btnMutilDelete').click(function () {
+                var lstdeleteId = "";
+                $("input[name='chkCheckBox']").each(function () {
+                    var cmd = $(this);
+                    var id = cmd.prop("value");
+                    if ($(this).is(":checked")) {
+                        lstdeleteId = lstdeleteId + id + ",";
+                    }
+                });
+                if (confirm('Bạn chắc chắn muốn xóa bản ghi này?')) {
+                    //post danh sách ID
+                    $.ajax({
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        url: _prefixLockerDomain + "/tblCustomerGroup/MutilDelete",
+                        data: "{'lstId':'" + lstdeleteId + "'}",
+                        dataType: "json",
+                        async: "false",
+                        success: function (data) {
+                            if (data) {
+                                toastr.success('Xóa thành công', 'Thông báo');
+                                window.location.href = _prefixLockerDomain + "/tblCustomerGroup/Index";
+                            } else {
+                                toastr.error('Không thể xóa menu đang kích hoạt', 'Thông báo');
+                            }
+                        }
+                    });
+                }
+            })
+
+            $('button[name=btnExport]').click(function () {
+                window.location.href = _prefixLockerDomain + "/tblCustomerGroup/ExportExcel";
+            });
+        });
+    </script>
+}

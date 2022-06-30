@@ -1,0 +1,169 @@
+﻿@model List<Kztek.Model.Models.ReportTotalMoneyCardMonthByUser>
+@using Kztek.Web.Core.Functions
+
+@{
+    ViewBag.Title = "ReportTotalMoneyCardMonthByUser";
+
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("report", "ReportTotalMoneyCardMonthByUser");
+    var DictionarySearch = FunctionHelper.GetLocalizeDictionary("report", "reportSearch");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+
+    double money = 0;
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["title"]
+    </h1>
+</div>
+
+
+    @using (Html.BeginForm("ReportTotalMoneyCardMonthByUser", "Report", FormMethod.Post, new { id = "frmReportTotalMoneyCardMonthByUser" }))
+    {
+        @Html.Hidden("chkExport", "0")
+    <div class="row">
+        <div class="col-md-2 col-xs-12 divboxmd">
+            <div class="control-label">
+                @DictionarySearch["user"]:
+            </div>
+            <div>
+                @Html.Action("DroplistMultiSelectTemplate1", "CommonUse", new { _dt = ViewBag.UserDT, itemValue = "Id", itemText = "Username", selectedValues = ViewBag.UserId, Modelname = "ddluser", labelName = "-- Lựa chọn --" })
+                @Html.Hidden("user")
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["fromDate"]:
+            <div class="input-group">
+                @Html.TextBox("fromdate", (string)ViewBag.fromdateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-xs-12 divboxmd">
+            @DictionarySearch["toDate"]:
+            <div class="input-group">
+                @Html.TextBox("todate", (string)ViewBag.todateValue, new { @class = "form-control datepicker" })
+                <span class="input-group-addon">
+                    <i class="fa fa-calendar"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 divboxmd line-height-450">
+            @Html.Action("Actions", "Home", new { ActionName = "Search", ControllerName = "ReportTotalMoneyCardMonthByUser" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Export", ControllerName = "ReportTotalMoneyCardMonthByUser" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Print", ControllerName = "ReportTotalMoneyCardMonthByUser" })
+
+            @Html.Action("Actions", "Home", new { ActionName = "Index", ControllerName = "ReportTotalMoneyCardMonthByUser" })
+        </div>
+    </div>
+       
+       
+    }
+
+
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr class="headerSort">
+                    <th class="center" width="50">
+                       @Dictionary["stt"]
+                    </th>
+                    <th class="center"> @Dictionary["userName"] </th>
+                    <th class="center"> @Dictionary["amount"] </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    var count = 0;
+                    foreach (var item in Model)
+                    {
+                        count++;
+                        money += item.Moneys;
+                        <tr>
+                            <td align="center">@count</td>
+                            <td>
+                                <a href="@Url.Action("ReportDetailMoneyCardMonth", new { user = item.UserID, fromdate = ViewBag.fromdateValue, todate= ViewBag.todateValue})" target="_blank">
+                                    @item.UserName
+                                </a>
+
+                            </td>
+                            <td align="center">
+                                @if (item.Moneys > 0)
+                                {
+                                    @item.Moneys.ToString("###,###")
+                                }
+                                else
+                                {
+                                    <span>0</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            @*<tfoot>
+                    <tr>
+                        <td align="center">#</td>
+                        <td>TỔNG SỐ</td>
+                        <td align="center">@money.ToString("###,###")</td>
+                    </tr>
+                </tfoot>*@
+        </table>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            //Export excel
+            $('button[name=btnExport]').click(function () {
+                $('#chkExport').val('1');
+                $('#frmReportTotalMoneyCardMonthByUser').submit();
+            });
+
+            $('button[name=btnFilter]').click(function () {
+                $('#chkExport').val('0'); // ko xuat xxcel
+                $('#frmReportTotalMoneyCardMonthByUser').submit();
+            });
+
+            $('#btnPrintFile').click(function () {
+                var _frdate = $('input[name=fromdate]').val();
+                var _todate = $('input[name=todate]').val();
+                var _user = $('#user').val();
+                //window.location.href = '/Parking/Report/PrintReportTotalMoneyCardMonthByUser?fromdate=' + _frdate + '&todate=' + _todate + '&user=' + _user;
+                window.open('/Parking/Report/PrintReportTotalMoneyCardMonthByUser?fromdate=' + _frdate + '&todate=' + _todate + '&user=' + _user, '_blank');
+                //window.open(window.location.href, '_blank');
+            });
+
+            $('#ddluser').change(function () {
+                var str = '';
+                var cmd = $(this);
+                cmd.parent().find('ul.multiselect-container li.active').each(function () {
+                    var _cmd = $(this);
+                    str += _cmd.find('input[type=checkbox]').val() + ',';
+                });
+                $('#user').val(str);
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+

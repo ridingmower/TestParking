@@ -1,0 +1,32 @@
+﻿@model Kztek.Model.Models.tblLocker
+
+@if (string.IsNullOrWhiteSpace(Model.Id))
+{
+    <tr>
+        <td class="text-left">
+            @Html.DropDownList("LockerSelect", new SelectList(ViewBag.lockerData, "Id", "Name"), "-- Lựa chọn tủ đồ --", new { @class = "form-control chosen-select" })
+        </td>
+        <td class="center">
+            <button type="button" class="btn btn-sm btn-primary btnSaveLockerCard" title="Lưu" idata="@ViewBag.cardnumberValue">
+                <i class="fa fa-save"></i>
+            </button>
+            <button type="button" class="btn btn-sm btn-danger btnRemoveLockerCardNew" title="Xóa">
+                <i class="fa fa-trash"></i>
+            </button>
+        </td>
+    </tr>
+}
+else
+{
+    <tr>
+        <td class="center">
+            @Model.Name
+        </td>
+        <td class="center">
+            <button type="button" class="btn btn-sm btn-danger btnRemoveLockerCard" title="Xóa" idata="@Model.Id" idata1="@ViewBag.cardnumberValue">
+                <i class="fa fa-trash"></i>
+            </button>
+        </td>
+    </tr>
+}
+

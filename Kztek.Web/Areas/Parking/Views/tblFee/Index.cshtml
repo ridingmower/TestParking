@@ -1,0 +1,127 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using Kztek.Web.Core.Functions
+
+@model PageModel<Kztek.Model.Models.FeeCustom>
+
+@{
+    ViewBag.Title = "Danh sách phí thuê bao";
+    string objId = (string)ViewBag.objId;
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var DictionaryShare = FunctionHelper.GetLocalizeDictionary("tblFee", "Shared");
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblFee", "Index");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+}
+
+<div class="page-header">
+    <h1>
+        @Dictionary["Title"]
+    </h1>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Index", "tblFee", FormMethod.Get, new { id = "frmFee" }))
+    {
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <input type="text" name="key" value="@ViewBag.Keyword" placeholder="@Dictionary["KeywordPlaceholder"]" class="form-control" />
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            @Html.DropDownList("cardgroup", new SelectList(ViewBag.CardGroups, "CardGroupID", "CardGroupName", ViewBag.CardGroupValue), DictionaryShare["select"], new { @class = "form-control" })
+        </div>
+        <div class="col-md-3 col-lg-3 col-xs-12 col-sm-12 divboxmd">
+            <button class="btn btn-sm btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i> @DictionaryAction["Search"] </button>
+            <a href="@Url.Action("Index", "tblFee")" class="btn btn-sm btn-purple" type="submit">
+                <i class="fa fa-refresh" aria-hidden="true"></i>
+                @DictionaryAction["Reset"]
+            </a>
+        </div>
+    }
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+<div class="row">
+    <div class="col-xs-12">
+        @Html.Action("Actions", "Home", new { ActionName = "Create", ControllerName = controller, group = ViewBag.Group })
+    </div>
+</div>
+<div class="hr hr-18 dotted hr-24"></div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-left">@Dictionary["FeeName"]</th>
+                    <th class="text-left">@Dictionary["CardGroupName"]</th>
+                    <th class="text-left">@Dictionary["FeeLevel"]</th>
+                    <th class="text-left">@Dictionary["Period"]</th>
+                    <th class="text-left" width="80">@Dictionary["Action"]</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model.Data.Any())
+                {
+                    foreach (var item in Model.Data)
+                    {
+                        <tr class="@string.Format("{0}", (!string.IsNullOrWhiteSpace(objId) && objId == item._id.ToString() ) ? "info" : "")">
+                            <td class="text-left">
+                                @item.FeeName
+                            </td>
+
+                            <td class="text-left">
+                                @item.CardGroupName
+                            </td>
+
+                            <td class="center">
+                                @Convert.ToInt32(item.FeeLevel).ToString("###,###")
+                            </td>
+
+                            <td class="center">
+                                @*@{
+                                    var objTime = Kztek.Web.Core.Functions.FunctionHelper.TimePeriodType().FirstOrDefault(n => n.ItemValue.Equals(item.Period));
+
+                                    if (objTime != null)
+                                    {
+                                        <span>@string.Format("{0} / {1}", item.Unit, objTime.ItemText)</span>
+                                    }
+                                }*@
+
+                                @item.Unit.Replace('_', ' ')
+                            </td>
+
+                            <td class="center">
+                                <div class="btn-group">
+                                    @Html.Action("Actions", "Home", new { ActionName = "Update", ControllerName = controller, id = item._id, pageNumber = Model.PageIndex, group = ViewBag.Group })
+                                    @Html.Action("Actions", "Home", new { ActionName = "Delete", ControllerName = controller, id = item._id })
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div><!-- /.span -->
+    @if (Model.Data.Any())
+    {
+        <div class="col-xs-12">
+            <div class="pull-right">
+                @Html.GeneratePagingFooter(Model.TotalPage, Model.PageIndex, Model.PageSize, "pagination", x => Url.Action("Index", "tblFee", new
+           {
+               page = x,
+               key = ViewBag.Keyword,
+               cardgroup = ViewBag.CardGroupValue
+           }))
+            </div>
+        </div>
+    }
+</div><!-- /.row -->
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            SearchSubmit("frmFee");
+            DeleteSubmit(_prefixParkingDomain + '/tblFee/Delete');
+        });
+    </script>
+}

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Kztek.Model.Models.Role>
+
+@{
+    string selected = ViewBag.Selected;
+}
+
+@if (Model.Any())
+{
+    <ul class="treeCustom">
+        @foreach (var item in Model)
+        {
+            if (selected.Contains(item.Id.ToString()))
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" checked />
+                        <span class="lbl"> @item.RoleName</span>
+                    </label>
+                </li>
+            }
+            else
+            {
+                <li>
+                    <label class="line-height-250">
+                        <input type="checkbox" name="chkCheckBox" id="chkCheckBox" value="@item.Id" class="ace chkCheckBox" />
+                        <span class="lbl"> @item.RoleName</span>
+                    </label>
+                </li>
+            }
+        }
+    </ul>
+}

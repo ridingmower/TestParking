@@ -1,0 +1,278 @@
+﻿@using Kztek.Model.CustomModel
+@using Kztek.Web.Core.Extensions
+@using Kztek.Web.Attributes
+@using System.Data
+
+@model DataTable
+
+@{
+    ViewBag.Title = "Chi tiết thu tiền thẻ tháng";
+
+    string controller = this.ViewContext.RouteData.Values["controller"].ToString();
+
+    var listCustomerGroup = (List<Kztek.Model.Models.tblCustomerGroup>)ViewBag.CustomerGroups;
+
+    var listcardGroup = (List<Kztek.Model.Models.tblCardGroup>)ViewBag.CardGroups;
+
+    var listuser = (List<Kztek.Model.Models.User>)ViewBag.Users;
+
+    var user = Kztek.Web.Core.Functions.GetCurrentUser.GetUser();
+
+    string money = (string)ViewBag.totalMoney;
+
+    var listtotal = new List<string>();
+
+    var dtsummonth = (DataTable)ViewBag.DTSumMonth;
+}
+<button type="button" id="btnAddCamera" onclick="printDiv('Print')" class="btn btn-info btn-sm">
+    <i class="fa fa-print"></i>
+    Print
+</button>
+<div class="hr hr-18 dotted hr-24"></div>
+<div id="Print">
+    <div class="row">
+        <div class="col-xs-12" style="height:55px;">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">TRUNG TÂM QUẢN LÝ KHAI THÁC TÒA NHÀ</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">PHÒNG KINH DOANH</h4>
+
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</h4>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">Độc lập - Tự do - Hạnh phúc</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table" style="margin-bottom:unset;">
+                <tr style="height:10px;border-style:hidden;">
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:18px;font-weight:bold;">BẢNG KÊ TIỀN TRÔNG GIỮ XE Ô TÔ</h4>
+                        <div id="div_information" style="margin: 10px auto; font-family: 'Times New Roman';text-align:center;font-size:12px;" runat="server">
+                            Từ ngày <strong>@ViewBag.fromdateValue</strong> đến ngày <strong>@ViewBag.todateValue</strong>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table  table-bordered table-hover" style="border:solid #000 !important;
+    border-width:1px 0 0 1px !important;">
+                <thead>
+                    <tr class="headerSort" style="font-family: 'Times New Roman';">
+                        <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> STT </th>
+                        <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Chủ phương tiện </th>
+                        <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Số HĐ </th>
+                        <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> BKS </th>
+                        <th class="center" rowspan="2" style="width:15px;border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thời hạn HĐ </th>
+                        <th class="center" colspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Thông tin công ty </th>
+
+                        <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Địa chỉ </th>
+
+                        @for (int i = 8; i < Model.Columns.Count; i++)
+                        {
+                            <th class="center" rowspan="2" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                @switch (Model.Columns[i].ColumnName)
+                                {
+                                    case "Jan":
+                                        <span>Tháng 1</span>
+                                        break;
+                                    case "Feb":
+                                        <span>Tháng 2</span>
+                                        break;
+                                    case "Mar":
+                                        <span>Tháng 3</span>
+                                        break;
+                                    case "Apr":
+                                        <span>Tháng 4</span>
+                                        break;
+                                    case "May":
+                                        <span>Tháng 5</span>
+                                        break;
+                                    case "Jun":
+                                        <span>Tháng 6</span>
+                                        break;
+                                    case "Jul":
+                                        <span>Tháng 7</span>
+                                        break;
+                                    case "Aug":
+                                        <span>Tháng 8</span>
+                                        break;
+                                    case "Sep":
+                                        <span>Tháng 9</span>
+                                        break;
+                                    case "Oct":
+                                        <span>Tháng 10</span>
+                                        break;
+                                    case "Nov":
+                                        <span>Tháng 11</span>
+                                        break;
+                                    case "Dec":
+                                        <span>Tháng 12</span>
+                                        break;
+
+                                }
+                            </th>
+                        }
+
+                    </tr>
+                    <tr style="font-family: 'Times New Roman';">
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Công ty </th>
+                        <th class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;"> Mã số thuế </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Rows.Count > 0)
+                    {
+                        var count = 0;
+                        
+                        foreach (DataRow dr in Model.Rows)
+                        {
+                            count++;
+                            <tr style="font-size:12px;font-family: 'Times New Roman';">
+                                <td class="center" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">@count</td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["CustomerID"].ToString()
+                                </td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["Description"].ToString()
+                                </td>
+
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["Plate"].ToString()
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @if (!string.IsNullOrEmpty(dr["ContractStartDate"].ToString()) && !string.IsNullOrEmpty(dr["ContractEndDate"].ToString()) && Convert.ToDateTime(dr["ContractStartDate"]) > DateTime.MinValue && Convert.ToDateTime(dr["ContractEndDate"]) > DateTime.MinValue)
+                                    {
+                                        <span>
+                                            @Convert.ToDateTime(dr["ContractStartDate"]).ToString("dd/MM/yyyy") -
+                                            @Convert.ToDateTime(dr["ContractEndDate"]).ToString("dd/MM/yyyy")
+                                        </span>
+
+                                    }
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["CustomerGroupName"].ToString()
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["Tax"].ToString()
+                                </td>
+                                <td class="text-left" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    @dr["Address"].ToString()
+                                </td>
+
+                                @for (int i = 8; i < Model.Columns.Count; i++)
+                                {
+                                    <td class="text-right" style="border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                        @if (!string.IsNullOrEmpty(dr[i].ToString()) && Convert.ToDecimal(dr[i].ToString()) > 0)
+                                        {
+                                          
+                                            <span>
+                                                @Convert.ToDecimal(dr[i].ToString()).ToString("###,###")
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span>0</span>
+                                        }
+
+                                    </td>
+                                }
+
+                            </tr>
+
+                        }
+                        if (dtsummonth != null && dtsummonth.Columns.Count > 1)
+                        {
+                            <tr style="font-family: 'Times New Roman';">
+                                <th colspan="8" style="text-align:center;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    TỔNG THÁNG
+                                </th>
+
+                                @for (int i = 0; i < dtsummonth.Columns.Count; i++)
+                                {
+                                    var b = dtsummonth.Rows[0][i].ToString();
+                                <th class="text-right" style="text-align:right;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                    
+                                    @if (!string.IsNullOrEmpty(dtsummonth.Rows[0][i].ToString()) && Convert.ToDecimal(dtsummonth.Rows[0][i].ToString()) > 0)
+                                    {
+                                        <span>
+                                            @Convert.ToDecimal(dtsummonth.Rows[0][i].ToString()).ToString("###,###")
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span>0</span>
+                                    }
+                                </th>
+                                }
+
+                            </tr>
+                        }
+                        <tr style="font-family: 'Times New Roman';">
+                            <th colspan="8" style="text-align:center;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                TỔNG: @ViewBag.StringMoney
+                            </th>
+                            <th colspan="@string.Format("{0}",Model.Columns.Count - 8)" class="text-right" style="text-align:right;font-weight:bold;border:solid #000 !important;border-width:0 1px 1px 0 !important;">
+                                <span>
+                                    @money
+
+                                </span>
+                            </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div><!-- /.span -->
+
+    </div><!-- /.row -->
+
+    <div class="row">
+        <div class="col-xs-12" style="height:30px;">
+            <table class="table">
+                <tr style="border-style:hidden;">
+                    <td>
+                        <p style="font-style: oblique;font-size:12px;float:right;padding-right:70px;font-family: 'Times New Roman';">
+                            Hà Nội, ngày @DateTime.Now.ToString("dd") tháng @DateTime.Now.ToString("MM") năm @DateTime.Now.Year
+                        </p>
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table">
+                <tr style="height:35px;border-style:hidden;">
+
+
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">P. TÀI CHÍNH - KẾ TOÁN</h4>
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">P. KINH DOANH</h4>
+                    </td>
+                    <td>
+                        <h4 style="font-family: 'Times New Roman';text-align:center;font-size:12px;font-weight:bold;">NGƯỜI LẬP BẢNG</h4>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/PrintFunction.js"></script>
+}

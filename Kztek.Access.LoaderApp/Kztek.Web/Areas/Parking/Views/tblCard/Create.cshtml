@@ -1,0 +1,396 @@
+﻿@using Kztek.Web.Core.Functions
+
+@model Kztek.Model.Models.tblCardSubmit
+
+@{
+    ViewBag.Title = "Create";
+    var DictionaryShare = FunctionHelper.GetLocalizeDictionary("tblCard", "share");
+    var Dictionary = FunctionHelper.GetLocalizeDictionary("tblCard", "Create");
+    var DictionaryAction = FunctionHelper.GetLocalizeDictionary("Home", "Action");
+    var DictionaryCustomer = FunctionHelper.GetLocalizeDictionary("tblCustomer", "Update");
+}
+
+@*<div class="page-header">
+        <h1>
+            Thêm mới thẻ
+        </h1>
+    </div>*@
+
+<div class="row">
+    @if (TempData["Success"] != null)
+    {
+        <strong style="color:green">@TempData["Success"]</strong>
+    }
+    <strong style="color:red">@ViewBag.Error</strong>
+</div>
+
+<div class="row">
+    @using (Html.BeginForm("Create", "tblCard", FormMethod.Post, new { encType = "multipart/form-data", @class = "form-horizontal", @role = "form", id = "frm_PK_Card_Create" }))
+    {
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        @Html.Hidden("SaveAndCountinue", false)
+
+        @Html.Hidden("key", (string)ViewBag.keyValue)
+        @Html.Hidden("cardgroups", (string)ViewBag.cardgroupsValue)
+        @Html.Hidden("customergroups", (string)ViewBag.customergroupsValue)
+        @Html.Hidden("active", (string)ViewBag.activeValue)
+        @Html.Hidden("fromdate", (string)ViewBag.fromdateValue)
+        @Html.Hidden("todate", (string)ViewBag.todateValue)
+        @Html.Hidden("isCheckByTime", (string)ViewBag.isCheckByTimeValue)
+
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue"> @Dictionary["CardInfo"] </h3>
+            <div class="tabbable">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active">
+                        <a data-toggle="tab" href="#cardinfo" aria-expanded="true">
+                            <i class="green ace-icon fa fa-credit-card bigger-120"></i>
+                            @Dictionary["CardPrimary"]
+                        </a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div id="cardinfo" class="tab-pane fade active in">
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CardNo"] <span class="error">*</span></label>
+                            <div class="col-sm-2 col-xs-12">
+                                @Html.TextBoxFor(n => n.CardNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.CardNo, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CardNumber"] <span class="error">*</span></label>
+                            <div class="col-sm-2 col-xs-12">
+                                @Html.TextBoxFor(n => n.CardNumber, new { @class = "form-control", @style = "border-left: 2px solid #e63232;" })
+                                @Html.ValidationMessageFor(n => n.CardNumber, "", new { @class = "text-danger" })
+                            </div>
+                            @if ((bool)ViewBag.ISMANDARIN1 == false)
+                            {
+                                <label class="col-sm-1 control-label-left no-padding-right"> </label>
+                                <div class="col-sm-2 col-xs-12">
+                                    <label class="inline">
+                                        @Html.CheckBoxFor(n => n.IsAutoCapture, new { @class = "ace" })
+                                        <span class="lbl"> Tự động chụp </span>
+                                    </label>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CardGroup"] <span class="error">*</span></label>
+                            <div class="col-sm-2 col-xs-12">
+                                <div id="boxCardGroup">
+                                    @Html.DropDownListFor(n => n.CardGroupID, new SelectList(ViewBag.lcardgroups, "CardGroupID", "CardGroupName"), DictionaryShare["selectCardGrp"], new { @class = "form-control chosen-select" })
+                                </div>
+                                @Html.ValidationMessageFor(n => n.CardGroupID, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-sm-2 col-xs-12" id="boxCardInfo">
+                                <span class="label label-info"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["Description"] </label>
+                            <div class="col-sm-6 col-xs-12">
+                                @Html.TextAreaFor(n => n.CardDescription, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(n => n.CardDescription, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> Đơn vị tấn(m3) </label>
+                            <div class="col-sm-3 col-xs-12">
+                                @Html.TextBoxFor(n => n.DVT, new { @class = "form-control", @type = "number", @min = "0" })
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["DateRegisted"] </label>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.DtpDateRegisted, new { @class = "form-control daterangpicker" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(n => n.DtpDateRegisted, "", new { @class = "text-danger" })
+                            </div>
+
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["DateReleased"] </label>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.DtpDateReleased, new { @class = "form-control daterangpicker" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(n => n.DtpDateReleased, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["DateActive"] </label>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.DtpDateActive, new { @class = "form-control daterangpicker" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(n => n.DtpDateActive, "", new { @class = "text-danger" })
+                            </div>
+                            <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["DateExpired"] </label>
+                            <div class="col-sm-2 col-xs-12">
+                                <div class="input-group">
+                                    @Html.TextBoxFor(n => n.DtpDateExpired, new { @class = "form-control daterangpicker" })
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessageFor(n => n.DtpDateExpired, "", new { @class = "text-danger" })
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label-left no-padding-right"> </label>
+                            <div class="col-sm-2 col-xs-12">
+                                <label class="inline">
+                                    @Html.CheckBoxFor(n => n.CardInActive, new { @class = "ace" })
+                                    <span class="lbl"> @Dictionary["CardIsLock"] </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">  @Dictionary["CustomerInfo"] </h3>
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerSearch"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.TextBox("txtSearchCustomer", "", new { @class = "form-control" })
+                    @Html.Hidden("CustomerID")
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerCode"] <span class="error">*</span></label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.TextBoxFor(n => n.CustomerCode, new { @class = "form-control", @style = "border-left: 2px solid #e63232;" })
+                    @Html.ValidationMessageFor(n => n.CustomerCode, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerName"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.TextBoxFor(n => n.CustomerName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CustomerName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerMobile"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.TextBoxFor(n => n.CustomerMobile, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CustomerMobile, "", new { @class = "text-danger" })
+                </div>
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerIdentify"] </label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.TextBoxFor(n => n.CustomerIdentify, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CustomerIdentify, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerAddress"] </label>
+                <div class="col-sm-7 col-xs-12">
+                    @Html.TextAreaFor(n => n.CustomerAddress, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(n => n.CustomerAddress, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerGroup"] <span class="error">*</span></label>
+                <div class="col-sm-3 col-xs-12">
+                    @Html.DropDownListFor(n => n.CustomerGroupID, new SelectList(ViewBag.lcustomergroups, "ItemValue", "ItemText"), new { @class = "form-control chosen-select", @style = "border-left: 2px solid #e63232;" })
+                    @Html.ValidationMessageFor(n => n.CustomerGroupID, "", new { @class = "text-danger" })
+                </div>
+                @if ((bool)ViewBag.IsCompartment)
+                {
+                    <label class="col-sm-1 control-label-left no-padding-right"> @DictionaryCustomer["Compartment"] </label>
+                    <div class="col-sm-3 col-xs-12">
+                        @Html.DropDownListFor(n => n.CompartmentId, new SelectList(ViewBag.Compartments, "ItemValue", "ItemText"), "Lựa chọn", new { @class = "form-control chosen-select" })
+
+                    </div>
+                }
+
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label-left no-padding-right"> @Dictionary["CustomerAvatar"] </label>
+                <div class="col-sm-8 col-xs-12">
+                    <div id="BoxRenderFile">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12" id="boxVehicle">
+            <h3 class="header smaller lighter blue"> @Dictionary["VehicleInfo"] </h3>
+            <div id="boxVehicles" class="form-group">
+                <div class="col-sm-6">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>@Dictionary["Plate"]</td>
+                                <td>@Dictionary["Name"]</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(n => n.Plate1, new { @class = "form-control", @placeholder = Dictionary["PlatePlaceholder"] + "1" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(n => n.VehicleName1, new { @class = "form-control", @placeholder = Dictionary["NamePlaceholder"] + "1" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(n => n.Plate2, new { @class = "form-control", @placeholder = Dictionary["PlatePlaceholder"] + "2" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(n => n.VehicleName2, new { @class = "form-control", @placeholder = Dictionary["NamePlaceholder"] + "2" })
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    @Html.TextBoxFor(n => n.Plate3, new { @class = "form-control", @placeholder = Dictionary["PlatePlaceholder"] + "3" })
+                                </td>
+                                <td>
+                                    @Html.TextBoxFor(n => n.VehicleName3, new { @class = "form-control", @placeholder = Dictionary["NamePlaceholder"] + "3" })
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="ace-settings-container" id="ace-settings-container" style="position: fixed; top: 155px;">
+            <div class="btn btn-app btn-xs btn-grey ace-settings-btn open" id="ace-settings-btn">
+                <i class="ace-icon fa fa-cog bigger-130"></i>
+            </div>
+
+            <div class="ace-settings-box clearfix open" id="ace-settings-box">
+                <!-- /.pull-left -->
+                <div class="bg-rightbox">
+                    <div class="clearfix lineButton">
+                        <div class="col-md-12 input-group">
+                            <button class="btn btn-success" type="submit" id="Countinue">
+                                <i class="ace-icon fa fa-refresh bigger-110"></i>
+                                @DictionaryAction["Save"]
+                            </button>
+                            <button class="btn btn-info" type="submit" id="BackToList">
+                                <i class="ace-icon fa fa-check bigger-110"></i>
+                                @DictionaryAction["Save"]
+                            </button>
+                            <button class="btn" type="reset">
+                                <i class="ace-icon fa fa-undo bigger-110"></i>
+                                @DictionaryAction["Reset"]
+                            </button>
+                            <a href="@Url.Action("Index", new { key = ViewBag.keyValue, cardgroups = ViewBag.cardgroupsValue, customergroups = ViewBag.customergroupsValue, active = ViewBag.activeValue, fromdate = ViewBag.fromdateValue, todate = ViewBag.todateValue, isCheckByTime = ViewBag.isCheckByTimeValue })" class="btn btn-yellow">
+                                <i class="ace-icon fa fa-chevron-circle-left bigger-110"></i>
+                                @DictionaryAction["BackToList"]
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.pull-left -->
+            </div><!-- /.ace-settings-box -->
+        </div>
+    }
+</div>
+
+
+@section scripts{
+    <script src="~/Areas/Parking/Scripts/CardController.js"></script>
+    <script src="~/Scripts/Ext/FileUploadController.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            //Vị trí upload avatar
+            FileUploadController.init("BoxRenderFile", "FileUpload", "", "");
+
+            $("#Countinue").click(function () {
+                $("#SaveAndCountinue").val(true);
+            });
+
+            $("#BackToList").click(function () {
+                $("#SaveAndCountinue").val('false');
+            });
+
+            $("#DVT").val(0);
+            ////Thẻ trong thẻ phụ
+            //$('#modalCardSub').find("#txtCardNumber").autocomplete({
+            //    source: []
+            //});
+
+            //$('#modalCardSub').find("#txtPrimaryCardNumber").autocomplete({
+            //    source: []
+            //})
+
+            //$("#cardsub").find("#txtNewCardNumberSub").autocomplete({
+            //    source: []
+            //});
+
+            //$("#cardsub").find("#txtNewCardNumberSub").keyup(function () {
+            //    var key = $(this).val();
+            //    $.ajax({
+            //        url: _prefixParkingDomain + '/PK_Card/GetListCardSubByKeyword',
+            //        data: { key: key },
+            //        type: 'json',
+            //        async: true,
+            //        success: function (data) {
+            //            $("#cardsub").find("#txtNewCardNumberSub").autocomplete({
+            //                source: data
+            //            });
+            //        }
+            //    });
+            //});
+
+            ////Thẻ
+            //$("input[id=CardNumber]").autocomplete({
+            //    source: []
+            //});
+
+            //$("input[id=CardNo]").autocomplete({
+            //    source: []
+            //});
+
+            //$("input[id=CardNumber]").keyup(function () {
+            //    var key = $(this).val();
+            //    PK_CardController.loadDataCard(key);
+            //});
+
+            //$("input[id=CardNo]").keyup(function () {
+            //    var key = $(this).val();
+            //    PK_CardController.loadDataCardNo(key);
+            //})
+
+            //$("input[id=CardNumber]").change(function () {
+            //    var code = $(this).val();
+            //    PK_CardController.getCard(code);
+            //});
+
+            //$("input[id=CardNo]").change(function () {
+            //    var key = $(this).val();
+            //    PK_CardController.getCardNo(key);
+            //})
+
+            //Khách hàng
+            $("input[id=txtSearchCustomer]").autocomplete({
+                source: []
+            });
+
+            $("input[id=txtSearchCustomer]").keyup(function () {
+                var key = $(this).val();
+                PK_CardController.loadDataCustomer(key);
+            });
+
+            //$("input[id=txtSearchCustomer]").change(function () {
+            //    var code = $(this).val();
+            //    PK_CardController.getCustomer(code);
+            //});
+        });
+    </script>
+}
